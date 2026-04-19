@@ -1,0 +1,44 @@
+---
+import { SITE_URL, SITE_NAME } from '../consts';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image = '/og-image.svg' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const imageURL = new URL(image, Astro.url);
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageURL} />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content="ja_JP" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageURL} />
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: SITE_NAME,
+    description: 'Web制作・SEO対策専門デザインスタジオ',
+    url: SITE_URL,
+    priceRange: '¥10,000〜',
+    areaServed: 'JP',
+    serviceType: ['Web Design', 'SEO', 'Web Development'],
+  })}
+/>

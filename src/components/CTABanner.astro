@@ -1,0 +1,41 @@
+---
+import { COCONALA_HP, COCONALA_SEO } from '../consts';
+
+interface Props {
+  headline?: string;
+  subline?: string;
+}
+
+const {
+  headline = "Let's make something.",
+  subline = 'ご依頼はココナラから承っております',
+} = Astro.props;
+---
+
+<section class="bg-accent text-white py-20 md:py-32 mt-24">
+  <div class="container-editorial text-center">
+    <p class="text-xs tracking-widest uppercase mb-4 opacity-80">Contact</p>
+    <h2 class="font-serif text-4xl md:text-6xl mb-4 leading-tight">
+      {headline}
+    </h2>
+    <p class="text-base md:text-lg mb-12 opacity-90">{subline}</p>
+    <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+      <a
+        href={COCONALA_HP}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block bg-white text-black no-underline px-8 py-4 font-semibold hover:opacity-85 transition-opacity"
+      >
+        ホームページ制作を依頼する →
+      </a>
+      <a
+        href={COCONALA_SEO}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block bg-white text-black no-underline px-8 py-4 font-semibold hover:opacity-85 transition-opacity"
+      >
+        SEO対策を依頼する →
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { COCONALA_HP, COCONALA_SEO } from '../consts';
+---
+
+<BaseLayout
+  title="Contact｜ご依頼・お問い合わせ | Sane Design"
+  description="Sane Designへのご依頼・お問い合わせはココナラから承っております。ホームページ制作は¥20,000〜、SEO対策は¥10,000〜、いずれも最速3日で対応します。"
+>
+  <section class="container-editorial pt-16 md:pt-24 pb-16">
+    <p class="section-label">Contact</p>
+    <h1 class="font-serif text-4xl md:text-7xl leading-tight mb-8">
+      Let's make<br />
+      <span class="italic">something.</span>
+    </h1>
+    <p class="max-w-2xl text-base md:text-xl leading-relaxed">
+      ご依頼・ご相談はココナラから承っております。<br />
+      ご質問だけでもお気軽にどうぞ。
+    </p>
+  </section>
+
+  <section class="container-editorial pb-24">
+    <div class="grid md:grid-cols-2 gap-8">
+      <a
+        href={COCONALA_HP}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group border-t border-primary pt-6 pb-8 no-underline hover:text-accent"
+      >
+        <p class="text-xs uppercase tracking-widest mb-2">01 / Web Design</p>
+        <h2 class="font-serif text-3xl md:text-4xl mb-4 leading-tight">
+          ホームページ制作を<br />依頼する
+        </h2>
+        <p class="text-sm text-muted mb-4">
+          最速3日・¥20,000〜。画像とイメージをお渡しいただくだけで、完全オーダーメイドで制作します。
+        </p>
+        <span class="text-sm underline">ココナラで詳細を見る →</span>
+      </a>
+      <a
+        href={COCONALA_SEO}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group border-t border-primary pt-6 pb-8 no-underline hover:text-accent"
+      >
+        <p class="text-xs uppercase tracking-widest mb-2">02 / SEO</p>
+        <h2 class="font-serif text-3xl md:text-4xl mb-4 leading-tight">
+          SEO対策を<br />依頼する
+        </h2>
+        <p class="text-sm text-muted mb-4">
+          最短3日・¥10,000〜。指定KWの記事60本追加と内部SEO対策を実施します。
+        </p>
+        <span class="text-sm underline">ココナラで詳細を見る →</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="container-editorial pb-24">
+    <div class="border-t border-border pt-8 max-w-2xl">
+      <h2 class="font-serif text-2xl mb-4">よくあるご質問</h2>
+      <dl class="space-y-6 text-sm">
+        <div>
+          <dt class="font-semibold mb-1">Q. ココナラ登録は必要ですか？</dt>
+          <dd class="text-muted">
+            はい。ご依頼・やりとりはすべてココナラのプラットフォーム上で行います。登録は無料です。
+          </dd>
+        </div>
+        <div>
+          <dt class="font-semibold mb-1">Q. 相談だけでも可能ですか？</dt>
+          <dd class="text-muted">
+            可能です。ココナラのトーク機能から、購入前のご質問をお受けしています。
+          </dd>
+        </div>
+        <div>
+          <dt class="font-semibold mb-1">Q. 本当に3日で納品できますか？</dt>
+          <dd class="text-muted">
+            画像・文章・ご要望が揃っている状態であれば、3〜4営業日で納品しております。
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+</BaseLayout>

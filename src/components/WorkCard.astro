@@ -1,0 +1,36 @@
+---
+interface Props {
+  title: string;
+  client: string;
+  year: number | string;
+  thumbnail: string;
+  href: string;
+  span?: 'small' | 'medium' | 'large';
+}
+
+const { title, client, year, thumbnail, href, span = 'medium' } = Astro.props;
+
+const spanClass = {
+  small: 'md:col-span-3',
+  medium: 'md:col-span-4',
+  large: 'md:col-span-6',
+}[span];
+---
+
+<a href={href} class={`work-card group block no-underline col-span-4 ${spanClass}`}>
+  <div class="overflow-hidden bg-[#fafafa] aspect-[4/3]">
+    <img
+      src={thumbnail}
+      alt={`${client} - ${title}`}
+      loading="lazy"
+      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+    />
+  </div>
+  <div class="mt-3 flex items-baseline justify-between">
+    <h3 class="font-sans text-sm font-medium leading-tight">
+      {client}
+    </h3>
+    <span class="text-xs text-muted">{year}</span>
+  </div>
+  <p class="text-xs text-muted mt-1">{title}</p>
+</a>

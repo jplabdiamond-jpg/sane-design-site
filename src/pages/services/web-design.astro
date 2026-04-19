@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { COCONALA_HP } from '../../consts';
+---
+
+<BaseLayout
+  title="Web Design｜ホームページ制作 | Sane Design"
+  description="最速3日納品・20,000円〜。画像とイメージをお渡しいただくだけで、個人事業主・中小企業向けのホームページを完全オーダーメイドで制作します。実績300件以上。"
+>
+  <section class="container-editorial pt-16 md:pt-24 pb-16">
+    <p class="section-label">Services / 01</p>
+    <h1 class="font-serif text-4xl md:text-7xl leading-tight mb-6">
+      Web Design.
+    </h1>
+    <p class="max-w-2xl text-base md:text-xl leading-relaxed">
+      最速3日でホームページを納品します。<br />
+      画像とイメージをお渡しいただくだけで、完全オーダーメイドで制作。
+    </p>
+  </section>
+
+  <section class="container-editorial pb-16">
+    <div class="border-t border-primary pt-8 grid md:grid-cols-4 gap-8 text-sm">
+      <div>
+        <p class="text-xs uppercase tracking-widest text-muted mb-2">価格</p>
+        <p class="font-serif text-2xl">¥20,000〜</p>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-widest text-muted mb-2">納期</p>
+        <p class="font-serif text-2xl">3〜4営業日</p>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-widest text-muted mb-2">ページ数</p>
+        <p class="font-serif text-2xl">TOP + 4P</p>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-widest text-muted mb-2">納品形態</p>
+        <p class="font-serif text-2xl">HTML / サーバー</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-editorial pb-16">
+    <h2 class="font-serif text-3xl md:text-4xl mb-8">こんな方におすすめ</h2>
+    <ul class="space-y-4 text-base md:text-lg max-w-2xl">
+      <li class="flex gap-4">
+        <span class="text-accent">✓</span>個人事業主・店舗で、急ぎHPが必要
+      </li>
+      <li class="flex gap-4">
+        <span class="text-accent">✓</span>デザインのイメージが固まっていない
+      </li>
+      <li class="flex gap-4">
+        <span class="text-accent">✓</span>WordPressではなく軽くて速いサイトが欲しい
+      </li>
+      <li class="flex gap-4">
+        <span class="text-accent">✓</span>予算を抑えたい
+      </li>
+    </ul>
+  </section>
+
+  <section class="container-editorial pb-16">
+    <h2 class="font-serif text-3xl md:text-4xl mb-8">制作の流れ</h2>
+    <ol class="space-y-6 max-w-2xl">
+      {
+        [
+          { num: '01', title: 'ご依頼', desc: 'ココナラのトーク機能からご連絡ください。' },
+          { num: '02', title: 'ヒアリング', desc: '画像・文章・ご要望を共有していただきます。' },
+          { num: '03', title: '初稿提出', desc: '1〜2営業日で初稿をご確認いただきます。' },
+          { num: '04', title: '修正・調整', desc: 'フィードバックを反映します。' },
+          { num: '05', title: '納品', desc: '合計3〜4営業日で納品完了。' },
+        ].map((step) => (
+          <li class="flex gap-6 border-t border-border pt-4">
+            <span class="font-serif text-2xl text-muted">{step.num}</span>
+            <div>
+              <h3 class="font-semibold mb-1">{step.title}</h3>
+              <p class="text-sm text-muted">{step.desc}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="bg-accent text-white py-20 md:py-32 mt-12">
+    <div class="container-editorial text-center">
+      <h2 class="font-serif text-3xl md:text-5xl mb-6 leading-tight">
+        ¥20,000 / 3日納品
+      </h2>
+      <p class="mb-12 opacity-90">
+        本サービスはココナラを通じてご提供しております
+      </p>
+      <a
+        href={COCONALA_HP}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block bg-white text-black no-underline px-12 py-5 font-semibold hover:opacity-85 transition-opacity"
+      >
+        ココナラで依頼する →
+      </a>
+    </div>
+  </section>
+</BaseLayout>

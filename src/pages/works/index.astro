@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import { getCollection } from 'astro:content';
+
+const works = (await getCollection('works', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout
+  title="Works｜実績一覧 | Sane Design"
+  description="Sane Designのホームページ制作実績一覧。コーポレートサイト、LP、サロン予約サイト、士業サイトなど300件以上の制作実績から代表作をご紹介します。"
+>
+  <section class="container-editorial pt-16 md:pt-24 pb-16">
+    <p class="section-label">Works</p>
+    <h1 class="font-serif text-4xl md:text-7xl leading-tight">
+      Selected<br />
+      Projects.
+    </h1>
+    <p class="mt-6 max-w-xl text-base md:text-lg">
+      DTP・WEB合わせて300件以上の実績より、代表的なプロジェクトをご紹介します。
+    </p>
+  </section>
+
+  <section class="container-editorial pb-24">
+    <div class="editorial-grid">
+      {
+        works.map((work, i) => (
+          <WorkCard
+            title={work.data.title}
+            client={work.data.client}
+            year={work.data.year}
+            thumbnail={work.data.thumbnail}
+            href={`/works/${work.slug}/`}
+            span={i % 4 === 0 ? 'large' : 'medium'}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>

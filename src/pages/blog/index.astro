@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<BaseLayout
+  title="Journal｜記事一覧 | Sane Design"
+  description="ホームページ制作とSEO対策に関する考察、ノウハウ、実例を発信しています。個人事業主・中小企業のWeb運用に役立つ情報を、実績300件以上のデザイナーがお届けします。"
+>
+  <section class="container-editorial pt-16 md:pt-24 pb-16">
+    <p class="section-label">Journal</p>
+    <h1 class="font-serif text-4xl md:text-7xl leading-tight">
+      Writings.
+    </h1>
+    <p class="mt-6 max-w-xl text-base md:text-lg">
+      ホームページ制作とSEO対策に関する考察・ノウハウ・実例。
+    </p>
+  </section>
+
+  <section class="container-editorial pb-24">
+    <div class="space-y-8 max-w-3xl">
+      {
+        posts.map((post) => (
+          <a
+            href={`/blog/${post.slug}/`}
+            class="block no-underline border-t border-primary pt-6 pb-2 hover:text-accent"
+          >
+            <div class="flex items-baseline justify-between mb-2">
+              <time class="text-xs text-muted">
+                {post.data.pubDate.toISOString().slice(0, 10)}
+              </time>
+              <div class="flex gap-2">
+                {post.data.tags.slice(0, 2).map((tag) => (
+                  <span class="text-xs text-muted">#{tag}</span>
+                ))}
+              </div>
+            </div>
+            <h2 class="font-serif text-2xl md:text-3xl leading-tight mb-2">{post.data.title}</h2>
+            <p class="text-sm text-muted">{post.data.description}</p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>

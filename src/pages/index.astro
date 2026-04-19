@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WorkCard from '../components/WorkCard.astro';
+import CTABanner from '../components/CTABanner.astro';
+import { getCollection } from 'astro:content';
+import { COCONALA_HP, COCONALA_SEO } from '../consts';
+
+const works = (await getCollection('works', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 6);
+
+const blogs = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout>
+  <section class="container-editorial pt-16 md:pt-32 pb-24 md:pb-40">
+    <p class="section-label">Sane Design — Est. 2020</p>
+    <h1 class="hero-headline">
+      We design<br />
+      websites that<br />
+      <span class="italic">work.</span>
+    </h1>
+    <p class="mt-8 md:mt-12 max-w-xl text-base md:text-lg leading-relaxed">
+      実績300件以上。最速3日納品。<br />
+      ホームページ制作とSEO対策のスタジオです。
+    </p>
+    <div class="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4">
+      <a href="/works/" class="btn-primary">実績を見る →</a>
+      <a href="/contact/" class="btn-ghost">ご依頼はこちら →</a>
+    </div>
+  </section>
+
+  <section class="container-editorial pb-24">
+    <div class="flex items-end justify-between mb-8 md:mb-12">
+      <div>
+        <p class="section-label">Featured Works</p>
+        <h2 class="font-serif text-3xl md:text-5xl">Selected Projects</h2>
+      </div>
+      <a href="/works/" class="hidden md:inline-block text-sm">View all →</a>
+    </div>
+    <div class="editorial-grid">
+      {
+        works.map((work, i) => (
+          <WorkCard
+            title={work.data.title}
+            client={work.data.client}
+            year={work.data.year}
+            thumbnail={work.data.thumbnail}
+            href={`/works/${work.slug}/`}
+            span={i % 3 === 0 ? 'large' : 'medium'}
+          />
+        ))
+      }
+    </div>
+    <div class="mt-8 md:hidden text-center">
+      <a href="/works/" class="text-sm">View all →</a>
+    </div>
+  </section>
+
+  <section class="container-editorial pb-24">
+    <p class="section-label">Services</p>
+    <h2 class="font-serif text-3xl md:text-5xl mb-12">2つのサービス</h2>
+    <div class="grid md:grid-cols-2 gap-8 md:gap-16">
+      <article class="border-t border-primary pt-6">
+        <p class="text-xs tracking-widest uppercase mb-2">01 / Web Design</p>
+        <h3 class="font-serif text-3xl md:text-4xl mb-4">
+          ホームページを<br />
+          最速3日で納品。
+        </h3>
+        <p class="text-base leading-relaxed mb-6">
+          画像とイメージをお渡しいただくだけで、トップ+4ページの完全オーダーメイドを¥20,000〜制作します。
+        </p>
+        <div class="flex gap-4">
+          <a href="/services/web-design/" class="underline text-sm">詳しく見る</a>
+          <a href={COCONALA_HP} target="_blank" rel="noopener" class="underline text-sm">
+            ココナラ →
+          </a>
+        </div>
+      </article>
+      <article class="border-t border-primary pt-6">
+        <p class="text-xs tracking-widest uppercase mb-2">02 / SEO</p>
+        <h3 class="font-serif text-3xl md:text-4xl mb-4">
+          検索順位を<br />
+          3日で変える。
+        </h3>
+        <p class="text-base leading-relaxed mb-6">
+          指定キーワードに基づく厳選60記事追加と内部SEO対策を、¥10,000〜で提供します。
+        </p>
+        <div class="flex gap-4">
+          <a href="/services/seo/" class="underline text-sm">詳しく見る</a>
+          <a href={COCONALA_SEO} target="_blank" rel="noopener" class="underline text-sm">
+            ココナラ →
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="container-editorial pb-24">
+    <div class="flex items-end justify-between mb-8 md:mb-12">
+      <div>
+        <p class="section-label">Journal</p>
+        <h2 class="font-serif text-3xl md:text-5xl">Writings</h2>
+      </div>
+      <a href="/blog/" class="hidden md:inline-block text-sm">View all →</a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      {
+        blogs.map((post) => (
+          <a href={`/blog/${post.slug}/`} class="no-underline border-t border-primary pt-4">
+            <time class="text-xs text-muted">
+              {post.data.pubDate.toISOString().slice(0, 10)}
+            </time>
+            <h3 class="font-serif text-xl md:text-2xl mt-2 leading-tight">{post.data.title}</h3>
+            <p class="text-sm text-muted mt-2 line-clamp-2">{post.data.description}</p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>

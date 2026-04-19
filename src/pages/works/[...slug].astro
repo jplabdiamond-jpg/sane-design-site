@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const works = await getCollection('works', ({ data }) => !data.draft);
+  return works.map((work) => ({
+    params: { slug: work.slug },
+    props: { work },
+  }));
+}
+
+interface Props {
+  work: CollectionEntry<'works'>;
+}
+
+const { work } = Astro.props;
+const { Content } = await work.render();
+---
+
+<BaseLayout
+  title={`${work.data.client} - ${work.data.title} | Sane Design`}
+  description={`${work.data.industry}の${work.data.client}様のプロジェクト事例。${work.data.title}。`}
+  image={work.data.heroImage}
+>
+  <article>
+    <header class="container-editorial pt-16 md:pt-24 pb-12">
+      <p class="section-label">{work.data.industry} / {work.data.year}</p>
+      <h1 class="font-serif text-4xl md:text-6xl leading-tight">{work.data.title}</h1>
+    </header>
+
+    {
+      work.data.heroImage && (
+        <div class="container-editorial pb-16">
+          <img
+            src={work.data.heroImage}
+            alt={work.data.title}
+            class="w-full h-auto bg-[#fafafa]"
+          />
+        </div>
+      )
+    }
+
+    <section class="container-editorial pb-16">
+      <div class="grid md:grid-cols-4 gap-8 border-t border-primary pt-8">
+        <div>
+          <p class="text-xs uppercase tracking-widest text-muted mb-2">Client</p>
+          <p class="text-sm">{work.data.client}</p>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-widest text-muted mb-2">Industry</p>
+          <p class="text-sm">{work.data.industry}</p>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-widest text-muted mb-2">Year</p>
+          <p class="text-sm">{work.data.year}</p>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-widest text-muted mb-2">Role</p>
+          <p class="text-sm">{work.data.role || 'Design & Development'}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container-editorial pb-24">
+      <div class="prose-custom">
+        <Content />
+      </div>
+    </section>
+  </article>
+
+  <CTABanner
+    headline="Interested?"
+    subline="同様のプロジェクトはココナラから承っております"
+  />
+</BaseLayout>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <rect width="1200" height="900" fill="#f5f5f5"/>
+  <rect x="40" y="40" width="1120" height="820" fill="none" stroke="#cccccc" stroke-width="1"/>
+  <text x="600" y="450" font-family="Times New Roman, serif" font-size="72" fill="#999999" text-anchor="middle" dominant-baseline="middle">Client A</text>
+  <text x="600" y="520" font-family="Helvetica, sans-serif" font-size="20" fill="#cccccc" text-anchor="middle">Corporate / 2025</text>
+</svg>

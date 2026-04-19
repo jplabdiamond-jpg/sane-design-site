@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout
+  title={`${post.data.title} | Sane Design Journal`}
+  description={post.data.description}
+  image={post.data.heroImage}
+>
+  <article>
+    <header class="container-editorial pt-16 md:pt-24 pb-12 max-w-3xl">
+      <p class="text-xs text-muted mb-4">
+        <time>{post.data.pubDate.toISOString().slice(0, 10)}</time>
+        {
+          post.data.tags.length > 0 && (
+            <>
+              {' · '}
+              {post.data.tags.map((tag, i) => (
+                <span>
+                  #{tag}
+                  {i < post.data.tags.length - 1 ? ' ' : ''}
+                </span>
+              ))}
+            </>
+          )
+        }
+      </p>
+      <h1 class="font-serif text-3xl md:text-5xl leading-tight">{post.data.title}</h1>
+      <p class="mt-6 text-base md:text-lg text-muted leading-relaxed">
+        {post.data.description}
+      </p>
+    </header>
+
+    {
+      post.data.heroImage && (
+        <div class="container-editorial pb-16">
+          <img
+            src={post.data.heroImage}
+            alt={post.data.title}
+            class="w-full h-auto bg-[#fafafa]"
+          />
+        </div>
+      )
+    }
+
+    <section class="container-editorial pb-24">
+      <div class="prose-custom">
+        <Content />
+      </div>
+    </section>
+  </article>
+
+  <CTABanner />
+</BaseLayout>

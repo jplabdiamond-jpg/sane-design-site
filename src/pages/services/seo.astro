@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { COCONALA_SEO } from '../../consts';
+---
+
+<BaseLayout
+  title="SEO｜SEO対策・内部対策 | Sane Design"
+  description="最短3日・10,000円〜。指定キーワードに基づくブログ記事60本追加と内部SEO対策を実施。実績200件以上のデザイナーが検索順位向上をサポートします。"
+>
+  <section class="container-editorial pt-16 md:pt-24 pb-16">
+    <p class="section-label">Services / 02</p>
+    <h1 class="font-serif text-4xl md:text-7xl leading-tight mb-6">
+      SEO.
+    </h1>
+    <p class="max-w-2xl text-base md:text-xl leading-relaxed">
+      検索順位を3日で変える。<br />
+      指定キーワードに基づく厳選60記事追加と、内部SEO対策を実施します。
+    </p>
+  </section>
+
+  <section class="container-editorial pb-16">
+    <div class="border-t border-primary pt-8 grid md:grid-cols-4 gap-8 text-sm">
+      <div>
+        <p class="text-xs uppercase tracking-widest text-muted mb-2">価格</p>
+        <p class="font-serif text-2xl">¥10,000〜</p>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-widest text-muted mb-2">納期</p>
+        <p class="font-serif text-2xl">3営業日</p>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-widest text-muted mb-2">記事数</p>
+        <p class="font-serif text-2xl">60本</p>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-widest text-muted mb-2">納品形態</p>
+        <p class="font-serif text-2xl">テキスト / 直接UP</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-editorial pb-16">
+    <h2 class="font-serif text-3xl md:text-4xl mb-8">こんな方におすすめ</h2>
+    <ul class="space-y-4 text-base md:text-lg max-w-2xl">
+      <li class="flex gap-4">
+        <span class="text-accent">✓</span>短期でSEO効果を出したい
+      </li>
+      <li class="flex gap-4">
+        <span class="text-accent">✓</span>記事作成のリソースが不足している
+      </li>
+      <li class="flex gap-4">
+        <span class="text-accent">✓</span>内部対策の見直しをしたい
+      </li>
+      <li class="flex gap-4">
+        <span class="text-accent">✓</span>検索順位を上げて問い合わせを増やしたい
+      </li>
+    </ul>
+  </section>
+
+  <section class="container-editorial pb-16">
+    <h2 class="font-serif text-3xl md:text-4xl mb-8">実施内容</h2>
+    <div class="grid md:grid-cols-2 gap-8 max-w-4xl">
+      <div class="border-t border-primary pt-4">
+        <h3 class="font-serif text-xl mb-3">① コンテンツSEO</h3>
+        <p class="text-sm leading-relaxed text-muted">
+          指定キーワードに基づき、検索意図を満たす記事を60本作成・追加します。
+        </p>
+      </div>
+      <div class="border-t border-primary pt-4">
+        <h3 class="font-serif text-xl mb-3">② 内部SEO対策</h3>
+        <p class="text-sm leading-relaxed text-muted">
+          タイトル、メタディスクリプション、見出し構造、内部リンク、スキーマなどサイト全体を見直します。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-accent text-white py-20 md:py-32 mt-12">
+    <div class="container-editorial text-center">
+      <h2 class="font-serif text-3xl md:text-5xl mb-6 leading-tight">
+        ¥10,000 / 3日納品
+      </h2>
+      <p class="mb-12 opacity-90">
+        本サービスはココナラを通じてご提供しております
+      </p>
+      <a
+        href={COCONALA_SEO}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block bg-white text-black no-underline px-12 py-5 font-semibold hover:opacity-85 transition-opacity"
+      >
+        ココナラで依頼する →
+      </a>
+    </div>
+  </section>
+</BaseLayout>

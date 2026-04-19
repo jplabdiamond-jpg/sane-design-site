@@ -1,0 +1,49 @@
+---
+import { SITE_NAME, NAV_LINKS } from '../consts';
+---
+
+<header class="border-b border-border">
+  <div class="container-editorial flex items-center justify-between py-6">
+    <a href="/" class="text-xl font-semibold no-underline tracking-tight" aria-label={SITE_NAME}>
+      {SITE_NAME}
+    </a>
+    <nav class="hidden md:flex gap-8 text-sm" aria-label="Global">
+      {
+        NAV_LINKS.map((link) => (
+          <a href={link.href} class="no-underline hover:text-accent">
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+    <button
+      id="menu-toggle"
+      class="md:hidden text-sm underline"
+      aria-label="メニューを開く"
+      type="button"
+    >
+      Menu
+    </button>
+  </div>
+  <nav id="mobile-menu" class="hidden md:hidden border-t border-border" aria-label="Mobile">
+    <ul class="flex flex-col">
+      {
+        NAV_LINKS.map((link) => (
+          <li class="border-b border-border">
+            <a href={link.href} class="block px-4 py-4 no-underline">
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+</script>
