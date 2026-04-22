@@ -11,42 +11,30 @@ interface Props {
 
 const { title, client, year, thumbnail, href, span = 'medium', index = 0 } = Astro.props;
 
-const spanClass = {
-  small: 'col-span-12 md:col-span-3',
-  medium: 'col-span-12 md:col-span-4',
-  large: 'col-span-12 md:col-span-6',
+// グリッドスパン（12カラム基準）
+const colSpan = {
+  small: '3',
+  medium: '4',
+  large: '6',
 }[span];
 ---
 
 <a
   href={href}
-  class={`work-card group block ${spanClass} reveal`}
-  style={`text-decoration:none; transition-delay:${index * 80}ms;`}
+  class={`work-card reveal`}
+  data-col={colSpan}
+  style={`text-decoration:none; display:block; transition-delay:${index * 80}ms;`}
 >
   <!-- Image container -->
-  <div
-    style="overflow:hidden; background:var(--color-surface); position:relative;"
-    class="aspect-[4/3]"
-  >
+  <div class="work-thumb">
     <img
       src={thumbnail}
       alt={`${client} — ${title}`}
       loading="lazy"
-      style="width:100%; height:100%; object-fit:cover; transition: transform 0.8s cubic-bezier(0.19,1,0.22,1);"
-      class="group-hover:scale-[1.06]"
+      class="work-img"
     />
-    <!-- Overlay -->
-    <div
-      style="position:absolute; inset:0; background:rgba(0,0,0,0); transition: background 0.4s ease;"
-      class="group-hover:bg-black/10"
-    ></div>
-    <!-- View label -->
-    <div
-      style="position:absolute; bottom:16px; right:16px; background:#fff; padding:6px 14px; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; opacity:0; transform:translateY(8px); transition: opacity 0.4s ease, transform 0.4s ease;"
-      class="view-label"
-    >
-      View →
-    </div>
+    <div class="work-overlay"></div>
+    <div class="view-label">View →</div>
   </div>
 
   <!-- Meta -->
@@ -62,16 +50,58 @@ const spanClass = {
 </a>
 
 <style>
+  .work-card {
+    display: block;
+  }
+
+  .work-thumb {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-surface);
+    width: 100%;
+    padding-top: 75%; /* 4:3 aspect ratio */
+  }
+
+  .work-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .work-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.4s ease;
+  }
+
+  .view-label {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    background: #fff;
+    padding: 6px 14px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .work-card:hover .work-img {
+    transform: scale(1.06);
+  }
+
+  .work-card:hover .work-overlay {
+    background: rgba(0, 0, 0, 0.08);
+  }
+
   .work-card:hover .view-label {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
-  .group-hover\:scale-\[1\.06\]:hover,
-  .work-card:hover img {
-    transform: scale(1.06) !important;
-  }
-  .group-hover\:bg-black\/10:hover,
-  .work-card:hover > div > div:first-of-type + div {
-    background: rgba(0,0,0,0.08) !important;
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>
