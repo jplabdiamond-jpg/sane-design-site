@@ -242,7 +242,7 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
 </style>
 
 <script>
-  // ── Hero Canvas Mesh Animation ──
+  // ── Hero Canvas: Cyber Grid + Slow Particle Flow ──
   (function() {
     const canvas = document.getElementById('heroCanvas') as HTMLCanvasElement;
     if (!canvas) return;
@@ -254,140 +254,110 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
       H = canvas.height = canvas.offsetHeight;
     }
     resize();
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', () => { resize(); initParticles(); });
 
-    // Node count & config
-    const NODE_COUNT = 60;
-    const CONNECT_DIST = 200;
-    const WAVE_NODES = 8; // extra nodes forming the wave ribbon
-
-    interface Node {
-      x: number; y: number;
-      vx: number; vy: number;
-      r: number;
-      baseY: number;
-      waveAmp: number;
-      waveFreq: number;
-      wavePhase: number;
-      isWave: boolean;
-    }
-
-    const nodes: Node[] = [];
-
-    function makeNode(isWave = false, index = 0): Node {
-      const baseY = H * 0.3 + Math.sin(index * 0.8) * H * 0.25;
-      return {
-        x: isWave ? (W / (WAVE_NODES - 1)) * index : Math.random() * W,
-        y: isWave ? baseY : Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.15,
-        vy: (Math.random() - 0.5) * 0.08,
-        r: isWave ? 2.5 : Math.random() * 1.8 + 0.8,
-        baseY,
-        waveAmp: H * 0.08 + Math.random() * H * 0.06,
-        waveFreq: 0.0003 + Math.random() * 0.0002,
-        wavePhase: (index / WAVE_NODES) * Math.PI * 2,
-        isWave,
-      };
-    }
-
-    // Wave ribbon nodes
-    for (let i = 0; i < WAVE_NODES; i++) nodes.push(makeNode(true, i));
-    // Scatter nodes (triangle mesh bg)
-    for (let i = 0; i < NODE_COUNT; i++) nodes.push(makeNode(false, i));
-
-    let t = 0;
-
-    function draw() {
-      t += 1;
-      ctx.clearRect(0, 0, W, H);
-
-      // Light gradient background (グレー系)
-      const grad = ctx.createLinearGradient(0, 0, W, H);
-      grad.addColorStop(0, '#f5f5f5');
-      grad.addColorStop(1, '#d8d8d8');
-      ctx.fillStyle = grad;
+    // ── 背景グラデーション ──
+    function drawBg() {
+      const g = ctx.createLinearGradient(0, 0, W * 0.6, H);
+      g.addColorStop(0, '#ffffff');
+      g.addColorStop(1, '#d4d4d4');
+      ctx.fillStyle = g;
       ctx.fillRect(0, 0, W, H);
+    }
 
-      // Update wave nodes
-      for (let i = 0; i < WAVE_NODES; i++) {
-        const n = nodes[i];
-        n.x = (W / (WAVE_NODES - 1)) * i;
-        n.y = n.baseY + Math.sin(t * n.waveFreq * 1000 + n.wavePhase) * n.waveAmp;
+    // ── サイバーグリッド（静的・薄い） ──
+    function drawGrid() {
+      const step = 80;
+      ctx.strokeStyle = 'rgba(180,180,180,0.25)';
+      ctx.lineWidth = 0.5;
+      for (let x = 0; x < W; x += step) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
       }
-
-      // Update scatter nodes
-      for (let i = WAVE_NODES; i < nodes.length; i++) {
-        const n = nodes[i];
-        n.x += n.vx;
-        n.y += n.vy;
-        if (n.x < 0 || n.x > W) n.vx *= -1;
-        if (n.y < 0 || n.y > H) n.vy *= -1;
+      for (let y = 0; y < H; y += step) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
       }
+    }
 
-      // Draw connections (scatter)
-      for (let i = WAVE_NODES; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i], b = nodes[j];
-          const dx = a.x - b.x, dy = a.y - b.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < CONNECT_DIST) {
-            const alpha = (1 - dist / CONNECT_DIST) * 0.18;
+    // ── パーティクル（ゆっくり漂うノード群） ──
+    const N = 55;
+    const LINK_DIST = 180;
+    interface P { x: number; y: number; vx: number; vy: number; r: number; }
+    let pts: P[] = [];
+
+    function initParticles() {
+      pts = [];
+      for (let i = 0; i < N; i++) {
+        pts.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() - 0.5) * 0.18,
+          vy: (Math.random() - 0.5) * 0.12,
+          r: Math.random() * 1.2 + 0.6,
+        });
+      }
+    }
+    initParticles();
+
+    function updateParticles() {
+      for (const p of pts) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = W;
+        if (p.x > W) p.x = 0;
+        if (p.y < 0) p.y = H;
+        if (p.y > H) p.y = 0;
+      }
+    }
+
+    function drawParticles() {
+      // リンク
+      for (let i = 0; i < N; i++) {
+        for (let j = i + 1; j < N; j++) {
+          const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < LINK_DIST) {
+            const a = (1 - d / LINK_DIST) * 0.22;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(160,160,160,${alpha})`;
-            ctx.lineWidth = 0.8;
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = `rgba(140,140,155,${a})`;
+            ctx.lineWidth = 0.7;
+            ctx.moveTo(pts[i].x, pts[i].y);
+            ctx.lineTo(pts[j].x, pts[j].y);
             ctx.stroke();
           }
         }
       }
-
-      // Draw wave ribbon — smooth bezier curve (multiple layers)
-      const waveNodes = nodes.slice(0, WAVE_NODES);
-
-      for (let layer = 0; layer < 3; layer++) {
-        const offset = (layer - 1) * 18;
-        const alphaLine = layer === 1 ? 0.55 : 0.2;
-        const lineW = layer === 1 ? 1.5 : 0.8;
-
+      // ドット
+      for (const p of pts) {
         ctx.beginPath();
-        ctx.moveTo(waveNodes[0].x, waveNodes[0].y + offset);
-        for (let i = 0; i < waveNodes.length - 1; i++) {
-          const cx = (waveNodes[i].x + waveNodes[i + 1].x) / 2;
-          const cy = (waveNodes[i].y + waveNodes[i + 1].y) / 2 + offset;
-          ctx.quadraticCurveTo(waveNodes[i].x, waveNodes[i].y + offset, cx, cy);
-        }
-        ctx.quadraticCurveTo(
-          waveNodes[WAVE_NODES - 2].x, waveNodes[WAVE_NODES - 2].y + offset,
-          waveNodes[WAVE_NODES - 1].x, waveNodes[WAVE_NODES - 1].y + offset
-        );
-        ctx.strokeStyle = `rgba(180,180,180,${alphaLine})`;
-        ctx.lineWidth = lineW;
-        ctx.stroke();
-      }
-
-      // Draw wave node dots
-      for (let i = 0; i < WAVE_NODES; i++) {
-        const n = waveNodes[i];
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(200,200,200,0.9)';
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(120,120,140,0.55)';
         ctx.fill();
       }
-
-      // Draw scatter node dots
-      for (let i = WAVE_NODES; i < nodes.length; i++) {
-        const n = nodes[i];
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(180,180,180,0.5)';
-        ctx.fill();
-      }
-
-      requestAnimationFrame(draw);
     }
 
-    draw();
+    // ── スキャンライン（上から下へ超ゆっくり流れる細線） ──
+    let scanY = -H * 0.5;
+    function drawScanLine() {
+      scanY += 0.25; // 非常にゆっくり
+      if (scanY > H * 1.5) scanY = -H * 0.5;
+      const g = ctx.createLinearGradient(0, scanY - 60, 0, scanY + 60);
+      g.addColorStop(0, 'rgba(180,180,200,0)');
+      g.addColorStop(0.5, 'rgba(180,180,200,0.12)');
+      g.addColorStop(1, 'rgba(180,180,200,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, scanY - 60, W, 120);
+    }
+
+    function loop() {
+      ctx.clearRect(0, 0, W, H);
+      drawBg();
+      drawGrid();
+      drawScanLine();
+      updateParticles();
+      drawParticles();
+      requestAnimationFrame(loop);
+    }
+    loop();
   })();
 
   // Scroll Reveal
