@@ -3,7 +3,7 @@ title: '飲食店 コーポレートサイト'
 client: '和食レストラン E様'
 industry: '飲食・フード'
 year: 2024
-thumbnail: '/works/placeholder-05.svg'
+thumbnail: '/works/work-05.jpg'
 heroImage: '/works/placeholder-05.svg'
 tags:
   - Corporate

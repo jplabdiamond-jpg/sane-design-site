@@ -3,7 +3,7 @@ title: '整骨院 LP 制作'
 client: '整骨院 D様'
 industry: '医療・健康'
 year: 2024
-thumbnail: '/works/placeholder-04.svg'
+thumbnail: '/works/work-04.jpg'
 heroImage: '/works/placeholder-04.svg'
 tags:
   - LP

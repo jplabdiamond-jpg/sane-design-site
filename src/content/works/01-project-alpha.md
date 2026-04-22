@@ -3,7 +3,7 @@ title: 'コーポレートサイトリニューアル'
 client: '建設会社 K様'
 industry: '建設・工務店'
 year: 2025
-thumbnail: '/works/placeholder-01.svg'
+thumbnail: '/works/work-01.jpg'
 heroImage: '/works/placeholder-01.svg'
 tags:
   - Corporate

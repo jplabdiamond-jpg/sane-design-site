@@ -3,7 +3,7 @@ title: 'サロン予約サイト制作'
 client: '美容サロン B様'
 industry: '美容・サロン'
 year: 2025
-thumbnail: '/works/placeholder-02.svg'
+thumbnail: '/works/work-02.jpg'
 heroImage: '/works/placeholder-02.svg'
 tags:
   - LP

@@ -3,7 +3,7 @@ title: '行政書士事務所 HP 新規制作'
 client: '行政書士事務所 C様'
 industry: '士業'
 year: 2024
-thumbnail: '/works/placeholder-03.svg'
+thumbnail: '/works/work-03.jpg'
 heroImage: '/works/placeholder-03.svg'
 tags:
   - Corporate
