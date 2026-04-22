@@ -9,7 +9,7 @@ tags:
   - LP
   - Entertainment
 role: 'Design & Development'
-order: 24
+order: 6
 draft: false
 ---
 
