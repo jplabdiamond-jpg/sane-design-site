@@ -47,8 +47,8 @@ const {
 </html>
 
 <style is:global>
-  /* page transition */
-  body {
+  /* page transition — mainのみに適用してbodyのopacityは常に1 */
+  main {
     animation: pageFadeIn 0.5s cubic-bezier(0.19,1,0.22,1) both;
   }
   @keyframes pageFadeIn {
@@ -72,7 +72,6 @@ const {
       { threshold: 0.01, rootMargin: '0px 0px 0px 0px' }
     );
     document.querySelectorAll('.reveal, .reveal-left, .reveal-scale').forEach((el) => {
-      // Already in viewport on load
       const rect = el.getBoundingClientRect();
       if (rect.top < window.innerHeight && rect.bottom > 0) {
         el.classList.add('visible');
@@ -82,11 +81,11 @@ const {
     });
   }
 
-  // Run after body animation settles (600ms = pageFadeIn 0.5s + margin)
+  // body opacity は常に1なので DOMContentLoaded 直後に実行可能
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => setTimeout(initReveal, 600));
+    document.addEventListener('DOMContentLoaded', initReveal);
   } else {
-    setTimeout(initReveal, 600);
+    initReveal();
   }
-  document.addEventListener('astro:page-load', () => setTimeout(initReveal, 600));
+  document.addEventListener('astro:page-load', initReveal);
 </script>
