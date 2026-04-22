@@ -244,9 +244,10 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
 <script>
   // ── Hero Canvas: Cyber Grid + Slow Particle Flow ──
   (function() {
-    const canvas = document.getElementById('heroCanvas') as HTMLCanvasElement;
+    const canvas = document.getElementById('heroCanvas');
     if (!canvas) return;
-    const ctx = canvas.getContext('2d')!;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
     let W = 0, H = 0;
     function resize() {
@@ -272,7 +273,7 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
     // ── パーティクル ──
     const N = 55;
     const LINK_DIST = 160;
-    const pts: {x:number;y:number;vx:number;vy:number;r:number}[] = [];
+    const pts = [];
 
     function initParticles() {
       pts.length = 0;
