@@ -83,7 +83,7 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
         </a>
       </div>
 
-      <div class="editorial-grid">
+      <div class="works-grid-top">
         {
           works.map((work, i) => (
             <WorkCard
@@ -92,7 +92,7 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
               year={work.data.year}
               thumbnail={work.data.thumbnail}
               href={`/works/${work.slug}/`}
-              span={i === 0 ? 'large' : i === 1 ? 'medium' : 'medium'}
+              span="medium"
               index={i}
             />
           ))
@@ -215,7 +215,16 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
   .service-card:hover .top-line {
     width: 100% !important;
   }
+  .works-grid-top {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
   @media (max-width: 768px) {
+    .works-grid-top {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
     .editorial-grid { gap: 2px; }
     section > div > div[style*="grid-template-columns: 1fr 1fr"] {
       grid-template-columns: 1fr !important;
