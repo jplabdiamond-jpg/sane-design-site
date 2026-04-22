@@ -16,8 +16,8 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
 <BaseLayout>
   <!-- ── Hero ── -->
   <section style="min-height: calc(90vh - 64px); display:flex; flex-direction:column; justify-content:flex-end; padding-bottom:80px; position:relative; overflow:hidden;">
-    <!-- Background subtle grid -->
-    <div style="position:absolute; inset:0; background-image: linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px); background-size: 80px 80px; opacity:0.3; pointer-events:none;"></div>
+    <!-- Background animated mesh canvas -->
+    <canvas id="heroCanvas" style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none;"></canvas>
 
     <div class="container-editorial" style="position:relative; z-index:1;">
       <p class="section-label reveal">Sane Design — Web Studio, Japan</p>
@@ -242,6 +242,154 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
 </style>
 
 <script>
+  // ── Hero Canvas Mesh Animation ──
+  (function() {
+    const canvas = document.getElementById('heroCanvas') as HTMLCanvasElement;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d')!;
+
+    let W = 0, H = 0;
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Node count & config
+    const NODE_COUNT = 60;
+    const CONNECT_DIST = 200;
+    const WAVE_NODES = 8; // extra nodes forming the wave ribbon
+
+    interface Node {
+      x: number; y: number;
+      vx: number; vy: number;
+      r: number;
+      baseY: number;
+      waveAmp: number;
+      waveFreq: number;
+      wavePhase: number;
+      isWave: boolean;
+    }
+
+    const nodes: Node[] = [];
+
+    function makeNode(isWave = false, index = 0): Node {
+      const baseY = H * 0.3 + Math.sin(index * 0.8) * H * 0.25;
+      return {
+        x: isWave ? (W / (WAVE_NODES - 1)) * index : Math.random() * W,
+        y: isWave ? baseY : Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.08,
+        r: isWave ? 2.5 : Math.random() * 1.8 + 0.8,
+        baseY,
+        waveAmp: H * 0.08 + Math.random() * H * 0.06,
+        waveFreq: 0.0003 + Math.random() * 0.0002,
+        wavePhase: (index / WAVE_NODES) * Math.PI * 2,
+        isWave,
+      };
+    }
+
+    // Wave ribbon nodes
+    for (let i = 0; i < WAVE_NODES; i++) nodes.push(makeNode(true, i));
+    // Scatter nodes (triangle mesh bg)
+    for (let i = 0; i < NODE_COUNT; i++) nodes.push(makeNode(false, i));
+
+    let t = 0;
+
+    function draw() {
+      t += 1;
+      ctx.clearRect(0, 0, W, H);
+
+      // Light gradient background (グレー系)
+      const grad = ctx.createLinearGradient(0, 0, W, H);
+      grad.addColorStop(0, '#f5f5f5');
+      grad.addColorStop(1, '#d8d8d8');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Update wave nodes
+      for (let i = 0; i < WAVE_NODES; i++) {
+        const n = nodes[i];
+        n.x = (W / (WAVE_NODES - 1)) * i;
+        n.y = n.baseY + Math.sin(t * n.waveFreq * 1000 + n.wavePhase) * n.waveAmp;
+      }
+
+      // Update scatter nodes
+      for (let i = WAVE_NODES; i < nodes.length; i++) {
+        const n = nodes[i];
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > W) n.vx *= -1;
+        if (n.y < 0 || n.y > H) n.vy *= -1;
+      }
+
+      // Draw connections (scatter)
+      for (let i = WAVE_NODES; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i], b = nodes[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECT_DIST) {
+            const alpha = (1 - dist / CONNECT_DIST) * 0.18;
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(160,160,160,${alpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw wave ribbon — smooth bezier curve (multiple layers)
+      const waveNodes = nodes.slice(0, WAVE_NODES);
+
+      for (let layer = 0; layer < 3; layer++) {
+        const offset = (layer - 1) * 18;
+        const alphaLine = layer === 1 ? 0.55 : 0.2;
+        const lineW = layer === 1 ? 1.5 : 0.8;
+
+        ctx.beginPath();
+        ctx.moveTo(waveNodes[0].x, waveNodes[0].y + offset);
+        for (let i = 0; i < waveNodes.length - 1; i++) {
+          const cx = (waveNodes[i].x + waveNodes[i + 1].x) / 2;
+          const cy = (waveNodes[i].y + waveNodes[i + 1].y) / 2 + offset;
+          ctx.quadraticCurveTo(waveNodes[i].x, waveNodes[i].y + offset, cx, cy);
+        }
+        ctx.quadraticCurveTo(
+          waveNodes[WAVE_NODES - 2].x, waveNodes[WAVE_NODES - 2].y + offset,
+          waveNodes[WAVE_NODES - 1].x, waveNodes[WAVE_NODES - 1].y + offset
+        );
+        ctx.strokeStyle = `rgba(180,180,180,${alphaLine})`;
+        ctx.lineWidth = lineW;
+        ctx.stroke();
+      }
+
+      // Draw wave node dots
+      for (let i = 0; i < WAVE_NODES; i++) {
+        const n = waveNodes[i];
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(200,200,200,0.9)';
+        ctx.fill();
+      }
+
+      // Draw scatter node dots
+      for (let i = WAVE_NODES; i < nodes.length; i++) {
+        const n = nodes[i];
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(180,180,180,0.5)';
+        ctx.fill();
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  })();
+
   // Scroll Reveal
   const observer = new IntersectionObserver(
     (entries) => {
