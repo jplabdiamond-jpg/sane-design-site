@@ -21,9 +21,9 @@ const colSpan = {
 
 <a
   href={href}
-  class={`work-card reveal`}
+  class={`work-card`}
   data-col={colSpan}
-  style={`text-decoration:none; display:block; transition-delay:${index * 80}ms;`}
+  style={`text-decoration:none; display:block; animation-delay:${index * 80}ms;`}
 >
   <!-- Image container -->
   <div class="work-thumb">
@@ -52,6 +52,12 @@ const colSpan = {
 <style>
   .work-card {
     display: block;
+    animation: workFadeIn 0.7s cubic-bezier(0.19, 1, 0.22, 1) both;
+  }
+
+  @keyframes workFadeIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   .work-thumb {
