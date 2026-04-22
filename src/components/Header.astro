@@ -2,15 +2,15 @@
 import { SITE_NAME, NAV_LINKS } from '../consts';
 ---
 
-<header class="border-b border-border">
-  <div class="container-editorial flex items-center justify-between py-6">
-    <a href="/" class="text-xl font-semibold no-underline tracking-tight" aria-label={SITE_NAME}>
+<header class="site-header" id="site-header">
+  <div class="container-editorial flex items-center justify-between" style="height:64px;">
+    <a href="/" class="font-serif text-base tracking-widest uppercase" aria-label={SITE_NAME} style="letter-spacing:0.2em;font-weight:400;">
       {SITE_NAME}
     </a>
-    <nav class="hidden md:flex gap-8 text-sm" aria-label="Global">
+    <nav class="hidden md:flex items-center gap-10" aria-label="Global">
       {
         NAV_LINKS.map((link) => (
-          <a href={link.href} class="no-underline hover:text-accent">
+          <a href={link.href} class="hover-underline text-xs tracking-widest uppercase" style="letter-spacing:0.12em;color:var(--color-text);">
             {link.label}
           </a>
         ))
@@ -18,20 +18,30 @@ import { SITE_NAME, NAV_LINKS } from '../consts';
     </nav>
     <button
       id="menu-toggle"
-      class="md:hidden text-sm underline"
+      class="md:hidden flex flex-col gap-[5px] justify-center items-end w-8 h-8"
       aria-label="メニューを開く"
       type="button"
     >
-      Menu
+      <span class="menu-bar block h-px bg-current w-6 transition-all duration-300"></span>
+      <span class="menu-bar block h-px bg-current w-4 transition-all duration-300"></span>
+      <span class="menu-bar block h-px bg-current w-6 transition-all duration-300"></span>
     </button>
   </div>
-  <nav id="mobile-menu" class="hidden md:hidden border-t border-border" aria-label="Mobile">
-    <ul class="flex flex-col">
+
+  <!-- Mobile menu -->
+  <nav
+    id="mobile-menu"
+    class="md:hidden overflow-hidden"
+    style="max-height:0; transition: max-height 0.5s cubic-bezier(0.19,1,0.22,1);"
+    aria-label="Mobile"
+  >
+    <ul class="flex flex-col border-t border-[var(--color-border)]">
       {
         NAV_LINKS.map((link) => (
-          <li class="border-b border-border">
-            <a href={link.href} class="block px-4 py-4 no-underline">
+          <li class="border-b border-[var(--color-border)]">
+            <a href={link.href} class="flex items-center justify-between px-5 py-5 text-sm tracking-widest uppercase" style="letter-spacing:0.1em;">
               {link.label}
+              <span style="font-size:10px;">→</span>
             </a>
           </li>
         ))
@@ -40,10 +50,38 @@ import { SITE_NAME, NAV_LINKS } from '../consts';
   </nav>
 </header>
 
+<!-- Header height spacer -->
+<div style="height:64px;"></div>
+
 <script>
+  // Scroll effect
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  }, { passive: true });
+
+  // Mobile menu
   const toggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('mobile-menu');
+  const menu = document.getElementById('mobile-menu') as HTMLElement | null;
+  let open = false;
   toggle?.addEventListener('click', () => {
-    menu?.classList.toggle('hidden');
+    open = !open;
+    if (menu) {
+      menu.style.maxHeight = open ? menu.scrollHeight + 'px' : '0';
+    }
+    const bars = toggle.querySelectorAll('.menu-bar');
+    if (open) {
+      (bars[0] as HTMLElement).style.transform = 'rotate(45deg) translateY(7px)';
+      (bars[1] as HTMLElement).style.opacity = '0';
+      (bars[2] as HTMLElement).style.transform = 'rotate(-45deg) translateY(-7px)';
+    } else {
+      (bars[0] as HTMLElement).style.transform = '';
+      (bars[1] as HTMLElement).style.opacity = '1';
+      (bars[2] as HTMLElement).style.transform = '';
+    }
   });
 </script>

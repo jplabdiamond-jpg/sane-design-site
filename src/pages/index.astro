@@ -15,111 +15,239 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
 ---
 
 <BaseLayout>
-  <section class="container-editorial pt-16 md:pt-32 pb-24 md:pb-40">
-    <p class="section-label">Sane Design — Est. 2020</p>
-    <h1 class="hero-headline">
-      We design<br />
-      websites that<br />
-      <span class="italic">work.</span>
-    </h1>
-    <p class="mt-8 md:mt-12 max-w-xl text-base md:text-lg leading-relaxed">
-      実績300件以上。最速3日納品。<br />
-      ホームページ制作とSEO対策のスタジオです。
-    </p>
-    <div class="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4">
-      <a href="/works/" class="btn-primary">実績を見る →</a>
-      <a href="/contact/" class="btn-ghost">ご依頼はこちら →</a>
-    </div>
-  </section>
+  <!-- ── Hero ── -->
+  <section style="min-height: calc(90vh - 64px); display:flex; flex-direction:column; justify-content:flex-end; padding-bottom:80px; position:relative; overflow:hidden;">
+    <!-- Background subtle grid -->
+    <div style="position:absolute; inset:0; background-image: linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px); background-size: 80px 80px; opacity:0.3; pointer-events:none;"></div>
 
-  <section class="container-editorial pb-24">
-    <div class="flex items-end justify-between mb-8 md:mb-12">
-      <div>
-        <p class="section-label">Featured Works</p>
-        <h2 class="font-serif text-3xl md:text-5xl">Selected Projects</h2>
-      </div>
-      <a href="/works/" class="hidden md:inline-block text-sm">View all →</a>
-    </div>
-    <div class="editorial-grid">
-      {
-        works.map((work, i) => (
-          <WorkCard
-            title={work.data.title}
-            client={work.data.client}
-            year={work.data.year}
-            thumbnail={work.data.thumbnail}
-            href={`/works/${work.slug}/`}
-            span={i % 3 === 0 ? 'large' : 'medium'}
-          />
-        ))
-      }
-    </div>
-    <div class="mt-8 md:hidden text-center">
-      <a href="/works/" class="text-sm">View all →</a>
-    </div>
-  </section>
+    <div class="container-editorial" style="position:relative; z-index:1;">
+      <p class="section-label reveal">Sane Design — Web Studio, Japan</p>
 
-  <section class="container-editorial pb-24">
-    <p class="section-label">Services</p>
-    <h2 class="font-serif text-3xl md:text-5xl mb-12">2つのサービス</h2>
-    <div class="grid md:grid-cols-2 gap-8 md:gap-16">
-      <article class="border-t border-primary pt-6">
-        <p class="text-xs tracking-widest uppercase mb-2">01 / Web Design</p>
-        <h3 class="font-serif text-3xl md:text-4xl mb-4">
-          ホームページを<br />
-          最速3日で納品。
-        </h3>
-        <p class="text-base leading-relaxed mb-6">
-          画像とイメージをお渡しいただくだけで、トップ+4ページの完全オーダーメイドを¥20,000〜制作します。
+      <h1 class="hero-headline" style="margin-top:16px;">
+        <span class="reveal" style="display:block; transition-delay:80ms;">Creating websites</span>
+        <span class="reveal" style="display:block; transition-delay:160ms; font-style:italic;">that move people.</span>
+      </h1>
+
+      <div class="reveal" style="margin-top:40px; max-width:480px; transition-delay:240ms;">
+        <p style="font-size:16px; color:var(--color-muted); line-height:1.9;">
+          DTP・WEB 実績 300件以上。<br />
+          最速3日納品・¥20,000〜のホームページ制作と<br />
+          SEO対策のスタジオです。
         </p>
-        <div class="flex gap-4">
-          <a href="/services/web-design/" class="underline text-sm">詳しく見る</a>
-          <a href={COCONALA_HP} target="_blank" rel="noopener" class="underline text-sm">
-            ココナラ →
+      </div>
+
+      <div class="reveal" style="margin-top:40px; display:flex; flex-wrap:wrap; gap:16px; transition-delay:320ms;">
+        <a href="/works/" class="btn-primary"><span>実績を見る →</span></a>
+        <a href="/contact/" class="btn-ghost"><span>ご依頼・お問い合わせ</span></a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div style="position:absolute; bottom:40px; right:40px; display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0.4;">
+      <span style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; writing-mode:vertical-rl;">Scroll</span>
+      <div style="width:1px; height:40px; background:var(--color-primary); animation: scrollLine 2s ease-in-out infinite;"></div>
+    </div>
+  </section>
+
+  <!-- ── Numbers / Stats ── -->
+  <section style="border-top:1px solid var(--color-border); border-bottom:1px solid var(--color-border); padding: 48px 0;">
+    <div class="container-editorial">
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px;">
+        <div class="reveal stat-item" style="padding:32px 40px; border-right:1px solid var(--color-border);">
+          <p style="font-family:var(--font-serif); font-size:clamp(40px,5vw,64px); font-weight:300; line-height:1; letter-spacing:-0.02em;">300<span style="font-size:0.5em;">+</span></p>
+          <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-muted); margin-top:8px;">Projects</p>
+        </div>
+        <div class="reveal stat-item" style="padding:32px 40px; border-right:1px solid var(--color-border); transition-delay:100ms;">
+          <p style="font-family:var(--font-serif); font-size:clamp(40px,5vw,64px); font-weight:300; line-height:1; letter-spacing:-0.02em;">3<span style="font-size:0.4em;font-family:var(--font-sans);">日〜</span></p>
+          <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-muted); margin-top:8px;">Delivery</p>
+        </div>
+        <div class="reveal stat-item" style="padding:32px 40px; transition-delay:200ms;">
+          <p style="font-family:var(--font-serif); font-size:clamp(40px,5vw,64px); font-weight:300; line-height:1; letter-spacing:-0.02em;">¥20,000<span style="font-size:0.35em;font-family:var(--font-sans);">〜</span></p>
+          <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-muted); margin-top:8px;">Starting Price</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Featured Works ── -->
+  <section style="padding:100px 0;">
+    <div class="container-editorial">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:48px;">
+        <div>
+          <p class="section-label reveal">Featured Works</p>
+          <h2 class="reveal" style="font-family:var(--font-serif); font-size:clamp(28px,4vw,52px); font-weight:300; transition-delay:80ms;">
+            Selected Projects
+          </h2>
+        </div>
+        <a href="/works/" class="hover-underline reveal" style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-muted); text-decoration:none; transition-delay:120ms;">
+          View all works →
+        </a>
+      </div>
+
+      <div class="editorial-grid">
+        {
+          works.map((work, i) => (
+            <WorkCard
+              title={work.data.title}
+              client={work.data.client}
+              year={work.data.year}
+              thumbnail={work.data.thumbnail}
+              href={`/works/${work.slug}/`}
+              span={i === 0 ? 'large' : i === 1 ? 'medium' : 'medium'}
+              index={i}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Services ── -->
+  <section style="padding:100px 0; background:var(--color-surface);">
+    <div class="container-editorial">
+      <p class="section-label reveal">Services</p>
+      <h2 class="reveal" style="font-family:var(--font-serif); font-size:clamp(28px,4vw,52px); font-weight:300; margin-bottom:64px; transition-delay:80ms;">
+        2 つのサービス
+      </h2>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:2px;">
+        <!-- Service 01 -->
+        <div class="reveal service-card" style="padding:56px 48px; background:#fff; position:relative; overflow:hidden; transition-delay:100ms;">
+          <div style="position:absolute; top:0; left:0; width:0; height:2px; background:var(--color-primary); transition: width 0.6s cubic-bezier(0.19,1,0.22,1);" class="top-line"></div>
+          <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-muted); margin-bottom:24px;">01 — Web Design</p>
+          <h3 style="font-family:var(--font-serif); font-size:clamp(24px,3vw,36px); font-weight:300; line-height:1.3; margin-bottom:24px;">
+            ホームページを<br />最速 3 日で納品。
+          </h3>
+          <p style="font-size:14px; color:var(--color-muted); line-height:1.9; margin-bottom:32px;">
+            画像とイメージをお渡しいただくだけで、トップ+4ページの完全オーダーメイドを ¥20,000〜 で制作します。コーポレートサイト・LP・士業・サロンなど幅広く対応。
+          </p>
+          <div style="display:flex; gap:24px; align-items:center;">
+            <a href="/services/web-design/" class="hover-underline" style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none;">詳しく見る</a>
+            <a href={COCONALA_HP} target="_blank" rel="noopener" class="hover-underline" style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; color:var(--color-muted);">Coconala →</a>
+          </div>
+        </div>
+
+        <!-- Service 02 -->
+        <div class="reveal service-card" style="padding:56px 48px; background:#fff; position:relative; overflow:hidden; transition-delay:200ms;">
+          <div style="position:absolute; top:0; left:0; width:0; height:2px; background:var(--color-primary); transition: width 0.6s cubic-bezier(0.19,1,0.22,1);" class="top-line"></div>
+          <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-muted); margin-bottom:24px;">02 — SEO</p>
+          <h3 style="font-family:var(--font-serif); font-size:clamp(24px,3vw,36px); font-weight:300; line-height:1.3; margin-bottom:24px;">
+            検索順位を<br />最短 3 日で変える。
+          </h3>
+          <p style="font-size:14px; color:var(--color-muted); line-height:1.9; margin-bottom:32px;">
+            指定キーワードに基づく厳選 60 記事追加と内部 SEO 対策を ¥10,000〜 で提供。Google 検索での集客を強化し、持続的なアクセスを生み出します。
+          </p>
+          <div style="display:flex; gap:24px; align-items:center;">
+            <a href="/services/seo/" class="hover-underline" style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none;">詳しく見る</a>
+            <a href={COCONALA_SEO} target="_blank" rel="noopener" class="hover-underline" style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; color:var(--color-muted);">Coconala →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Process ── -->
+  <section style="padding:100px 0;">
+    <div class="container-editorial">
+      <p class="section-label reveal">How it works</p>
+      <h2 class="reveal" style="font-family:var(--font-serif); font-size:clamp(28px,4vw,52px); font-weight:300; margin-bottom:64px; transition-delay:80ms;">
+        制作の流れ
+      </h2>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:2px;">
+        {[
+          { step:'01', title:'ご依頼', desc:'ご予算・ページ数・イメージをお伝えください。ご不明点があってもご相談から対応します。' },
+          { step:'02', title:'素材入稿', desc:'画像・テキスト・ロゴなどの素材をお送りください。この時点で制作を開始します。' },
+          { step:'03', title:'デザイン制作', desc:'最速3日でデザイン・コーディングを完成させ、確認用URLをお送りします。' },
+          { step:'04', title:'納品・公開', desc:'ご確認後、1〜2回の修正対応のうえ最終納品。ドメイン・サーバー設定もサポートします。' },
+        ].map((item, i) => (
+          <div class="reveal" style={`padding:40px 32px; border-top:1px solid var(--color-border); transition-delay:${i * 80}ms;`}>
+            <p style="font-family:var(--font-serif); font-size:32px; font-weight:300; color:var(--color-border); margin-bottom:16px;">{item.step}</p>
+            <h3 style="font-size:16px; font-weight:500; margin-bottom:12px; font-family:var(--font-serif);">{item.title}</h3>
+            <p style="font-size:13px; color:var(--color-muted); line-height:1.9;">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Journal ── -->
+  {blogs.length > 0 && (
+    <section style="padding:100px 0; border-top:1px solid var(--color-border);">
+      <div class="container-editorial">
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:48px;">
+          <div>
+            <p class="section-label reveal">Journal</p>
+            <h2 class="reveal" style="font-family:var(--font-serif); font-size:clamp(28px,4vw,52px); font-weight:300; transition-delay:80ms;">
+              Writings
+            </h2>
+          </div>
+          <a href="/blog/" class="hover-underline reveal" style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-muted); text-decoration:none; transition-delay:120ms;">
+            View all →
           </a>
         </div>
-      </article>
-      <article class="border-t border-primary pt-6">
-        <p class="text-xs tracking-widest uppercase mb-2">02 / SEO</p>
-        <h3 class="font-serif text-3xl md:text-4xl mb-4">
-          検索順位を<br />
-          3日で変える。
-        </h3>
-        <p class="text-base leading-relaxed mb-6">
-          指定キーワードに基づく厳選60記事追加と内部SEO対策を、¥10,000〜で提供します。
-        </p>
-        <div class="flex gap-4">
-          <a href="/services/seo/" class="underline text-sm">詳しく見る</a>
-          <a href={COCONALA_SEO} target="_blank" rel="noopener" class="underline text-sm">
-            ココナラ →
-          </a>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px;">
+          {
+            blogs.map((post, i) => (
+              <a href={`/blog/${post.slug}/`} class="reveal" style={`display:block; padding:32px; border:1px solid var(--color-border); text-decoration:none; transition-delay:${i * 80}ms; transition: background 0.3s ease;`}
+                onmouseover="this.style.background='var(--color-surface)'"
+                onmouseout="this.style.background=''"
+              >
+                <time style="font-size:10px; letter-spacing:0.1em; color:var(--color-muted);">
+                  {post.data.pubDate.toISOString().slice(0, 10)}
+                </time>
+                <h3 style="font-family:var(--font-serif); font-size:18px; font-weight:400; margin-top:12px; line-height:1.5;">{post.data.title}</h3>
+                <p style="font-size:12px; color:var(--color-muted); margin-top:8px; line-height:1.8; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">{post.data.description}</p>
+              </a>
+            ))
+          }
         </div>
-      </article>
-    </div>
-  </section>
-
-  <section class="container-editorial pb-24">
-    <div class="flex items-end justify-between mb-8 md:mb-12">
-      <div>
-        <p class="section-label">Journal</p>
-        <h2 class="font-serif text-3xl md:text-5xl">Writings</h2>
       </div>
-      <a href="/blog/" class="hidden md:inline-block text-sm">View all →</a>
-    </div>
-    <div class="grid md:grid-cols-3 gap-8">
-      {
-        blogs.map((post) => (
-          <a href={`/blog/${post.slug}/`} class="no-underline border-t border-primary pt-4">
-            <time class="text-xs text-muted">
-              {post.data.pubDate.toISOString().slice(0, 10)}
-            </time>
-            <h3 class="font-serif text-xl md:text-2xl mt-2 leading-tight">{post.data.title}</h3>
-            <p class="text-sm text-muted mt-2 line-clamp-2">{post.data.description}</p>
-          </a>
-        ))
-      }
-    </div>
-  </section>
+    </section>
+  )}
 
   <CTABanner />
 </BaseLayout>
+
+<style>
+  @keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    50.1% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+  .service-card:hover .top-line {
+    width: 100% !important;
+  }
+  @media (max-width: 768px) {
+    .editorial-grid { gap: 2px; }
+    section > div > div[style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+    section > div > div[style*="grid-template-columns:repeat(4"] {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+    section > div > div[style*="grid-template-columns:repeat(3"] {
+      grid-template-columns: 1fr !important;
+    }
+    section > div > div[style*="grid-template-columns:repeat(3,1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
+
+<script>
+  // Scroll Reveal
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-scale').forEach((el) => {
+    observer.observe(el);
+  });
+</script>

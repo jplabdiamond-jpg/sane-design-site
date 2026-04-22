@@ -3,22 +3,63 @@ import { SITE_NAME, NAV_LINKS } from '../consts';
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-border mt-24">
-  <div class="container-editorial py-12">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-      <a href="/" class="text-lg font-semibold no-underline">{SITE_NAME}</a>
-      <nav class="flex flex-wrap gap-6 text-sm" aria-label="Footer">
-        {
-          NAV_LINKS.map((link) => (
-            <a href={link.href} class="no-underline">
-              {link.label}
-            </a>
-          ))
-        }
+<footer style="border-top:1px solid var(--color-border); margin-top: 120px;">
+  <div class="container-editorial" style="padding-top:64px; padding-bottom:64px;">
+    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; align-items: start;">
+
+      <!-- Brand -->
+      <div>
+        <a href="/" class="font-serif" style="font-size:20px; font-weight:300; letter-spacing:0.15em; text-decoration:none;">
+          {SITE_NAME}
+        </a>
+        <p style="margin-top:16px; font-size:12px; color:var(--color-muted); line-height:2;">
+          Web制作・SEO対策専門スタジオ<br />
+          実績300件以上
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <nav aria-label="Footer Navigation">
+        <p style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--color-muted); margin-bottom:16px;">Navigation</p>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+          {
+            NAV_LINKS.map((link) => (
+              <li>
+                <a href={link.href} class="hover-underline" style="font-size:12px; letter-spacing:0.05em; text-decoration:none; color:var(--color-text);">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </nav>
+
+      <!-- Contact -->
+      <div>
+        <p style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--color-muted); margin-bottom:16px;">Contact</p>
+        <a href="/contact/" class="hover-underline" style="font-size:12px; text-decoration:none;">
+          お問い合わせ
+        </a>
+        <div style="margin-top:16px; display:flex; gap:16px;">
+          <a href="https://coconala.com/users/1109931" target="_blank" rel="noopener" class="hover-underline" style="font-size:11px; color:var(--color-muted);">Coconala</a>
+          <a href="https://www.instagram.com/sane_design2023/" target="_blank" rel="noopener" class="hover-underline" style="font-size:11px; color:var(--color-muted);">Instagram</a>
+          <a href="https://x.com/sane_design" target="_blank" rel="noopener" class="hover-underline" style="font-size:11px; color:var(--color-muted);">X</a>
+        </div>
+      </div>
+
     </div>
-    <p class="mt-8 text-xs text-muted">
-      © {year} {SITE_NAME}. All rights reserved.
-    </p>
+
+    <div style="margin-top:48px; padding-top:24px; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+      <p style="font-size:11px; color:var(--color-muted);">© {year} {SITE_NAME}. All rights reserved.</p>
+      <p style="font-size:11px; color:var(--color-muted);">Web Design & SEO Studio — Japan</p>
+    </div>
   </div>
 </footer>
+
+<style>
+@media (max-width: 768px) {
+  footer > div > div:first-of-type {
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>

@@ -6,31 +6,72 @@ interface Props {
   thumbnail: string;
   href: string;
   span?: 'small' | 'medium' | 'large';
+  index?: number;
 }
 
-const { title, client, year, thumbnail, href, span = 'medium' } = Astro.props;
+const { title, client, year, thumbnail, href, span = 'medium', index = 0 } = Astro.props;
 
 const spanClass = {
-  small: 'md:col-span-3',
-  medium: 'md:col-span-4',
-  large: 'md:col-span-6',
+  small: 'col-span-12 md:col-span-3',
+  medium: 'col-span-12 md:col-span-4',
+  large: 'col-span-12 md:col-span-6',
 }[span];
 ---
 
-<a href={href} class={`work-card group block no-underline col-span-4 ${spanClass}`}>
-  <div class="overflow-hidden bg-[#fafafa] aspect-[4/3]">
+<a
+  href={href}
+  class={`work-card group block ${spanClass} reveal`}
+  style={`text-decoration:none; transition-delay:${index * 80}ms;`}
+>
+  <!-- Image container -->
+  <div
+    style="overflow:hidden; background:var(--color-surface); position:relative;"
+    class="aspect-[4/3]"
+  >
     <img
       src={thumbnail}
-      alt={`${client} - ${title}`}
+      alt={`${client} — ${title}`}
       loading="lazy"
-      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      style="width:100%; height:100%; object-fit:cover; transition: transform 0.8s cubic-bezier(0.19,1,0.22,1);"
+      class="group-hover:scale-[1.06]"
     />
+    <!-- Overlay -->
+    <div
+      style="position:absolute; inset:0; background:rgba(0,0,0,0); transition: background 0.4s ease;"
+      class="group-hover:bg-black/10"
+    ></div>
+    <!-- View label -->
+    <div
+      style="position:absolute; bottom:16px; right:16px; background:#fff; padding:6px 14px; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; opacity:0; transform:translateY(8px); transition: opacity 0.4s ease, transform 0.4s ease;"
+      class="view-label"
+    >
+      View →
+    </div>
   </div>
-  <div class="mt-3 flex items-baseline justify-between">
-    <h3 class="font-sans text-sm font-medium leading-tight">
-      {client}
-    </h3>
-    <span class="text-xs text-muted">{year}</span>
+
+  <!-- Meta -->
+  <div style="margin-top:12px; display:flex; align-items:flex-start; justify-content:space-between; gap:8px;">
+    <div>
+      <h3 style="font-family:var(--font-serif); font-size:15px; font-weight:400; line-height:1.4; margin-bottom:4px;">
+        {client}
+      </h3>
+      <p style="font-size:11px; color:var(--color-muted); letter-spacing:0.05em;">{title}</p>
+    </div>
+    <span style="font-size:11px; color:var(--color-muted); white-space:nowrap; padding-top:2px;">{year}</span>
   </div>
-  <p class="text-xs text-muted mt-1">{title}</p>
 </a>
+
+<style>
+  .work-card:hover .view-label {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  .group-hover\:scale-\[1\.06\]:hover,
+  .work-card:hover img {
+    transform: scale(1.06) !important;
+  }
+  .group-hover\:bg-black\/10:hover,
+  .work-card:hover > div > div:first-of-type + div {
+    background: rgba(0,0,0,0.08) !important;
+  }
+</style>

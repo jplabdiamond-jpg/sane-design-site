@@ -7,35 +7,68 @@ interface Props {
 }
 
 const {
-  headline = "Let's make something.",
-  subline = 'ご依頼はココナラから承っております',
+  headline = 'Let\'s work together.',
+  subline = '新しいプロジェクトのご依頼・ご相談をお待ちしております',
 } = Astro.props;
 ---
 
-<section class="bg-accent text-white py-20 md:py-32 mt-24">
-  <div class="container-editorial text-center">
-    <p class="text-xs tracking-widest uppercase mb-4 opacity-80">Contact</p>
-    <h2 class="font-serif text-4xl md:text-6xl mb-4 leading-tight">
+<section style="background:var(--color-primary); color:#ffffff; padding: 120px 0; margin-top:120px; position:relative; overflow:hidden;">
+  <!-- Decorative background text -->
+  <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; overflow:hidden;">
+    <span style="font-family:var(--font-serif); font-size:clamp(80px,18vw,260px); font-weight:300; color:rgba(255,255,255,0.04); white-space:nowrap; user-select:none; letter-spacing:-0.02em;">
+      CONTACT
+    </span>
+  </div>
+
+  <div class="container-editorial" style="position:relative; z-index:1; text-align:center;">
+    <p style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; opacity:0.5; margin-bottom:24px;">New Project</p>
+    <h2 class="reveal" style="font-family:var(--font-serif); font-size:clamp(36px,6vw,80px); font-weight:300; line-height:1.1; margin-bottom:24px; letter-spacing:-0.01em;">
       {headline}
     </h2>
-    <p class="text-base md:text-lg mb-12 opacity-90">{subline}</p>
-    <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+    <p class="reveal" style="font-size:15px; opacity:0.7; margin-bottom:56px; transition-delay:100ms;">
+      {subline}
+    </p>
+    <div class="reveal" style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; transition-delay:200ms;">
       <a
         href={COCONALA_HP}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-block bg-white text-black no-underline px-8 py-4 font-semibold hover:opacity-85 transition-opacity"
+        style="display:inline-flex; align-items:center; gap:10px; padding:16px 36px; border:1px solid rgba(255,255,255,0.6); color:#ffffff; font-size:13px; letter-spacing:0.1em; text-transform:uppercase; position:relative; overflow:hidden; transition: border-color 0.3s ease;"
+        class="cta-btn"
       >
-        ホームページ制作を依頼する →
+        <span style="position:relative;z-index:1;">ホームページ制作を依頼する</span>
       </a>
       <a
         href={COCONALA_SEO}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-block bg-white text-black no-underline px-8 py-4 font-semibold hover:opacity-85 transition-opacity"
+        style="display:inline-flex; align-items:center; gap:10px; padding:16px 36px; border:1px solid rgba(255,255,255,0.6); color:#ffffff; font-size:13px; letter-spacing:0.1em; text-transform:uppercase; position:relative; overflow:hidden; transition: border-color 0.3s ease;"
+        class="cta-btn"
       >
-        SEO対策を依頼する →
+        <span style="position:relative;z-index:1;">SEO対策を依頼する</span>
+      </a>
+    </div>
+    <div class="reveal" style="margin-top:40px; transition-delay:300ms;">
+      <a href="/contact/" style="font-size:12px; letter-spacing:0.12em; text-transform:uppercase; opacity:0.6; border-bottom:1px solid rgba(255,255,255,0.4); padding-bottom:2px; text-decoration:none; color:#fff; transition: opacity 0.3s ease;">
+        またはメールで問い合わせる →
       </a>
     </div>
   </div>
 </section>
+
+<style>
+  .cta-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.12);
+    transform: translateX(-101%);
+    transition: transform 0.4s cubic-bezier(0.19,1,0.22,1);
+  }
+  .cta-btn:hover::after {
+    transform: translateX(0);
+  }
+  .cta-btn:hover {
+    border-color: rgba(255,255,255,1) !important;
+  }
+</style>

@@ -33,7 +33,7 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:ital,wght@0,300;0,400;1,300;1,400&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -45,3 +45,35 @@ const {
     <Footer />
   </body>
 </html>
+
+<style is:global>
+  /* page transition */
+  body {
+    animation: pageFadeIn 0.5s cubic-bezier(0.19,1,0.22,1) both;
+  }
+  @keyframes pageFadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<script>
+  // Global scroll reveal — runs on every page
+  function initReveal() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-scale').forEach((el) => {
+      observer.observe(el);
+    });
+  }
+  initReveal();
+  document.addEventListener('astro:page-load', initReveal);
+</script>

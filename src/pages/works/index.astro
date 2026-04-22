@@ -7,35 +7,55 @@ import { getCollection } from 'astro:content';
 const works = (await getCollection('works', ({ data }) => !data.draft)).sort(
   (a, b) => a.data.order - b.data.order,
 );
+
+// Group by industry/tag
+const categories = [...new Set(works.flatMap(w => w.data.tags || []))];
 ---
 
 <BaseLayout
   title="Works｜実績一覧 | Sane Design"
   description="Sane Designのホームページ制作実績一覧。コーポレートサイト、LP、サロン予約サイト、士業サイトなど300件以上の制作実績から代表作をご紹介します。"
 >
-  <section class="container-editorial pt-16 md:pt-24 pb-16">
-    <p class="section-label">Works</p>
-    <h1 class="font-serif text-4xl md:text-7xl leading-tight">
-      Selected<br />
-      Projects.
-    </h1>
-    <p class="mt-6 max-w-xl text-base md:text-lg">
-      DTP・WEB合わせて300件以上の実績より、代表的なプロジェクトをご紹介します。
-    </p>
+  <!-- Hero -->
+  <section style="padding: 80px 0 60px;">
+    <div class="container-editorial">
+      <p class="section-label reveal">Works</p>
+      <h1 class="reveal" style="font-family:var(--font-serif); font-size:clamp(40px,7vw,100px); font-weight:300; line-height:1.05; letter-spacing:-0.02em; transition-delay:80ms;">
+        Selected<br />
+        <span style="font-style:italic;">Projects.</span>
+      </h1>
+      <p class="reveal" style="margin-top:24px; max-width:480px; font-size:15px; color:var(--color-muted); line-height:1.9; transition-delay:160ms;">
+        DTP・WEB 合わせて 300 件以上の実績より、<br />代表的なプロジェクトをご紹介します。
+      </p>
+    </div>
   </section>
 
-  <section class="container-editorial pb-24">
-    <div class="editorial-grid">
+  <!-- Category tags -->
+  <div class="container-editorial reveal" style="padding-bottom:48px; transition-delay:240ms;">
+    <div style="display:flex; flex-wrap:wrap; gap:8px; border-top:1px solid var(--color-border); padding-top:24px;">
+      <button class="filter-btn active" data-filter="all" style="padding:6px 16px; border:1px solid var(--color-primary); background:var(--color-primary); color:#fff; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition: all 0.3s ease;">All</button>
+      {categories.map(cat => (
+        <button class="filter-btn" data-filter={cat} style="padding:6px 16px; border:1px solid var(--color-border); background:transparent; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition: all 0.3s ease;">{cat}</button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Works grid -->
+  <section class="container-editorial" style="padding-bottom:120px;" id="works-grid">
+    <div class="editorial-grid" style="gap:2px;">
       {
         works.map((work, i) => (
-          <WorkCard
-            title={work.data.title}
-            client={work.data.client}
-            year={work.data.year}
-            thumbnail={work.data.thumbnail}
-            href={`/works/${work.slug}/`}
-            span={i % 4 === 0 ? 'large' : 'medium'}
-          />
+          <div class="work-item" data-tags={(work.data.tags || []).join(',')}>
+            <WorkCard
+              title={work.data.title}
+              client={work.data.client}
+              year={work.data.year}
+              thumbnail={work.data.thumbnail}
+              href={`/works/${work.slug}/`}
+              span={i % 5 === 0 ? 'large' : 'medium'}
+              index={i}
+            />
+          </div>
         ))
       }
     </div>
@@ -43,3 +63,45 @@ const works = (await getCollection('works', ({ data }) => !data.draft)).sort(
 
   <CTABanner />
 </BaseLayout>
+
+<style>
+  .filter-btn:hover {
+    border-color: var(--color-primary) !important;
+    background: var(--color-primary) !important;
+    color: #fff !important;
+  }
+  .filter-btn.active {
+    border-color: var(--color-primary) !important;
+    background: var(--color-primary) !important;
+    color: #fff !important;
+  }
+  .work-item.hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  // Scroll Reveal
+  const observer = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-scale').forEach(el => observer.observe(el));
+
+  // Filter
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.getAttribute('data-filter');
+      document.querySelectorAll('.work-item').forEach(item => {
+        if (filter === 'all') {
+          item.classList.remove('hidden');
+        } else {
+          const tags = item.getAttribute('data-tags') || '';
+          item.classList.toggle('hidden', !tags.includes(filter));
+        }
+      });
+    });
+  });
+</script>
