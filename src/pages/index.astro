@@ -260,8 +260,8 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
     // ── サイバーグリッド（白背景に映える薄墨色） ──
     function drawGrid() {
       const step = 80;
-      ctx.strokeStyle = 'rgba(0,0,20,0.06)';
-      ctx.lineWidth = 0.5;
+      ctx.strokeStyle = 'rgba(0,0,30,0.12)';
+      ctx.lineWidth = 0.7;
       for (let x = 0; x <= W; x += step) {
         ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
       }
@@ -306,10 +306,10 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
           const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
           const d = Math.sqrt(dx*dx + dy*dy);
           if (d < LINK_DIST) {
-            const a = (1 - d / LINK_DIST) * 0.28;
+            const a = (1 - d / LINK_DIST) * 0.55;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(60,60,80,${a})`;
-            ctx.lineWidth = 0.7;
+            ctx.strokeStyle = `rgba(60,60,100,${a})`;
+            ctx.lineWidth = 0.8;
             ctx.moveTo(pts[i].x, pts[i].y);
             ctx.lineTo(pts[j].x, pts[j].y);
             ctx.stroke();
@@ -319,7 +319,7 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
       for (const p of pts) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(60,60,90,0.5)';
+        ctx.fillStyle = 'rgba(50,50,100,0.75)';
         ctx.fill();
       }
     }
@@ -331,7 +331,7 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
       if (scanY > H + 80) scanY = -80;
       const g = ctx.createLinearGradient(0, scanY - 80, 0, scanY + 80);
       g.addColorStop(0,   'rgba(0,0,60,0)');
-      g.addColorStop(0.5, 'rgba(0,0,60,0.06)');
+      g.addColorStop(0.5, 'rgba(0,0,60,0.07)');
       g.addColorStop(1,   'rgba(0,0,60,0)');
       ctx.fillStyle = g;
       ctx.fillRect(0, scanY - 80, W, 160);
