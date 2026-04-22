@@ -82,11 +82,11 @@ const {
     });
   }
 
-  // Run after body animation settles
+  // Run after body animation settles (600ms = pageFadeIn 0.5s + margin)
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => setTimeout(initReveal, 100));
+    document.addEventListener('DOMContentLoaded', () => setTimeout(initReveal, 600));
   } else {
-    setTimeout(initReveal, 100);
+    setTimeout(initReveal, 600);
   }
-  document.addEventListener('astro:page-load', () => setTimeout(initReveal, 100));
+  document.addEventListener('astro:page-load', () => setTimeout(initReveal, 600));
 </script>
