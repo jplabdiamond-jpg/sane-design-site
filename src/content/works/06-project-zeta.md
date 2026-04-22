@@ -3,8 +3,8 @@ title: 'SEO コンテンツ記事 60 本追加'
 client: 'リフォーム会社 F様'
 industry: '建設・リフォーム'
 year: 2025
-thumbnail: '/works/placeholder-03.svg'
-heroImage: '/works/placeholder-03.svg'
+thumbnail: '/works/placeholder-06.svg'
+heroImage: '/works/placeholder-06.svg'
 tags:
   - SEO
   - Corporate
