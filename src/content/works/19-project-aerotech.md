@@ -1,14 +1,18 @@
 ---
-title: Corporate Website
-client: AeroTech Co.
+title: 'コーポレートサイト制作'
+client: 'AeroTech Co.'
+industry: 'テクノロジー・航空'
 year: 2025
-order: 19
-thumbnail: /works/work-19.jpg
-url: https://aerotechco.com/
+thumbnail: '/works/work-19.jpg'
+heroImage: '/works/work-19.jpg'
 tags:
-  - Web Design
   - Corporate
+  - Responsive
+role: 'Design & Development'
+order: 19
 draft: false
 ---
 
-航空・宇宙関連企業のコーポレートサイト。先進的なテクノロジーイメージを表現したモダンなデザインで制作しました。
+## 概要
+
+航空・テクノロジー企業のコーポレートサイト。先進的なテクノロジーイメージを表現したモダンなデザインで制作しました。

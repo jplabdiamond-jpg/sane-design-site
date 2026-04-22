@@ -1,15 +1,18 @@
 ---
-title: Landing Page
-client: 夜ナビ Shine LP
+title: 'ランディングページ制作'
+client: '夜ナビ Shine LP'
+industry: 'エンターテインメント'
 year: 2025
-order: 23
-thumbnail: /works/work-23.jpg
-url: https://www.yoru-navi-shine.com/lp
+thumbnail: '/works/work-23.jpg'
+heroImage: '/works/work-23.jpg'
 tags:
-  - Web Design
   - LP
   - Entertainment
+role: 'Design & Development'
+order: 23
 draft: false
 ---
+
+## 概要
 
 夜ナビShineの集客用ランディングページ。コンバージョン最適化を意識した縦長LP構成で制作しました。

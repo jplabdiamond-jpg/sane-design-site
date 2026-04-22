@@ -1,14 +1,18 @@
 ---
-title: Website
-client: 夜ナビ Shine
+title: 'Webサイト制作'
+client: '夜ナビ Shine'
+industry: 'エンターテインメント'
 year: 2025
-order: 22
-thumbnail: /works/work-22.jpg
-url: https://yoru-navi-shine.com/
+thumbnail: '/works/work-22.jpg'
+heroImage: '/works/work-22.jpg'
 tags:
   - Web Design
   - Entertainment
+role: 'Design & Development'
+order: 22
 draft: false
 ---
+
+## 概要
 
 夜のエンターテインメント情報サービスのWebサイト。洗練されたダークトーンのデザインで制作しました。
