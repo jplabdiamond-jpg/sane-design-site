@@ -4,8 +4,6 @@ export const SITE_DESCRIPTION =
 export const SITE_URL = 'https://sane-design.net';
 export const SITE_NAME = 'SANE DESIGN';
 
-export const COCONALA_HP = 'https://coconala.com/services/2605832';
-export const COCONALA_SEO = 'https://coconala.com/services/2697889';
 
 export const NAV_LINKS = [
   { href: '/works/', label: 'Works' },

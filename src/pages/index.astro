@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkCard from '../components/WorkCard.astro';
 import CTABanner from '../components/CTABanner.astro';
 import { getCollection } from 'astro:content';
-import { COCONALA_HP, COCONALA_SEO } from '../consts';
 
 const works = (await getCollection('works', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order)
@@ -123,7 +122,6 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
           </p>
           <div style="display:flex; gap:24px; align-items:center;">
             <a href="/services/web-design/" class="hover-underline" style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none;">詳しく見る</a>
-            <a href={COCONALA_HP} target="_blank" rel="noopener" class="hover-underline" style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; color:var(--color-muted);">Coconala →</a>
           </div>
         </div>
 
@@ -139,7 +137,6 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
           </p>
           <div style="display:flex; gap:24px; align-items:center;">
             <a href="/services/seo/" class="hover-underline" style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none;">詳しく見る</a>
-            <a href={COCONALA_SEO} target="_blank" rel="noopener" class="hover-underline" style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; color:var(--color-muted);">Coconala →</a>
           </div>
         </div>
       </div>

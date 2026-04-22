@@ -1,11 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { COCONALA_HP, COCONALA_SEO } from '../consts';
 ---
 
 <BaseLayout
   title="Contact｜ご依頼・お問い合わせ | Sane Design"
-  description="Sane Designへのご依頼・お問い合わせ。ホームページ制作は¥20,000〜、SEO対策は¥10,000〜。メールフォームまたはCoconaraからお気軽にご相談ください。"
+  description="Sane Designへのご依頼・お問い合わせ。ホームページ制作は¥20,000〜、SEO対策は¥10,000〜。フォームからお気軽にご相談ください。"
 >
   <!-- Hero -->
   <section style="padding:80px 0 60px;">
@@ -22,16 +21,13 @@ import { COCONALA_HP, COCONALA_SEO } from '../consts';
     </div>
   </section>
 
-  <!-- Coconala Links -->
+  <!-- Service Links -->
   <section style="padding:0 0 80px;">
     <div class="container-editorial">
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;" class="contact-grid">
-        <a
-          href={COCONALA_HP}
-          target="_blank"
-          rel="noopener noreferrer"
+        <div
           class="reveal contact-card"
-          style="display:block; padding:56px 48px; border:1px solid var(--color-border); text-decoration:none; position:relative; overflow:hidden; transition: border-color 0.3s ease;"
+          style="display:block; padding:56px 48px; border:1px solid var(--color-border); position:relative; overflow:hidden;"
         >
           <div style="position:absolute; top:0; left:0; right:0; height:2px; background:var(--color-primary); transform:scaleX(0); transform-origin:left; transition: transform 0.5s cubic-bezier(0.19,1,0.22,1);" class="card-line"></div>
           <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-muted); margin-bottom:24px;">01 — Web Design</p>
@@ -41,15 +37,12 @@ import { COCONALA_HP, COCONALA_SEO } from '../consts';
           <p style="font-size:13px; color:var(--color-muted); line-height:1.9; margin-bottom:32px;">
             最速3日・¥20,000〜。画像とイメージをお渡しいただくだけで、完全オーダーメイドで制作します。
           </p>
-          <span style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; border-bottom:1px solid currentColor; padding-bottom:2px;">Coconala で詳細を見る →</span>
-        </a>
+          <span style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; border-bottom:1px solid currentColor; padding-bottom:2px;">詳細を見る →</span>
+        </div>
 
-        <a
-          href={COCONALA_SEO}
-          target="_blank"
-          rel="noopener noreferrer"
+        <div
           class="reveal contact-card"
-          style="display:block; padding:56px 48px; border:1px solid var(--color-border); text-decoration:none; position:relative; overflow:hidden; transition: border-color 0.3s ease; transition-delay:100ms;"
+          style="display:block; padding:56px 48px; border:1px solid var(--color-border); position:relative; overflow:hidden; transition-delay:100ms;"
         >
           <div style="position:absolute; top:0; left:0; right:0; height:2px; background:var(--color-primary); transform:scaleX(0); transform-origin:left; transition: transform 0.5s cubic-bezier(0.19,1,0.22,1);" class="card-line"></div>
           <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-muted); margin-bottom:24px;">02 — SEO</p>
@@ -59,8 +52,8 @@ import { COCONALA_HP, COCONALA_SEO } from '../consts';
           <p style="font-size:13px; color:var(--color-muted); line-height:1.9; margin-bottom:32px;">
             最短3日・¥10,000〜。指定KWの記事60本追加と内部SEO対策を実施します。
           </p>
-          <span style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; border-bottom:1px solid currentColor; padding-bottom:2px;">Coconala で詳細を見る →</span>
-        </a>
+          <span style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; border-bottom:1px solid currentColor; padding-bottom:2px;">詳細を見る →</span>
+        </div>
       </div>
     </div>
   </section>
