@@ -43,9 +43,9 @@ try {
     <div class="container-editorial" style="position:relative; z-index:1;">
       <p class="section-label reveal">Sane Design — Web Studio, Japan</p>
 
-      <h1 class="hero-headline" style="margin-top:16px;">
-        <span class="reveal" style="display:block; transition-delay:80ms;">Creating websites</span>
-        <span class="reveal" style="display:block; transition-delay:160ms; font-style:italic;">that move people.</span>
+      <h1 class="hero-headline glitch-wrap" style="margin-top:16px;" data-text1="Creating websites" data-text2="that move people.">
+        <span class="reveal glitch-line" style="display:block; transition-delay:80ms;" data-text="Creating websites">Creating websites</span>
+        <span class="reveal glitch-line" style="display:block; transition-delay:160ms; font-style:italic;" data-text="that move people.">that move people.</span>
       </h1>
 
       <div class="reveal" style="margin-top:40px; max-width:480px; transition-delay:240ms;">
@@ -293,6 +293,55 @@ try {
   @keyframes waveRotate {
     from { transform: translateX(-50%) rotate(0deg); }
     to   { transform: translateX(-50%) rotate(360deg); }
+  }
+
+  /* ── Glitch ── */
+  .glitch-line {
+    position: relative;
+  }
+  .glitch-line::before,
+  .glitch-line::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    overflow: hidden;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    pointer-events: none;
+    opacity: 0;
+  }
+  .glitch-line::before {
+    color: #0ff;
+    clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+    animation: glitch-before 6s infinite;
+    animation-delay: 1s;
+  }
+  .glitch-line::after {
+    color: #f0f;
+    clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
+    animation: glitch-after 6s infinite;
+    animation-delay: 1s;
+  }
+  @keyframes glitch-before {
+    0%, 88%, 100% { opacity: 0; transform: none; }
+    89%  { opacity: 0.9; transform: translate(-3px, 1px) skewX(-2deg); }
+    90%  { opacity: 0.9; transform: translate(3px, -1px) skewX(2deg); }
+    91%  { opacity: 0; transform: none; }
+    93%  { opacity: 0.7; transform: translate(-2px, 2px); clip-path: polygon(0 5%, 100% 5%, 100% 25%, 0 25%); }
+    94%  { opacity: 0; transform: none; }
+  }
+  @keyframes glitch-after {
+    0%, 88%, 100% { opacity: 0; transform: none; }
+    89%  { opacity: 0.8; transform: translate(3px, -2px) skewX(3deg); }
+    90%  { opacity: 0.8; transform: translate(-3px, 1px) skewX(-3deg); }
+    91%  { opacity: 0; transform: none; }
+    93%  { opacity: 0.6; transform: translate(2px, -1px); clip-path: polygon(0 55%, 100% 55%, 100% 80%, 0 80%); }
+    94%  { opacity: 0; transform: none; }
   }
 
   @keyframes scrollLine {
