@@ -8,9 +8,25 @@ const works = (await getCollection('works', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 6);
 
-const blogs = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+// note RSS fetch
+let noteArticles: { title: string; link: string; pubDate: string; thumbnail: string; description: string }[] = [];
+try {
+  const rssRes = await fetch('https://note.com/sane_design2026/rss');
+  const rssText = await rssRes.text();
+  const itemMatches = [...rssText.matchAll(/<item>([\s\S]*?)<\/item>/g)];
+  noteArticles = itemMatches.slice(0, 3).map((m) => {
+    const item = m[1];
+    const title = item.match(/<title>([\s\S]*?)<\/title>/)?.[1]?.replace(/<!\[CDATA\[|\]\]>/g, '').trim() ?? '';
+    const link = item.match(/<link>([\s\S]*?)<\/link>/)?.[1]?.trim() ?? '';
+    const pubDate = item.match(/<pubDate>([\s\S]*?)<\/pubDate>/)?.[1]?.trim() ?? '';
+    const thumbnail = item.match(/<media:thumbnail[^>]+url="([^"]+)"/)?.[1] ?? '';
+    const descRaw = item.match(/<description>([\s\S]*?)<\/description>/)?.[1]?.replace(/<!\[CDATA\[|\]\]>/g, '') ?? '';
+    const description = descRaw.replace(/<[^>]+>/g, '').replace(/続きをみる$/, '').trim().slice(0, 80);
+    return { title, link, pubDate, thumbnail, description };
+  });
+} catch (e) {
+  // RSS fetch失敗時は空配列のまま
+}
 ---
 
 <BaseLayout>
@@ -172,40 +188,48 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
     </div>
   </section>
 
-  <!-- ── Journal ── -->
-  {blogs.length > 0 && (
-    <section style="padding:100px 0; border-top:1px solid var(--color-border);">
-      <div class="container-editorial">
-        <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:48px;">
-          <div>
-            <p class="section-label reveal">Journal</p>
-            <h2 class="reveal" style="font-family:var(--font-serif); font-size:clamp(28px,4vw,52px); font-weight:300; transition-delay:80ms;">
-              Writings
-            </h2>
-          </div>
-          <a href="/blog/" class="hover-underline reveal" style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-muted); text-decoration:none; transition-delay:120ms;">
-            View all →
-          </a>
+  <!-- ── Journal (note RSS) ── -->
+  <section style="padding:100px 0; border-top:1px solid var(--color-border);">
+    <div class="container-editorial">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:48px;">
+        <div>
+          <p class="section-label reveal">Journal</p>
+          <h2 class="reveal" style="font-family:var(--font-serif); font-size:clamp(28px,4vw,52px); font-weight:300; transition-delay:80ms;">
+            Writings
+          </h2>
         </div>
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px;">
-          {
-            blogs.map((post, i) => (
-              <a href={`/blog/${post.slug}/`} class="reveal" style={`display:block; padding:32px; border:1px solid var(--color-border); text-decoration:none; transition-delay:${i * 80}ms; transition: background 0.3s ease;`}
-                onmouseover="this.style.background='var(--color-surface)'"
-                onmouseout="this.style.background=''"
-              >
-                <time style="font-size:10px; letter-spacing:0.1em; color:var(--color-muted);">
-                  {post.data.pubDate.toISOString().slice(0, 10)}
-                </time>
-                <h3 style="font-family:var(--font-serif); font-size:18px; font-weight:400; margin-top:12px; line-height:1.5;">{post.data.title}</h3>
-                <p style="font-size:12px; color:var(--color-muted); margin-top:8px; line-height:1.8; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">{post.data.description}</p>
-              </a>
-            ))
-          }
-        </div>
+        <a href="https://note.com/sane_design2026" target="_blank" rel="noopener" class="hover-underline reveal" style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-muted); text-decoration:none; transition-delay:120ms;">
+          View all on note →
+        </a>
       </div>
-    </section>
-  )}
+      {noteArticles.length > 0 ? (
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+          {noteArticles.map((article, i) => {
+            const d = new Date(article.pubDate);
+            const dateStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+            return (
+              <a href={article.link} target="_blank" rel="noopener" class="reveal note-card" style={`display:block; text-decoration:none; border:1px solid var(--color-border); overflow:hidden; transition-delay:${i * 80}ms; transition: box-shadow 0.3s ease, transform 0.3s ease;`}>
+                {article.thumbnail && (
+                  <div style="width:100%; aspect-ratio:16/9; overflow:hidden; background:var(--color-surface);">
+                    <img src={article.thumbnail} alt={article.title} loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.4s ease;" class="note-thumb" />
+                  </div>
+                )}
+                <div style="padding:24px;">
+                  <time style="font-size:10px; letter-spacing:0.1em; color:var(--color-muted);">{dateStr}</time>
+                  <h3 style="font-family:var(--font-serif); font-size:17px; font-weight:400; margin-top:10px; line-height:1.6; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">{article.title}</h3>
+                  {article.description && (
+                    <p style="font-size:12px; color:var(--color-muted); margin-top:8px; line-height:1.8; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">{article.description}</p>
+                  )}
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      ) : (
+        <p style="font-size:14px; color:var(--color-muted);">記事を読み込めませんでした。<a href="https://note.com/sane_design2026" target="_blank" rel="noopener" style="color:var(--color-primary);">noteで読む →</a></p>
+      )}
+    </div>
+  </section>
 
   <CTABanner />
 </BaseLayout>
@@ -279,6 +303,13 @@ const blogs = (await getCollection('blog', ({ data }) => !data.draft))
   }
   .service-card:hover .top-line {
     width: 100% !important;
+  }
+  .note-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  .note-card:hover .note-thumb {
+    transform: scale(1.04);
   }
   .works-grid-top {
     display: grid;
