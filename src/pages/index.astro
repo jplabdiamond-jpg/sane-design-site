@@ -43,9 +43,9 @@ try {
     <div class="container-editorial" style="position:relative; z-index:1;">
       <p class="section-label reveal">Sane Design — Web Studio, Japan</p>
 
-      <h1 class="hero-headline glitch-wrap" style="margin-top:16px;" data-text1="Creating websites" data-text2="that move people.">
-        <span class="reveal glitch-line" style="display:block; transition-delay:80ms;" data-text="Creating websites">Creating websites</span>
-        <span class="reveal glitch-line" style="display:block; transition-delay:160ms; font-style:italic;" data-text="that move people.">that move people.</span>
+      <h1 class="hero-headline" style="margin-top:16px;">
+        <span class="reveal glitch-title" style="display:block; transition-delay:80ms;" data-text="Creating websites">Creating websites</span>
+        <span class="reveal glitch-title" style="display:block; transition-delay:160ms; font-style:italic;" data-text="that move people.">that move people.</span>
       </h1>
 
       <div class="reveal" style="margin-top:40px; max-width:480px; transition-delay:240ms;">
@@ -295,17 +295,22 @@ try {
     to   { transform: translateX(-50%) rotate(360deg); }
   }
 
-  /* ── Glitch ── */
-  .glitch-line {
-    position: relative;
-    /* shake は下の @keyframes glitch-shake で定義 */
+  /* ── Glitch (AlainBarrios / CodePen OEOKgm 移植) ── */
+  :root {
+    --gap-horizontal: 10px;
+    --gap-vertical: 5px;
+    --time-anim: 4s;
+    --delay-anim: 2s;
   }
-  .glitch-line::before,
-  .glitch-line::after {
+  .glitch-title {
+    position: relative;
+  }
+  .glitch-title::before,
+  .glitch-title::after {
     content: attr(data-text);
     position: absolute;
-    top: 0; left: 0;
-    width: 100%;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
     overflow: hidden;
     font-family: inherit;
     font-size: inherit;
@@ -313,78 +318,43 @@ try {
     font-style: inherit;
     line-height: inherit;
     letter-spacing: inherit;
-    pointer-events: none;
-    opacity: 0;
   }
-  .glitch-line::before {
-    color: #0ff;
-    clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
-    animation: glitch-before 6s infinite;
-    animation-delay: 1s;
+  .glitch-title::before {
+    left: 2px;
+    text-shadow: -1px 0 #00ffea;
+    clip: rect(24px, 9999px, 90px, 0);
+    animation: glitch-anim-text var(--time-anim) linear infinite alternate-reverse;
+    animation-delay: var(--delay-anim);
   }
-  .glitch-line::after {
-    color: #f0f;
-    clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
-    animation: glitch-after 6s infinite;
-    animation-delay: 1s;
+  .glitch-title::after {
+    left: -2px;
+    text-shadow: -1px 0 #fe3a7f;
+    clip: rect(85px, 9999px, 140px, 0);
+    animation: glitch-anim-text var(--time-anim) 1s linear infinite alternate-reverse;
+    animation-delay: var(--delay-anim);
   }
-  /* 本体の揺れ */
-  .glitch-line {
-    animation: glitch-shake 2.5s infinite;
-  }
-  @keyframes glitch-shake {
-    0%,  100% { transform: translate(0, 0); }
-    10%        { transform: translate(-1px, 1px); }
-    20%        { transform: translate(1px, -1px); }
-    30%        { transform: translate(-1px, 0px); }
-    40%        { transform: translate(1px, 1px); }
-    50%        { transform: translate(0px, -1px); }
-    55%        { transform: translate(-2px, 1px); }
-    60%        { transform: translate(2px, -2px); }
-    65%        { transform: translate(-1px, 2px); }
-    70%        { transform: translate(0, 0); }
-  }
-  @keyframes glitch-before {
-    0%,  100% { opacity: 0; transform: none; }
-    /* 第1波 */
-    8%   { opacity: 0.9; transform: translate(-4px, 1px) skewX(-3deg); clip-path: polygon(0 15%, 100% 15%, 100% 35%, 0 35%); }
-    10%  { opacity: 0.9; transform: translate(4px, -1px) skewX(3deg);  clip-path: polygon(0 40%, 100% 40%, 100% 55%, 0 55%); }
-    12%  { opacity: 0; transform: none; }
-    /* 第2波 */
-    28%  { opacity: 0.8; transform: translate(-3px, 2px) skewX(-2deg); clip-path: polygon(0 5%, 100% 5%, 100% 28%, 0 28%); }
-    30%  { opacity: 0; transform: none; }
-    /* 第3波 */
-    48%  { opacity: 0.9; transform: translate(5px, -2px) skewX(4deg);  clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); }
-    50%  { opacity: 0.9; transform: translate(-5px, 2px) skewX(-4deg); clip-path: polygon(0 20%, 100% 20%, 100% 45%, 0 45%); }
-    52%  { opacity: 0; transform: none; }
-    /* 第4波 */
-    68%  { opacity: 0.7; transform: translate(-2px, 1px); clip-path: polygon(0 70%, 100% 70%, 100% 90%, 0 90%); }
-    70%  { opacity: 0; transform: none; }
-    /* 第5波 */
-    88%  { opacity: 0.9; transform: translate(3px, -1px) skewX(2deg);  clip-path: polygon(0 10%, 100% 10%, 100% 30%, 0 30%); }
-    90%  { opacity: 0.9; transform: translate(-3px, 1px) skewX(-2deg); clip-path: polygon(0 50%, 100% 50%, 100% 70%, 0 70%); }
-    92%  { opacity: 0; transform: none; }
-  }
-  @keyframes glitch-after {
-    0%,  100% { opacity: 0; transform: none; }
-    /* 第1波（少しずらす） */
-    9%   { opacity: 0.8; transform: translate(4px, -2px) skewX(3deg);  clip-path: polygon(0 50%, 100% 50%, 100% 70%, 0 70%); }
-    11%  { opacity: 0.8; transform: translate(-4px, 2px) skewX(-3deg); clip-path: polygon(0 25%, 100% 25%, 100% 42%, 0 42%); }
-    13%  { opacity: 0; transform: none; }
-    /* 第2波 */
-    29%  { opacity: 0.7; transform: translate(3px, -1px) skewX(2deg);  clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); }
-    31%  { opacity: 0; transform: none; }
-    /* 第3波 */
-    49%  { opacity: 0.8; transform: translate(-5px, 3px) skewX(-4deg); clip-path: polygon(0 10%, 100% 10%, 100% 30%, 0 30%); }
-    51%  { opacity: 0.8; transform: translate(5px, -3px) skewX(4deg);  clip-path: polygon(0 65%, 100% 65%, 100% 85%, 0 85%); }
-    53%  { opacity: 0; transform: none; }
-    /* 第4波 */
-    69%  { opacity: 0.6; transform: translate(2px, -2px); clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%); }
-    71%  { opacity: 0; transform: none; }
-    /* 第5波 */
-    89%  { opacity: 0.8; transform: translate(-3px, 2px) skewX(-2deg); clip-path: polygon(0 55%, 100% 55%, 100% 75%, 0 75%); }
-    91%  { opacity: 0.8; transform: translate(3px, -2px) skewX(2deg);  clip-path: polygon(0 15%, 100% 15%, 100% 35%, 0 35%); }
-    93%  { opacity: 0; transform: none; }
+  @keyframes glitch-anim-text {
+    0%   { clip: rect(73px,  9999px, 128px, 0); }
+    5%   { clip: rect(119px, 9999px,  60px, 0); }
+    10%  { clip: rect(98px,  9999px,  32px, 0); }
+    15%  { clip: rect(100px, 9999px,   7px, 0); }
+    20%  { clip: rect(138px, 9999px, 133px, 0); }
+    25%  { clip: rect(68px,  9999px,  62px, 0); }
+    30%  { clip: rect(129px, 9999px,   4px, 0); }
+    35%  { clip: rect(4px,   9999px,   7px, 0); }
+    40%  { clip: rect(149px, 9999px, 169px, 0); }
+    45%  { clip: rect(69px,  9999px, 170px, 0); }
+    50%  { clip: rect(93px,  9999px,  91px, 0); }
+    55%  { clip: rect(74px,  9999px, 122px, 0); }
+    60%  { clip: rect(60px,  9999px, 126px, 0); }
+    65%  { clip: rect(83px,  9999px,  28px, 0); }
+    70%  { clip: rect(89px,  9999px, 110px, 0); }
+    75%  { clip: rect(109px, 9999px,   7px, 0); }
+    80%  { clip: rect(39px,  9999px,  24px, 0); }
+    85%  { clip: rect(77px,  9999px, 155px, 0); }
+    90%  { clip: rect(10px,  9999px, 128px, 0); }
+    95%  { clip: rect(134px, 9999px,  52px, 0); }
+    100% { clip: rect(156px, 9999px, 142px, 0); }
   }
 
   @keyframes scrollLine {
