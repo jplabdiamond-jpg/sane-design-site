@@ -82,15 +82,15 @@ try {
     <div class="container-editorial">
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px;">
         <div class="reveal stat-item" style="padding:32px 40px; border-right:1px solid var(--color-border);">
-          <p style="font-family:var(--font-serif); font-size:clamp(40px,5vw,64px); font-weight:300; line-height:1; letter-spacing:-0.02em;">300<span style="font-size:0.5em;">+</span></p>
+          <p style="font-family:var(--font-serif); font-size:clamp(40px,5vw,64px); font-weight:300; line-height:1; letter-spacing:-0.02em;"><span class="count-up" data-target="300" data-suffix="+">0</span></p>
           <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-muted); margin-top:8px;">Projects</p>
         </div>
         <div class="reveal stat-item" style="padding:32px 40px; border-right:1px solid var(--color-border); transition-delay:100ms;">
-          <p style="font-family:var(--font-serif); font-size:clamp(40px,5vw,64px); font-weight:300; line-height:1; letter-spacing:-0.02em;">3<span style="font-size:0.4em;font-family:var(--font-sans);">日〜</span></p>
+          <p style="font-family:var(--font-serif); font-size:clamp(40px,5vw,64px); font-weight:300; line-height:1; letter-spacing:-0.02em;"><span class="count-up" data-target="3" data-suffix='<span style="font-size:0.4em;font-family:var(--font-sans);">日〜</span>'>0</span></p>
           <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-muted); margin-top:8px;">Delivery</p>
         </div>
         <div class="reveal stat-item" style="padding:32px 40px; transition-delay:200ms;">
-          <p style="font-family:var(--font-serif); font-size:clamp(40px,5vw,64px); font-weight:300; line-height:1; letter-spacing:-0.02em;">¥20,000<span style="font-size:0.35em;font-family:var(--font-sans);">〜</span></p>
+          <p style="font-family:var(--font-serif); font-size:clamp(40px,5vw,64px); font-weight:300; line-height:1; letter-spacing:-0.02em;"><span class="count-up" data-prefix="¥" data-target="20000" data-suffix='<span style="font-size:0.35em;font-family:var(--font-sans);">〜</span>'>0</span></p>
           <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-muted); margin-top:8px;">Starting Price</p>
         </div>
       </div>
@@ -427,6 +427,41 @@ try {
 
 <script>
 
+
+  // ── Count Up ──
+  function runCountUp(el) {
+    const target = parseInt(el.dataset.target);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 900; // ms
+    const steps = 40;
+    const interval = duration / steps;
+    let current = 0;
+    const increment = target / steps;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      const num = target >= 1000
+        ? Math.floor(current).toLocaleString()
+        : Math.floor(current);
+      el.innerHTML = prefix + num + suffix;
+    }, interval);
+  }
+
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        runCountUp(entry.target);
+        countObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.count-up').forEach(el => countObserver.observe(el));
 
   // Scroll Reveal
   const observer = new IntersectionObserver(
