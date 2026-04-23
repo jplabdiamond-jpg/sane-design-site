@@ -12,8 +12,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       SEO.
     </h1>
     <p class="max-w-2xl text-base md:text-xl leading-relaxed">
-      検索順位を3日で変える。<br />
-      指定キーワードに基づく厳選60記事追加と、内部SEO対策を実施します。
+      SEO対策の実装を最短3日で完了します。<br />
+      指定キーワードに基づく厳選60記事追加と、内部SEO対策を実施します。<br />
+      <span style="font-size:0.85em; opacity:0.6;">※検索順位の変動には通常数週間〜数ヶ月かかります。</span>
     </p>
   </section>
 
@@ -24,7 +25,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p class="font-serif text-2xl">¥10,000〜</p>
       </div>
       <div>
-        <p class="text-xs uppercase tracking-widest text-muted mb-2">納期</p>
+        <p class="text-xs uppercase tracking-widest text-muted mb-2">実装納期</p>
         <p class="font-serif text-2xl">3営業日</p>
       </div>
       <div>
@@ -74,20 +75,55 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- Coconala サービス情報 -->
+  <section class="container-editorial pb-16">
+    <h2 class="font-serif text-3xl md:text-4xl mb-8">サービス詳細</h2>
+    <div class="grid md:grid-cols-2 gap-8 max-w-4xl">
+      <div class="border-t border-primary pt-4">
+        <h3 class="font-serif text-xl mb-3">基本プランに含まれるもの</h3>
+        <ul class="space-y-2 text-sm text-muted leading-relaxed">
+          <li>✓ 指定キーワードに基づくブログ記事 60本作成・追加</li>
+          <li>✓ 内部SEO対策（タイトル・メタ・見出し構造・内部リンク・スキーマ）</li>
+          <li>✓ 実績200件以上のノウハウで対策を実施</li>
+        </ul>
+      </div>
+      <div class="border-t border-primary pt-4">
+        <h3 class="font-serif text-xl mb-3">オプション</h3>
+        <ul class="space-y-2 text-sm text-muted leading-relaxed">
+          <li>＋ ¥5,000 — サーバーへの直接アップロード（内部SEO対策実施含）</li>
+          <li>＋ ¥5,000 — 完全オリジナル画像付き記事 60本</li>
+        </ul>
+        <p class="mt-4 text-xs text-muted leading-relaxed">
+          ※ SEO対策の実装は最短3日で完了しますが、検索順位への反映には通常数週間〜数ヶ月かかります。即日の順位変動を保証するものではありません。
+        </p>
+      </div>
+    </div>
+  </section>
+
   <section class="bg-accent text-white py-20 md:py-32 mt-12">
     <div class="container-editorial text-center">
       <h2 class="font-serif text-3xl md:text-5xl mb-6 leading-tight">
-        ¥10,000 / 3日納品
+        ¥10,000 / 実装3日
       </h2>
-      <p class="mb-12 opacity-90">
-        フォームからお気軽にご相談ください
+      <p class="mb-8 opacity-90">
+        ココナラにて承っております
       </p>
-      <a
-        href="/contact"
-        class="inline-block bg-white text-black no-underline px-12 py-5 font-semibold hover:opacity-85 transition-opacity"
-      >
-        フォームから依頼する →
-      </a>
+      <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center;">
+        <a
+          href="https://coconala.com/services/2697889"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block bg-white text-black no-underline px-12 py-5 font-semibold hover:opacity-85 transition-opacity"
+        >
+          SEO対策を依頼する →
+        </a>
+        <a
+          href="/contact"
+          class="inline-block bg-transparent text-white no-underline px-12 py-5 font-semibold border border-white hover:opacity-85 transition-opacity"
+        >
+          お問い合わせ →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

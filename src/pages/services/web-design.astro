@@ -79,20 +79,65 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </ol>
   </section>
 
+  <!-- Coconala サービス情報 -->
+  <section class="container-editorial pb-16">
+    <h2 class="font-serif text-3xl md:text-4xl mb-8">サービス詳細</h2>
+    <div class="grid md:grid-cols-2 gap-8 max-w-4xl">
+      <div class="border-t border-primary pt-4">
+        <h3 class="font-serif text-xl mb-3">含まれるもの</h3>
+        <ul class="space-y-2 text-sm text-muted leading-relaxed">
+          <li>✓ デザイン（レスポンシブ・スマホ対応）</li>
+          <li>✓ SEO対応</li>
+          <li>✓ 画像・素材の用意</li>
+          <li>✓ 文章作成</li>
+          <li>✓ SNS機能 / ギャラリー / お問い合わせフォーム</li>
+          <li>✓ 地図 / 動画挿入 / FAQ / イベント</li>
+          <li>✓ 無料修正：無制限</li>
+        </ul>
+      </div>
+      <div class="border-t border-primary pt-4">
+        <h3 class="font-serif text-xl mb-3">オプション</h3>
+        <ul class="space-y-2 text-sm text-muted leading-relaxed">
+          <li>＋ ¥3,000 — サーバーへの直接アップロード・公開対応</li>
+          <li>＋ ¥10,000 — デザイン提出後の大幅変更</li>
+          <li>＋ ¥40,000 — ECサイト構築（Stripe / Square 決済連携含）</li>
+          <li>＋ ¥1,000 — 軽微な修正（画像入替・役員追加など）</li>
+          <li>＋ ¥5,000 — 大規模修正（文字1,000字以上・画像20枚以上）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-8 max-w-4xl border-t border-primary pt-6">
+      <p class="text-sm text-muted leading-relaxed">
+        ご不明点はお気軽にご相談ください。サーバー・ドメインの選び方、ページ追加、ECサイト構築なども対応しております。<br />
+        初回返答：<strong>2時間以内（実績）</strong>／ 納期：<strong>約5日（実績）</strong>
+      </p>
+    </div>
+  </section>
+
   <section class="bg-accent text-white py-20 md:py-32 mt-12">
     <div class="container-editorial text-center">
       <h2 class="font-serif text-3xl md:text-5xl mb-6 leading-tight">
         ¥20,000 / 3日納品
       </h2>
-      <p class="mb-12 opacity-90">
-        フォームからお気軽にご相談ください
+      <p class="mb-8 opacity-90">
+        ココナラにて承っております
       </p>
-      <a
-        href="/contact"
-        class="inline-block bg-white text-black no-underline px-12 py-5 font-semibold hover:opacity-85 transition-opacity"
-      >
-        フォームから依頼する →
-      </a>
+      <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center;">
+        <a
+          href="https://coconala.com/services/2605832"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block bg-white text-black no-underline px-12 py-5 font-semibold hover:opacity-85 transition-opacity"
+        >
+          ホームページ制作を依頼する →
+        </a>
+        <a
+          href="/contact"
+          class="inline-block bg-transparent text-white no-underline px-12 py-5 font-semibold border border-white hover:opacity-85 transition-opacity"
+        >
+          お問い合わせ →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>
