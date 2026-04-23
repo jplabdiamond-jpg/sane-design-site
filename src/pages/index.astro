@@ -298,6 +298,7 @@ try {
   /* ── Glitch ── */
   .glitch-line {
     position: relative;
+    /* shake は下の @keyframes glitch-shake で定義 */
   }
   .glitch-line::before,
   .glitch-line::after {
@@ -327,21 +328,63 @@ try {
     animation: glitch-after 6s infinite;
     animation-delay: 1s;
   }
+  /* 本体の揺れ */
+  .glitch-line {
+    animation: glitch-shake 2.5s infinite;
+  }
+  @keyframes glitch-shake {
+    0%,  100% { transform: translate(0, 0); }
+    10%        { transform: translate(-1px, 1px); }
+    20%        { transform: translate(1px, -1px); }
+    30%        { transform: translate(-1px, 0px); }
+    40%        { transform: translate(1px, 1px); }
+    50%        { transform: translate(0px, -1px); }
+    55%        { transform: translate(-2px, 1px); }
+    60%        { transform: translate(2px, -2px); }
+    65%        { transform: translate(-1px, 2px); }
+    70%        { transform: translate(0, 0); }
+  }
   @keyframes glitch-before {
-    0%, 88%, 100% { opacity: 0; transform: none; }
-    89%  { opacity: 0.9; transform: translate(-3px, 1px) skewX(-2deg); }
-    90%  { opacity: 0.9; transform: translate(3px, -1px) skewX(2deg); }
-    91%  { opacity: 0; transform: none; }
-    93%  { opacity: 0.7; transform: translate(-2px, 2px); clip-path: polygon(0 5%, 100% 5%, 100% 25%, 0 25%); }
-    94%  { opacity: 0; transform: none; }
+    0%,  100% { opacity: 0; transform: none; }
+    /* 第1波 */
+    8%   { opacity: 0.9; transform: translate(-4px, 1px) skewX(-3deg); clip-path: polygon(0 15%, 100% 15%, 100% 35%, 0 35%); }
+    10%  { opacity: 0.9; transform: translate(4px, -1px) skewX(3deg);  clip-path: polygon(0 40%, 100% 40%, 100% 55%, 0 55%); }
+    12%  { opacity: 0; transform: none; }
+    /* 第2波 */
+    28%  { opacity: 0.8; transform: translate(-3px, 2px) skewX(-2deg); clip-path: polygon(0 5%, 100% 5%, 100% 28%, 0 28%); }
+    30%  { opacity: 0; transform: none; }
+    /* 第3波 */
+    48%  { opacity: 0.9; transform: translate(5px, -2px) skewX(4deg);  clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); }
+    50%  { opacity: 0.9; transform: translate(-5px, 2px) skewX(-4deg); clip-path: polygon(0 20%, 100% 20%, 100% 45%, 0 45%); }
+    52%  { opacity: 0; transform: none; }
+    /* 第4波 */
+    68%  { opacity: 0.7; transform: translate(-2px, 1px); clip-path: polygon(0 70%, 100% 70%, 100% 90%, 0 90%); }
+    70%  { opacity: 0; transform: none; }
+    /* 第5波 */
+    88%  { opacity: 0.9; transform: translate(3px, -1px) skewX(2deg);  clip-path: polygon(0 10%, 100% 10%, 100% 30%, 0 30%); }
+    90%  { opacity: 0.9; transform: translate(-3px, 1px) skewX(-2deg); clip-path: polygon(0 50%, 100% 50%, 100% 70%, 0 70%); }
+    92%  { opacity: 0; transform: none; }
   }
   @keyframes glitch-after {
-    0%, 88%, 100% { opacity: 0; transform: none; }
-    89%  { opacity: 0.8; transform: translate(3px, -2px) skewX(3deg); }
-    90%  { opacity: 0.8; transform: translate(-3px, 1px) skewX(-3deg); }
-    91%  { opacity: 0; transform: none; }
-    93%  { opacity: 0.6; transform: translate(2px, -1px); clip-path: polygon(0 55%, 100% 55%, 100% 80%, 0 80%); }
-    94%  { opacity: 0; transform: none; }
+    0%,  100% { opacity: 0; transform: none; }
+    /* 第1波（少しずらす） */
+    9%   { opacity: 0.8; transform: translate(4px, -2px) skewX(3deg);  clip-path: polygon(0 50%, 100% 50%, 100% 70%, 0 70%); }
+    11%  { opacity: 0.8; transform: translate(-4px, 2px) skewX(-3deg); clip-path: polygon(0 25%, 100% 25%, 100% 42%, 0 42%); }
+    13%  { opacity: 0; transform: none; }
+    /* 第2波 */
+    29%  { opacity: 0.7; transform: translate(3px, -1px) skewX(2deg);  clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); }
+    31%  { opacity: 0; transform: none; }
+    /* 第3波 */
+    49%  { opacity: 0.8; transform: translate(-5px, 3px) skewX(-4deg); clip-path: polygon(0 10%, 100% 10%, 100% 30%, 0 30%); }
+    51%  { opacity: 0.8; transform: translate(5px, -3px) skewX(4deg);  clip-path: polygon(0 65%, 100% 65%, 100% 85%, 0 85%); }
+    53%  { opacity: 0; transform: none; }
+    /* 第4波 */
+    69%  { opacity: 0.6; transform: translate(2px, -2px); clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%); }
+    71%  { opacity: 0; transform: none; }
+    /* 第5波 */
+    89%  { opacity: 0.8; transform: translate(-3px, 2px) skewX(-2deg); clip-path: polygon(0 55%, 100% 55%, 100% 75%, 0 75%); }
+    91%  { opacity: 0.8; transform: translate(3px, -2px) skewX(2deg);  clip-path: polygon(0 15%, 100% 15%, 100% 35%, 0 35%); }
+    93%  { opacity: 0; transform: none; }
   }
 
   @keyframes scrollLine {
