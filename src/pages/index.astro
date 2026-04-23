@@ -43,10 +43,18 @@ try {
     <div class="container-editorial" style="position:relative; z-index:1;">
       <p class="section-label reveal">Sane Design — Web Studio, Japan</p>
 
-      <h1 class="hero-headline" style="margin-top:16px;">
-        <span class="reveal glitch-title" style="display:block; transition-delay:80ms;" data-text="Creating websites">Creating websites</span>
-        <span class="reveal glitch-title" style="display:block; transition-delay:160ms; font-style:italic;" data-text="that move people.">that move people.</span>
-      </h1>
+      <div class="hero-headline reveal" style="margin-top:16px; transition-delay:80ms;">
+        <div class="glitch-container">
+          <span class="glitch-layer glitch-l1">Creating websites</span>
+          <span class="glitch-layer glitch-l2">Creating websites</span>
+          <span class="glitch-layer glitch-l3">Creating websites</span>
+        </div>
+        <div class="glitch-container" style="font-style:italic;">
+          <span class="glitch-layer glitch-l1">that move people.</span>
+          <span class="glitch-layer glitch-l2">that move people.</span>
+          <span class="glitch-layer glitch-l3">that move people.</span>
+        </div>
+      </div>
 
       <div class="reveal" style="margin-top:40px; max-width:480px; transition-delay:240ms;">
         <p style="font-size:16px; color:var(--color-muted); line-height:1.9;">
@@ -295,66 +303,84 @@ try {
     to   { transform: translateX(-50%) rotate(360deg); }
   }
 
-  /* ── Glitch (AlainBarrios / CodePen OEOKgm 移植) ── */
-  :root {
-    --gap-horizontal: 10px;
-    --gap-vertical: 5px;
-    --time-anim: 4s;
-    --delay-anim: 2s;
-  }
-  .glitch-title {
+  /* ── Glitch (FelixRilling / CodePen vNJoMy 移植) ── */
+  .glitch-container {
     position: relative;
+    display: block;
+    line-height: 1.15;
   }
-  .glitch-title::before,
-  .glitch-title::after {
-    content: attr(data-text);
-    position: absolute;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    overflow: hidden;
+  .glitch-layer {
+    display: block;
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
     font-style: inherit;
-    line-height: inherit;
     letter-spacing: inherit;
   }
-  .glitch-title::before {
-    left: 2px;
-    text-shadow: -1px 0 #00ffea;
-    clip: rect(24px, 9999px, 90px, 0);
-    animation: glitch-anim-text var(--time-anim) linear infinite alternate-reverse;
-    animation-delay: var(--delay-anim);
+  /* レイヤー1: 白・本体 */
+  .glitch-l1 {
+    position: relative;
+    color: var(--color-text);
+    animation: glitch1 2.5s infinite;
   }
-  .glitch-title::after {
-    left: -2px;
-    text-shadow: -1px 0 #fe3a7f;
-    clip: rect(85px, 9999px, 140px, 0);
-    animation: glitch-anim-text var(--time-anim) 1s linear infinite alternate-reverse;
-    animation-delay: var(--delay-anim);
+  /* レイヤー2: シアン */
+  .glitch-l2 {
+    position: absolute;
+    top: 0; left: 0;
+    color: #67f3da;
+    animation: glitch2 2.5s infinite;
   }
-  @keyframes glitch-anim-text {
-    0%   { clip: rect(73px,  9999px, 128px, 0); }
-    5%   { clip: rect(119px, 9999px,  60px, 0); }
-    10%  { clip: rect(98px,  9999px,  32px, 0); }
-    15%  { clip: rect(100px, 9999px,   7px, 0); }
-    20%  { clip: rect(138px, 9999px, 133px, 0); }
-    25%  { clip: rect(68px,  9999px,  62px, 0); }
-    30%  { clip: rect(129px, 9999px,   4px, 0); }
-    35%  { clip: rect(4px,   9999px,   7px, 0); }
-    40%  { clip: rect(149px, 9999px, 169px, 0); }
-    45%  { clip: rect(69px,  9999px, 170px, 0); }
-    50%  { clip: rect(93px,  9999px,  91px, 0); }
-    55%  { clip: rect(74px,  9999px, 122px, 0); }
-    60%  { clip: rect(60px,  9999px, 126px, 0); }
-    65%  { clip: rect(83px,  9999px,  28px, 0); }
-    70%  { clip: rect(89px,  9999px, 110px, 0); }
-    75%  { clip: rect(109px, 9999px,   7px, 0); }
-    80%  { clip: rect(39px,  9999px,  24px, 0); }
-    85%  { clip: rect(77px,  9999px, 155px, 0); }
-    90%  { clip: rect(10px,  9999px, 128px, 0); }
-    95%  { clip: rect(134px, 9999px,  52px, 0); }
-    100% { clip: rect(156px, 9999px, 142px, 0); }
+  /* レイヤー3: 赤 */
+  .glitch-l3 {
+    position: absolute;
+    top: 0; left: 0;
+    color: #f16f6f;
+    animation: glitch3 2.5s infinite;
+  }
+  @keyframes glitch1 {
+    0%   { transform: none;                   opacity: 1;    }
+    7%   { transform: skew(-0.5deg, -0.9deg); opacity: 0.75; }
+    10%  { transform: none;                   opacity: 1;    }
+    27%  { transform: none;                   opacity: 1;    }
+    30%  { transform: skew(0.8deg, -0.1deg);  opacity: 0.75; }
+    35%  { transform: none;                   opacity: 1;    }
+    52%  { transform: none;                   opacity: 1;    }
+    55%  { transform: skew(-1deg, 0.2deg);    opacity: 0.75; }
+    50%  { transform: none;                   opacity: 1;    }
+    72%  { transform: none;                   opacity: 1;    }
+    75%  { transform: skew(0.4deg, 1deg);     opacity: 0.75; }
+    80%  { transform: none;                   opacity: 1;    }
+    100% { transform: none;                   opacity: 1;    }
+  }
+  @keyframes glitch2 {
+    0%   { transform: none;                    opacity: 0.25; }
+    7%   { transform: translate(-2px, -3px);   opacity: 0.5;  }
+    10%  { transform: none;                    opacity: 0.25; }
+    27%  { transform: none;                    opacity: 0.25; }
+    30%  { transform: translate(-5px, -2px);   opacity: 0.5;  }
+    35%  { transform: none;                    opacity: 0.25; }
+    52%  { transform: none;                    opacity: 0.25; }
+    55%  { transform: translate(-5px, -1px);   opacity: 0.5;  }
+    50%  { transform: none;                    opacity: 0.25; }
+    72%  { transform: none;                    opacity: 0.25; }
+    75%  { transform: translate(-2px, -6px);   opacity: 0.5;  }
+    80%  { transform: none;                    opacity: 0.25; }
+    100% { transform: none;                    opacity: 0.25; }
+  }
+  @keyframes glitch3 {
+    0%   { transform: none;                   opacity: 0.25; }
+    7%   { transform: translate(2px, 3px);    opacity: 0.5;  }
+    10%  { transform: none;                   opacity: 0.25; }
+    27%  { transform: none;                   opacity: 0.25; }
+    30%  { transform: translate(5px, 2px);    opacity: 0.5;  }
+    35%  { transform: none;                   opacity: 0.25; }
+    52%  { transform: none;                   opacity: 0.25; }
+    55%  { transform: translate(5px, 1px);    opacity: 0.5;  }
+    50%  { transform: none;                   opacity: 0.25; }
+    72%  { transform: none;                   opacity: 0.25; }
+    75%  { transform: translate(2px, 6px);    opacity: 0.5;  }
+    80%  { transform: none;                   opacity: 0.25; }
+    100% { transform: none;                   opacity: 0.25; }
   }
 
   @keyframes scrollLine {
