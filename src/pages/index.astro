@@ -19,7 +19,7 @@ try {
     const title = item.match(/<title>([\s\S]*?)<\/title>/)?.[1]?.replace(/<!\[CDATA\[|\]\]>/g, '').trim() ?? '';
     const link = item.match(/<link>([\s\S]*?)<\/link>/)?.[1]?.trim() ?? '';
     const pubDate = item.match(/<pubDate>([\s\S]*?)<\/pubDate>/)?.[1]?.trim() ?? '';
-    const thumbnail = item.match(/<media:thumbnail[^>]+url="([^"]+)"/)?.[1] ?? '';
+    const thumbnail = item.match(/<media:thumbnail[^>]*>([^<]+)<\/media:thumbnail>/)?.[1]?.trim() ?? item.match(/<media:thumbnail[^>]+url="([^"]+)"/)?.[1] ?? '';
     const descRaw = item.match(/<description>([\s\S]*?)<\/description>/)?.[1]?.replace(/<!\[CDATA\[|\]\]>/g, '') ?? '';
     const description = descRaw.replace(/<[^>]+>/g, '').replace(/続きをみる$/, '').trim().slice(0, 80);
     return { title, link, pubDate, thumbnail, description };
