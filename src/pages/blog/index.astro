@@ -17,7 +17,7 @@ try {
     const descRaw = item.match(/<description>([\s\S]*?)<\/description>/)?.[1]?.replace(/<!\[CDATA\[|\]\]>/g, '') ?? '';
     const description = descRaw.replace(/<[^>]+>/g, '').replace(/続きをみる$/, '').trim().slice(0, 100);
     return { title, link, pubDate, thumbnail, description };
-  });
+  }).sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
 } catch (e) {
   // fetch失敗時は空配列
 }
