@@ -25,16 +25,25 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
   </section>
 
   <!-- Filter -->
-  <div class="container-editorial reveal filter-wrap">
-    <div class="filter-row" id="filter-row">
-      <button class="filter-btn active" data-filter="all">All</button>
+  <div class="container-editorial filter-wrap reveal">
+    <div class="filter-header">
+      <span class="filter-label">FILTER</span>
+      <div class="filter-row" id="filter-row">
+        <button class="filter-btn active" data-filter="all">
+          <span class="filter-dot"></span>All
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- Works grid -->
   <section class="container-editorial works-grid-section">
     <div class="works-grid" id="works-grid">
-      <div class="loading-state">読み込み中...</div>
+      <div class="loading-state">
+        <span class="loading-dot"></span>
+        <span class="loading-dot"></span>
+        <span class="loading-dot"></span>
+      </div>
     </div>
   </section>
 
@@ -42,6 +51,7 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 </BaseLayout>
 
 <style>
+  /* ── Hero ── */
   .works-hero { padding: 80px 0 60px; }
   .works-title {
     font-family: var(--font-serif);
@@ -58,62 +68,119 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     color: var(--color-muted);
     line-height: 1.9;
   }
-  .filter-wrap { padding-bottom: 48px; }
+
+  /* ── Filter ── */
+  .filter-wrap { padding-bottom: 56px; }
+  .filter-header {
+    border-top: 1px solid var(--color-border);
+    padding-top: 28px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .filter-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--color-muted);
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
   .filter-row {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    border-top: 1px solid var(--color-border);
-    padding-top: 24px;
+    flex: 1;
   }
   .filter-btn {
-    padding: 6px 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 18px;
     border: 1px solid var(--color-border);
     background: transparent;
     font-size: 11px;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.3s ease;
+    border-radius: 100px;
+    transition: all 0.25s ease;
     font-family: var(--font-sans);
+    color: var(--color-muted);
+    white-space: nowrap;
   }
-  .filter-btn:hover, .filter-btn.active {
+  .filter-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity 0.25s;
+    flex-shrink: 0;
+  }
+  .filter-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+  .filter-btn.active {
     border-color: var(--color-primary);
     background: var(--color-primary);
     color: #fff;
   }
+  .filter-btn.active .filter-dot { opacity: 1; background: #fff; }
+
+  /* ── Loading ── */
+  .loading-state {
+    grid-column: 1/-1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 120px 0;
+  }
+  .loading-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--color-muted);
+    animation: dotPulse 1.2s ease-in-out infinite;
+  }
+  .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+  .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes dotPulse {
+    0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+    40% { opacity: 1; transform: scale(1); }
+  }
+
+  /* ── Grid ── */
   .works-grid-section { padding-bottom: 120px; }
   .works-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px 24px;
+    gap: 48px 28px;
   }
   .work-item { display: block; }
   .work-item.hidden { display: none; }
-  .loading-state {
-    grid-column: 1/-1;
-    text-align: center;
-    padding: 80px;
-    color: var(--color-muted);
-    font-size: 14px;
-  }
 
-  /* WorkCard styles */
+  /* ── Card ── */
   .work-card {
     display: block;
     text-decoration: none;
-    animation: workFadeIn 0.7s cubic-bezier(0.19, 1, 0.22, 1) both;
+    animation: workFadeIn 0.8s cubic-bezier(0.19, 1, 0.22, 1) both;
   }
   @keyframes workFadeIn {
-    from { opacity: 0; transform: translateY(24px); }
+    from { opacity: 0; transform: translateY(32px); }
     to   { opacity: 1; transform: translateY(0); }
   }
+
+  /* サムネイル */
   .work-thumb {
     position: relative;
     overflow: hidden;
     background: var(--color-surface);
     width: 100%;
-    padding-top: 66.67%; /* 3:2 固定アスペクト比 */
+    padding-top: 66.67%;
+    border-radius: 4px;
   }
   .work-img {
     position: absolute;
@@ -121,138 +188,199 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
   }
   .work-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0);
-    transition: background 0.4s ease;
-  }
-  .view-label {
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
-    background: #fff;
-    padding: 6px 14px;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 50%);
     opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: opacity 0.4s ease;
   }
-  .work-card:hover .work-img { transform: scale(1.06); }
-  .work-card:hover .work-overlay { background: rgba(0,0,0,0.08); }
-  .work-card:hover .view-label { opacity: 1; transform: translateY(0); }
-  .work-meta {
-    margin-top: 12px;
+
+  /* ホバー時に画像下部に出るバナー */
+  .work-hover-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 20px 18px;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.19, 1, 0.22, 1);
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: space-between;
     gap: 8px;
   }
+  .work-hover-client {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    color: #fff;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+  .work-hover-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 10px;
+    color: #fff;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .work-card:hover .work-img { transform: scale(1.05); }
+  .work-card:hover .work-overlay { opacity: 1; }
+  .work-card:hover .work-hover-info { opacity: 1; transform: translateY(0); }
+
+  /* メタ情報 */
+  .work-meta {
+    margin-top: 16px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .work-meta-left { flex: 1; min-width: 0; }
   .work-client {
     font-family: var(--font-serif);
     font-size: 15px;
     font-weight: 400;
     line-height: 1.4;
-    margin-bottom: 4px;
     color: var(--color-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .work-title-text {
     font-size: 11px;
     color: var(--color-muted);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
+    margin-top: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .work-meta-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
   }
   .work-year {
     font-size: 11px;
     color: var(--color-muted);
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+  }
+  .work-tag-first {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    border: 1px solid var(--color-border);
+    padding: 2px 7px;
+    border-radius: 100px;
     white-space: nowrap;
-    padding-top: 2px;
   }
 
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .works-grid { grid-template-columns: repeat(3, 1fr); gap: 36px 20px; }
+  }
   @media (max-width: 900px) {
-    .works-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
+    .works-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; }
   }
   @media (max-width: 560px) {
-    .works-grid { grid-template-columns: 1fr; gap: 32px; }
+    .works-grid { grid-template-columns: 1fr; gap: 40px; }
+    .filter-header { gap: 14px; }
   }
 </style>
 
 <script define:vars={{ SUPABASE_URL, SUPABASE_KEY }}>
-  async function loadWorks(filter = 'all') {
+  async function loadWorks() {
     try {
       const res = await fetch(
         `${SUPABASE_URL}/rest/v1/portfolio_works?draft=eq.false&order=display_order.asc&select=*`,
         { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } }
       );
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const works = await res.json();
 
-      // フィルターボタン生成
+      /* ── フィルターボタン生成 ── */
       const allTags = [...new Set(works.flatMap(w => w.tags || []))].sort();
       const filterRow = document.getElementById('filter-row');
-      filterRow.innerHTML = '<button class="filter-btn active" data-filter="all">All</button>';
+      filterRow.innerHTML = `<button class="filter-btn active" data-filter="all"><span class="filter-dot"></span>All</button>`;
       allTags.forEach(tag => {
         const btn = document.createElement('button');
         btn.className = 'filter-btn';
         btn.dataset.filter = tag;
-        btn.textContent = tag;
+        btn.innerHTML = `<span class="filter-dot"></span>${tag}`;
         filterRow.appendChild(btn);
       });
 
-      // フィルターイベント
-      filterRow.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          filterRow.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          const f = btn.dataset.filter;
-          document.querySelectorAll('.work-item').forEach(item => {
-            if (f === 'all') {
-              item.classList.remove('hidden');
-            } else {
-              const tags = item.dataset.tags || '';
-              item.classList.toggle('hidden', !tags.includes(f));
-            }
-          });
+      filterRow.addEventListener('click', e => {
+        const btn = e.target.closest('.filter-btn');
+        if (!btn) return;
+        filterRow.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.work-item').forEach(item => {
+          const show = f === 'all' || (item.dataset.tags || '').split(',').includes(f);
+          item.classList.toggle('hidden', !show);
         });
       });
 
-      // グリッド描画
+      /* ── グリッド描画 ── */
       const grid = document.getElementById('works-grid');
       grid.innerHTML = '';
 
       works.forEach((work, i) => {
         const isExternal = !!work.external_url;
         const href = work.external_url || '#';
-        const tags = (work.tags || []).join(',');
+        const tagsArr = work.tags || [];
+        const firstTag = tagsArr[0] || '';
 
         const item = document.createElement('div');
         item.className = 'work-item';
-        item.dataset.tags = tags;
+        item.dataset.tags = tagsArr.join(',');
 
         item.innerHTML = `
           <a href="${href}" class="work-card"
             ${isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''}
-            style="animation-delay:${i * 60}ms"
+            style="animation-delay:${i * 55}ms"
           >
             <div class="work-thumb">
               <img src="${work.thumbnail_url}" alt="${work.client}" loading="lazy" class="work-img" />
               <div class="work-overlay"></div>
-              <div class="view-label">${isExternal ? 'Visit →' : 'View →'}</div>
+              <div class="work-hover-info">
+                <span class="work-hover-client">${work.client}</span>
+                <span class="work-hover-link">${isExternal ? 'Visit ↗' : 'View →'}</span>
+              </div>
             </div>
             <div class="work-meta">
-              <div>
+              <div class="work-meta-left">
                 <p class="work-client">${work.client}</p>
                 <p class="work-title-text">${work.title}</p>
               </div>
-              <span class="work-year">${work.year}</span>
+              <div class="work-meta-right">
+                <span class="work-year">${work.year}</span>
+                ${firstTag ? `<span class="work-tag-first">${firstTag}</span>` : ''}
+              </div>
             </div>
           </a>`;
         grid.appendChild(item);
       });
 
-      // Scroll reveal
+      /* Scroll reveal */
       const observer = new IntersectionObserver(
         entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
         { threshold: 0.05 }
@@ -260,7 +388,8 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     } catch(e) {
-      document.getElementById('works-grid').innerHTML = '<div class="loading-state">読み込みに失敗しました</div>';
+      document.getElementById('works-grid').innerHTML =
+        `<div style="grid-column:1/-1;text-align:center;padding:80px;color:var(--color-muted);font-size:13px;">読み込みに失敗しました<br><small>${e.message}</small></div>`;
     }
   }
 
