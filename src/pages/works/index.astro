@@ -1,14 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import WorkCard from '../../components/WorkCard.astro';
 import CTABanner from '../../components/CTABanner.astro';
-import { getCollection } from 'astro:content';
 
-const works = (await getCollection('works', ({ data }) => !data.draft)).sort(
-  (a, b) => a.data.order - b.data.order,
-);
-
-const categories = [...new Set(works.flatMap(w => w.data.tags || []))];
+const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
+const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 ---
 
 <BaseLayout
@@ -31,35 +26,15 @@ const categories = [...new Set(works.flatMap(w => w.data.tags || []))];
 
   <!-- Filter -->
   <div class="container-editorial reveal filter-wrap">
-    <div class="filter-row">
+    <div class="filter-row" id="filter-row">
       <button class="filter-btn active" data-filter="all">All</button>
-      {categories.map(cat => (
-        <button class="filter-btn" data-filter={cat}>{cat}</button>
-      ))}
     </div>
   </div>
 
   <!-- Works grid -->
-  <section class="container-editorial works-grid-section" id="works-grid">
-    <div class="works-grid">
-      {works.map((work, i) => (
-        <div
-          class="work-item"
-          data-tags={(work.data.tags || []).join(',')}
-          style={`grid-column: span ${i % 5 === 0 ? 6 : 4};`}
-        >
-          <WorkCard
-            title={work.data.title}
-            client={work.data.client}
-            year={work.data.year}
-            thumbnail={work.data.thumbnail}
-            href={`/works/${work.slug}/`}
-            externalUrl={work.data.url}
-            span={i % 5 === 0 ? 'large' : 'medium'}
-            index={i}
-          />
-        </div>
-      ))}
+  <section class="container-editorial works-grid-section">
+    <div class="works-grid" id="works-grid">
+      <div class="loading-state">読み込み中...</div>
     </div>
   </section>
 
@@ -67,9 +42,7 @@ const categories = [...new Set(works.flatMap(w => w.data.tags || []))];
 </BaseLayout>
 
 <style>
-  .works-hero {
-    padding: 80px 0 60px;
-  }
+  .works-hero { padding: 80px 0 60px; }
   .works-title {
     font-family: var(--font-serif);
     font-size: clamp(40px, 7vw, 100px);
@@ -85,9 +58,7 @@ const categories = [...new Set(works.flatMap(w => w.data.tags || []))];
     color: var(--color-muted);
     line-height: 1.9;
   }
-  .filter-wrap {
-    padding-bottom: 48px;
-  }
+  .filter-wrap { padding-bottom: 48px; }
   .filter-row {
     display: flex;
     flex-wrap: wrap;
@@ -106,71 +77,192 @@ const categories = [...new Set(works.flatMap(w => w.data.tags || []))];
     transition: all 0.3s ease;
     font-family: var(--font-sans);
   }
-  .filter-btn:hover,
-  .filter-btn.active {
+  .filter-btn:hover, .filter-btn.active {
     border-color: var(--color-primary);
     background: var(--color-primary);
     color: #fff;
   }
-
-  /* Works grid */
-  .works-grid-section {
-    padding-bottom: 120px;
-  }
+  .works-grid-section { padding-bottom: 120px; }
   .works-grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 32px 24px;
   }
-  .work-item {
-    /* デフォルトは span 4 (inline styleで上書き) */
+  .work-item { display: block; }
+  .work-item.hidden { display: none; }
+  .loading-state {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 80px;
+    color: var(--color-muted);
+    font-size: 14px;
   }
-  .work-item.hidden {
-    display: none;
+
+  /* WorkCard styles */
+  .work-card {
+    display: block;
+    text-decoration: none;
+    animation: workFadeIn 0.7s cubic-bezier(0.19, 1, 0.22, 1) both;
+  }
+  @keyframes workFadeIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .work-thumb {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-surface);
+    width: 100%;
+    padding-top: 66.67%; /* 3:2 固定アスペクト比 */
+  }
+  .work-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .work-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0);
+    transition: background 0.4s ease;
+  }
+  .view-label {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    background: #fff;
+    padding: 6px 14px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .work-card:hover .work-img { transform: scale(1.06); }
+  .work-card:hover .work-overlay { background: rgba(0,0,0,0.08); }
+  .work-card:hover .view-label { opacity: 1; transform: translateY(0); }
+  .work-meta {
+    margin-top: 12px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .work-client {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.4;
+    margin-bottom: 4px;
+    color: var(--color-primary);
+  }
+  .work-title-text {
+    font-size: 11px;
+    color: var(--color-muted);
+    letter-spacing: 0.05em;
+  }
+  .work-year {
+    font-size: 11px;
+    color: var(--color-muted);
+    white-space: nowrap;
+    padding-top: 2px;
   }
 
   @media (max-width: 900px) {
-    .works-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px 16px;
-    }
-    .work-item {
-      grid-column: span 1 !important;
-    }
+    .works-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
   }
   @media (max-width: 560px) {
-    .works-grid {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    .work-item {
-      grid-column: span 1 !important;
-    }
+    .works-grid { grid-template-columns: 1fr; gap: 32px; }
   }
 </style>
 
-<script>
-  // Scroll Reveal
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-    { threshold: 0.05, rootMargin: '0px 0px -40px 0px' }
-  );
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+<script define:vars={{ SUPABASE_URL, SUPABASE_KEY }}>
+  async function loadWorks(filter = 'all') {
+    try {
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/portfolio_works?draft=eq.false&order=display_order.asc&select=*`,
+        { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } }
+      );
+      const works = await res.json();
 
-  // Filter
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.getAttribute('data-filter');
-      document.querySelectorAll('.work-item').forEach(item => {
-        if (filter === 'all') {
-          item.classList.remove('hidden');
-        } else {
-          const tags = item.getAttribute('data-tags') || '';
-          item.classList.toggle('hidden', !tags.includes(filter));
-        }
+      // フィルターボタン生成
+      const allTags = [...new Set(works.flatMap(w => w.tags || []))].sort();
+      const filterRow = document.getElementById('filter-row');
+      filterRow.innerHTML = '<button class="filter-btn active" data-filter="all">All</button>';
+      allTags.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.filter = tag;
+        btn.textContent = tag;
+        filterRow.appendChild(btn);
       });
-    });
-  });
+
+      // フィルターイベント
+      filterRow.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterRow.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const f = btn.dataset.filter;
+          document.querySelectorAll('.work-item').forEach(item => {
+            if (f === 'all') {
+              item.classList.remove('hidden');
+            } else {
+              const tags = item.dataset.tags || '';
+              item.classList.toggle('hidden', !tags.includes(f));
+            }
+          });
+        });
+      });
+
+      // グリッド描画
+      const grid = document.getElementById('works-grid');
+      grid.innerHTML = '';
+
+      works.forEach((work, i) => {
+        const isExternal = !!work.external_url;
+        const href = work.external_url || '#';
+        const tags = (work.tags || []).join(',');
+
+        const item = document.createElement('div');
+        item.className = 'work-item';
+        item.dataset.tags = tags;
+
+        item.innerHTML = `
+          <a href="${href}" class="work-card"
+            ${isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''}
+            style="animation-delay:${i * 60}ms"
+          >
+            <div class="work-thumb">
+              <img src="${work.thumbnail_url}" alt="${work.client}" loading="lazy" class="work-img" />
+              <div class="work-overlay"></div>
+              <div class="view-label">${isExternal ? 'Visit →' : 'View →'}</div>
+            </div>
+            <div class="work-meta">
+              <div>
+                <p class="work-client">${work.client}</p>
+                <p class="work-title-text">${work.title}</p>
+              </div>
+              <span class="work-year">${work.year}</span>
+            </div>
+          </a>`;
+        grid.appendChild(item);
+      });
+
+      // Scroll reveal
+      const observer = new IntersectionObserver(
+        entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+        { threshold: 0.05 }
+      );
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    } catch(e) {
+      document.getElementById('works-grid').innerHTML = '<div class="loading-state">読み込みに失敗しました</div>';
+    }
+  }
+
+  loadWorks();
 </script>

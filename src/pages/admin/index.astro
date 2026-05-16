@@ -1,0 +1,525 @@
+---
+const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
+const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+const ADMIN_PASSWORD = import.meta.env.ADMIN_PASSWORD ?? 'sanedesign2025';
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Works 管理ダッシュボード | Sane Design</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --border: #2a2a2a;
+      --primary: #ffffff;
+      --muted: #888;
+      --accent: #c8a96e;
+      --danger: #e05252;
+      --success: #52c87a;
+    }
+    body { background: var(--bg); color: var(--primary); font-family: 'Inter', 'Helvetica Neue', sans-serif; min-height: 100vh; }
+
+    /* ===== LOGIN ===== */
+    #login-screen {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh;
+    }
+    .login-box {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 48px; width: 100%; max-width: 400px; border-radius: 4px;
+    }
+    .login-box h1 { font-size: 22px; font-weight: 300; margin-bottom: 8px; letter-spacing: 0.05em; }
+    .login-box p { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
+    .login-box input {
+      width: 100%; padding: 12px 16px; background: var(--bg);
+      border: 1px solid var(--border); color: var(--primary);
+      font-size: 14px; border-radius: 2px; margin-bottom: 16px;
+    }
+    .login-box input:focus { outline: none; border-color: var(--accent); }
+    .btn-primary {
+      width: 100%; padding: 14px; background: var(--accent); color: #000;
+      border: none; font-size: 13px; font-weight: 600; cursor: pointer;
+      letter-spacing: 0.08em; border-radius: 2px; transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .login-error { color: var(--danger); font-size: 12px; margin-top: 8px; display: none; }
+
+    /* ===== DASHBOARD ===== */
+    #dashboard { display: none; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 32px; border-bottom: 1px solid var(--border);
+      background: var(--surface); position: sticky; top: 0; z-index: 100;
+    }
+    .topbar-title { font-size: 14px; font-weight: 600; letter-spacing: 0.1em; }
+    .topbar-right { display: flex; gap: 12px; align-items: center; }
+    .btn-logout {
+      padding: 6px 14px; border: 1px solid var(--border); background: transparent;
+      color: var(--muted); font-size: 11px; cursor: pointer; border-radius: 2px;
+      letter-spacing: 0.05em;
+    }
+    .btn-logout:hover { border-color: var(--danger); color: var(--danger); }
+
+    .main-layout { display: grid; grid-template-columns: 400px 1fr; min-height: calc(100vh - 57px); }
+
+    /* ===== ADD FORM ===== */
+    .add-panel {
+      border-right: 1px solid var(--border); padding: 32px;
+      overflow-y: auto; background: var(--surface);
+    }
+    .panel-title { font-size: 12px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; margin-bottom: 24px; }
+    .form-group { margin-bottom: 20px; }
+    .form-label { display: block; font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+    .form-input, .form-select {
+      width: 100%; padding: 10px 14px; background: var(--bg);
+      border: 1px solid var(--border); color: var(--primary);
+      font-size: 13px; border-radius: 2px; transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus { outline: none; border-color: var(--accent); }
+
+    /* 画像アップロード */
+    .upload-area {
+      border: 2px dashed var(--border); border-radius: 4px; padding: 32px 16px;
+      text-align: center; cursor: pointer; transition: all 0.2s; position: relative;
+    }
+    .upload-area:hover, .upload-area.dragover { border-color: var(--accent); background: rgba(200,169,110,0.05); }
+    .upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .upload-icon { font-size: 32px; margin-bottom: 8px; }
+    .upload-text { font-size: 13px; color: var(--muted); }
+    .upload-preview {
+      width: 100%; aspect-ratio: 3/2; object-fit: cover;
+      border-radius: 2px; margin-top: 12px; display: none;
+    }
+    .upload-progress {
+      height: 3px; background: var(--border); border-radius: 2px; margin-top: 12px; display: none;
+    }
+    .upload-progress-bar { height: 100%; background: var(--accent); border-radius: 2px; width: 0%; transition: width 0.3s; }
+
+    .btn-add {
+      width: 100%; padding: 14px; background: var(--accent); color: #000;
+      border: none; font-size: 13px; font-weight: 700; cursor: pointer;
+      letter-spacing: 0.1em; border-radius: 2px; transition: opacity 0.2s;
+      margin-top: 8px;
+    }
+    .btn-add:hover { opacity: 0.85; }
+    .btn-add:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .toast {
+      position: fixed; bottom: 32px; right: 32px; padding: 14px 24px;
+      border-radius: 4px; font-size: 13px; font-weight: 500; z-index: 9999;
+      transform: translateY(20px); opacity: 0; transition: all 0.3s;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.success { background: var(--success); color: #000; }
+    .toast.error { background: var(--danger); color: #fff; }
+
+    /* ===== WORKS LIST ===== */
+    .list-panel { padding: 32px; overflow-y: auto; }
+    .list-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .works-count { font-size: 12px; color: var(--muted); }
+
+    .works-table { width: 100%; border-collapse: collapse; }
+    .works-table th {
+      text-align: left; font-size: 10px; letter-spacing: 0.1em; color: var(--muted);
+      text-transform: uppercase; padding: 8px 12px; border-bottom: 1px solid var(--border);
+    }
+    .works-table td {
+      padding: 12px; border-bottom: 1px solid var(--border); vertical-align: middle;
+      font-size: 13px;
+    }
+    .works-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .thumb-cell img {
+      width: 72px; height: 48px; object-fit: cover; border-radius: 2px;
+      display: block; background: var(--border);
+    }
+    .order-badge {
+      display: inline-block; width: 28px; height: 28px; line-height: 28px;
+      text-align: center; background: var(--border); border-radius: 2px;
+      font-size: 11px; font-weight: 600;
+    }
+    .tag-chip {
+      display: inline-block; padding: 2px 8px; background: var(--border);
+      border-radius: 2px; font-size: 10px; color: var(--muted); margin: 2px 2px 2px 0;
+    }
+    .url-chip {
+      display: inline-block; padding: 2px 8px; background: rgba(200,169,110,0.15);
+      border-radius: 2px; font-size: 10px; color: var(--accent);
+    }
+    .btn-delete {
+      padding: 5px 12px; border: 1px solid var(--border); background: transparent;
+      color: var(--muted); font-size: 11px; cursor: pointer; border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .btn-delete:hover { border-color: var(--danger); color: var(--danger); }
+    .btn-top {
+      padding: 5px 12px; border: 1px solid var(--border); background: transparent;
+      color: var(--muted); font-size: 11px; cursor: pointer; border-radius: 2px;
+      transition: all 0.2s; margin-right: 4px;
+    }
+    .btn-top:hover { border-color: var(--accent); color: var(--accent); }
+
+    @media (max-width: 1024px) {
+      .main-layout { grid-template-columns: 1fr; }
+      .add-panel { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>SANE DESIGN</h1>
+    <p>Works 管理ダッシュボード</p>
+    <input type="password" id="pw-input" placeholder="パスワードを入力" autocomplete="current-password" />
+    <button class="btn-primary" id="login-btn">ログイン</button>
+    <p class="login-error" id="login-error">パスワードが違います</p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class="topbar">
+    <span class="topbar-title">WORKS DASHBOARD</span>
+    <div class="topbar-right">
+      <span id="works-count-top" style="font-size:12px;color:var(--muted)"></span>
+      <button class="btn-logout" id="logout-btn">ログアウト</button>
+    </div>
+  </div>
+
+  <div class="main-layout">
+    <!-- ADD PANEL -->
+    <div class="add-panel">
+      <p class="panel-title">新規 Work 追加</p>
+
+      <div class="form-group">
+        <label class="form-label">サムネイル画像 *</label>
+        <div class="upload-area" id="upload-area">
+          <input type="file" id="file-input" accept="image/*" />
+          <div id="upload-placeholder">
+            <div class="upload-icon">🖼</div>
+            <div class="upload-text">クリックまたはドラッグ&ドロップ<br><small style="font-size:11px;color:#666">PNG / JPG / WebP</small></div>
+          </div>
+          <img id="upload-preview" class="upload-preview" alt="preview" />
+        </div>
+        <div class="upload-progress" id="upload-progress">
+          <div class="upload-progress-bar" id="upload-progress-bar"></div>
+        </div>
+        <p id="upload-status" style="font-size:11px;color:var(--muted);margin-top:6px;"></p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">クライアント名 *</label>
+        <input type="text" class="form-input" id="f-client" placeholder="例：株式会社〇〇" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">制作タイトル *</label>
+        <input type="text" class="form-input" id="f-title" placeholder="例：コーポレートサイト制作" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">業種</label>
+        <input type="text" class="form-input" id="f-industry" placeholder="例：飲食・フード" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">年</label>
+        <input type="number" class="form-input" id="f-year" value="2025" min="2000" max="2099" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">外部URL（クリック先）</label>
+        <input type="url" class="form-input" id="f-url" placeholder="https://example.com" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">タグ（カンマ区切り）</label>
+        <input type="text" class="form-input" id="f-tags" placeholder="例：Web,LP,Corporate" />
+      </div>
+
+      <button class="btn-add" id="add-btn" disabled>＋ Works に追加する（最新として先頭表示）</button>
+    </div>
+
+    <!-- LIST PANEL -->
+    <div class="list-panel">
+      <div class="list-header">
+        <p class="panel-title" style="margin-bottom:0">現在の Works 一覧</p>
+        <span class="works-count" id="works-count"></span>
+      </div>
+      <div id="works-list">
+        <p style="color:var(--muted);font-size:13px;">読み込み中...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script define:vars={{ SUPABASE_URL, SUPABASE_KEY, ADMIN_PASSWORD }}>
+  const STORAGE_BUCKET = 'portfolio-works';
+
+  // ===== LOGIN =====
+  const loginBtn = document.getElementById('login-btn');
+  const pwInput = document.getElementById('pw-input');
+  const loginError = document.getElementById('login-error');
+
+  function checkLogin() {
+    if (sessionStorage.getItem('admin_ok') === '1') showDashboard();
+  }
+
+  loginBtn.addEventListener('click', () => {
+    if (pwInput.value === ADMIN_PASSWORD) {
+      sessionStorage.setItem('admin_ok', '1');
+      showDashboard();
+    } else {
+      loginError.style.display = 'block';
+      pwInput.value = '';
+    }
+  });
+  pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn.click(); });
+  document.getElementById('logout-btn').addEventListener('click', () => {
+    sessionStorage.removeItem('admin_ok');
+    location.reload();
+  });
+
+  function showDashboard() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadWorks();
+  }
+
+  checkLogin();
+
+  // ===== SUPABASE HELPERS =====
+  async function sbFetch(path, opts = {}) {
+    const url = `${SUPABASE_URL}/rest/v1/${path}`;
+    const headers = {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation',
+      ...opts.headers
+    };
+    const res = await fetch(url, { ...opts, headers });
+    if (!res.ok) throw new Error(await res.text());
+    return res.status === 204 ? null : res.json();
+  }
+
+  // ===== UPLOAD =====
+  let uploadedUrl = null;
+  const fileInput = document.getElementById('file-input');
+  const uploadArea = document.getElementById('upload-area');
+  const preview = document.getElementById('upload-preview');
+  const progressWrap = document.getElementById('upload-progress');
+  const progressBar = document.getElementById('upload-progress-bar');
+  const uploadStatus = document.getElementById('upload-status');
+  const addBtn = document.getElementById('add-btn');
+
+  uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('dragover'); });
+  uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+  uploadArea.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadArea.classList.remove('dragover');
+    if (e.dataTransfer.files[0]) uploadFile(e.dataTransfer.files[0]);
+  });
+  fileInput.addEventListener('change', () => { if (fileInput.files[0]) uploadFile(fileInput.files[0]); });
+
+  async function uploadFile(file) {
+    const ext = file.name.split('.').pop().toLowerCase();
+    const filename = `work-${Date.now()}.${ext}`;
+    uploadStatus.textContent = 'アップロード中...';
+    progressWrap.style.display = 'block';
+    progressBar.style.width = '30%';
+    addBtn.disabled = true;
+
+    try {
+      // Supabase Storage upload
+      const uploadRes = await fetch(
+        `${SUPABASE_URL}/storage/v1/object/${STORAGE_BUCKET}/${filename}`,
+        {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`,
+            'Content-Type': file.type,
+            'x-upsert': 'true'
+          },
+          body: file
+        }
+      );
+      progressBar.style.width = '100%';
+      if (!uploadRes.ok) throw new Error(await uploadRes.text());
+
+      uploadedUrl = `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${filename}`;
+      preview.src = uploadedUrl;
+      preview.style.display = 'block';
+      document.getElementById('upload-placeholder').style.display = 'none';
+      uploadStatus.textContent = '✓ アップロード完了';
+      uploadStatus.style.color = '#52c87a';
+      addBtn.disabled = false;
+    } catch(e) {
+      uploadStatus.textContent = 'アップロード失敗: ' + e.message;
+      uploadStatus.style.color = '#e05252';
+      progressBar.style.width = '0%';
+    }
+    setTimeout(() => { progressWrap.style.display = 'none'; }, 800);
+  }
+
+  // ===== ADD WORK =====
+  addBtn.addEventListener('click', async () => {
+    const client = document.getElementById('f-client').value.trim();
+    const title = document.getElementById('f-title').value.trim();
+    const industry = document.getElementById('f-industry').value.trim();
+    const year = parseInt(document.getElementById('f-year').value) || 2025;
+    const url = document.getElementById('f-url').value.trim();
+    const tagsRaw = document.getElementById('f-tags').value.trim();
+    const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()).filter(Boolean) : [];
+
+    if (!client || !title || !uploadedUrl) {
+      showToast('クライアント名・タイトル・画像は必須です', 'error');
+      return;
+    }
+
+    addBtn.disabled = true;
+    addBtn.textContent = '追加中...';
+
+    try {
+      // display_order=0でトリガー発火 → 自動で先頭に
+      await sbFetch('portfolio_works', {
+        method: 'POST',
+        body: JSON.stringify({
+          client, title, industry, year,
+          thumbnail_url: uploadedUrl,
+          external_url: url || null,
+          tags,
+          role: 'Design & Development',
+          display_order: 0
+        })
+      });
+
+      showToast('✓ Works に追加しました（先頭に表示）', 'success');
+      resetForm();
+      loadWorks();
+    } catch(e) {
+      showToast('追加失敗: ' + e.message, 'error');
+    }
+    addBtn.disabled = false;
+    addBtn.textContent = '＋ Works に追加する（最新として先頭表示）';
+  });
+
+  function resetForm() {
+    ['f-client','f-title','f-industry','f-url','f-tags'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-year').value = new Date().getFullYear();
+    preview.style.display = 'none';
+    preview.src = '';
+    document.getElementById('upload-placeholder').style.display = 'block';
+    uploadStatus.textContent = '';
+    uploadedUrl = null;
+    addBtn.disabled = true;
+  }
+
+  // ===== LOAD WORKS =====
+  async function loadWorks() {
+    try {
+      const works = await sbFetch('portfolio_works?draft=eq.false&order=display_order.asc&select=*');
+      const count = works.length;
+      document.getElementById('works-count').textContent = `全 ${count} 件`;
+      document.getElementById('works-count-top').textContent = `${count} works`;
+
+      const container = document.getElementById('works-list');
+      container.innerHTML = `
+        <table class="works-table">
+          <thead>
+            <tr>
+              <th>順</th>
+              <th>サムネイル</th>
+              <th>クライアント</th>
+              <th>タグ / URL</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="works-tbody"></tbody>
+        </table>`;
+
+      const tbody = document.getElementById('works-tbody');
+      works.forEach(w => {
+        const tr = document.createElement('tr');
+        const tags = (w.tags || []).map(t => `<span class="tag-chip">${t}</span>`).join('');
+        const urlBadge = w.external_url
+          ? `<br><span class="url-chip">🔗 外部リンク</span>`
+          : '';
+        tr.innerHTML = `
+          <td><span class="order-badge">${w.display_order}</span></td>
+          <td class="thumb-cell"><img src="${w.thumbnail_url}" alt="${w.client}" loading="lazy" /></td>
+          <td>
+            <strong style="font-size:13px;">${w.client}</strong><br>
+            <span style="font-size:11px;color:var(--muted)">${w.title} / ${w.year}</span>
+          </td>
+          <td>${tags}${urlBadge}</td>
+          <td>
+            <button class="btn-top" onclick="moveToTop(${w.id})">▲ 先頭へ</button>
+            <button class="btn-delete" onclick="deleteWork(${w.id}, '${w.client.replace(/'/g,"\\'")}')">削除</button>
+          </td>`;
+        tbody.appendChild(tr);
+      });
+    } catch(e) {
+      document.getElementById('works-list').innerHTML = `<p style="color:var(--danger)">読み込み失敗: ${e.message}</p>`;
+    }
+  }
+
+  // ===== MOVE TO TOP =====
+  window.moveToTop = async (id) => {
+    try {
+      // 全件のdisplay_orderを+1
+      await sbFetch('portfolio_works?display_order=gte.1', {
+        method: 'PATCH',
+        body: JSON.stringify({ display_order: null }),
+        headers: { 'Prefer': 'return=minimal' }
+      });
+      // RPC使えないので別アプローチ：全件取得→並び替え
+      const works = await sbFetch('portfolio_works?order=display_order.asc&select=id,display_order');
+      // 対象を先頭に、残りを順番通り
+      const target = works.find(w => w.id === id);
+      const rest = works.filter(w => w.id !== id);
+      const ordered = [target, ...rest];
+      await Promise.all(ordered.map((w, i) =>
+        sbFetch(`portfolio_works?id=eq.${w.id}`, {
+          method: 'PATCH',
+          headers: { 'Prefer': 'return=minimal' },
+          body: JSON.stringify({ display_order: i + 1 })
+        })
+      ));
+      showToast('先頭に移動しました', 'success');
+      loadWorks();
+    } catch(e) {
+      showToast('移動失敗: ' + e.message, 'error');
+    }
+  };
+
+  // ===== DELETE =====
+  window.deleteWork = async (id, client) => {
+    if (!confirm(`「${client}」を削除しますか？`)) return;
+    try {
+      await sbFetch(`portfolio_works?id=eq.${id}`, { method: 'DELETE', headers: { 'Prefer': 'return=minimal' } });
+      showToast('削除しました', 'success');
+      loadWorks();
+    } catch(e) {
+      showToast('削除失敗: ' + e.message, 'error');
+    }
+  };
+
+  // ===== TOAST =====
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = `toast ${type} show`;
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+</script>
+</body>
+</html>
