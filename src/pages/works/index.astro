@@ -54,6 +54,7 @@ const categories = [...new Set(works.flatMap(w => w.data.tags || []))];
             year={work.data.year}
             thumbnail={work.data.thumbnail}
             href={`/works/${work.slug}/`}
+            externalUrl={work.data.url}
             span={i % 5 === 0 ? 'large' : 'medium'}
             index={i}
           />

@@ -8,6 +8,7 @@ heroImage: '/works/work-21.jpg'
 tags:
   - LP
   - SaaS
+url: 'https://xpost-pro.com/'
 role: 'Design & Development'
 order: 3
 draft: false

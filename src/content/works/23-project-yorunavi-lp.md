@@ -8,6 +8,7 @@ heroImage: '/works/work-23.jpg'
 tags:
   - LP
   - Entertainment
+url: 'https://www.yoru-navi-shine.com/lp/'
 role: 'Design & Development'
 order: 5
 draft: false

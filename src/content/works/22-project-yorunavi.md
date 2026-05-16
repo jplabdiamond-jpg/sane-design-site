@@ -8,6 +8,7 @@ heroImage: '/works/work-22.jpg'
 tags:
   - Web Design
   - Entertainment
+url: 'https://www.yoru-navi-shine.com/'
 role: 'Design & Development'
 order: 4
 draft: false

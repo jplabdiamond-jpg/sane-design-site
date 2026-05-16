@@ -5,27 +5,30 @@ interface Props {
   year: number | string;
   thumbnail: string;
   href: string;
+  externalUrl?: string;
   span?: 'small' | 'medium' | 'large';
   index?: number;
 }
 
-const { title, client, year, thumbnail, href, span = 'medium', index = 0 } = Astro.props;
+const { title, client, year, thumbnail, href, externalUrl, span = 'medium', index = 0 } = Astro.props;
 
-// グリッドスパン（12カラム基準）
 const colSpan = {
   small: '3',
   medium: '4',
   large: '6',
 }[span];
+
+const linkHref = externalUrl || href;
+const isExternal = !!externalUrl;
 ---
 
 <a
-  href={href}
+  href={linkHref}
   class={`work-card`}
   data-col={colSpan}
   style={`text-decoration:none; display:block; animation-delay:${index * 80}ms;`}
+  {...isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
 >
-  <!-- Image container -->
   <div class="work-thumb">
     <img
       src={thumbnail}
@@ -34,10 +37,9 @@ const colSpan = {
       class="work-img"
     />
     <div class="work-overlay"></div>
-    <div class="view-label">View →</div>
+    <div class="view-label">{isExternal ? 'Visit →' : 'View →'}</div>
   </div>
 
-  <!-- Meta -->
   <div style="margin-top:12px; display:flex; align-items:flex-start; justify-content:space-between; gap:8px;">
     <div>
       <h3 style="font-family:var(--font-serif); font-size:15px; font-weight:400; line-height:1.4; margin-bottom:4px;">
@@ -54,20 +56,17 @@ const colSpan = {
     display: block;
     animation: workFadeIn 0.7s cubic-bezier(0.19, 1, 0.22, 1) both;
   }
-
   @keyframes workFadeIn {
     from { opacity: 0; transform: translateY(24px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-
   .work-thumb {
     position: relative;
     overflow: hidden;
     background: var(--color-surface);
     width: 100%;
-    padding-top: 75%; /* 4:3 aspect ratio */
+    padding-top: 75%;
   }
-
   .work-img {
     position: absolute;
     inset: 0;
@@ -76,14 +75,12 @@ const colSpan = {
     object-fit: cover;
     transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
   }
-
   .work-overlay {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0);
     transition: background 0.4s ease;
   }
-
   .view-label {
     position: absolute;
     bottom: 16px;
@@ -97,17 +94,7 @@ const colSpan = {
     transform: translateY(8px);
     transition: opacity 0.4s ease, transform 0.4s ease;
   }
-
-  .work-card:hover .work-img {
-    transform: scale(1.06);
-  }
-
-  .work-card:hover .work-overlay {
-    background: rgba(0, 0, 0, 0.08);
-  }
-
-  .work-card:hover .view-label {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .work-card:hover .work-img { transform: scale(1.06); }
+  .work-card:hover .work-overlay { background: rgba(0, 0, 0, 0.08); }
+  .work-card:hover .view-label { opacity: 1; transform: translateY(0); }
 </style>

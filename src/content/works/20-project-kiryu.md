@@ -8,6 +8,7 @@ heroImage: '/works/work-20.jpg'
 tags:
   - Corporate
   - Responsive
+url: 'https://kiryu-shikoku.jp/'
 role: 'Design & Development'
 order: 2
 draft: false
