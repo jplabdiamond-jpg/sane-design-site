@@ -10,7 +10,7 @@ tags:
   - Corporate
 role: 'Design & Development'
 url: 'https://jplabdiamond-jpg.github.io/tairyuji-temple/'
-order: 30
+order: 5
 draft: false
 ---
 
