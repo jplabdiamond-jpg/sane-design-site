@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="お支払い完了 | Sane Design"
+  description="ご注文ありがとうございます。"
+>
+  <section class="container-editorial" style="min-height:70vh; display:flex; flex-direction:column; justify-content:center; padding-top:80px; padding-bottom:80px;">
+    <p class="section-label">Order Complete</p>
+    <h1 class="font-serif" style="font-size:clamp(36px,5vw,64px); font-weight:300; margin:16px 0 24px;">
+      ありがとうございます。
+    </h1>
+    <p style="font-size:16px; color:var(--color-muted); line-height:2; max-width:480px; margin-bottom:48px;">
+      ご注文を受け付けました。<br />
+      ご登録のメールアドレスに確認メールをお送りします。<br />
+      2時間以内にSane Designよりご連絡いたします。
+    </p>
+    <div style="display:flex; gap:16px; flex-wrap:wrap;">
+      <a href="/" style="display:inline-block; background:var(--color-primary); color:#fff; padding:16px 40px; font-size:13px; letter-spacing:0.08em; text-decoration:none;">
+        トップへ戻る
+      </a>
+      <a href="/contact/#contact-form" style="display:inline-block; border:1px solid var(--color-border); color:var(--color-text); padding:16px 40px; font-size:13px; letter-spacing:0.08em; text-decoration:none;">
+        お問い合わせ
+      </a>
+    </div>
+  </section>
+</BaseLayout>

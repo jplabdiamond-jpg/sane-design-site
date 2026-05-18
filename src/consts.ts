@@ -12,4 +12,5 @@ export const NAV_LINKS = [
   { href: '/blog/', label: 'Journal' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
+  { href: '/payment/', label: 'Order' },
 ];

@@ -1,0 +1,320 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const PRICE_IDS = {
+  // ── Web Design ──
+  web_standard:      { id: 'price_1TYLVsK3gE5z1rlGHaIB33GA', label: 'ホームページ制作（スタンダード）', price: 20000, mode: 'payment', category: 'web' },
+  web_opt_upload:    { id: 'price_1TYLW9K3gE5z1rlG9jcYHK9J', label: 'オプション：サーバー直接アップロード・公開対応', price: 3000, mode: 'payment', category: 'web' },
+  web_opt_redesign:  { id: 'price_1TYLWAK3gE5z1rlG0Cx6MoDf', label: 'オプション：デザイン提出後の大幅変更', price: 10000, mode: 'payment', category: 'web' },
+  web_opt_ec:        { id: 'price_1TYLWBK3gE5z1rlGL1qH3dYB', label: 'オプション：ECサイト構築（Stripe/Square決済連携含）', price: 40000, mode: 'payment', category: 'web' },
+  web_opt_minor:     { id: 'price_1TYLWCK3gE5z1rlGuuH4wtyG', label: 'オプション：軽微な修正（画像入替・役員追加など）', price: 1000, mode: 'payment', category: 'web' },
+  web_opt_major:     { id: 'price_1TYLWDK3gE5z1rlGLv16j9bq', label: 'オプション：大規模修正（文字1,000字以上・画像20枚以上）', price: 5000, mode: 'payment', category: 'web' },
+  // ── SEO ──
+  seo_standard:      { id: 'price_1TYLWZK3gE5z1rlGidgvCQwG', label: 'SEO対策（スタンダード）', price: 10000, mode: 'payment', category: 'seo' },
+  seo_opt_upload:    { id: 'price_1TYLWaK3gE5z1rlGfTunfKya', label: 'SEOオプション：サーバー直接アップロード（内部SEO対策含）', price: 5000, mode: 'payment', category: 'seo' },
+  seo_opt_image:     { id: 'price_1TYLWaK3gE5z1rlGC6zJkA9W', label: 'SEOオプション：完全オリジナル画像付き記事60本', price: 5000, mode: 'payment', category: 'seo' },
+  // ── 保守 ──
+  maintenance:       { id: 'price_1TYLWbK3gE5z1rlG2w1ZDWTe', label: 'Webサイト保守サービス', price: 5000, mode: 'subscription', category: 'maintenance' },
+};
+---
+
+<BaseLayout
+  title="お支払い | Sane Design"
+  description="Sane Designのサービスをオンラインでご注文いただけます。"
+>
+  <section class="container-editorial pt-16 md:pt-24 pb-8">
+    <p class="section-label">Order</p>
+    <h1 class="font-serif text-4xl md:text-6xl leading-tight mb-4">お支払い</h1>
+    <p class="text-muted text-sm md:text-base max-w-xl leading-relaxed">
+      ご希望のサービスを選択してお進みください。<br />
+      カード決済（Visa / Mastercard / JCB / Amex）に対応しています。
+    </p>
+  </section>
+
+  <section class="container-editorial pb-24" id="order-form">
+
+    <!-- Step indicator -->
+    <div style="display:flex; gap:0; border-bottom:1px solid var(--color-border); margin-bottom:48px;">
+      <div class="step-tab active" data-step="1" style="padding:16px 32px; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; cursor:pointer; border-bottom:2px solid var(--color-primary); font-weight:600;">① サービス選択</div>
+      <div class="step-tab" data-step="2" style="padding:16px 32px; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; cursor:pointer; border-bottom:2px solid transparent; color:var(--color-muted);">② 確認・お支払い</div>
+    </div>
+
+    <!-- Step 1: Service Selection -->
+    <div id="step1">
+
+      <!-- Web Design -->
+      <div style="margin-bottom:48px;">
+        <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-muted); margin-bottom:20px;">01 — Web Design</p>
+        <div style="display:grid; gap:2px;">
+          {Object.entries(PRICE_IDS).filter(([k]) => PRICE_IDS[k as keyof typeof PRICE_IDS].category === 'web').map(([key, item]) => (
+            <label class="price-row" data-key={key} data-price={item.price} data-mode={item.mode} style="display:flex; align-items:center; justify-content:space-between; padding:20px 24px; border:1px solid var(--color-border); cursor:pointer; transition: border-color 0.2s, background 0.2s; gap:16px;">
+              <div style="display:flex; align-items:center; gap:16px; flex:1;">
+                <input type="checkbox" data-key={key} style="width:18px; height:18px; cursor:pointer; accent-color:var(--color-primary);" />
+                <div>
+                  <span style="font-size:14px; font-weight:500; line-height:1.5;">{item.label}</span>
+                  {key === 'maintenance' && <span style="display:inline-block; margin-left:8px; font-size:10px; background:var(--color-primary); color:#fff; padding:2px 8px; letter-spacing:0.08em;">月額</span>}
+                </div>
+              </div>
+              <span style="font-family:var(--font-serif); font-size:18px; white-space:nowrap;">¥{item.price.toLocaleString()}{item.mode==='subscription'?'/月':''}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <!-- SEO -->
+      <div style="margin-bottom:48px;">
+        <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-muted); margin-bottom:20px;">02 — SEO</p>
+        <div style="display:grid; gap:2px;">
+          {Object.entries(PRICE_IDS).filter(([k]) => PRICE_IDS[k as keyof typeof PRICE_IDS].category === 'seo').map(([key, item]) => (
+            <label class="price-row" data-key={key} data-price={item.price} data-mode={item.mode} style="display:flex; align-items:center; justify-content:space-between; padding:20px 24px; border:1px solid var(--color-border); cursor:pointer; transition: border-color 0.2s, background 0.2s; gap:16px;">
+              <div style="display:flex; align-items:center; gap:16px; flex:1;">
+                <input type="checkbox" data-key={key} style="width:18px; height:18px; cursor:pointer; accent-color:var(--color-primary);" />
+                <span style="font-size:14px; font-weight:500; line-height:1.5;">{item.label}</span>
+              </div>
+              <span style="font-family:var(--font-serif); font-size:18px; white-space:nowrap;">¥{item.price.toLocaleString()}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <!-- 保守サービス -->
+      <div style="margin-bottom:48px;">
+        <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-muted); margin-bottom:20px;">03 — 保守サービス</p>
+        <div style="display:grid; gap:2px;">
+          {Object.entries(PRICE_IDS).filter(([k]) => PRICE_IDS[k as keyof typeof PRICE_IDS].category === 'maintenance').map(([key, item]) => (
+            <label class="price-row" data-key={key} data-price={item.price} data-mode={item.mode} style="display:flex; align-items:center; justify-content:space-between; padding:20px 24px; border:1px solid var(--color-border); cursor:pointer; transition: border-color 0.2s, background 0.2s; gap:16px;">
+              <div style="display:flex; align-items:center; gap:16px; flex:1;">
+                <input type="checkbox" data-key={key} style="width:18px; height:18px; cursor:pointer; accent-color:var(--color-primary);" />
+                <div>
+                  <span style="font-size:14px; font-weight:500; line-height:1.5;">{item.label}</span>
+                  <span style="display:inline-block; margin-left:8px; font-size:10px; background:var(--color-primary); color:#fff; padding:2px 8px; letter-spacing:0.08em;">月額自動更新</span>
+                </div>
+              </div>
+              <span style="font-family:var(--font-serif); font-size:18px; white-space:nowrap;">¥{item.price.toLocaleString()}/月</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <!-- 注意書き -->
+      <div style="border-top:1px solid var(--color-border); padding-top:24px; margin-bottom:32px;">
+        <p style="font-size:12px; color:var(--color-muted); line-height:2;">
+          ※ Web Design と SEO を同時にお申し込みの場合、サブスクリプション（保守）と一括払いは別々の決済になります。<br />
+          ※ ご注文後、2時間以内にメールにてご連絡いたします。<br />
+          ※ キャンセル・返金については<a href="/contact/#contact-form" style="text-decoration:underline;">お問い合わせ</a>ください。
+        </p>
+      </div>
+
+      <!-- 合計・次へ -->
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; padding:32px; background:var(--color-surface); border:1px solid var(--color-border);">
+        <div>
+          <p style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-muted); margin-bottom:6px;">合計金額</p>
+          <p id="total-display" style="font-family:var(--font-serif); font-size:36px; font-weight:300;">¥0</p>
+          <p id="sub-note" style="font-size:12px; color:var(--color-muted); display:none; margin-top:4px;">※ 保守サービスは月額¥5,000が別途発生します</p>
+        </div>
+        <button id="next-btn" disabled style="background:var(--color-primary); color:#fff; border:none; padding:18px 48px; font-size:13px; letter-spacing:0.08em; cursor:pointer; opacity:0.4; transition:opacity 0.2s;" onclick="goToStep2()">
+          次へ → 確認・お支払い
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: Confirm & Pay -->
+    <div id="step2" style="display:none;">
+      <div style="max-width:600px;">
+        <h2 style="font-family:var(--font-serif); font-size:24px; font-weight:300; margin-bottom:32px;">ご注文内容の確認</h2>
+        <div id="order-summary" style="border:1px solid var(--color-border); margin-bottom:32px;">
+          <!-- JS挿入 -->
+        </div>
+
+        <div style="margin-bottom:32px;">
+          <label style="display:block; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;">メールアドレス（任意・領収書送付用）</label>
+          <input id="customer-email" type="email" placeholder="example@email.com" style="width:100%; padding:14px 16px; border:1px solid var(--color-border); font-size:14px; outline:none; font-family:var(--font-sans); box-sizing:border-box;" />
+        </div>
+
+        <div id="payment-warning" style="display:none; padding:16px; background:#fff3cd; border:1px solid #ffc107; margin-bottom:24px; font-size:13px; line-height:1.8; color:#856404;"></div>
+
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+          <button onclick="goToStep1()" style="background:transparent; border:1px solid var(--color-border); color:var(--color-text); padding:16px 32px; font-size:13px; cursor:pointer;">← 戻る</button>
+          <button id="pay-btn-one" style="display:none; background:var(--color-primary); color:#fff; border:none; padding:16px 40px; font-size:13px; letter-spacing:0.08em; cursor:pointer; flex:1;" onclick="checkout('payment')">
+            カードで支払う →
+          </button>
+          <button id="pay-btn-sub" style="display:none; background:var(--color-primary); color:#fff; border:none; padding:16px 40px; font-size:13px; letter-spacing:0.08em; cursor:pointer; flex:1;" onclick="checkout('subscription')">
+            保守サービスに申し込む →
+          </button>
+        </div>
+        <p style="font-size:11px; color:var(--color-muted); margin-top:16px; line-height:1.9;">
+          🔒 決済はStripeの安全なページで行われます。カード情報はSane Designには送信されません。
+        </p>
+      </div>
+    </div>
+
+  </section>
+</BaseLayout>
+
+<style>
+  .price-row:hover {
+    border-color: var(--color-primary) !important;
+    background: var(--color-surface);
+  }
+  .price-row.selected {
+    border-color: var(--color-primary) !important;
+    background: var(--color-surface);
+  }
+  #next-btn:not([disabled]) {
+    opacity: 1;
+  }
+  #next-btn:not([disabled]):hover {
+    opacity: 0.8;
+  }
+  #pay-btn-one:hover, #pay-btn-sub:hover { opacity: 0.8; }
+  .step-tab.active {
+    border-bottom-color: var(--color-primary) !important;
+    color: var(--color-text) !important;
+    font-weight: 600 !important;
+  }
+  @media (max-width: 640px) {
+    .price-row { flex-direction: column; align-items: flex-start !important; }
+  }
+</style>
+
+<script define:vars={{ PRICE_IDS }}>
+  let selected = {};
+
+  // checkbox toggle
+  document.querySelectorAll('.price-row').forEach(row => {
+    const key = row.dataset.key;
+    const cb = row.querySelector('input[type=checkbox]');
+    row.addEventListener('click', e => {
+      if (e.target === cb) return;
+      cb.checked = !cb.checked;
+      toggleItem(key, cb.checked, row);
+    });
+    cb.addEventListener('change', () => toggleItem(key, cb.checked, row));
+  });
+
+  function toggleItem(key, checked, row) {
+    if (checked) {
+      selected[key] = PRICE_IDS[key];
+      row.classList.add('selected');
+    } else {
+      delete selected[key];
+      row.classList.remove('selected');
+    }
+    updateTotal();
+  }
+
+  function updateTotal() {
+    const oneTime = Object.values(selected).filter(i => i.mode === 'payment').reduce((s, i) => s + i.price, 0);
+    const subItems = Object.values(selected).filter(i => i.mode === 'subscription');
+    const total = oneTime;
+    document.getElementById('total-display').textContent = '¥' + total.toLocaleString();
+    const subNote = document.getElementById('sub-note');
+    subNote.style.display = subItems.length > 0 ? 'block' : 'none';
+    const btn = document.getElementById('next-btn');
+    btn.disabled = Object.keys(selected).length === 0;
+  }
+
+  function goToStep2() {
+    if (Object.keys(selected).length === 0) return;
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step2').style.display = 'block';
+    document.querySelectorAll('.step-tab').forEach((t, i) => {
+      t.classList.toggle('active', i === 1);
+      t.style.borderBottomColor = i === 1 ? 'var(--color-primary)' : 'transparent';
+      t.style.color = i === 1 ? 'var(--color-text)' : 'var(--color-muted)';
+    });
+    renderSummary();
+  }
+
+  function goToStep1() {
+    document.getElementById('step2').style.display = 'none';
+    document.getElementById('step1').style.display = 'block';
+    document.querySelectorAll('.step-tab').forEach((t, i) => {
+      t.classList.toggle('active', i === 0);
+      t.style.borderBottomColor = i === 0 ? 'var(--color-primary)' : 'transparent';
+      t.style.color = i === 0 ? 'var(--color-text)' : 'var(--color-muted)';
+    });
+  }
+
+  function renderSummary() {
+    const oneTimeItems = Object.values(selected).filter(i => i.mode === 'payment');
+    const subItems = Object.values(selected).filter(i => i.mode === 'subscription');
+    const oneTimeTotal = oneTimeItems.reduce((s, i) => s + i.price, 0);
+    const subTotal = subItems.reduce((s, i) => s + i.price, 0);
+
+    let html = '';
+    if (oneTimeItems.length > 0) {
+      html += '<div style="padding:20px 24px; border-bottom:1px solid var(--color-border);"><p style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-muted); margin-bottom:12px;">一括払い</p>';
+      oneTimeItems.forEach(i => {
+        html += `<div style="display:flex; justify-content:space-between; padding:8px 0; font-size:14px; border-bottom:1px solid var(--color-border);"><span>${i.label}</span><span style="font-family:var(--font-serif)">¥${i.price.toLocaleString()}</span></div>`;
+      });
+      html += `<div style="display:flex; justify-content:space-between; padding:12px 0; font-size:16px; font-weight:600;"><span>小計</span><span style="font-family:var(--font-serif)">¥${oneTimeTotal.toLocaleString()}</span></div></div>`;
+    }
+    if (subItems.length > 0) {
+      html += '<div style="padding:20px 24px;"><p style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-muted); margin-bottom:12px;">月額（サブスクリプション）</p>';
+      subItems.forEach(i => {
+        html += `<div style="display:flex; justify-content:space-between; padding:8px 0; font-size:14px; border-bottom:1px solid var(--color-border);"><span>${i.label}</span><span style="font-family:var(--font-serif)">¥${i.price.toLocaleString()}/月</span></div>`;
+      });
+      html += `<div style="display:flex; justify-content:space-between; padding:12px 0; font-size:16px; font-weight:600;"><span>月額合計</span><span style="font-family:var(--font-serif)">¥${subTotal.toLocaleString()}/月</span></div></div>`;
+    }
+    document.getElementById('order-summary').innerHTML = html;
+
+    // 警告表示（一括+サブスク混在）
+    const warn = document.getElementById('payment-warning');
+    if (oneTimeItems.length > 0 && subItems.length > 0) {
+      warn.style.display = 'block';
+      warn.textContent = '一括払いとサブスクリプション（保守サービス）は別々の決済になります。それぞれのボタンからお支払いください。';
+      document.getElementById('pay-btn-one').style.display = 'block';
+      document.getElementById('pay-btn-sub').style.display = 'block';
+    } else if (oneTimeItems.length > 0) {
+      warn.style.display = 'none';
+      document.getElementById('pay-btn-one').style.display = 'block';
+      document.getElementById('pay-btn-sub').style.display = 'none';
+    } else {
+      warn.style.display = 'none';
+      document.getElementById('pay-btn-one').style.display = 'none';
+      document.getElementById('pay-btn-sub').style.display = 'block';
+    }
+  }
+
+  async function checkout(mode) {
+    const btn = mode === 'payment' ? document.getElementById('pay-btn-one') : document.getElementById('pay-btn-sub');
+    btn.textContent = '処理中...';
+    btn.disabled = true;
+
+    const items = Object.values(selected)
+      .filter(i => i.mode === mode)
+      .map(i => ({ priceId: i.id, quantity: 1, mode: i.mode }));
+
+    const email = document.getElementById('customer-email').value.trim();
+
+    try {
+      const res = await fetch('https://sane-design.net/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items,
+          customerEmail: email || undefined,
+          successUrl: 'https://sane-design.net/payment/success/',
+          cancelUrl: 'https://sane-design.net/payment/',
+        }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('エラーが発生しました。しばらくしてから再度お試しください。\n' + (data.error || ''));
+        btn.textContent = mode === 'payment' ? 'カードで支払う →' : '保守サービスに申し込む →';
+        btn.disabled = false;
+      }
+    } catch (e) {
+      alert('通信エラーが発生しました。しばらくしてから再度お試しください。');
+      btn.textContent = mode === 'payment' ? 'カードで支払う →' : '保守サービスに申し込む →';
+      btn.disabled = false;
+    }
+  }
+
+  window.goToStep1 = goToStep1;
+  window.goToStep2 = goToStep2;
+  window.checkout = checkout;
+</script>
