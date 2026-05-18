@@ -3,20 +3,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const PRICE_IDS = {
   // ── Web Design 基本 ──
-  web_standard:        { id: 'price_1TYLVsK3gE5z1rlGHaIB33GA', label: 'ホームページ制作（スタンダード）', price: 20000, mode: 'payment', category: 'web', isBase: true },
+  web_standard:        { id: 'price_1TYShME3wzB3B1HbAyT8j1Zy', label: 'ホームページ制作（スタンダード）', price: 20000, mode: 'payment', category: 'web', isBase: true },
   // ── Web Design オプション（スタンダード必須）──
-  web_opt_upload:      { id: 'price_1TYLW9K3gE5z1rlG9jcYHK9J', label: 'オプション：サーバー直接アップロード・公開対応', price: 3000, mode: 'payment', category: 'web_opt', requiresBase: true },
-  web_opt_redesign:    { id: 'price_1TYLWAK3gE5z1rlG0Cx6MoDf', label: 'オプション：デザイン提出後の大幅変更', price: 10000, mode: 'payment', category: 'web_opt', requiresBase: true },
-  web_opt_ec:          { id: 'price_1TYLWBK3gE5z1rlGL1qH3dYB', label: 'オプション：ECサイト構築（Stripe/Square決済連携含）', price: 40000, mode: 'payment', category: 'web_opt', requiresBase: true },
-  web_opt_minor:       { id: 'price_1TYLWCK3gE5z1rlGuuH4wtyG', label: 'オプション：軽微な修正（画像入替・役員追加など）', price: 1000, mode: 'payment', category: 'web_opt', requiresBase: true },
-  web_opt_major:       { id: 'price_1TYLWDK3gE5z1rlGLv16j9bq', label: 'オプション：大規模修正（文字1,000字以上・画像20枚以上）', price: 5000, mode: 'payment', category: 'web_opt', requiresBase: true },
-  web_opt_bilingual:   { id: 'price_1TYSNZK3gE5z1rlGZWBaJYFY', label: 'オプション：英語・日本語 言語切り替え', price: 10000, mode: 'payment', category: 'web_opt', requiresBase: true },
+  web_opt_upload:      { id: 'price_1TYShkE3wzB3B1Hb1rlR6od0', label: 'オプション：サーバー直接アップロード・公開対応', price: 3000, mode: 'payment', category: 'web_opt', requiresBase: true },
+  web_opt_redesign:    { id: 'price_1TYShkE3wzB3B1Hb4vcQgiEp', label: 'オプション：デザイン提出後の大幅変更', price: 10000, mode: 'payment', category: 'web_opt', requiresBase: true },
+  web_opt_ec:          { id: 'price_1TYShlE3wzB3B1HbFXOHoXXL', label: 'オプション：ECサイト構築（Stripe/Square決済連携含）', price: 40000, mode: 'payment', category: 'web_opt', requiresBase: true },
+  web_opt_minor:       { id: 'price_1TYShmE3wzB3B1Hbf27AybCH', label: 'オプション：軽微な修正（画像入替・役員追加など）', price: 1000, mode: 'payment', category: 'web_opt', requiresBase: true },
+  web_opt_major:       { id: 'price_1TYShmE3wzB3B1Hb5XjCwXDw', label: 'オプション：大規模修正（文字1,000字以上・画像20枚以上）', price: 5000, mode: 'payment', category: 'web_opt', requiresBase: true },
+  web_opt_bilingual:   { id: 'price_1TYShQE3wzB3B1HbgfMPdFyD', label: 'オプション：英語・日本語 言語切り替え', price: 10000, mode: 'payment', category: 'web_opt', requiresBase: true },
   // ── SEO ──
-  seo_standard:        { id: 'price_1TYLWZK3gE5z1rlGidgvCQwG', label: 'SEO対策（スタンダード）', price: 10000, mode: 'payment', category: 'seo' },
-  seo_opt_upload:      { id: 'price_1TYLWaK3gE5z1rlGfTunfKya', label: 'SEOオプション：サーバー直接アップロード（内部SEO対策含）', price: 5000, mode: 'payment', category: 'seo' },
-  seo_opt_image:       { id: 'price_1TYLWaK3gE5z1rlGC6zJkA9W', label: 'SEOオプション：完全オリジナル画像付き記事60本', price: 5000, mode: 'payment', category: 'seo' },
+  seo_standard:        { id: 'price_1TYShRE3wzB3B1HboNOGrHXd', label: 'SEO対策（スタンダード）', price: 10000, mode: 'payment', category: 'seo' },
+  seo_opt_upload:      { id: 'price_1TYShnE3wzB3B1HbMwPXad4i', label: 'SEOオプション：サーバー直接アップロード（内部SEO対策含）', price: 5000, mode: 'payment', category: 'seo' },
+  seo_opt_image:       { id: 'price_1TYShoE3wzB3B1HbAKtbXHLa', label: 'SEOオプション：完全オリジナル画像付き記事60本', price: 5000, mode: 'payment', category: 'seo' },
   // ── 保守 ──
-  maintenance:         { id: 'price_1TYLWbK3gE5z1rlG2w1ZDWTe', label: 'Webサイト保守サービス', price: 5000, mode: 'subscription', category: 'maintenance' },
+  maintenance:         { id: 'price_1TYShTE3wzB3B1Hb9UTIgX7T', label: 'Webサイト保守サービス', price: 5000, mode: 'subscription', category: 'maintenance' },
 };
 ---
 
@@ -58,7 +58,7 @@ const PRICE_IDS = {
 
       <!-- Web Design オプション -->
       <div style="margin-bottom:40px; margin-left:24px;">
-        <p id="opt-label" style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--color-muted); margin-bottom:12px; margin-top:8px;">オプション <span id="opt-lock-note" style="color:#aaa; font-size:9px; margin-left:8px;">※ スタンダードを選択すると追加できます</span></p>
+        <p style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--color-muted); margin-bottom:12px; margin-top:8px;">オプション <span id="opt-lock-note" style="color:#aaa; font-size:9px; margin-left:8px;">※ スタンダードを選択すると追加できます</span></p>
         <div id="opts-wrapper" style="display:grid; gap:2px; opacity:0.35; pointer-events:none; transition: opacity 0.25s;">
           {Object.entries(PRICE_IDS).filter(([,v]) => v.category === 'web_opt').map(([key, item]) => (
             <label class="price-row opt-row" data-key={key} style="display:flex; align-items:center; justify-content:space-between; padding:16px 24px; border:1px solid var(--color-border); cursor:not-allowed; gap:16px; background:var(--color-surface);">
@@ -176,12 +176,10 @@ const PRICE_IDS = {
 <script define:vars={{ PRICE_IDS }}>
   let selected = {};
 
-  // ── row クリック処理 ──
-  function bindRow(row) {
+  document.querySelectorAll('.price-row').forEach(row => {
     const key = row.dataset.key;
     const cb = row.querySelector('input[type=checkbox]');
     if (!cb) return;
-
     row.addEventListener('click', e => {
       if (e.target === cb) return;
       if (cb.disabled) return;
@@ -192,18 +190,11 @@ const PRICE_IDS = {
       if (cb.disabled) return;
       toggleItem(key, cb.checked, row);
     });
-  }
-  document.querySelectorAll('.price-row').forEach(bindRow);
+  });
 
   function toggleItem(key, checked, row) {
-    if (checked) {
-      selected[key] = PRICE_IDS[key];
-      row.classList.add('selected');
-    } else {
-      delete selected[key];
-      row.classList.remove('selected');
-    }
-    // スタンダードのON/OFFでオプション有効/無効切り替え
+    if (checked) { selected[key] = PRICE_IDS[key]; row.classList.add('selected'); }
+    else         { delete selected[key]; row.classList.remove('selected'); }
     if (key === 'web_standard') updateOptLock();
     updateTotal();
   }
@@ -211,21 +202,17 @@ const PRICE_IDS = {
   function updateOptLock() {
     const baseChecked = !!selected['web_standard'];
     const wrapper = document.getElementById('opts-wrapper');
-    const note = document.getElementById('opt-lock-note');
-
-    wrapper.style.opacity = baseChecked ? '1' : '0.35';
+    const note    = document.getElementById('opt-lock-note');
+    wrapper.style.opacity       = baseChecked ? '1' : '0.35';
     wrapper.style.pointerEvents = baseChecked ? 'auto' : 'none';
-    note.style.display = baseChecked ? 'none' : 'inline';
-
+    note.style.display          = baseChecked ? 'none' : 'inline';
     document.querySelectorAll('.opt-cb').forEach(cb => {
       cb.disabled = !baseChecked;
       const row = cb.closest('.price-row');
       row.style.cursor = baseChecked ? 'pointer' : 'not-allowed';
-      // スタンダード外した場合、オプションのチェックも解除
       if (!baseChecked && cb.checked) {
         cb.checked = false;
-        const k = cb.dataset.key;
-        delete selected[k];
+        delete selected[cb.dataset.key];
         row.classList.remove('selected');
       }
     });
@@ -233,37 +220,33 @@ const PRICE_IDS = {
 
   function updateTotal() {
     const oneTime = Object.values(selected).filter(i => i.mode === 'payment').reduce((s, i) => s + i.price, 0);
-    const hasSub = Object.values(selected).some(i => i.mode === 'subscription');
+    const hasSub  = Object.values(selected).some(i => i.mode === 'subscription');
     document.getElementById('total-display').textContent = '¥' + oneTime.toLocaleString();
     document.getElementById('sub-note').style.display = hasSub ? 'block' : 'none';
-
     const hasAny = Object.keys(selected).length > 0;
     const btn = document.getElementById('next-btn');
-    btn.disabled = !hasAny;
-    btn.style.opacity = hasAny ? '1' : '0.3';
-    btn.style.cursor = hasAny ? 'pointer' : 'not-allowed';
+    btn.disabled       = !hasAny;
+    btn.style.opacity  = hasAny ? '1' : '0.3';
+    btn.style.cursor   = hasAny ? 'pointer' : 'not-allowed';
   }
 
   function goToStep2() {
-    if (Object.keys(selected).length === 0) return;
+    if (!Object.keys(selected).length) return;
     document.getElementById('step1').style.display = 'none';
     document.getElementById('step2').style.display = 'block';
-    setActiveTab(1);
-    renderSummary();
+    setActiveTab(1); renderSummary();
   }
-
   function goToStep1() {
     document.getElementById('step2').style.display = 'none';
     document.getElementById('step1').style.display = 'block';
     setActiveTab(0);
   }
-
   function setActiveTab(idx) {
     document.querySelectorAll('.step-tab').forEach((t, i) => {
-      const active = i === idx;
-      t.style.borderBottomColor = active ? 'var(--color-primary)' : 'transparent';
-      t.style.color = active ? 'var(--color-text)' : 'var(--color-muted)';
-      t.style.fontWeight = active ? '600' : '400';
+      const a = i === idx;
+      t.style.borderBottomColor = a ? 'var(--color-primary)' : 'transparent';
+      t.style.color             = a ? 'var(--color-text)' : 'var(--color-muted)';
+      t.style.fontWeight        = a ? '600' : '400';
     });
   }
 
@@ -272,37 +255,25 @@ const PRICE_IDS = {
     const subItems     = Object.values(selected).filter(i => i.mode === 'subscription');
     const oneTimeTotal = oneTimeItems.reduce((s, i) => s + i.price, 0);
     const subTotal     = subItems.reduce((s, i) => s + i.price, 0);
-
     let html = '';
-    if (oneTimeItems.length > 0) {
-      html += '<div style="padding:20px 24px; border-bottom:1px solid var(--color-border);">';
-      html += '<p style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-muted); margin-bottom:12px;">一括払い</p>';
-      oneTimeItems.forEach(i => {
-        html += `<div style="display:flex; justify-content:space-between; padding:8px 0; font-size:14px; border-bottom:1px solid var(--color-border);">
-          <span>${i.label}</span><span style="font-family:var(--font-serif)">¥${i.price.toLocaleString()}</span></div>`;
-      });
-      html += `<div style="display:flex; justify-content:space-between; padding:12px 0; font-size:16px; font-weight:600;">
-        <span>小計</span><span style="font-family:var(--font-serif)">¥${oneTimeTotal.toLocaleString()}</span></div></div>`;
+    if (oneTimeItems.length) {
+      html += '<div style="padding:20px 24px; border-bottom:1px solid var(--color-border);"><p style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-muted);margin-bottom:12px;">一括払い</p>';
+      oneTimeItems.forEach(i => { html += `<div style="display:flex;justify-content:space-between;padding:8px 0;font-size:14px;border-bottom:1px solid var(--color-border);"><span>${i.label}</span><span style="font-family:var(--font-serif)">¥${i.price.toLocaleString()}</span></div>`; });
+      html += `<div style="display:flex;justify-content:space-between;padding:12px 0;font-size:16px;font-weight:600;"><span>小計</span><span style="font-family:var(--font-serif)">¥${oneTimeTotal.toLocaleString()}</span></div></div>`;
     }
-    if (subItems.length > 0) {
-      html += '<div style="padding:20px 24px;">';
-      html += '<p style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-muted); margin-bottom:12px;">月額（サブスクリプション）</p>';
-      subItems.forEach(i => {
-        html += `<div style="display:flex; justify-content:space-between; padding:8px 0; font-size:14px; border-bottom:1px solid var(--color-border);">
-          <span>${i.label}</span><span style="font-family:var(--font-serif)">¥${i.price.toLocaleString()}/月</span></div>`;
-      });
-      html += `<div style="display:flex; justify-content:space-between; padding:12px 0; font-size:16px; font-weight:600;">
-        <span>月額合計</span><span style="font-family:var(--font-serif)">¥${subTotal.toLocaleString()}/月</span></div></div>`;
+    if (subItems.length) {
+      html += '<div style="padding:20px 24px;"><p style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-muted);margin-bottom:12px;">月額（サブスクリプション）</p>';
+      subItems.forEach(i => { html += `<div style="display:flex;justify-content:space-between;padding:8px 0;font-size:14px;border-bottom:1px solid var(--color-border);"><span>${i.label}</span><span style="font-family:var(--font-serif)">¥${i.price.toLocaleString()}/月</span></div>`; });
+      html += `<div style="display:flex;justify-content:space-between;padding:12px 0;font-size:16px;font-weight:600;"><span>月額合計</span><span style="font-family:var(--font-serif)">¥${subTotal.toLocaleString()}/月</span></div></div>`;
     }
     document.getElementById('order-summary').innerHTML = html;
-
     const warn = document.getElementById('payment-warning');
-    if (oneTimeItems.length > 0 && subItems.length > 0) {
+    if (oneTimeItems.length && subItems.length) {
       warn.style.display = 'block';
       warn.textContent = '一括払いとサブスクリプション（保守サービス）は別々の決済になります。それぞれのボタンからお支払いください。';
       document.getElementById('pay-btn-one').style.display = 'block';
       document.getElementById('pay-btn-sub').style.display = 'block';
-    } else if (oneTimeItems.length > 0) {
+    } else if (oneTimeItems.length) {
       warn.style.display = 'none';
       document.getElementById('pay-btn-one').style.display = 'block';
       document.getElementById('pay-btn-sub').style.display = 'none';
@@ -315,38 +286,20 @@ const PRICE_IDS = {
 
   async function checkout(mode) {
     const btn = mode === 'payment' ? document.getElementById('pay-btn-one') : document.getElementById('pay-btn-sub');
-    btn.textContent = '処理中...';
-    btn.disabled = true;
-
-    const items = Object.values(selected)
-      .filter(i => i.mode === mode)
-      .map(i => ({ priceId: i.id, quantity: 1, mode: i.mode }));
+    btn.textContent = '処理中...'; btn.disabled = true;
+    const items = Object.values(selected).filter(i => i.mode === mode).map(i => ({ priceId: i.id, quantity: 1, mode: i.mode }));
     const email = document.getElementById('customer-email').value.trim();
-
     try {
-      const res = await fetch('https://sane-design.net/api/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          items,
-          customerEmail: email || undefined,
+      const res  = await fetch('https://sane-design.net/api/create-checkout-session', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items, customerEmail: email || undefined,
           successUrl: 'https://sane-design.net/payment/success/',
-          cancelUrl:  'https://sane-design.net/payment/',
-        }),
+          cancelUrl:  'https://sane-design.net/payment/' }),
       });
       const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert('エラーが発生しました。\n' + (data.error || ''));
-        btn.textContent = mode === 'payment' ? 'カードで支払う →' : '保守サービスに申し込む →';
-        btn.disabled = false;
-      }
-    } catch {
-      alert('通信エラーが発生しました。しばらくしてから再度お試しください。');
-      btn.textContent = mode === 'payment' ? 'カードで支払う →' : '保守サービスに申し込む →';
-      btn.disabled = false;
-    }
+      if (data.url) { window.location.href = data.url; }
+      else { alert('エラーが発生しました。\n' + (data.error || '')); btn.textContent = mode === 'payment' ? 'カードで支払う →' : '保守サービスに申し込む →'; btn.disabled = false; }
+    } catch { alert('通信エラーが発生しました。'); btn.textContent = mode === 'payment' ? 'カードで支払う →' : '保守サービスに申し込む →'; btn.disabled = false; }
   }
 
   window.goToStep1 = goToStep1;
