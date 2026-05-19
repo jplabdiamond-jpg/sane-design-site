@@ -18,6 +18,7 @@ interface Props {
 
 const { work } = Astro.props;
 const { Content } = await work.render();
+const hasUrl = !!work.data.url;
 ---
 
 <BaseLayout
@@ -31,17 +32,32 @@ const { Content } = await work.render();
       <h1 class="font-serif text-4xl md:text-6xl leading-tight">{work.data.title}</h1>
     </header>
 
-    {
-      work.data.heroImage && (
-        <div class="container-editorial pb-16">
+    {work.data.heroImage && (
+      <div class="container-editorial pb-16">
+        {hasUrl ? (
+          <a
+            href={work.data.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hero-img-link"
+            title={`${work.data.client} のサイトを見る`}
+          >
+            <img
+              src={work.data.heroImage}
+              alt={work.data.title}
+              class="w-full h-auto bg-[#fafafa] hero-img"
+            />
+            <span class="hero-img-badge">サイトを見る ↗</span>
+          </a>
+        ) : (
           <img
             src={work.data.heroImage}
             alt={work.data.title}
             class="w-full h-auto bg-[#fafafa]"
           />
-        </div>
-      )
-    }
+        )}
+      </div>
+    )}
 
     <section class="container-editorial pb-16">
       <div class="grid md:grid-cols-4 gap-8 border-t border-primary pt-8">
@@ -62,6 +78,22 @@ const { Content } = await work.render();
           <p class="text-sm">{work.data.role || 'Design & Development'}</p>
         </div>
       </div>
+
+      {hasUrl && (
+        <div class="mt-8">
+          <a
+            href={work.data.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="site-link-btn"
+          >
+            <span>公開サイトを見る</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </a>
+        </div>
+      )}
     </section>
 
     <section class="container-editorial pb-24">
@@ -76,3 +108,68 @@ const { Content } = await work.render();
     subline="同様のプロジェクトはココナラから承っております"
   />
 </BaseLayout>
+
+<style>
+  /* ヒーロー画像リンク */
+  .hero-img-link {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .hero-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .hero-img-badge {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.95);
+    color: #000;
+    padding: 8px 20px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+    border-radius: 2px;
+  }
+  .hero-img-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0);
+    transition: background 0.4s ease;
+    pointer-events: none;
+  }
+  .hero-img-link:hover .hero-img { transform: scale(1.02); }
+  .hero-img-link:hover::after { background: rgba(0,0,0,0.06); }
+  .hero-img-link:hover .hero-img-badge { opacity: 1; transform: translateY(0); }
+
+  /* 公開サイトリンクボタン */
+  .site-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    transition: background 0.25s ease, color 0.25s ease;
+    font-weight: 500;
+  }
+  .site-link-btn:hover {
+    background: var(--color-primary);
+    color: #fff;
+  }
+  .site-link-btn svg { flex-shrink: 0; }
+</style>
