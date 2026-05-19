@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
+const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 ---
 
 <BaseLayout
@@ -114,6 +116,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
+
+  <!-- Web制作実績ギャラリー -->
+  <section class="container-editorial pb-16" id="web-works">
+    <div class="wd-section-head">
+      <h2 class="font-serif text-3xl md:text-4xl">制作実績</h2>
+      <a href="/works/" class="wd-view-all">すべて見る →</a>
+    </div>
+    <div class="wd-grid" id="wd-grid">
+      <div class="wd-loading">
+        <span class="wd-dot"></span><span class="wd-dot"></span><span class="wd-dot"></span>
+      </div>
+    </div>
+  </section>
+
   <section class="bg-accent text-white py-20 md:py-32 mt-12">
     <div class="container-editorial text-center">
       <h2 class="font-serif text-3xl md:text-5xl mb-6 leading-tight">
@@ -138,4 +154,171 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </div>
     </div>
   </section>
+
+<style is:global>
+  /* ── Web Design Works Gallery ── */
+  .wd-section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    border-top: 1px solid var(--color-border);
+    padding-top: 24px;
+  }
+  .wd-view-all {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .wd-view-all:hover { color: var(--color-primary); }
+
+  .wd-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px 24px;
+  }
+  .wd-loading {
+    grid-column: 1/-1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 60px 0;
+  }
+  .wd-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--color-muted);
+    animation: wdPulse 1.2s ease-in-out infinite;
+  }
+  .wd-dot:nth-child(2) { animation-delay: 0.2s; }
+  .wd-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes wdPulse {
+    0%,80%,100% { opacity:0.2; transform:scale(0.8); }
+    40% { opacity:1; transform:scale(1); }
+  }
+
+  .wd-card {
+    display: block;
+    text-decoration: none;
+    animation: wdFade 0.7s cubic-bezier(0.19,1,0.22,1) both;
+  }
+  @keyframes wdFade {
+    from { opacity:0; transform:translateY(24px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .wd-thumb {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-surface);
+    width: 100%;
+    padding-top: 66.67%;
+    border-radius: 4px;
+  }
+  .wd-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.9s cubic-bezier(0.19,1,0.22,1);
+  }
+  .wd-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 55%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .wd-hover {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 18px 18px 16px;
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 8px;
+    opacity: 0; transform: translateY(8px);
+    transition: all 0.35s cubic-bezier(0.19,1,0.22,1);
+  }
+  .wd-hover-name { font-size: 13px; color: #fff; font-family: var(--font-serif); }
+  .wd-hover-badge {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 4px 11px; border-radius: 100px;
+    font-size: 10px; color: #fff;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .wd-card:hover .wd-img { transform: scale(1.05); }
+  .wd-card:hover .wd-overlay { opacity: 1; }
+  .wd-card:hover .wd-hover { opacity: 1; transform: translateY(0); }
+
+  .wd-meta {
+    margin-top: 14px;
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 10px;
+  }
+  .wd-client {
+    font-family: var(--font-serif);
+    font-size: 14px; font-weight: 400; line-height: 1.4;
+    color: var(--color-primary);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .wd-title-text {
+    font-size: 11px; color: var(--color-muted);
+    letter-spacing: 0.04em; margin-top: 3px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .wd-year {
+    font-size: 11px; color: var(--color-muted);
+    white-space: nowrap; padding-top: 2px; flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) { .wd-grid { grid-template-columns: repeat(2,1fr); gap:24px 16px; } }
+  @media (max-width: 560px) { .wd-grid { grid-template-columns: 1fr; gap:32px; } }
+</style>
+
+<script define:vars={{ SUPABASE_URL, SUPABASE_KEY }}>
+(async () => {
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/portfolio_works?draft=eq.false&order=display_order.asc&select=*`,
+      { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
+    );
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const works = await res.json();
+    const grid = document.getElementById('wd-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    // 最新12件のみ表示（display_order昇順=最新から）
+    works.slice(0, 12).forEach((w, i) => {
+      const isExt = !!w.external_url;
+      const href = w.external_url || `/works/`;
+      const el = document.createElement('div');
+      el.innerHTML = `
+        <a href="${href}" class="wd-card"
+          ${isExt ? 'target="_blank" rel="noopener noreferrer"' : ''}
+          style="animation-delay:${i*55}ms">
+          <div class="wd-thumb">
+            <img src="${w.thumbnail_url}" alt="${w.client}" loading="lazy" class="wd-img"/>
+            <div class="wd-overlay"></div>
+            <div class="wd-hover">
+              <span class="wd-hover-name">${w.client}</span>
+              <span class="wd-hover-badge">${isExt ? 'Visit ↗' : 'View →'}</span>
+            </div>
+          </div>
+          <div class="wd-meta">
+            <div style="min-width:0;flex:1">
+              <p class="wd-client">${w.client}</p>
+              <p class="wd-title-text">${w.title}</p>
+            </div>
+            <span class="wd-year">${w.year}</span>
+          </div>
+        </a>`;
+      grid.appendChild(el.firstElementChild);
+    });
+  } catch(e) {
+    const g = document.getElementById('wd-grid');
+    if (g) g.innerHTML = '';
+  }
+})();
+</script>
+
 </BaseLayout>
