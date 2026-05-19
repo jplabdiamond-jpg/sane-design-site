@@ -74,12 +74,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           class="reveal"
           id="contact-form"
           style="display:flex; flex-direction:column; gap:24px; transition-delay:160ms;"
-          action="https://formspree.io/f/xpwpojpq"
+          action="https://api.web3forms.com/submit"
           method="POST"
         >
-          <input type="hidden" name="_subject" value="【Sane Design】お問い合わせ" />
-          <input type="hidden" name="_to" value="saneatsu.designs@gmail.com" />
-          <input type="text" name="_gotcha" style="display:none;" />
+          <input type="hidden" name="access_key" value="7bcc6bbc-01d3-4a99-a783-3cdad33fbaa5" />
+          <input type="hidden" name="subject" value="【Sane Design】お問い合わせ" />
+          <input type="hidden" name="from_name" value="Sane Design お問い合わせフォーム" />
+          <input type="checkbox" name="botcheck" style="display:none;" />
 
           <div class="form-group">
             <label style="display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; color:var(--color-muted);">
@@ -236,13 +237,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     (btn.querySelector('span') as HTMLElement).textContent = '送信中...';
 
     try {
-      const res = await fetch(form.action, {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         body: new FormData(form),
         headers: { 'Accept': 'application/json' }
       });
 
-      if (res.ok) {
+      const json = await res.json();
+
+      if (res.ok && json.success) {
         msg.style.display = 'block';
         msg.style.background = '#f0f9f0';
         msg.style.border = '1px solid #b0d8b0';
