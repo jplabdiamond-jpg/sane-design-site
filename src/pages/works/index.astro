@@ -1,9 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CTABanner from '../../components/CTABanner.astro';
+import { getCollection } from 'astro:content';
 
-const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
-const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+// md コレクションから取得（Supabase非依存）。order昇順で全件表示。
+const works = (await getCollection('works', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((w) => w.data);
+
+// タグフィルタ用の一覧（出現順をアルファベット順に統一）
+const allTags = [...new Set(works.flatMap((w) => w.tags || []))].sort();
 ---
 
 <BaseLayout
@@ -32,6 +38,11 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
         <button class="filter-btn active" data-filter="all">
           <span class="filter-dot"></span>All
         </button>
+        {allTags.map((tag) => (
+          <button class="filter-btn" data-filter={tag}>
+            <span class="filter-dot"></span>{tag}
+          </button>
+        ))}
       </div>
     </div>
   </div>
@@ -39,11 +50,41 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
   <!-- Works grid -->
   <section class="container-editorial works-grid-section">
     <div class="works-grid" id="works-grid">
-      <div class="loading-state">
-        <span class="loading-dot"></span>
-        <span class="loading-dot"></span>
-        <span class="loading-dot"></span>
-      </div>
+      {works.map((work, i) => {
+        const isExternal = !!work.url;
+        const href = work.url || '#';
+        const tagsArr = work.tags || [];
+        const firstTag = tagsArr[0] || '';
+        return (
+          <div class="work-item" data-tags={tagsArr.join(',')}>
+            <a
+              href={href}
+              class="work-card"
+              style={`animation-delay:${i * 55}ms`}
+              {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              <div class="work-thumb">
+                <img src={work.thumbnail} alt={work.client} loading="lazy" class="work-img" />
+                <div class="work-overlay"></div>
+                <div class="work-hover-info">
+                  <span class="work-hover-client">{work.client}</span>
+                  <span class="work-hover-link">{isExternal ? 'Visit ↗' : 'View →'}</span>
+                </div>
+              </div>
+              <div class="work-meta">
+                <div class="work-meta-left">
+                  <p class="work-client">{work.client}</p>
+                  <p class="work-title-text">{work.title}</p>
+                </div>
+                <div class="work-meta-right">
+                  <span class="work-year">{work.year}</span>
+                  {firstTag && <span class="work-tag-first">{firstTag}</span>}
+                </div>
+              </div>
+            </a>
+          </div>
+        );
+      })}
     </div>
   </section>
 
@@ -129,28 +170,6 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
     color: #fff;
   }
   .filter-btn.active .filter-dot { opacity: 1; background: #fff; }
-
-  /* ── Loading ── */
-  .loading-state {
-    grid-column: 1/-1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 120px 0;
-  }
-  .loading-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--color-muted);
-    animation: dotPulse 1.2s ease-in-out infinite;
-  }
-  .loading-dot:nth-child(2) { animation-delay: 0.2s; }
-  .loading-dot:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes dotPulse {
-    0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
-    40% { opacity: 1; transform: scale(1); }
-  }
 
   /* ── Grid ── */
   .works-grid-section { padding-bottom: 120px; }
@@ -305,93 +324,28 @@ const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
   }
 </style>
 
-<script define:vars={{ SUPABASE_URL, SUPABASE_KEY }}>
-  async function loadWorks() {
-    try {
-      const res = await fetch(
-        `${SUPABASE_URL}/rest/v1/portfolio_works?draft=eq.false&order=display_order.asc&select=*`,
-        { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } }
-      );
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const works = await res.json();
-
-      /* ── フィルターボタン生成 ── */
-      const allTags = [...new Set(works.flatMap(w => w.tags || []))].sort();
-      const filterRow = document.getElementById('filter-row');
-      filterRow.innerHTML = `<button class="filter-btn active" data-filter="all"><span class="filter-dot"></span>All</button>`;
-      allTags.forEach(tag => {
-        const btn = document.createElement('button');
-        btn.className = 'filter-btn';
-        btn.dataset.filter = tag;
-        btn.innerHTML = `<span class="filter-dot"></span>${tag}`;
-        filterRow.appendChild(btn);
+<script>
+  // タグフィルタ（サーバーレンダリング済みDOMに対して動作）
+  const filterRow = document.getElementById('filter-row');
+  if (filterRow) {
+    filterRow.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest('.filter-btn') as HTMLElement | null;
+      if (!btn) return;
+      filterRow.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.work-item').forEach((item) => {
+        const el = item as HTMLElement;
+        const show = f === 'all' || (el.dataset.tags || '').split(',').includes(f as string);
+        el.classList.toggle('hidden', !show);
       });
-
-      filterRow.addEventListener('click', e => {
-        const btn = e.target.closest('.filter-btn');
-        if (!btn) return;
-        filterRow.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const f = btn.dataset.filter;
-        document.querySelectorAll('.work-item').forEach(item => {
-          const show = f === 'all' || (item.dataset.tags || '').split(',').includes(f);
-          item.classList.toggle('hidden', !show);
-        });
-      });
-
-      /* ── グリッド描画 ── */
-      const grid = document.getElementById('works-grid');
-      grid.innerHTML = '';
-
-      works.forEach((work, i) => {
-        const isExternal = !!work.external_url;
-        const href = work.external_url || '#';
-        const tagsArr = work.tags || [];
-        const firstTag = tagsArr[0] || '';
-
-        const item = document.createElement('div');
-        item.className = 'work-item';
-        item.dataset.tags = tagsArr.join(',');
-
-        item.innerHTML = `
-          <a href="${href}" class="work-card"
-            ${isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''}
-            style="animation-delay:${i * 55}ms"
-          >
-            <div class="work-thumb">
-              <img src="${work.thumbnail_url}" alt="${work.client}" loading="lazy" class="work-img" />
-              <div class="work-overlay"></div>
-              <div class="work-hover-info">
-                <span class="work-hover-client">${work.client}</span>
-                <span class="work-hover-link">${isExternal ? 'Visit ↗' : 'View →'}</span>
-              </div>
-            </div>
-            <div class="work-meta">
-              <div class="work-meta-left">
-                <p class="work-client">${work.client}</p>
-                <p class="work-title-text">${work.title}</p>
-              </div>
-              <div class="work-meta-right">
-                <span class="work-year">${work.year}</span>
-                ${firstTag ? `<span class="work-tag-first">${firstTag}</span>` : ''}
-              </div>
-            </div>
-          </a>`;
-        grid.appendChild(item);
-      });
-
-      /* Scroll reveal */
-      const observer = new IntersectionObserver(
-        entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-        { threshold: 0.05 }
-      );
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    } catch(e) {
-      document.getElementById('works-grid').innerHTML =
-        `<div style="grid-column:1/-1;text-align:center;padding:80px;color:var(--color-muted);font-size:13px;">読み込みに失敗しました<br><small>${e.message}</small></div>`;
-    }
+    });
   }
 
-  loadWorks();
+  // スクロールリビール
+  const observer = new IntersectionObserver(
+    (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.05 }
+  );
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 </script>
