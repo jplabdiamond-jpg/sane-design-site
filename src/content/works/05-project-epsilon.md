@@ -1,6 +1,6 @@
 ---
-title: '焼肉屋・BARチラシ'
-client: '和食レストラン E様'
+title: ''
+client: '焼肉屋・BARチラシ'
 industry: '飲食・フード'
 year: 2024
 thumbnail: '/works/work-05.jpg'

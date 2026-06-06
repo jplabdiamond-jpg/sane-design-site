@@ -1,6 +1,6 @@
 ---
-title: '電気工事会社コーポレートサイト'
-client: '美容サロン B様'
+title: ''
+client: '電気工事会社コーポレートサイト'
 industry: '美容・サロン'
 year: 2025
 thumbnail: '/works/work-02.jpg'

@@ -1,6 +1,6 @@
 ---
-title: 'ハウスクリーニング・ゴールキーパースクールチラシ'
-client: '行政書士事務所 C様'
+title: ''
+client: 'ハウスクリーニング・ゴールキーパースクールチラシ'
 industry: '士業'
 year: 2024
 thumbnail: '/works/work-03.jpg'

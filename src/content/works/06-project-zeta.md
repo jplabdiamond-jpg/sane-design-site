@@ -1,6 +1,6 @@
 ---
-title: '焼肉屋・アメフト部チラシ'
-client: 'リフォーム会社 F様'
+title: ''
+client: '焼肉屋・アメフト部チラシ'
 industry: '建設・リフォーム'
 year: 2025
 thumbnail: '/works/work-06.jpg'

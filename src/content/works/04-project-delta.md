@@ -1,6 +1,6 @@
 ---
-title: '整骨院・焼肉屋チラシ'
-client: '整骨院 D様'
+title: ''
+client: '整骨院・焼肉屋チラシ'
 industry: '医療・健康'
 year: 2024
 thumbnail: '/works/work-04.jpg'

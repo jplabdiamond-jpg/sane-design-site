@@ -1,6 +1,6 @@
 ---
-title: '業務用生ゴミ処理機コーポレートサイト'
-client: '建設会社 K様'
+title: ''
+client: '業務用生ゴミ処理機コーポレートサイト'
 industry: '建設・工務店'
 year: 2025
 thumbnail: '/works/work-01.jpg'
