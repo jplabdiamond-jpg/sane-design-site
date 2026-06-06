@@ -1,5 +1,5 @@
 ---
-title: '飲食店 コーポレートサイト'
+title: '焼肉屋・BARチラシ'
 client: '和食レストラン E様'
 industry: '飲食・フード'
 year: 2024

@@ -1,5 +1,5 @@
 ---
-title: '整骨院 LP 制作'
+title: '整骨院・焼肉屋チラシ'
 client: '整骨院 D様'
 industry: '医療・健康'
 year: 2024
