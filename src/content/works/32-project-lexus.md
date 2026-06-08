@@ -14,7 +14,11 @@ draft: false
 
 <div class="lexus-detail">
 
-<p style="font-size:13px; letter-spacing:0.08em; color:var(--color-muted); margin-bottom:8px;">制作期間：2日</p>
+<p class="lexus-period">制作期間：2日</p>
+
+<p class="lexus-lead">レクサスRX専門の買取査定LP。レクサスというブランドが持つ静謐な高級感を、引き算のデザインで表現したプロジェクトです。</p>
+
+<div class="lexus-body">
 
 ## コンセプト
 
@@ -28,9 +32,11 @@ draft: false
 
 最も注力したのはモバイル最適化です。買取LPはスマホ流入が大半を占めるため、すべてモバイルファーストで構築し、横スクロールの発生やボタンの押しにくさを徹底的に排除しました。加えて、強調表現を盛り込みすぎると安っぽく見えるリスクがあるため、訴求の強さと品の良さのバランスを何度も調整。短納期の中でも「高級ブランドにふさわしい静けさ」を最後まで崩さないことを意識して仕上げています。
 
-<p style="margin:48px 0 0; text-align:center;">
+<p class="lexus-cta">
   <a href="https://jplabdiamond-jpg.github.io/lexus-rx/" target="_blank" rel="noopener noreferrer" class="site-link-btn-md">公開サイトを見る ↗</a>
 </p>
+
+</div>
 
 <figure class="lexus-shot">
   <img src="/works/work-32-full.jpg" alt="レクサスRX買取専門店様LP 全体キャプチャ" loading="lazy" />
@@ -40,24 +46,60 @@ draft: false
 </div>
 
 <style>
-  /* このページのみ本文を全幅・中央揃えに */
-  .prose-custom { max-width: none !important; }
-  .lexus-detail { max-width: 1100px; margin: 0 auto; text-align: center; }
-  .lexus-detail h2 { text-align: center; }
-  .lexus-detail p { text-align: center; }
+  /* === このページ専用：タイトル縮小（テンプレ共通h1をこのページだけ調整） === */
+  article header h1 {
+    font-size: clamp(26px, 3.4vw, 40px) !important;
+    line-height: 1.35 !important;
+  }
 
+  /* === 本文ラッパ：全幅解除しエディトリアルに === */
+  .prose-custom { max-width: none !important; }
+  .lexus-detail { max-width: 860px; margin: 0; text-align: left; }
+
+  .lexus-period {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    margin-bottom: 12px;
+  }
+  .lexus-lead {
+    font-size: clamp(16px, 1.6vw, 19px);
+    line-height: 1.9;
+    color: var(--color-text);
+    max-width: 680px;
+    margin-bottom: 8px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  /* 本文：左揃え・読みやすい行幅 */
+  .lexus-body { max-width: 720px; text-align: left; }
+  .lexus-body h2 {
+    text-align: left;
+    font-size: clamp(20px, 2.2vw, 26px);
+    margin-top: 48px;
+    margin-bottom: 16px;
+    padding-left: 14px;
+    border-left: 3px solid var(--color-primary);
+  }
+  .lexus-body p { text-align: left; }
+
+  .lexus-cta { margin: 44px 0 0; text-align: left; }
+
+  /* スクショ：主役として全幅・中央に大きく */
   .lexus-shot {
-    margin: 56px auto 0;
+    margin: 72px auto 0;
     width: 100%;
+    max-width: 1000px;
     text-align: center;
   }
   .lexus-shot img {
     display: block;
     margin: 0 auto;
     width: 100%;
-    max-width: 760px;
     height: auto;
-    box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 16px 56px rgba(0,0,0,0.14);
   }
   .lexus-shot figcaption {
     margin-top: 16px;
@@ -82,5 +124,9 @@ draft: false
   .site-link-btn-md:hover {
     background: var(--color-primary);
     color: #fff;
+  }
+
+  @media (max-width: 640px) {
+    .lexus-shot { margin-top: 48px; }
   }
 </style>
