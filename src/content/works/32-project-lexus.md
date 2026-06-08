@@ -4,7 +4,6 @@ client: 'レクサスRX買取専門店'
 industry: '自動車・買取'
 year: 2026
 thumbnail: '/works/work-32.jpg'
-heroImage: '/works/work-32.jpg'
 tags:
   - LP
   - Web
@@ -12,6 +11,8 @@ role: 'Design & Development'
 order: -1
 draft: false
 ---
+
+<div class="lexus-detail">
 
 <p style="font-size:13px; letter-spacing:0.08em; color:var(--color-muted); margin-bottom:8px;">制作期間：2日</p>
 
@@ -27,16 +28,44 @@ draft: false
 
 最も注力したのはモバイル最適化です。買取LPはスマホ流入が大半を占めるため、すべてモバイルファーストで構築し、横スクロールの発生やボタンの押しにくさを徹底的に排除しました。加えて、強調表現を盛り込みすぎると安っぽく見えるリスクがあるため、訴求の強さと品の良さのバランスを何度も調整。短納期の中でも「高級ブランドにふさわしい静けさ」を最後まで崩さないことを意識して仕上げています。
 
-<p style="margin:48px 0 0;">
+<p style="margin:48px 0 0; text-align:center;">
   <a href="https://jplabdiamond-jpg.github.io/lexus-rx/" target="_blank" rel="noopener noreferrer" class="site-link-btn-md">公開サイトを見る ↗</a>
 </p>
 
-<figure style="margin:56px calc(50% - 50vw) 0; width:100vw; text-align:center;">
-  <img src="/works/work-32-full.jpg" alt="レクサスRX買取専門店様LP 全体キャプチャ" loading="lazy" style="display:block; margin:0 auto; width:100%; max-width:900px; height:auto; box-shadow:0 12px 48px rgba(0,0,0,0.12);" />
-  <figcaption style="margin-top:16px; font-size:12px; color:var(--color-muted); letter-spacing:0.06em;">LP 全体ビュー</figcaption>
+<figure class="lexus-shot">
+  <img src="/works/work-32-full.jpg" alt="レクサスRX買取専門店様LP 全体キャプチャ" loading="lazy" />
+  <figcaption>LP 全体ビュー</figcaption>
 </figure>
 
+</div>
+
 <style>
+  /* このページのみ本文を全幅・中央揃えに */
+  .prose-custom { max-width: none !important; }
+  .lexus-detail { max-width: 1100px; margin: 0 auto; text-align: center; }
+  .lexus-detail h2 { text-align: center; }
+  .lexus-detail p { text-align: center; }
+
+  .lexus-shot {
+    margin: 56px auto 0;
+    width: 100%;
+    text-align: center;
+  }
+  .lexus-shot img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+  }
+  .lexus-shot figcaption {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--color-muted);
+    letter-spacing: 0.06em;
+  }
+
   .site-link-btn-md {
     display: inline-flex;
     align-items: center;
