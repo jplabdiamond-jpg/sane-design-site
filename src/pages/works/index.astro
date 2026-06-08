@@ -6,7 +6,7 @@ import { getCollection } from 'astro:content';
 // md コレクションから取得（Supabase非依存）。order昇順で全件表示。
 const works = (await getCollection('works', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order)
-  .map((w) => w.data);
+  .map((w) => ({ ...w.data, slug: w.slug }));
 
 // タグフィルタ用の一覧（出現順をアルファベット順に統一）
 const allTags = [...new Set(works.flatMap((w) => w.tags || []))].sort();
@@ -52,7 +52,7 @@ const allTags = [...new Set(works.flatMap((w) => w.tags || []))].sort();
     <div class="works-grid" id="works-grid">
       {works.map((work, i) => {
         const isExternal = !!work.url;
-        const href = work.url || '#';
+        const href = work.url || `/works/${work.slug}/`;
         const tagsArr = work.tags || [];
         const firstTag = tagsArr[0] || '';
         return (
