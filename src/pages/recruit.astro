@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="お仕事のご依頼｜単発・長期対応 | Sane Design"
+  description="Sane Designへのお仕事のご依頼。単発・長期など様々な形態でご対応可能です。Web制作・SEO・DTPデザイン、まずはお気軽にご相談ください。"
+>
+  <!-- Hero -->
+  <section style="padding:80px 0 60px;">
+    <div class="container-editorial">
+      <p class="section-label reveal">Work Request</p>
+      <h1 class="reveal" style="font-family:var(--font-serif); font-size:clamp(40px,7vw,100px); font-weight:300; line-height:1.05; letter-spacing:-0.02em; transition-delay:80ms;">
+        Let's work<br />
+        <span style="font-style:italic;">together.</span>
+      </h1>
+      <p class="reveal" style="margin-top:24px; max-width:520px; font-size:15px; color:var(--color-muted); line-height:1.9; transition-delay:160ms;">
+        単発・長期など様々な形態でご対応可能です。<br />
+        Web制作・SEO・DTPデザインなど、まずはお気軽にご相談ください。
+      </p>
+    </div>
+  </section>
+
+  <!-- Work Styles -->
+  <section style="padding:0 0 80px;">
+    <div class="container-editorial">
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px;" class="recruit-grid">
+        {[
+          { no: '01', t: '単発のご依頼', d: 'チラシ1枚、LP1本、記事制作など。スポットでの制作をその都度お受けします。' },
+          { no: '02', t: '長期・継続のご依頼', d: '定期的なデザイン制作やSEO運用、サイトの継続的な更新など、長期パートナーとして伴走します。' },
+          { no: '03', t: '柔軟なご相談', d: 'ご予算・納期・稼働量に合わせて、最適な進め方をご提案します。お気軽にご相談ください。' },
+        ].map((item, i) => (
+          <div
+            class="reveal"
+            style={`padding:48px 40px; border:1px solid var(--color-border); position:relative; overflow:hidden; transition-delay:${i * 100}ms;`}
+          >
+            <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-muted); margin-bottom:24px;">{item.no}</p>
+            <h2 style="font-family:var(--font-serif); font-size:clamp(20px,2.2vw,26px); font-weight:300; line-height:1.4; margin-bottom:16px;">
+              {item.t}
+            </h2>
+            <p style="font-size:13px; color:var(--color-muted); line-height:1.9;">
+              {item.d}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Work Request Form -->
+  <section style="padding:80px 0; border-top:1px solid var(--color-border);">
+    <div class="container-editorial">
+      <div style="max-width:640px;">
+        <p class="section-label reveal">Request Form</p>
+        <h2 class="reveal" style="font-family:var(--font-serif); font-size:clamp(24px,3vw,40px); font-weight:300; margin-bottom:12px; transition-delay:80ms;">
+          お仕事のご依頼フォーム
+        </h2>
+        <p class="reveal" style="font-size:13px; color:var(--color-muted); margin-bottom:40px; transition-delay:120ms;">
+          単発・長期どちらも歓迎です。ご依頼内容をお書きください。通常24時間以内にご返信します。
+        </p>
+
+        <form
+          class="reveal"
+          id="recruit-form"
+          style="display:flex; flex-direction:column; gap:24px; transition-delay:160ms;"
+          action="https://api.web3forms.com/submit"
+          method="POST"
+        >
+          <input type="hidden" name="access_key" value="7bcc6bbc-01d3-4a99-a783-3cdad33fbaa5" />
+          <input type="hidden" name="subject" value="【Sane Design】お仕事のご依頼" />
+          <input type="hidden" name="from_name" value="Sane Design お仕事依頼フォーム" />
+          <input type="checkbox" name="botcheck" style="display:none;" />
+
+          <div class="form-group">
+            <label style="display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; color:var(--color-muted);">
+              お名前 <span style="color:#c00;">*</span>
+            </label>
+            <input
+              type="text"
+              name="name"
+              required
+              placeholder="山田 太郎"
+              style="width:100%; padding:14px 16px; border:1px solid var(--color-border); background:#fff; font-size:14px; font-family:var(--font-sans); outline:none; transition: border-color 0.3s ease;"
+              class="form-input"
+            />
+          </div>
+
+          <div class="form-group">
+            <label style="display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; color:var(--color-muted);">
+              メールアドレス <span style="color:#c00;">*</span>
+            </label>
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="your@email.com"
+              style="width:100%; padding:14px 16px; border:1px solid var(--color-border); background:#fff; font-size:14px; font-family:var(--font-sans); outline:none; transition: border-color 0.3s ease;"
+              class="form-input"
+            />
+          </div>
+
+          <div class="form-group">
+            <label style="display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; color:var(--color-muted);">
+              ご依頼の形態
+            </label>
+            <select
+              name="work_type"
+              style="width:100%; padding:14px 16px; border:1px solid var(--color-border); background:#fff; font-size:14px; font-family:var(--font-sans); outline:none; transition: border-color 0.3s ease; appearance:none; cursor:pointer;"
+              class="form-input"
+            >
+              <option value="">選択してください</option>
+              <option value="単発のご依頼">単発のご依頼</option>
+              <option value="長期・継続のご依頼">長期・継続のご依頼</option>
+              <option value="未定・要相談">未定・要相談</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label style="display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; color:var(--color-muted);">
+              ご依頼の内容
+            </label>
+            <select
+              name="service"
+              style="width:100%; padding:14px 16px; border:1px solid var(--color-border); background:#fff; font-size:14px; font-family:var(--font-sans); outline:none; transition: border-color 0.3s ease; appearance:none; cursor:pointer;"
+              class="form-input"
+            >
+              <option value="">選択してください</option>
+              <option value="ホームページ制作">ホームページ制作</option>
+              <option value="LP制作">LP制作</option>
+              <option value="SEO対策">SEO対策</option>
+              <option value="DTP・チラシデザイン">DTP・チラシデザイン</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label style="display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; color:var(--color-muted);">
+              ご依頼内容の詳細 <span style="color:#c00;">*</span>
+            </label>
+            <textarea
+              name="message"
+              required
+              rows="6"
+              placeholder="ご依頼内容・ご予算・ご希望納期・稼働量などをご記入ください"
+              style="width:100%; padding:14px 16px; border:1px solid var(--color-border); background:#fff; font-size:14px; font-family:var(--font-sans); outline:none; resize:vertical; transition: border-color 0.3s ease; line-height:1.8;"
+              class="form-input"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="btn-primary"
+            style="align-self:flex-start;"
+            id="recruit-submit-btn"
+          >
+            <span>依頼を送信する →</span>
+          </button>
+
+          <div id="recruit-form-message" style="display:none; padding:16px; font-size:13px;"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .form-input:focus {
+    border-color: var(--color-primary) !important;
+  }
+  @media (max-width: 900px) {
+    .recruit-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
+
+<script>
+  // Scroll Reveal
+  const observer = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Form submission feedback
+  const form = document.getElementById('recruit-form') as HTMLFormElement | null;
+  const msg = document.getElementById('recruit-form-message');
+  const btn = document.getElementById('recruit-submit-btn');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!btn || !msg) return;
+    btn.setAttribute('disabled', 'true');
+    (btn.querySelector('span') as HTMLElement).textContent = '送信中...';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      const json = await res.json();
+
+      if (res.ok && json.success) {
+        msg.style.display = 'block';
+        msg.style.background = '#f0f9f0';
+        msg.style.border = '1px solid #b0d8b0';
+        msg.style.color = '#2a6a2a';
+        msg.textContent = 'お仕事のご依頼ありがとうございます。24時間以内にご返信いたします。';
+        form.reset();
+      } else {
+        throw new Error('送信エラー');
+      }
+    } catch {
+      msg.style.display = 'block';
+      msg.style.background = '#fff0f0';
+      msg.style.border = '1px solid #d8b0b0';
+      msg.style.color = '#6a2a2a';
+      msg.textContent = '送信に失敗しました。直接 saneatsu.designs@gmail.com へご連絡ください。';
+    } finally {
+      btn.removeAttribute('disabled');
+      (btn.querySelector('span') as HTMLElement).textContent = '依頼を送信する →';
+    }
+  });
+</script>

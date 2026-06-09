@@ -191,11 +191,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <!-- Slide-in Notice Card -->
-  <div id="notice-card" aria-live="polite" style="position:fixed; right:0; bottom:32px; z-index:200; max-width:320px; padding:20px 44px 20px 24px; background:var(--color-primary); color:#fff; box-shadow:-8px 8px 32px rgba(0,0,0,0.18); transform:translateX(calc(100% + 24px)); transition: transform 0.7s cubic-bezier(0.19,1,0.22,1); border-radius:4px 0 0 4px;">
-    <button id="notice-close" aria-label="閉じる" style="position:absolute; top:10px; right:12px; background:none; border:none; color:#fff; font-size:18px; line-height:1; cursor:pointer; opacity:0.7;">×</button>
+  <a id="notice-card" href="/recruit/" aria-live="polite" style="display:block; text-decoration:none; position:fixed; right:0; bottom:32px; z-index:200; max-width:320px; padding:20px 44px 20px 24px; background:var(--color-primary); color:#fff; box-shadow:-8px 8px 32px rgba(0,0,0,0.18); transform:translateX(calc(100% + 24px)); transition: transform 0.7s cubic-bezier(0.19,1,0.22,1); border-radius:4px 0 0 4px;">
+    <button id="notice-close" aria-label="閉じる" type="button" style="position:absolute; top:10px; right:12px; background:none; border:none; color:#fff; font-size:18px; line-height:1; cursor:pointer; opacity:0.7;">×</button>
     <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; opacity:0.7; margin-bottom:8px;">Open for work</p>
     <p style="font-size:13px; line-height:1.8; font-weight:400;">単発・定期など、お仕事のご依頼随時受付中！まずはお問い合わせ下さいませ。</p>
-  </div>
+    <p style="font-size:11px; letter-spacing:0.05em; margin-top:10px; opacity:0.85; border-bottom:1px solid currentColor; display:inline-block; padding-bottom:2px;">仕事を依頼する →</p>
+  </a>
 </BaseLayout>
 
 <style>
@@ -241,7 +242,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   const noticeClose = document.getElementById('notice-close');
   if (noticeCard) {
     setTimeout(() => noticeCard.classList.add('notice-show'), 1200);
-    noticeClose?.addEventListener('click', () => noticeCard.classList.remove('notice-show'));
+    noticeClose?.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      noticeCard.classList.remove('notice-show');
+    });
   }
 
   // FAQ accordion
