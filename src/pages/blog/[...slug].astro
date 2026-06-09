@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CTABanner from '../../components/CTABanner.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
+import { SITE_URL, SITE_NAME } from '../../consts';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -18,15 +20,42 @@ interface Props {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  keywords: post.data.tags.join(', '),
+  inLanguage: 'ja',
+  ...(post.data.heroImage
+    ? { image: new URL(post.data.heroImage, SITE_URL).href }
+    : {}),
+  mainEntityOfPage: new URL(`/blog/${post.slug}/`, SITE_URL).href,
+  author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+  publisher: { '@id': `${SITE_URL}/#organization` },
+};
 ---
 
 <BaseLayout
   title={`${post.data.title} | Sane Design Journal`}
   description={post.data.description}
   image={post.data.heroImage}
+  ogType="article"
+  jsonLd={articleJsonLd}
 >
   <article>
     <header class="container-editorial pt-16 md:pt-24 pb-12 max-w-3xl">
+      <div class="mb-6">
+        <Breadcrumbs
+          items={[
+            { label: 'Journal', href: '/blog/' },
+            { label: post.data.title },
+          ]}
+        />
+      </div>
       <p class="text-xs text-muted mb-4">
         <time>{post.data.pubDate.toISOString().slice(0, 10)}</time>
         {

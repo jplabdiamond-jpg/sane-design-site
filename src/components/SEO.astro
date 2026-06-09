@@ -5,18 +5,67 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  /** og:type — トップやサービスは website、記事・実績は article */
+  ogType?: string;
+  /** ページ固有の追加 JSON-LD（Service / Article / FAQPage / CreativeWork など） */
+  jsonLd?: Record<string, any> | Record<string, any>[];
+  noindex?: boolean;
 }
 
-const { title, description, image = '/og-image.svg' } = Astro.props;
+const {
+  title,
+  description,
+  image = '/og-image.svg',
+  ogType = 'website',
+  jsonLd,
+  noindex = false,
+} = Astro.props;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const imageURL = new URL(image, Astro.url);
+
+// サイト全体で常に出す構造化データ（運営者・サイト）
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${SITE_URL}/#organization`,
+  name: SITE_NAME,
+  alternateName: 'Sane Design',
+  description:
+    '個人事業主・中小企業向けのホームページ制作と内部SEO対策を専門とするデザインスタジオ。最速3日納品・20,000円〜、DTP・WEB合わせて実績300件以上。',
+  url: SITE_URL,
+  image: new URL('/og-image.svg', SITE_URL).href,
+  priceRange: '¥20,000〜',
+  areaServed: { '@type': 'Country', name: 'Japan' },
+  serviceType: ['ホームページ制作', 'Web制作', 'SEO対策', 'LP制作', 'DTPデザイン'],
+  knowsLanguage: ['ja'],
+  sameAs: ['https://note.com/sane_design2026'],
+};
+
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE_URL}/#website`,
+  name: SITE_NAME,
+  url: SITE_URL,
+  inLanguage: 'ja',
+  publisher: { '@id': `${SITE_URL}/#organization` },
+};
+
+const extra = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+// noindexページ（管理画面・決済）には構造化データを出さない
+const graph = noindex ? [] : [organization, website, ...extra];
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
+<meta
+  name="robots"
+  content={noindex ? 'noindex,nofollow' : 'index,follow,max-image-preview:large'}
+/>
 
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -29,16 +78,6 @@ const imageURL = new URL(image, Astro.url);
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageURL} />
 
-<script
-  type="application/ld+json"
-  set:html={JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
-    name: SITE_NAME,
-    description: 'Web制作・SEO対策専門デザインスタジオ',
-    url: SITE_URL,
-    priceRange: '¥10,000〜',
-    areaServed: 'JP',
-    serviceType: ['Web Design', 'SEO', 'Web Development'],
-  })}
-/>
+{graph.map((node) => (
+  <script type="application/ld+json" set:html={JSON.stringify(node)} />
+))}

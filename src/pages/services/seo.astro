@@ -1,16 +1,41 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { SITE_URL } from '../../consts';
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'SEO対策',
+  name: 'SEO対策・内部対策',
+  description:
+    '最短3日・10,000円〜。指定キーワードに基づくブログ記事追加と内部SEO対策を実施。検索順位向上をサポートします。',
+  provider: { '@id': `${SITE_URL}/#organization` },
+  areaServed: { '@type': 'Country', name: 'Japan' },
+  url: `${SITE_URL}/services/seo/`,
+  offers: {
+    '@type': 'Offer',
+    price: '10000',
+    priceCurrency: 'JPY',
+    description: '厳選60記事追加＋内部SEO対策',
+  },
+};
 ---
 
 <BaseLayout
-  title="SEO｜SEO対策・内部対策 | Sane Design"
+  title="SEO対策・内部SEO｜最短3日・10,000円〜 | Sane Design"
   description="最短3日・10,000円〜。指定キーワードに基づくブログ記事60本追加と内部SEO対策を実施。実績200件以上のデザイナーが検索順位向上をサポートします。"
+  jsonLd={serviceJsonLd}
 >
   <section class="container-editorial pt-16 md:pt-24 pb-16">
-    <p class="section-label">Services / 02</p>
+    <Breadcrumbs items={[{ label: 'SEO' }]} />
+    <p class="section-label" style="margin-top:18px;">Services / 02</p>
     <h1 class="font-serif text-4xl md:text-7xl leading-tight mb-6">
       SEO.
     </h1>
+    <p class="font-serif text-xl md:text-2xl leading-snug mb-4">
+      SEO対策・内部SEO対策
+    </p>
     <p class="max-w-2xl text-base md:text-xl leading-relaxed">
       SEO対策の実装を最短3日で完了します。<br />
       指定キーワードに基づく厳選60記事追加と、内部SEO対策を実施します。<br />

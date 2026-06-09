@@ -1,0 +1,75 @@
+---
+import { SITE_URL } from '../consts';
+
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+
+// 先頭に Home を固定で付与
+const crumbs: Crumb[] = [{ label: 'Home', href: '/' }, ...items];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: crumbs.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.label,
+    ...(c.href ? { item: new URL(c.href, SITE_URL).href } : {}),
+  })),
+};
+---
+
+<nav class="breadcrumbs" aria-label="パンくずリスト">
+  <ol>
+    {crumbs.map((c, i) => (
+      <li>
+        {c.href && i < crumbs.length - 1 ? (
+          <a href={c.href}>{c.label}</a>
+        ) : (
+          <span aria-current="page">{c.label}</span>
+        )}
+        {i < crumbs.length - 1 && <span class="sep" aria-hidden="true">/</span>}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+<style>
+  .breadcrumbs {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--color-muted);
+  }
+  .breadcrumbs ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    margin: 0;
+  }
+  .breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .breadcrumbs a {
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .breadcrumbs a:hover { color: var(--color-primary); }
+  .breadcrumbs span[aria-current='page'] { color: var(--color-primary); }
+  .breadcrumbs .sep { opacity: 0.5; }
+</style>

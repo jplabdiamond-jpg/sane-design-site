@@ -1,18 +1,43 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { SITE_URL, SITE_NAME } from '../../consts';
 const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'ホームページ制作',
+  name: 'ホームページ制作（Web Design）',
+  description:
+    '個人事業主・中小企業向けのホームページ制作サービス。最速3日納品・20,000円〜、画像とイメージをお渡しいただくだけで完全オーダーメイドで制作します。',
+  provider: { '@id': `${SITE_URL}/#organization` },
+  areaServed: { '@type': 'Country', name: 'Japan' },
+  url: `${SITE_URL}/services/web-design/`,
+  offers: {
+    '@type': 'Offer',
+    price: '20000',
+    priceCurrency: 'JPY',
+    description: 'TOP + 4ページ / 3〜4営業日納品',
+  },
+};
 ---
 
 <BaseLayout
-  title="Web Design｜ホームページ制作 | Sane Design"
-  description="最速3日納品・20,000円〜。画像とイメージをお渡しいただくだけで、個人事業主・中小企業向けのホームページを完全オーダーメイドで制作します。実績300件以上。"
+  title="ホームページ制作｜最速3日・20,000円〜 | Sane Design"
+  description="最速3日納品・20,000円〜。画像とイメージをお渡しいただくだけで、個人事業主・中小企業向けのホームページを完全オーダーメイドで制作します。実績300件以上のSane Design。"
+  jsonLd={serviceJsonLd}
 >
   <section class="container-editorial pt-16 md:pt-24 pb-16">
-    <p class="section-label">Services / 01</p>
+    <Breadcrumbs items={[{ label: 'Web Design' }]} />
+    <p class="section-label" style="margin-top:18px;">Services / 01</p>
     <h1 class="font-serif text-4xl md:text-7xl leading-tight mb-6">
       Web Design.
     </h1>
+    <p class="font-serif text-xl md:text-2xl leading-snug mb-4">
+      ホームページ制作｜個人事業主・中小企業向け
+    </p>
     <p class="max-w-2xl text-base md:text-xl leading-relaxed">
       最速3日でホームページを納品します。<br />
       画像とイメージをお渡しいただくだけで、完全オーダーメイドで制作。

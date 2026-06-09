@@ -10,6 +10,8 @@ interface Props {
   description?: string;
   image?: string;
   noindex?: boolean;
+  ogType?: string;
+  jsonLd?: Record<string, any> | Record<string, any>[];
 }
 
 const {
@@ -17,6 +19,8 @@ const {
   description = SITE_DESCRIPTION,
   image,
   noindex = false,
+  ogType = 'website',
+  jsonLd,
 } = Astro.props;
 ---
 
@@ -27,8 +31,14 @@ const {
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    {noindex && <meta name="robots" content="noindex,nofollow" />}
-    <SEO title={title} description={description} image={image} />
+    <SEO
+      title={title}
+      description={description}
+      image={image}
+      ogType={ogType}
+      jsonLd={jsonLd}
+      noindex={noindex}
+    />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

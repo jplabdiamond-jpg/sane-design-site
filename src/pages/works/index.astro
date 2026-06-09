@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CTABanner from '../../components/CTABanner.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
+import { SITE_URL } from '../../consts';
 
 // md コレクションから取得（Supabase非依存）。order昇順で全件表示。
 const works = (await getCollection('works', ({ data }) => !data.draft))
@@ -10,16 +12,33 @@ const works = (await getCollection('works', ({ data }) => !data.draft))
 
 // タグフィルタ用の一覧（出現順をアルファベット順に統一）
 const allTags = [...new Set(works.flatMap((w) => w.tags || []))].sort();
+
+// 制作実績の ItemList 構造化データ（内部リンク先のみ列挙）
+const itemListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Sane Design 制作実績一覧',
+  itemListElement: works
+    .filter((w) => !w.noLink)
+    .map((w, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `${w.client} ${w.title}`,
+      url: w.url || new URL(`/works/${w.slug}/`, SITE_URL).href,
+    })),
+};
 ---
 
 <BaseLayout
-  title="Works｜実績一覧 | Sane Design"
-  description="Sane Designのホームページ制作実績一覧。コーポレートサイト、LP、サロン予約サイト、士業サイトなど300件以上の制作実績から代表作をご紹介します。"
+  title="制作実績一覧｜ホームページ・LP・チラシ300件以上 | Sane Design"
+  description="Sane Designのホームページ制作・LP・DTPデザイン実績一覧。コーポレートサイト、LP、サロン予約サイト、士業サイト、飲食店チラシなど300件以上の制作実績から代表作をご紹介します。"
+  jsonLd={itemListJsonLd}
 >
   <!-- Hero -->
   <section class="works-hero">
     <div class="container-editorial">
-      <p class="section-label reveal">Works</p>
+      <Breadcrumbs items={[{ label: 'Works' }]} />
+      <p class="section-label reveal" style="margin-top:18px;">Works</p>
       <h1 class="reveal works-title">
         Selected<br />
         <span style="font-style:italic;">Projects.</span>
@@ -68,7 +87,7 @@ const allTags = [...new Set(works.flatMap((w) => w.tags || []))].sort();
               {...linkProps}
             >
               <div class="work-thumb">
-                <img src={work.thumbnail} alt={work.client} loading="lazy" class="work-img" />
+                <img src={work.thumbnail} alt={`${work.client}｜${work.title}（${work.industry}）の制作実績`} loading="lazy" width="600" height="400" class="work-img" />
                 <div class="work-overlay"></div>
                 <div class="work-hover-info">
                   <span class="work-hover-client">{work.client}</span>

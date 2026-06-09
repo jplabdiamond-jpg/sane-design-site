@@ -15,3 +15,9 @@ export const NAV_LINKS = [
   { href: '/recruit/', label: 'Work Request' },
   { href: '/payment/', label: 'Order' },
 ];
+
+// フッター用（ヘッダーを混雑させずFAQ等の補助ページを内部リンク・sitemapに含める）
+export const FOOTER_LINKS = [
+  ...NAV_LINKS,
+  { href: '/faq/', label: 'FAQ' },
+];

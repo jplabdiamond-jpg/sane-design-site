@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CTABanner from '../../components/CTABanner.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
+import { SITE_URL, SITE_NAME } from '../../consts';
 
 export async function getStaticPaths() {
   const works = await getCollection('works', ({ data }) => !data.draft);
@@ -19,16 +21,42 @@ interface Props {
 const { work } = Astro.props;
 const { Content } = await work.render();
 const hasUrl = !!work.data.url;
+
+const pageTitle = `${work.data.client} ${work.data.title}｜${work.data.industry}の制作実績 | Sane Design`;
+const pageDesc = `${work.data.industry}「${work.data.client}」様の${work.data.title}制作事例。${work.data.tags.join('・')}。実績300件以上のSane Designによるホームページ・デザイン制作実績をご紹介します。`;
+const heroAlt = `${work.data.client}（${work.data.industry}）の${work.data.title}｜Sane Design制作実績`;
+
+const workJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: `${work.data.client} ${work.data.title}`,
+  about: work.data.industry,
+  keywords: work.data.tags.join(', '),
+  dateCreated: String(work.data.year),
+  ...(work.data.heroImage
+    ? { image: new URL(work.data.heroImage, SITE_URL).href }
+    : {}),
+  ...(hasUrl ? { url: work.data.url } : {}),
+  creator: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+};
 ---
 
 <BaseLayout
-  title={`${work.data.client} - ${work.data.title} | Sane Design`}
-  description={`${work.data.industry}の${work.data.client}様のプロジェクト事例。${work.data.title}。`}
+  title={pageTitle}
+  description={pageDesc}
   image={work.data.heroImage}
+  ogType="article"
+  jsonLd={workJsonLd}
 >
   <article>
     <header class="container-editorial pt-16 md:pt-24 pb-12">
-      <p class="section-label">{work.data.industry} / {work.data.year}</p>
+      <Breadcrumbs
+        items={[
+          { label: 'Works', href: '/works/' },
+          { label: work.data.client },
+        ]}
+      />
+      <p class="section-label" style="margin-top:20px;">{work.data.industry} / {work.data.year}</p>
       <h1 class="font-serif text-4xl md:text-6xl leading-tight">{work.data.title}</h1>
     </header>
 
@@ -44,7 +72,9 @@ const hasUrl = !!work.data.url;
           >
             <img
               src={work.data.heroImage}
-              alt={work.data.title}
+              alt={heroAlt}
+              width="1200"
+              height="800"
               class="w-full h-auto bg-[#fafafa] hero-img"
             />
             <span class="hero-img-badge">サイトを見る ↗</span>
@@ -52,7 +82,9 @@ const hasUrl = !!work.data.url;
         ) : (
           <img
             src={work.data.heroImage}
-            alt={work.data.title}
+            alt={heroAlt}
+            width="1200"
+            height="800"
             class="w-full h-auto bg-[#fafafa]"
           />
         )}
@@ -96,9 +128,17 @@ const hasUrl = !!work.data.url;
       )}
     </section>
 
-    <section class="container-editorial pb-24">
+    <section class="container-editorial pb-16">
       <div class="prose-custom">
         <Content />
+      </div>
+    </section>
+
+    <section class="container-editorial pb-24">
+      <div class="related-links">
+        <a href="/works/" class="related-link">← 制作実績の一覧へ戻る</a>
+        <a href="/services/web-design/" class="related-link">ホームページ制作のサービス詳細 →</a>
+        <a href="/contact/#contact-form" class="related-link">この実績について相談する →</a>
       </div>
     </section>
   </article>
@@ -110,6 +150,22 @@ const hasUrl = !!work.data.url;
 </BaseLayout>
 
 <style>
+  /* 関連内部リンク */
+  .related-links {
+    border-top: 1px solid var(--color-border);
+    padding-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 40px;
+  }
+  .related-link {
+    font-size: 13px;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .related-link:hover { color: var(--color-primary); }
+
   /* ヒーロー画像リンク */
   .hero-img-link {
     display: block;
