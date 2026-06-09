@@ -1,5 +1,5 @@
 ---
-title: 'SaaSランディングページ制作'
+title: 'XPost Pro'
 client: 'XPost Pro'
 industry: 'SaaS・SNSツール'
 year: 2025

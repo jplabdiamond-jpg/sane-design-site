@@ -1,5 +1,5 @@
 ---
-title: 'コーポレートサイト制作'
+title: 'お遍路宿 亀龍'
 client: 'お遍路宿 亀龍'
 industry: '宿泊・観光'
 year: 2025

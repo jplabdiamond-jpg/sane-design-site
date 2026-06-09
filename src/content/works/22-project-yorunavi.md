@@ -1,5 +1,5 @@
 ---
-title: 'Webサイト制作'
+title: '夜ナビ Shine'
 client: '夜ナビ Shine'
 industry: 'エンターテインメント'
 year: 2025

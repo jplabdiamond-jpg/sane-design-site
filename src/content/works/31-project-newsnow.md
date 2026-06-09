@@ -1,5 +1,5 @@
 ---
-title: 'ニュースポータルサイト Nows Now'
+title: 'News Now'
 client: 'News Now'
 industry: 'メディア・ニュース'
 year: 2026

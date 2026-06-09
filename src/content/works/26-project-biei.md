@@ -1,5 +1,5 @@
 ---
-title: 'ホームページ制作'
+title: '星の光の宿BIEI'
 client: '星の光の宿BIEI'
 industry: '宿泊・観光'
 year: 2025

@@ -1,5 +1,5 @@
 ---
-title: 'レクサスRX買取専門店様LP'
+title: 'レクサスRX買取専門店'
 client: 'レクサスRX買取専門店'
 industry: '自動車・買取'
 year: 2026
