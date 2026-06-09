@@ -51,24 +51,28 @@ const allTags = [...new Set(works.flatMap((w) => w.tags || []))].sort();
   <section class="container-editorial works-grid-section">
     <div class="works-grid" id="works-grid">
       {works.map((work, i) => {
-        const isExternal = !!work.url;
+        const noLink = !!work.noLink;
+        const isExternal = !noLink && !!work.url;
         const href = work.url || `/works/${work.slug}/`;
         const tagsArr = work.tags || [];
         const firstTag = tagsArr[0] || '';
+        const CardTag = noLink ? 'div' : 'a';
+        const linkProps = noLink
+          ? {}
+          : { href, ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}) };
         return (
           <div class="work-item" data-tags={tagsArr.join(',')}>
-            <a
-              href={href}
-              class="work-card"
+            <CardTag
+              class={`work-card${noLink ? ' work-card-static' : ''}`}
               style={`animation-delay:${i * 55}ms`}
-              {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              {...linkProps}
             >
               <div class="work-thumb">
                 <img src={work.thumbnail} alt={work.client} loading="lazy" class="work-img" />
                 <div class="work-overlay"></div>
                 <div class="work-hover-info">
                   <span class="work-hover-client">{work.client}</span>
-                  <span class="work-hover-link">{isExternal ? 'Visit ↗' : 'View →'}</span>
+                  {!noLink && <span class="work-hover-link">{isExternal ? 'Visit ↗' : 'View →'}</span>}
                 </div>
               </div>
               <div class="work-meta">
@@ -81,7 +85,7 @@ const allTags = [...new Set(works.flatMap((w) => w.tags || []))].sort();
                   {firstTag && <span class="work-tag-first">{firstTag}</span>}
                 </div>
               </div>
-            </a>
+            </CardTag>
           </div>
         );
       })}
@@ -255,9 +259,13 @@ const allTags = [...new Set(works.flatMap((w) => w.tags || []))].sort();
     white-space: nowrap;
     flex-shrink: 0;
   }
-  .work-card:hover .work-img { transform: scale(1.05); }
-  .work-card:hover .work-overlay { opacity: 1; }
-  .work-card:hover .work-hover-info { opacity: 1; transform: translateY(0); }
+  .work-card:not(.work-card-static):hover .work-img { transform: scale(1.05); }
+  .work-card:not(.work-card-static):hover .work-overlay { opacity: 1; }
+  .work-card:not(.work-card-static):hover .work-hover-info { opacity: 1; transform: translateY(0); }
+
+  /* リンク無効のサムネ（旧ポートフォリオ）：クリック不可・ホバー演出なし */
+  .work-card-static { cursor: default; }
+  .work-card-static .work-thumb { pointer-events: none; }
 
   /* メタ情報 */
   .work-meta {
