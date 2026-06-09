@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
+/* applyBaseStyles:false のため @layer base は出力時に破棄される。
+   :root変数とリセットはレイヤー外に置いて確実に出力する（横スクロール防止の要） */
+:root {
     --color-primary: #000000;
     --color-background: #ffffff;
     --color-text: #1a1a1a;
@@ -35,11 +36,14 @@
     text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     margin: 0;
     padding: 0;
+    width: 100%;
+    max-width: 100%;
     overflow-x: hidden;
   }
 
@@ -73,7 +77,6 @@
       transition-duration: 0.01ms !important;
     }
   }
-}
 
 @layer components {
   /* ── レイアウト ── */
