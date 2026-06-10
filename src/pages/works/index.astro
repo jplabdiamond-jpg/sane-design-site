@@ -198,10 +198,10 @@ const itemListJsonLd = {
   .works-grid-section { padding-bottom: 120px; }
   .works-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 48px 28px;
   }
-  .work-item { display: block; }
+  .work-item { display: block; min-width: 0; }
   .work-item.hidden { display: none; }
 
   /* ── Card ── */
@@ -340,13 +340,13 @@ const itemListJsonLd = {
 
   /* ── Responsive ── */
   @media (max-width: 1024px) {
-    .works-grid { grid-template-columns: repeat(3, 1fr); gap: 36px 20px; }
+    .works-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 20px; }
   }
   @media (max-width: 900px) {
-    .works-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; }
+    .works-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 16px; }
   }
   @media (max-width: 560px) {
-    .works-grid { grid-template-columns: 1fr; gap: 40px; }
+    .works-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
     .filter-header { gap: 14px; }
   }
 </style>
