@@ -2,7 +2,7 @@
 title: '空き家更生サービスのチラシデザイン'
 client: '日本の空家研究所'
 industry: '不動産・住宅'
-year: 2024
+year: 2025
 thumbnail: '/works/dtp-02.jpg'
 tags:
   - DTPデザイン

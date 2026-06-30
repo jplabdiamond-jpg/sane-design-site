@@ -2,7 +2,7 @@
 title: 'リハビリ型フィットネス様のチラシデザイン'
 client: 'リハビリ型フィットネスジム'
 industry: 'フィットネス・健康'
-year: 2024
+year: 2025
 thumbnail: '/works/dtp-13.jpg'
 tags:
   - DTPデザイン

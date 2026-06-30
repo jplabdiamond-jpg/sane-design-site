@@ -2,7 +2,7 @@
 title: '整体_×_パーソナルトレーニングフライヤー'
 client: '整体×パーソナルジム'
 industry: 'フィットネス・整体'
-year: 2024
+year: 2025
 thumbnail: '/works/dtp-49.jpg'
 tags:
   - DTPデザイン

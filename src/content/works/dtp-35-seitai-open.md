@@ -2,7 +2,7 @@
 title: '整体院様のオープニングキャンペーンチラシ'
 client: '鈴木トリートメント整体院'
 industry: '治療院・整体'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-35.jpg'
 tags:
   - DTPデザイン

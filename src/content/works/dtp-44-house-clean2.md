@@ -2,7 +2,7 @@
 title: '住宅クリーニング業者様の営業チラシ'
 client: 'ハウスクリーニング業者'
 industry: 'ハウスクリーニング'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-44.jpg'
 tags:
   - DTPデザイン

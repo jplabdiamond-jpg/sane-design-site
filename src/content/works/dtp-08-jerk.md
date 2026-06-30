@@ -2,7 +2,7 @@
 title: 'ジャークチキン屋さんチラシデザイン'
 client: 'ジャークチキン店'
 industry: '飲食・グルメ'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-08.jpg'
 tags:
   - DTPデザイン

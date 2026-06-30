@@ -2,7 +2,7 @@
 title: 'リユースショップのOPENフライヤー'
 client: 'リユースショップ そこね屋'
 industry: '小売・買取'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-50.jpg'
 tags:
   - DTPデザイン

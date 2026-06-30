@@ -2,7 +2,7 @@
 title: '補助金導入アピールチラシデザイン'
 client: '飲食店向け補助金サービス'
 industry: 'コンサル・IT'
-year: 2024
+year: 2025
 thumbnail: '/works/dtp-15.jpg'
 tags:
   - DTPデザイン

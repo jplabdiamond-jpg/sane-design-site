@@ -2,7 +2,7 @@
 title: '歯科技工所（セラミック制作）様オープニングチラシ'
 client: 'Dental Studio Zebra'
 industry: '医療・歯科'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-32.jpg'
 tags:
   - DTPデザイン

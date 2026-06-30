@@ -2,7 +2,7 @@
 title: 'リフォーム会社様チラシ'
 client: '建築廃材回収・リフォーム会社'
 industry: '建設・リフォーム'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-09.jpg'
 tags:
   - DTPデザイン

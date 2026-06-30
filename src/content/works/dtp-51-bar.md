@@ -2,7 +2,7 @@
 title: '高級会員制BARのフライヤー'
 client: 'Bar Laetus'
 industry: 'ナイト・飲食'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-51.jpg'
 tags:
   - DTPデザイン

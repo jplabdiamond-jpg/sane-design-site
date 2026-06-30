@@ -2,7 +2,7 @@
 title: '自動車販売会社様の決算大セールチラシデザイン'
 client: '自動車販売会社'
 industry: '自動車・販売'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-47.jpg'
 tags:
   - DTPデザイン

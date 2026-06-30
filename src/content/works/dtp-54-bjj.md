@@ -2,7 +2,7 @@
 title: 'ブラジリアン柔術ジムフライヤー'
 client: 'BLAST BJJ STUDIO'
 industry: 'スポーツ・フィットネス'
-year: 2022
+year: 2025
 thumbnail: '/works/dtp-54.jpg'
 tags:
   - DTPデザイン

@@ -2,7 +2,7 @@
 title: '就職マッチングアプリ告知チラシ'
 client: '就職マッチングアプリ'
 industry: 'IT・求人'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-29.jpg'
 tags:
   - DTPデザイン

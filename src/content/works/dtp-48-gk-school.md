@@ -2,7 +2,7 @@
 title: 'ゴールキーパー専門スクール生徒募集フライヤー'
 client: 'ゴールキーパー専門スクール YGKS'
 industry: 'スポーツ・教育'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-48.jpg'
 tags:
   - DTPデザイン

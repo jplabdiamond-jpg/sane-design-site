@@ -2,7 +2,7 @@
 title: '外壁塗装・屋根防水工事業者様チラシ'
 client: '外壁塗装・防水工事業者'
 industry: '建設・リフォーム'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-19.jpg'
 tags:
   - DTPデザイン

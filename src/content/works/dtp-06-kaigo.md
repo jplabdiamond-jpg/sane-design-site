@@ -2,7 +2,7 @@
 title: '介護職求人チラシデザイン'
 client: '介護施設'
 industry: '求人・福祉'
-year: 2024
+year: 2025
 thumbnail: '/works/dtp-06.jpg'
 tags:
   - DTPデザイン

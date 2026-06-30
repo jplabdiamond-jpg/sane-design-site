@@ -2,7 +2,7 @@
 title: '医療機器メーカー様のチラシデザイン'
 client: '医療機器メーカー'
 industry: '医療・歯科'
-year: 2024
+year: 2025
 thumbnail: '/works/dtp-01.jpg'
 tags:
   - DTPデザイン

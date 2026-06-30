@@ -2,7 +2,7 @@
 title: '軽貨物運送の格安引越しチラシ'
 client: '軽貨物運送業者'
 industry: '運送・引越し'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-21.jpg'
 tags:
   - DTPデザイン

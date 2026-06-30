@@ -2,7 +2,7 @@
 title: 'ベトナム料理の居酒屋さんの5周年セールチラシデザイン'
 client: 'ベトナム料理居酒屋'
 industry: '飲食・グルメ'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-42.jpg'
 tags:
   - DTPデザイン

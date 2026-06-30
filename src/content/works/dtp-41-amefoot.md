@@ -2,7 +2,7 @@
 title: 'アメリカンフットボール部の部員募集ポスターデザイン'
 client: 'アメリカンフットボール部 BONITO'
 industry: 'スポーツ・教育'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-41.jpg'
 tags:
   - DTPデザイン

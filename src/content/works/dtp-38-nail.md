@@ -2,7 +2,7 @@
 title: 'ネイルサロン様の店舗オープンチラシデザイン'
 client: 'ネイルサロン heartnail'
 industry: '美容・サロン'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-38.jpg'
 tags:
   - DTPデザイン

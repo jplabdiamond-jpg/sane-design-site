@@ -2,7 +2,7 @@
 title: '夏休み催事イベントチラシ'
 client: '商業施設'
 industry: '小売・イベント'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-30.jpg'
 tags:
   - DTPデザイン

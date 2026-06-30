@@ -2,7 +2,7 @@
 title: 'ライバー募集チラシデザイン'
 client: 'DOZAN - Colors Project'
 industry: 'エンタメ・IT'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-26.jpg'
 tags:
   - DTPデザイン

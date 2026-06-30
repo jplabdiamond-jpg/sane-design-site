@@ -2,7 +2,7 @@
 title: '焼肉屋クーポンチラシ'
 client: '焼肉 牛司'
 industry: '飲食・グルメ'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-40.jpg'
 tags:
   - DTPデザイン

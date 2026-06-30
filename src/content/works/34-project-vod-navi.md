@@ -2,7 +2,7 @@
 title: 'VODナビ'
 client: 'VODナビ'
 industry: 'メディア・ガジェットレビュー'
-year: 2025
+year: 2026
 thumbnail: '/works/work-34.jpg'
 tags:
   - Web

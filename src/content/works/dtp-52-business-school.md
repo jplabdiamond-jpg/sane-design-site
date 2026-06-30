@@ -2,7 +2,7 @@
 title: 'ビジネススクールチラシ'
 client: 'ハイスペ PCビジネススクール'
 industry: '教育・IT'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-52.jpg'
 tags:
   - DTPデザイン

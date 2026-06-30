@@ -2,7 +2,7 @@
 title: '接骨院オープニングチラシ'
 client: 'たき接骨院'
 industry: '治療院・整体'
-year: 2024
+year: 2025
 thumbnail: '/works/dtp-05.jpg'
 tags:
   - DTPデザイン

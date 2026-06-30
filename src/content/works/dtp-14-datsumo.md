@@ -2,7 +2,7 @@
 title: '脱毛サロンチラシデザイン'
 client: '脱毛サロン Re:A'
 industry: '美容・サロン'
-year: 2024
+year: 2025
 thumbnail: '/works/dtp-14.jpg'
 tags:
   - DTPデザイン

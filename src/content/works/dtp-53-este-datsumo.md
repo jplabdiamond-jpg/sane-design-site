@@ -2,7 +2,7 @@
 title: 'エステ・脱毛のフライヤー'
 client: 'エステ・脱毛サロン'
 industry: '美容・サロン'
-year: 2024
+year: 2025
 thumbnail: '/works/dtp-53.jpg'
 tags:
   - DTPデザイン

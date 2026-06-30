@@ -2,7 +2,7 @@
 title: '地域の町おこし求人チラシデザイン制作'
 client: '岡山県奈義町'
 industry: '自治体・求人'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-16.jpg'
 tags:
   - DTPデザイン

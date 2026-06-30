@@ -2,7 +2,7 @@
 title: 'リユースショップ様のチラシデザインver2'
 client: 'リユースショップ'
 industry: '小売・買取'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-39.jpg'
 tags:
   - DTPデザイン

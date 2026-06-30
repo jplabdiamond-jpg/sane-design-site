@@ -2,7 +2,7 @@
 title: '不動産売却専門店様の集客チラシ'
 client: '不動産売却専門店 LUMIERE HOME'
 industry: '不動産'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-23.jpg'
 tags:
   - DTPデザイン

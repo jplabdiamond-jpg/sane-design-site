@@ -2,7 +2,7 @@
 title: '英会話教室集客チラシ'
 client: '英会話教室'
 industry: '教育・スクール'
-year: 2024
+year: 2025
 thumbnail: '/works/dtp-07.jpg'
 tags:
   - DTPデザイン

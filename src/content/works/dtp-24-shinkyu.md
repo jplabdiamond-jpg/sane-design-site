@@ -2,7 +2,7 @@
 title: '訪問鍼灸マッサージ院の三つ折りリーフレット'
 client: '訪問鍼灸マッサージ院'
 industry: '治療院・福祉'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-24.jpg'
 tags:
   - DTPデザイン

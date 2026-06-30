@@ -2,7 +2,7 @@
 title: 'おせち製造会社様チラシ'
 client: 'おせち製造会社'
 industry: '飲食・通販'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-10.jpg'
 tags:
   - DTPデザイン

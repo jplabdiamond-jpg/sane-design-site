@@ -2,7 +2,7 @@
 title: 'FPサービスのココナラ出品画像制作'
 client: 'FPサービス'
 industry: '金融・コンサル'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-20.jpg'
 tags:
   - DTPデザイン

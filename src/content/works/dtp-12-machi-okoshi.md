@@ -2,7 +2,7 @@
 title: '町興しチラシ'
 client: '岡山県奈義町'
 industry: '自治体・地域'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-12.jpg'
 tags:
   - DTPデザイン

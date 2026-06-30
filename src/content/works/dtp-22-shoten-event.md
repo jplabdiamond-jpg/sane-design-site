@@ -2,7 +2,7 @@
 title: '書店のイベントチラシデザイン'
 client: '書店'
 industry: '小売・イベント'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-22.jpg'
 tags:
   - DTPデザイン

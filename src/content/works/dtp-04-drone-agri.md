@@ -2,7 +2,7 @@
 title: 'ドローン農薬散布サービスチラシ'
 client: 'Agri Drone Service'
 industry: '農業・テクノロジー'
-year: 2024
+year: 2025
 thumbnail: '/works/dtp-04.jpg'
 tags:
   - DTPデザイン

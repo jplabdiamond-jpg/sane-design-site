@@ -2,7 +2,7 @@
 title: '求人用4コマバナーデザイン'
 client: '求人サービス'
 industry: '求人・広告'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-28.jpg'
 tags:
   - DTPデザイン

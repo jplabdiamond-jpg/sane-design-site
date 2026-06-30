@@ -2,7 +2,7 @@
 title: '歯科医院の経営コンサルセミナーチラシ'
 client: 'M&M PARTNERS'
 industry: 'コンサル・医療'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-34.jpg'
 tags:
   - DTPデザイン

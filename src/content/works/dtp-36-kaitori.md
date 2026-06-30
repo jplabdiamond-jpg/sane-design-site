@@ -2,7 +2,7 @@
 title: '買取屋様チラシ'
 client: '買取専門店'
 industry: '小売・買取'
-year: 2023
+year: 2025
 thumbnail: '/works/dtp-36.jpg'
 tags:
   - DTPデザイン
