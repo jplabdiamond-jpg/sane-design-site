@@ -2,7 +2,7 @@
 title: 'GADGET LINE'
 client: 'GADGET LINE'
 industry: 'メディア・ガジェットレビュー'
-year: 2026
+year: 2025
 thumbnail: '/works/work-33.jpg'
 tags:
   - Web

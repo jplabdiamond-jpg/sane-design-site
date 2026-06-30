@@ -2,7 +2,7 @@
 title: 'News Now'
 client: 'News Now'
 industry: 'メディア・ニュース'
-year: 2026
+year: 2025
 thumbnail: '/works/work-31.png'
 tags:
   - Web
