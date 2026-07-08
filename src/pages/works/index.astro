@@ -40,11 +40,10 @@ const itemListJsonLd = {
       <Breadcrumbs items={[{ label: 'Works' }]} />
       <p class="section-label reveal" style="margin-top:18px;">Works</p>
       <h1 class="reveal works-title">
-        Selected<br />
-        <span style="font-style:italic;">Projects.</span>
+        Selected <span style="font-style:italic;">Projects.</span>
       </h1>
       <p class="reveal works-desc">
-        DTP・WEB 合わせて 300 件以上の実績より、<br />代表的なプロジェクトをご紹介します。
+        DTP・WEB 合わせて 300 件以上の実績より、代表的なプロジェクトをご紹介します。
       </p>
     </div>
   </section>
@@ -53,7 +52,12 @@ const itemListJsonLd = {
   <div class="container-editorial filter-wrap reveal">
     <div class="filter-header">
       <span class="filter-label">FILTER</span>
-      <div class="filter-row" id="filter-row">
+      <button class="filter-toggle" id="filter-toggle" aria-expanded="false" aria-controls="filter-row">
+        <span class="filter-toggle-text">絞り込む</span>
+        <span class="filter-toggle-current" id="filter-current">すべて</span>
+        <span class="filter-toggle-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="filter-row collapsed" id="filter-row">
         <button class="filter-btn active" data-filter="all">
           <span class="filter-dot"></span>All
         </button>
@@ -116,31 +120,32 @@ const itemListJsonLd = {
 
 <style is:global>
   /* ── Hero ── */
-  .works-hero { padding: 80px 0 60px; }
+  .works-hero { padding: 40px 0 20px; }
   .works-title {
     font-family: var(--font-serif);
-    font-size: clamp(40px, 7vw, 100px);
+    font-size: clamp(28px, 4vw, 46px);
     font-weight: 300;
-    line-height: 1.05;
+    line-height: 1.1;
     letter-spacing: -0.02em;
-    margin-top: 16px;
+    margin-top: 10px;
+    white-space: nowrap;
   }
   .works-desc {
-    margin-top: 24px;
-    max-width: 480px;
-    font-size: 15px;
+    margin-top: 12px;
+    max-width: 640px;
+    font-size: 14px;
     color: var(--color-muted);
-    line-height: 1.9;
+    line-height: 1.7;
   }
 
   /* ── Filter ── */
-  .filter-wrap { padding-bottom: 56px; }
+  .filter-wrap { padding-bottom: 32px; }
   .filter-header {
     border-top: 1px solid var(--color-border);
-    padding-top: 28px;
+    padding-top: 20px;
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 16px;
     flex-wrap: wrap;
   }
   .filter-label {
@@ -151,12 +156,42 @@ const itemListJsonLd = {
     white-space: nowrap;
     flex-shrink: 0;
   }
+  /* トグルボタン */
+  .filter-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    border-radius: 100px;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--color-primary);
+    transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+  .filter-toggle:hover { border-color: var(--color-primary); }
+  .filter-toggle-current {
+    color: var(--color-muted);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .filter-toggle-caret {
+    font-size: 10px;
+    transition: transform 0.25s ease;
+    color: var(--color-muted);
+  }
+  .filter-toggle[aria-expanded="true"] .filter-toggle-caret { transform: rotate(180deg); }
   .filter-row {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    flex: 1;
+    flex-basis: 100%;
+    margin-top: 4px;
   }
+  .filter-row.collapsed { display: none; }
   .filter-btn {
     display: inline-flex;
     align-items: center;
@@ -352,8 +387,18 @@ const itemListJsonLd = {
 </style>
 
 <script>
-  // タグフィルタ（サーバーレンダリング済みDOMに対して動作）
+  // フィルタ開閉トグル（デフォルトは非表示）
+  const filterToggle = document.getElementById('filter-toggle');
   const filterRow = document.getElementById('filter-row');
+  const filterCurrent = document.getElementById('filter-current');
+  if (filterToggle && filterRow) {
+    filterToggle.addEventListener('click', () => {
+      const collapsed = filterRow.classList.toggle('collapsed');
+      filterToggle.setAttribute('aria-expanded', String(!collapsed));
+    });
+  }
+
+  // タグフィルタ（サーバーレンダリング済みDOMに対して動作）
   if (filterRow) {
     filterRow.addEventListener('click', (e) => {
       const btn = (e.target as HTMLElement).closest('.filter-btn') as HTMLElement | null;
@@ -361,6 +406,7 @@ const itemListJsonLd = {
       filterRow.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
       const f = btn.dataset.filter;
+      if (filterCurrent) filterCurrent.textContent = f === 'all' ? 'すべて' : (btn.textContent || '').trim();
       document.querySelectorAll('.work-item').forEach((item) => {
         const el = item as HTMLElement;
         const show = f === 'all' || (el.dataset.tags || '').split(',').includes(f as string);
