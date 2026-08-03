@@ -111,7 +111,7 @@ const itemListJsonLd = {
           ? {}
           : { href, ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}) };
         return (
-          <div class="work-item reveal" data-tags={tagsArr.join(',')} style={`transition-delay:${(i % 3) * 80}ms`}>
+          <div class="work-item" data-tags={tagsArr.join(',')} style={`animation-delay:${Math.min(i, 8) * 55}ms`}>
             <CardTag
               class={`work-card${noLink ? ' work-card-static' : ''}`}
               {...linkProps}
@@ -382,7 +382,15 @@ const itemListJsonLd = {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 48px 28px;
   }
-  .work-item { display: block; min-width: 0; }
+  .work-item {
+    display: block;
+    min-width: 0;
+    animation: workFadeIn 0.8s cubic-bezier(0.19, 1, 0.22, 1) both;
+  }
+  @keyframes workFadeIn {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
   .work-item.hidden {
     display: none;
   }
