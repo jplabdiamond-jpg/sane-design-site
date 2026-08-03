@@ -34,43 +34,70 @@ const itemListJsonLd = {
   description="Sane Designのホームページ制作・LP・DTPデザイン実績一覧。コーポレートサイト、LP、サロン予約サイト、士業サイト、飲食店チラシなど300件以上の制作実績から代表作をご紹介します。"
   jsonLd={itemListJsonLd}
 >
-  <!-- Hero -->
-  <section class="works-hero">
-    <div class="container-editorial">
+  <!-- ── Hero with Wave Background ── -->
+  <section class="works-hero-section">
+    <div class="works-hero-bg" aria-hidden="true">
+      <div class="works-wave works-wave1"></div>
+      <div class="works-wave works-wave2"></div>
+      <div class="works-wave works-wave3"></div>
+    </div>
+
+    <div class="container-editorial" style="position:relative; z-index:1;">
       <Breadcrumbs items={[{ label: 'Works' }]} />
-      <p class="section-label reveal" style="margin-top:18px;">Works</p>
-      <h1 class="reveal works-title">
-        Selected <span style="font-style:italic;">Projects.</span>
-      </h1>
-      <p class="reveal works-desc">
-        DTP・WEB 合わせて 300 件以上の実績より、代表的なプロジェクトをご紹介します。
+
+      <p class="section-label reveal" style="margin-top:24px;">Works</p>
+
+      <div class="works-hero-headline reveal" style="margin-top:12px; transition-delay:80ms;">
+        <div class="works-glitch-container">
+          <span class="works-glitch-layer works-gl1">Selected</span>
+          <span class="works-glitch-layer works-gl2">Selected</span>
+          <span class="works-glitch-layer works-gl3">Selected</span>
+        </div>
+        <div class="works-glitch-container" style="font-style:italic;">
+          <span class="works-glitch-layer works-gl1">Projects.</span>
+          <span class="works-glitch-layer works-gl2">Projects.</span>
+          <span class="works-glitch-layer works-gl3">Projects.</span>
+        </div>
+      </div>
+
+      <p class="reveal works-hero-desc" style="transition-delay:160ms;">
+        DTP・WEB 合わせて 300 件以上の実績より、<br class="sp-hide" />代表的なプロジェクトをご紹介します。
       </p>
+
+      <!-- Stats mini bar -->
+      <div class="works-stats reveal" style="transition-delay:240ms;">
+        <div class="works-stat-item">
+          <span class="works-stat-num"><span class="count-up" data-target="300" data-suffix="+">0</span></span>
+          <span class="works-stat-label">Projects</span>
+        </div>
+        <div class="works-stat-divider"></div>
+        <div class="works-stat-item">
+          <span class="works-stat-num">Web & DTP</span>
+          <span class="works-stat-label">Design</span>
+        </div>
+        <div class="works-stat-divider"></div>
+        <div class="works-stat-item">
+          <span class="works-stat-num">2024–2026</span>
+          <span class="works-stat-label">Years</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Filter -->
-  <div class="container-editorial filter-wrap reveal">
-    <div class="filter-header">
-      <span class="filter-label">FILTER</span>
-      <button class="filter-toggle" id="filter-toggle" aria-expanded="false" aria-controls="filter-row">
-        <span class="filter-toggle-text">絞り込む</span>
-        <span class="filter-toggle-current" id="filter-current">すべて</span>
-        <span class="filter-toggle-caret" aria-hidden="true">▾</span>
-      </button>
-      <div class="filter-row collapsed" id="filter-row">
-        <button class="filter-btn active" data-filter="all">
-          <span class="filter-dot"></span>All
-        </button>
+  <!-- ── Filter ── -->
+  <div class="container-editorial works-filter-wrap reveal">
+    <div class="works-filter-header">
+      <span class="works-filter-label">Filter</span>
+      <div class="works-filter-row" id="filter-row">
+        <button class="works-filter-btn active" data-filter="all">All</button>
         {allTags.map((tag) => (
-          <button class="filter-btn" data-filter={tag}>
-            <span class="filter-dot"></span>{tag}
-          </button>
+          <button class="works-filter-btn" data-filter={tag}>{tag}</button>
         ))}
       </div>
     </div>
   </div>
 
-  <!-- Works grid -->
+  <!-- ── Works Grid ── -->
   <section class="container-editorial works-grid-section">
     <div class="works-grid" id="works-grid">
       {works.map((work, i) => {
@@ -84,10 +111,9 @@ const itemListJsonLd = {
           ? {}
           : { href, ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}) };
         return (
-          <div class="work-item" data-tags={tagsArr.join(',')}>
+          <div class="work-item reveal" data-tags={tagsArr.join(',')} style={`transition-delay:${(i % 3) * 80}ms`}>
             <CardTag
               class={`work-card${noLink ? ' work-card-static' : ''}`}
-              style={`animation-delay:${i * 55}ms`}
               {...linkProps}
             >
               <div class="work-thumb">
@@ -119,80 +145,210 @@ const itemListJsonLd = {
 </BaseLayout>
 
 <style is:global>
-  /* ── Hero ── */
-  .works-hero { padding: 40px 0 20px; }
-  .works-title {
-    font-family: var(--font-serif);
-    font-size: clamp(28px, 4vw, 46px);
-    font-weight: 300;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-top: 10px;
-    white-space: nowrap;
+  /* ══════════════════════════════════════
+     WORKS PAGE — REDESIGNED HERO + GRID
+     ══════════════════════════════════════ */
+
+  /* ── Hero Section ── */
+  .works-hero-section {
+    position: relative;
+    overflow: hidden;
+    padding: 48px 0 64px;
   }
-  .works-desc {
-    margin-top: 12px;
-    max-width: 640px;
-    font-size: 14px;
+
+  .works-hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background: linear-gradient(180deg, #e8eaf0 0%, #f5f6fa 60%, #ffffff 100%);
+  }
+
+  .works-wave {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 43%;
+    animation: worksWaveRotate linear infinite;
+  }
+  .works-wave1 {
+    width: 200vw; height: 200vw; top: 20%;
+    background: rgba(180, 190, 210, 0.18);
+    animation-duration: 26s;
+  }
+  .works-wave2 {
+    width: 185vw; height: 185vw; top: 30%;
+    background: rgba(160, 175, 200, 0.14);
+    animation-duration: 20s;
+    animation-direction: reverse;
+    animation-delay: -3s;
+  }
+  .works-wave3 {
+    width: 170vw; height: 170vw; top: 40%;
+    background: rgba(140, 158, 190, 0.10);
+    animation-duration: 16s;
+    animation-delay: -6s;
+  }
+  @keyframes worksWaveRotate {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to   { transform: translateX(-50%) rotate(360deg); }
+  }
+
+  /* ── Glitch Text (Heroタイトル) ── */
+  .works-hero-headline {
+    font-family: var(--font-serif);
+    font-size: clamp(36px, 7vw, 88px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .works-glitch-container {
+    position: relative;
+    display: block;
+    line-height: 1.1;
+  }
+  .works-glitch-layer {
+    display: block;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    letter-spacing: inherit;
+  }
+  .works-gl1 {
+    position: relative;
+    color: var(--color-text);
+    animation: worksGlitch1 2.5s infinite;
+  }
+  .works-gl2 {
+    position: absolute;
+    top: 0; left: 0;
+    color: #67f3da;
+    animation: worksGlitch2 2.5s infinite;
+  }
+  .works-gl3 {
+    position: absolute;
+    top: 0; left: 0;
+    color: #f16f6f;
+    animation: worksGlitch3 2.5s infinite;
+  }
+  @keyframes worksGlitch1 {
+    0%   { transform: none;                   opacity: 1;    }
+    7%   { transform: skew(-0.5deg, -0.9deg); opacity: 0.75; }
+    10%  { transform: none;                   opacity: 1;    }
+    27%  { transform: none;                   opacity: 1;    }
+    30%  { transform: skew(0.8deg, -0.1deg);  opacity: 0.75; }
+    35%  { transform: none;                   opacity: 1;    }
+    52%  { transform: none;                   opacity: 1;    }
+    55%  { transform: skew(-1deg, 0.2deg);    opacity: 0.75; }
+    50%  { transform: none;                   opacity: 1;    }
+    72%  { transform: none;                   opacity: 1;    }
+    75%  { transform: skew(0.4deg, 1deg);     opacity: 0.75; }
+    80%  { transform: none;                   opacity: 1;    }
+    100% { transform: none;                   opacity: 1;    }
+  }
+  @keyframes worksGlitch2 {
+    0%   { transform: none;                    opacity: 0.25; }
+    7%   { transform: translate(-2px, -3px);   opacity: 0.5;  }
+    10%  { transform: none;                    opacity: 0.25; }
+    27%  { transform: none;                    opacity: 0.25; }
+    30%  { transform: translate(-5px, -2px);   opacity: 0.5;  }
+    35%  { transform: none;                    opacity: 0.25; }
+    52%  { transform: none;                    opacity: 0.25; }
+    55%  { transform: translate(-5px, -1px);   opacity: 0.5;  }
+    50%  { transform: none;                    opacity: 0.25; }
+    72%  { transform: none;                    opacity: 0.25; }
+    75%  { transform: translate(-2px, -6px);   opacity: 0.5;  }
+    80%  { transform: none;                    opacity: 0.25; }
+    100% { transform: none;                    opacity: 0.25; }
+  }
+  @keyframes worksGlitch3 {
+    0%   { transform: none;                   opacity: 0.25; }
+    7%   { transform: translate(2px, 3px);    opacity: 0.5;  }
+    10%  { transform: none;                   opacity: 0.25; }
+    27%  { transform: none;                   opacity: 0.25; }
+    30%  { transform: translate(5px, 2px);    opacity: 0.5;  }
+    35%  { transform: none;                   opacity: 0.25; }
+    52%  { transform: none;                   opacity: 0.25; }
+    55%  { transform: translate(5px, 1px);    opacity: 0.5;  }
+    50%  { transform: none;                   opacity: 0.25; }
+    72%  { transform: none;                   opacity: 0.25; }
+    75%  { transform: translate(2px, 6px);    opacity: 0.5;  }
+    80%  { transform: none;                   opacity: 0.25; }
+    100% { transform: none;                   opacity: 0.25; }
+  }
+
+  .works-hero-desc {
+    margin-top: 28px;
+    max-width: 560px;
+    font-size: 15px;
     color: var(--color-muted);
-    line-height: 1.7;
+    line-height: 1.9;
+  }
+
+  /* ── Stats Mini Bar ── */
+  .works-stats {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 40px;
+    padding: 20px 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .works-stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 32px;
+  }
+  .works-stat-item:first-child { padding-left: 0; }
+  .works-stat-item:last-child { padding-right: 0; }
+  .works-stat-num {
+    font-family: var(--font-serif);
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .works-stat-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .works-stat-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--color-border);
+    flex-shrink: 0;
   }
 
   /* ── Filter ── */
-  .filter-wrap { padding-bottom: 32px; }
-  .filter-header {
-    border-top: 1px solid var(--color-border);
-    padding-top: 20px;
+  .works-filter-wrap {
+    padding: 32px 0;
+  }
+  .works-filter-header {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
     flex-wrap: wrap;
   }
-  .filter-label {
+  .works-filter-label {
     font-size: 10px;
     letter-spacing: 0.2em;
+    text-transform: uppercase;
     color: var(--color-muted);
     font-weight: 500;
     white-space: nowrap;
     flex-shrink: 0;
   }
-  /* トグルボタン */
-  .filter-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border: 1px solid var(--color-border);
-    background: transparent;
-    border-radius: 100px;
-    cursor: pointer;
-    font-family: var(--font-sans);
-    font-size: 12px;
-    color: var(--color-primary);
-    transition: all 0.25s ease;
-    white-space: nowrap;
-  }
-  .filter-toggle:hover { border-color: var(--color-primary); }
-  .filter-toggle-current {
-    color: var(--color-muted);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-  }
-  .filter-toggle-caret {
-    font-size: 10px;
-    transition: transform 0.25s ease;
-    color: var(--color-muted);
-  }
-  .filter-toggle[aria-expanded="true"] .filter-toggle-caret { transform: rotate(180deg); }
-  .filter-row {
+  .works-filter-row {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    flex-basis: 100%;
-    margin-top: 4px;
   }
-  .filter-row.collapsed { display: none; }
-  .filter-btn {
+  .works-filter-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -204,30 +360,20 @@ const itemListJsonLd = {
     text-transform: uppercase;
     cursor: pointer;
     border-radius: 100px;
-    transition: all 0.25s ease;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
     font-family: var(--font-sans);
     color: var(--color-muted);
     white-space: nowrap;
   }
-  .filter-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: currentColor;
-    opacity: 0;
-    transition: opacity 0.25s;
-    flex-shrink: 0;
-  }
-  .filter-btn:hover {
+  .works-filter-btn:hover {
     border-color: var(--color-primary);
     color: var(--color-primary);
   }
-  .filter-btn.active {
+  .works-filter-btn.active {
     border-color: var(--color-primary);
     background: var(--color-primary);
     color: #fff;
   }
-  .filter-btn.active .filter-dot { opacity: 1; background: #fff; }
 
   /* ── Grid ── */
   .works-grid-section { padding-bottom: 120px; }
@@ -237,17 +383,14 @@ const itemListJsonLd = {
     gap: 48px 28px;
   }
   .work-item { display: block; min-width: 0; }
-  .work-item.hidden { display: none; }
+  .work-item.hidden {
+    display: none;
+  }
 
   /* ── Card ── */
   .work-card {
     display: block;
     text-decoration: none;
-    animation: workFadeIn 0.8s cubic-bezier(0.19, 1, 0.22, 1) both;
-  }
-  @keyframes workFadeIn {
-    from { opacity: 0; transform: translateY(32px); }
-    to   { opacity: 1; transform: translateY(0); }
   }
 
   /* サムネイル */
@@ -373,6 +516,11 @@ const itemListJsonLd = {
     white-space: nowrap;
   }
 
+  /* ── SP hide helper ── */
+  @media (max-width: 560px) {
+    .sp-hide { display: none; }
+  }
+
   /* ── Responsive ── */
   @media (max-width: 1024px) {
     .works-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 20px; }
@@ -381,32 +529,27 @@ const itemListJsonLd = {
     .works-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 16px; }
   }
   @media (max-width: 560px) {
+    .works-hero-section { padding: 32px 0 48px; }
+    .works-hero-headline { font-size: clamp(32px, 10vw, 52px); }
+    .works-stats { flex-wrap: wrap; gap: 16px; }
+    .works-stat-divider { display: none; }
+    .works-stat-item { padding: 0 16px 0 0; }
     .works-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
-    .filter-header { gap: 14px; }
+    .works-filter-header { gap: 12px; }
+    .works-filter-row { gap: 6px; }
   }
 </style>
 
 <script>
-  // フィルタ開閉トグル（デフォルトは非表示）
-  const filterToggle = document.getElementById('filter-toggle');
+  // ── タグフィルタ ──
   const filterRow = document.getElementById('filter-row');
-  const filterCurrent = document.getElementById('filter-current');
-  if (filterToggle && filterRow) {
-    filterToggle.addEventListener('click', () => {
-      const collapsed = filterRow.classList.toggle('collapsed');
-      filterToggle.setAttribute('aria-expanded', String(!collapsed));
-    });
-  }
-
-  // タグフィルタ（サーバーレンダリング済みDOMに対して動作）
   if (filterRow) {
     filterRow.addEventListener('click', (e) => {
-      const btn = (e.target as HTMLElement).closest('.filter-btn') as HTMLElement | null;
+      const btn = (e.target as HTMLElement).closest('.works-filter-btn') as HTMLElement | null;
       if (!btn) return;
-      filterRow.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
+      filterRow.querySelectorAll('.works-filter-btn').forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
       const f = btn.dataset.filter;
-      if (filterCurrent) filterCurrent.textContent = f === 'all' ? 'すべて' : (btn.textContent || '').trim();
       document.querySelectorAll('.work-item').forEach((item) => {
         const el = item as HTMLElement;
         const show = f === 'all' || (el.dataset.tags || '').split(',').includes(f as string);
@@ -415,10 +558,44 @@ const itemListJsonLd = {
     });
   }
 
-  // スクロールリビール
+  // ── Count Up ──
+  function runCountUp(el: HTMLElement) {
+    const target = parseInt(el.dataset.target || '0');
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 900;
+    const steps = 40;
+    const interval = duration / steps;
+    let current = 0;
+    const increment = target / steps;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      const num = target >= 1000
+        ? Math.floor(current).toLocaleString()
+        : Math.floor(current);
+      el.innerHTML = prefix + num + suffix;
+    }, interval);
+  }
+
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        runCountUp(entry.target as HTMLElement);
+        countObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.count-up').forEach(el => countObserver.observe(el));
+
+  // ── Scroll Reveal ──
   const observer = new IntersectionObserver(
     (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-    { threshold: 0.05 }
+    { threshold: 0.05, rootMargin: '0px 0px -40px 0px' }
   );
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 </script>
