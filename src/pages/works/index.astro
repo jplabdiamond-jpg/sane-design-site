@@ -9,8 +9,34 @@ const works = (await getCollection('works', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order)
   .map((w) => ({ ...w.data, slug: w.slug }));
 
-// タグフィルタ用の一覧（出現順をアルファベット順に統一）
-const allTags = [...new Set(works.flatMap((w) => w.tags || []))].sort();
+// ── フィルタ分類 ──
+// サイトジャンル（タグから判定）
+const GENRE_TAGS = ['Web', 'LP', 'EC', 'Corporate', 'ポータルサイト', 'System', 'DTPデザイン'] as const;
+const genreLabels: Record<string, string> = {
+  Web: 'WEBサイト',
+  LP: 'LP（ランディングページ）',
+  EC: 'ECサイト',
+  Corporate: 'コーポレートサイト',
+  'ポータルサイト': 'ポータルサイト',
+  System: 'システム / ツール',
+  'DTPデザイン': 'DTPデザイン',
+};
+// 実際に作品に存在するジャンルだけ表示
+const activeGenres = GENRE_TAGS.filter((g) =>
+  works.some((w) => (w.tags || []).includes(g))
+);
+
+// 業種（industry フィールドから取得、・で分割して主カテゴリのみ）
+const industrySet = new Map<string, string>(); // label → 元の industry 文字列（複数対応）
+works.forEach((w) => {
+  if (!w.industry) return;
+  // "自動車・買取" → "自動車" を主カテゴリとして使う
+  const primary = w.industry.split('・')[0];
+  if (!industrySet.has(primary)) {
+    industrySet.set(primary, primary);
+  }
+});
+const activeIndustries = [...industrySet.keys()].sort();
 
 // 制作実績の ItemList 構造化データ（内部リンク先のみ列挙）
 const itemListJsonLd = {
@@ -53,13 +79,8 @@ const itemListJsonLd = {
           </div>
           <div class="rw-stat-divider"></div>
           <div class="rw-stat">
-            <span class="rw-stat-num">Web & DTP</span>
-            <span class="rw-stat-label">対応デザイン</span>
-          </div>
-          <div class="rw-stat-divider"></div>
-          <div class="rw-stat">
-            <span class="rw-stat-num">2024–2026</span>
-            <span class="rw-stat-label">制作年</span>
+            <span class="rw-stat-num rw-stat-num-sm">WEBサイト・LP・ECサイト etc...</span>
+            <span class="rw-stat-label">制作可能デザイン</span>
           </div>
         </div>
       </div>
@@ -73,13 +94,38 @@ const itemListJsonLd = {
 
   <!-- ── Filter ── -->
   <div class="rw-wrap rw-filter-section">
-    <div class="rw-filter-header">
-      <span class="rw-filter-label">カテゴリで絞り込む</span>
-      <div class="rw-filter-row" id="filter-row">
-        <button class="rw-filter-btn active" data-filter="all">すべて</button>
-        {allTags.map((tag) => (
-          <button class="rw-filter-btn" data-filter={tag}>{tag}</button>
-        ))}
+    <div class="rw-filter-controls">
+      <!-- すべて表示ボタン -->
+      <button class="rw-filter-btn rw-filter-all active" id="filter-all">すべて表示</button>
+
+      <!-- サイトジャンル -->
+      <div class="rw-filter-group">
+        <button class="rw-filter-toggle" id="toggle-genre" type="button">
+          <span>サイトジャンル</span>
+          <svg class="rw-filter-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+        </button>
+        <div class="rw-filter-dropdown" id="dropdown-genre">
+          {activeGenres.map((g) => (
+            <button class="rw-filter-btn" data-filter-type="genre" data-filter-value={g}>
+              {genreLabels[g] || g}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- 業種 -->
+      <div class="rw-filter-group">
+        <button class="rw-filter-toggle" id="toggle-industry" type="button">
+          <span>業種</span>
+          <svg class="rw-filter-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+        </button>
+        <div class="rw-filter-dropdown" id="dropdown-industry">
+          {activeIndustries.map((ind) => (
+            <button class="rw-filter-btn" data-filter-type="industry" data-filter-value={ind}>
+              {ind}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   </div>
@@ -97,7 +143,13 @@ const itemListJsonLd = {
           ? {}
           : { href, ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}) };
         return (
-          <div class="rw-item" data-tags={tagsArr.join(',')} style={`animation-delay:${Math.min(i, 11) * 60}ms`}>
+          <div
+            class="rw-item"
+            data-tags={tagsArr.join(',')}
+            data-genre={tagsArr.filter((t: string) => (GENRE_TAGS as readonly string[]).includes(t)).join(',')}
+            data-industry={work.industry ? work.industry.split('・')[0] : ''}
+            style={`animation-delay:${Math.min(i, 11) * 60}ms`}
+          >
             <CardTag
               class={`rw-card${noLink ? ' rw-card-static' : ''}`}
               {...linkProps}
@@ -280,6 +332,11 @@ const itemListJsonLd = {
     font-weight: 700;
     font-family: "Noto Sans JP", sans-serif;
   }
+  .rw-stat-num-sm {
+    font-size: clamp(14px, 2vw, 18px) !important;
+    font-family: "Noto Sans JP", sans-serif;
+    letter-spacing: 0.02em;
+  }
   .rw-stat-divider {
     width: 2px;
     height: 28px;
@@ -309,25 +366,14 @@ const itemListJsonLd = {
   .rw-filter-section {
     padding: 32px 22px;
   }
-  .rw-filter-header {
+  .rw-filter-controls {
     display: flex;
-    align-items: center;
-    gap: 16px;
+    align-items: flex-start;
+    gap: 12px;
     flex-wrap: wrap;
   }
-  .rw-filter-label {
-    font-size: 13px;
-    color: var(--rw-sub);
-    font-weight: 700;
-    font-family: "Noto Sans JP", sans-serif;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .rw-filter-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
+
+  /* 共通ボタン */
   .rw-filter-btn {
     display: inline-flex;
     align-items: center;
@@ -353,6 +399,80 @@ const itemListJsonLd = {
     border-color: var(--rw-primary);
     color: #fff;
     box-shadow: 0 4px 0 var(--rw-primary-deep);
+  }
+
+  /* すべて表示ボタン */
+  .rw-filter-all {
+    flex-shrink: 0;
+  }
+
+  /* ドロップダウングループ */
+  .rw-filter-group {
+    position: relative;
+  }
+  .rw-filter-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    border: 2px solid #CDEBFA;
+    background: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: "Noto Sans JP", sans-serif;
+    cursor: pointer;
+    border-radius: 999px;
+    color: var(--rw-primary-dark);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .rw-filter-toggle:hover {
+    background: var(--rw-sky);
+    border-color: var(--rw-primary);
+  }
+  .rw-filter-toggle.open {
+    background: var(--rw-sky);
+    border-color: var(--rw-primary);
+  }
+  .rw-filter-toggle.has-active {
+    background: var(--rw-primary);
+    border-color: var(--rw-primary);
+    color: #fff;
+    box-shadow: 0 4px 0 var(--rw-primary-deep);
+  }
+  .rw-filter-chevron {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+  }
+  .rw-filter-toggle.open .rw-filter-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* ドロップダウンパネル */
+  .rw-filter-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 220px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 12px 36px rgba(58,66,86,0.14);
+    padding: 12px;
+    z-index: 30;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .rw-filter-dropdown.open {
+    display: flex;
+  }
+  .rw-filter-dropdown .rw-filter-btn {
+    width: 100%;
+    justify-content: flex-start;
+    border-radius: 12px;
+    padding: 10px 16px;
   }
 
   /* ── Grid ── */
@@ -517,15 +637,16 @@ const itemListJsonLd = {
     .rw-filter-section {
       padding: 24px 22px;
     }
-    .rw-filter-header {
-      gap: 10px;
+    .rw-filter-controls {
+      gap: 8px;
     }
-    .rw-filter-row {
-      gap: 6px;
-    }
-    .rw-filter-btn {
+    .rw-filter-btn,
+    .rw-filter-toggle {
       font-size: 12px;
-      padding: 6px 14px;
+      padding: 7px 14px;
+    }
+    .rw-filter-dropdown {
+      min-width: 200px;
     }
   }
 
@@ -612,22 +733,104 @@ const itemListJsonLd = {
 </style>
 
 <script>
-  // ── タグフィルタ ──
-  const filterRow = document.getElementById('filter-row');
-  if (filterRow) {
-    filterRow.addEventListener('click', (e) => {
-      const btn = (e.target as HTMLElement).closest('.rw-filter-btn') as HTMLElement | null;
-      if (!btn) return;
-      filterRow.querySelectorAll('.rw-filter-btn').forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-      const f = btn.dataset.filter;
-      document.querySelectorAll('.rw-item').forEach((item) => {
-        const el = item as HTMLElement;
-        const show = f === 'all' || (el.dataset.tags || '').split(',').includes(f as string);
-        el.classList.toggle('hidden', !show);
-      });
+  // ── フィルタ ──
+  const filterAllBtn = document.getElementById('filter-all') as HTMLButtonElement | null;
+  const items = document.querySelectorAll('.rw-item');
+
+  // ドロップダウントグル
+  function setupToggle(toggleId: string, dropdownId: string) {
+    const toggle = document.getElementById(toggleId);
+    const dropdown = document.getElementById(dropdownId);
+    if (!toggle || !dropdown) return;
+
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.classList.contains('open');
+      // 他のドロップダウンを閉じる
+      document.querySelectorAll('.rw-filter-toggle').forEach((t) => t.classList.remove('open'));
+      document.querySelectorAll('.rw-filter-dropdown').forEach((d) => d.classList.remove('open'));
+      if (!isOpen) {
+        toggle.classList.add('open');
+        dropdown.classList.add('open');
+      }
     });
   }
+  setupToggle('toggle-genre', 'dropdown-genre');
+  setupToggle('toggle-industry', 'dropdown-industry');
+
+  // ドロップダウン外クリックで閉じる
+  document.addEventListener('click', (e) => {
+    if (!(e.target as HTMLElement).closest('.rw-filter-group')) {
+      document.querySelectorAll('.rw-filter-toggle').forEach((t) => t.classList.remove('open'));
+      document.querySelectorAll('.rw-filter-dropdown').forEach((d) => d.classList.remove('open'));
+    }
+  });
+
+  // フィルタ適用
+  let activeFilterType: string | null = null;
+  let activeFilterValue: string | null = null;
+
+  function applyFilter() {
+    items.forEach((item) => {
+      const el = item as HTMLElement;
+      if (!activeFilterType || !activeFilterValue) {
+        el.classList.remove('hidden');
+        return;
+      }
+      if (activeFilterType === 'genre') {
+        const genres = (el.dataset.genre || '').split(',');
+        el.classList.toggle('hidden', !genres.includes(activeFilterValue));
+      } else if (activeFilterType === 'industry') {
+        const industry = el.dataset.industry || '';
+        el.classList.toggle('hidden', industry !== activeFilterValue);
+      }
+    });
+  }
+
+  function clearActiveStates() {
+    document.querySelectorAll('.rw-filter-dropdown .rw-filter-btn').forEach((b) => b.classList.remove('active'));
+    document.querySelectorAll('.rw-filter-toggle').forEach((t) => t.classList.remove('has-active'));
+  }
+
+  // 「すべて表示」
+  filterAllBtn?.addEventListener('click', () => {
+    activeFilterType = null;
+    activeFilterValue = null;
+    clearActiveStates();
+    filterAllBtn.classList.add('active');
+    applyFilter();
+  });
+
+  // 各フィルタボタン
+  document.querySelectorAll('.rw-filter-dropdown .rw-filter-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const el = btn as HTMLElement;
+      const type = el.dataset.filterType || '';
+      const value = el.dataset.filterValue || '';
+
+      // 同じボタンをもう一度押したらリセット
+      if (activeFilterType === type && activeFilterValue === value) {
+        activeFilterType = null;
+        activeFilterValue = null;
+        clearActiveStates();
+        filterAllBtn?.classList.add('active');
+      } else {
+        activeFilterType = type;
+        activeFilterValue = value;
+        clearActiveStates();
+        filterAllBtn?.classList.remove('active');
+        el.classList.add('active');
+        // 親トグルをハイライト
+        const group = el.closest('.rw-filter-group');
+        group?.querySelector('.rw-filter-toggle')?.classList.add('has-active');
+      }
+
+      applyFilter();
+
+      // ドロップダウンを閉じる
+      document.querySelectorAll('.rw-filter-toggle').forEach((t) => t.classList.remove('open'));
+      document.querySelectorAll('.rw-filter-dropdown').forEach((d) => d.classList.remove('open'));
+    });
+  });
 
   // ── Count Up ──
   function runCountUp(el: HTMLElement) {
