@@ -34,105 +34,94 @@ const itemListJsonLd = {
   description="Sane Designのホームページ制作・LP・DTPデザイン実績一覧。コーポレートサイト、LP、サロン予約サイト、士業サイト、飲食店チラシなど300件以上の制作実績から代表作をご紹介します。"
   jsonLd={itemListJsonLd}
 >
-  <!-- ── Hero with Wave Background ── -->
-  <section class="works-hero-section">
-    <div class="works-hero-bg" aria-hidden="true">
-      <div class="works-wave works-wave1"></div>
-      <div class="works-wave works-wave2"></div>
-      <div class="works-wave works-wave3"></div>
+  <!-- ── Hero ── -->
+  <section class="rw-hero">
+    <div class="rw-wrap">
+      <Breadcrumbs items={[{ label: '制作実績' }]} />
+
+      <div class="rw-hero-content">
+        <span class="rw-sec-sub">Works</span>
+        <h1 class="rw-hero-title">これまでの制作例</h1>
+        <p class="rw-hero-desc">
+          DTP・WEB 合わせて 300 件以上の実績より、<br class="rw-sp-hide" />代表的なプロジェクトをご紹介します。
+        </p>
+
+        <!-- Stats strip -->
+        <div class="rw-stats">
+          <div class="rw-stat">
+            <span class="rw-stat-num"><span class="rw-count" data-target="300" data-suffix="+">0</span></span>
+            <span class="rw-stat-label">制作実績</span>
+          </div>
+          <div class="rw-stat-divider"></div>
+          <div class="rw-stat">
+            <span class="rw-stat-num">Web & DTP</span>
+            <span class="rw-stat-label">対応デザイン</span>
+          </div>
+          <div class="rw-stat-divider"></div>
+          <div class="rw-stat">
+            <span class="rw-stat-num">2024–2026</span>
+            <span class="rw-stat-label">制作年</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="container-editorial" style="position:relative; z-index:1;">
-      <Breadcrumbs items={[{ label: 'Works' }]} />
-
-      <p class="section-label reveal" style="margin-top:24px;">Works</p>
-
-      <div class="works-hero-headline reveal" style="margin-top:12px; transition-delay:80ms;">
-        <div class="works-glitch-container">
-          <span class="works-glitch-layer works-gl1">Selected</span>
-          <span class="works-glitch-layer works-gl2">Selected</span>
-          <span class="works-glitch-layer works-gl3">Selected</span>
-        </div>
-        <div class="works-glitch-container" style="font-style:italic;">
-          <span class="works-glitch-layer works-gl1">Projects.</span>
-          <span class="works-glitch-layer works-gl2">Projects.</span>
-          <span class="works-glitch-layer works-gl3">Projects.</span>
-        </div>
-      </div>
-
-      <p class="reveal works-hero-desc" style="transition-delay:160ms;">
-        DTP・WEB 合わせて 300 件以上の実績より、<br class="sp-hide" />代表的なプロジェクトをご紹介します。
-      </p>
-
-      <!-- Stats mini bar -->
-      <div class="works-stats reveal" style="transition-delay:240ms;">
-        <div class="works-stat-item">
-          <span class="works-stat-num"><span class="count-up" data-target="300" data-suffix="+">0</span></span>
-          <span class="works-stat-label">Projects</span>
-        </div>
-        <div class="works-stat-divider"></div>
-        <div class="works-stat-item">
-          <span class="works-stat-num">Web & DTP</span>
-          <span class="works-stat-label">Design</span>
-        </div>
-        <div class="works-stat-divider"></div>
-        <div class="works-stat-item">
-          <span class="works-stat-num">2024–2026</span>
-          <span class="works-stat-label">Years</span>
-        </div>
-      </div>
+    <!-- Wave divider -->
+    <div class="rw-wave rw-wave-bot">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,0 C300,60 900,60 1200,0 L1200,60 L0,60 Z" fill="#fff"/></svg>
     </div>
   </section>
 
   <!-- ── Filter ── -->
-  <div class="container-editorial works-filter-wrap reveal">
-    <div class="works-filter-header">
-      <span class="works-filter-label">Filter</span>
-      <div class="works-filter-row" id="filter-row">
-        <button class="works-filter-btn active" data-filter="all">All</button>
+  <div class="rw-wrap rw-filter-section">
+    <div class="rw-filter-header">
+      <span class="rw-filter-label">カテゴリで絞り込む</span>
+      <div class="rw-filter-row" id="filter-row">
+        <button class="rw-filter-btn active" data-filter="all">すべて</button>
         {allTags.map((tag) => (
-          <button class="works-filter-btn" data-filter={tag}>{tag}</button>
+          <button class="rw-filter-btn" data-filter={tag}>{tag}</button>
         ))}
       </div>
     </div>
   </div>
 
   <!-- ── Works Grid ── -->
-  <section class="container-editorial works-grid-section">
-    <div class="works-grid" id="works-grid">
+  <section class="rw-wrap rw-grid-section">
+    <div class="rw-grid" id="works-grid">
       {works.map((work, i) => {
         const noLink = !!work.noLink;
         const isExternal = !noLink && !!work.url;
         const href = work.url || `/works/${work.slug}/`;
         const tagsArr = work.tags || [];
-        const firstTag = tagsArr[0] || '';
         const CardTag = noLink ? 'div' : 'a';
         const linkProps = noLink
           ? {}
           : { href, ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}) };
         return (
-          <div class="work-item" data-tags={tagsArr.join(',')} style={`animation-delay:${Math.min(i, 8) * 55}ms`}>
+          <div class="rw-item" data-tags={tagsArr.join(',')} style={`animation-delay:${Math.min(i, 11) * 60}ms`}>
             <CardTag
-              class={`work-card${noLink ? ' work-card-static' : ''}`}
+              class={`rw-card${noLink ? ' rw-card-static' : ''}`}
               {...linkProps}
             >
-              <div class="work-thumb">
-                <img src={work.thumbnail} alt={`${work.client}｜${work.title}（${work.industry}）の制作実績`} loading="lazy" width="600" height="400" class="work-img" />
-                <div class="work-overlay"></div>
-                <div class="work-hover-info">
-                  <span class="work-hover-client">{work.client}</span>
-                  {!noLink && <span class="work-hover-link">{isExternal ? 'Visit ↗' : 'View →'}</span>}
-                </div>
+              <div class="rw-thumb">
+                <img src={work.thumbnail} alt={`${work.client}｜${work.title}（${work.industry}）の制作実績`} loading="lazy" width="600" height="400" />
+                {!noLink && (
+                  <div class="rw-thumb-overlay">
+                    <span class="rw-view-label">
+                      {isExternal ? 'サイトを見る ↗' : '詳しく見る →'}
+                    </span>
+                  </div>
+                )}
               </div>
-              <div class="work-meta">
-                <div class="work-meta-left">
-                  <p class="work-client">{work.client}</p>
-                  <p class="work-title-text">{work.title}</p>
+              <div class="rw-body">
+                <div class="rw-tags">
+                  {tagsArr.map((tag: string) => (
+                    <span>{tag}</span>
+                  ))}
+                  <span class="rw-year-tag">{work.year}</span>
                 </div>
-                <div class="work-meta-right">
-                  <span class="work-year">{work.year}</span>
-                  {firstTag && <span class="work-tag-first">{firstTag}</span>}
-                </div>
+                <h3 class="rw-card-title">{work.title}</h3>
+                <p class="rw-card-client">{work.client}</p>
               </div>
             </CardTag>
           </div>
@@ -145,406 +134,387 @@ const itemListJsonLd = {
 </BaseLayout>
 
 <style is:global>
-  /* ══════════════════════════════════════
-     WORKS PAGE — REDESIGNED HERO + GRID
-     ══════════════════════════════════════ */
+  /* ══════════════════════════════════════════════
+     WORKS PAGE — RENEWAL PASTEL DESIGN
+     Matching sane-design_sample.html design system
+     ══════════════════════════════════════════════ */
 
-  /* ── Hero Section ── */
-  .works-hero-section {
+  /* ── Design Tokens (scoped to works page) ── */
+  .rw-hero,
+  .rw-filter-section,
+  .rw-grid-section {
+    --rw-primary: #4FB4E8;
+    --rw-primary-dark: #2E90C4;
+    --rw-primary-deep: #1c6f9c;
+    --rw-sky: #E4F4FD;
+    --rw-cream: #FFF6E0;
+    --rw-mint: #E9F7E4;
+    --rw-green: #78C25E;
+    --rw-orange: #F79B3E;
+    --rw-orange-dark: #c76f14;
+    --rw-text: #3A4256;
+    --rw-sub: #7A8494;
+    --rw-radius: 24px;
+    --rw-shadow: 0 10px 30px rgba(58,66,86,.08);
+
+    font-family: "Noto Sans JP", sans-serif;
+    color: var(--rw-text);
+  }
+
+  /* ── Utility ── */
+  .rw-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 22px;
+  }
+
+  @media (max-width: 560px) {
+    .rw-sp-hide { display: none; }
+  }
+
+  /* ── Hero ── */
+  .rw-hero {
     position: relative;
-    overflow: hidden;
-    padding: 48px 0 64px;
+    background: radial-gradient(120% 90% at 50% 0%, #D7EFFB 0%, #EAF7FE 50%, #fff 100%);
+    padding: 36px 0 80px;
+  }
+  .rw-hero .breadcrumbs {
+    margin-bottom: 0;
+  }
+  .rw-hero .breadcrumbs a,
+  .rw-hero .breadcrumbs span {
+    color: var(--rw-sub) !important;
+  }
+  .rw-hero .breadcrumbs a:hover {
+    color: var(--rw-primary) !important;
   }
 
-  .works-hero-bg {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    background: linear-gradient(180deg, #e8eaf0 0%, #f5f6fa 60%, #ffffff 100%);
+  .rw-hero-content {
+    text-align: center;
+    margin-top: 32px;
   }
 
-  .works-wave {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 43%;
-    animation: worksWaveRotate linear infinite;
-  }
-  .works-wave1 {
-    width: 200vw; height: 200vw; top: 20%;
-    background: rgba(180, 190, 210, 0.18);
-    animation-duration: 26s;
-  }
-  .works-wave2 {
-    width: 185vw; height: 185vw; top: 30%;
-    background: rgba(160, 175, 200, 0.14);
-    animation-duration: 20s;
-    animation-direction: reverse;
-    animation-delay: -3s;
-  }
-  .works-wave3 {
-    width: 170vw; height: 170vw; top: 40%;
-    background: rgba(140, 158, 190, 0.10);
-    animation-duration: 16s;
-    animation-delay: -6s;
-  }
-  @keyframes worksWaveRotate {
-    from { transform: translateX(-50%) rotate(0deg); }
-    to   { transform: translateX(-50%) rotate(360deg); }
-  }
-
-  /* ── Glitch Text (Heroタイトル) ── */
-  .works-hero-headline {
-    font-family: var(--font-serif);
-    font-size: clamp(36px, 7vw, 88px);
-    font-weight: 300;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-  }
-  .works-glitch-container {
-    position: relative;
+  .rw-sec-sub {
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--rw-primary);
+    text-transform: uppercase;
     display: block;
-    line-height: 1.1;
-  }
-  .works-glitch-layer {
-    display: block;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    font-style: inherit;
-    letter-spacing: inherit;
-  }
-  .works-gl1 {
-    position: relative;
-    color: var(--color-text);
-    animation: worksGlitch1 2.5s infinite;
-  }
-  .works-gl2 {
-    position: absolute;
-    top: 0; left: 0;
-    color: #67f3da;
-    animation: worksGlitch2 2.5s infinite;
-  }
-  .works-gl3 {
-    position: absolute;
-    top: 0; left: 0;
-    color: #f16f6f;
-    animation: worksGlitch3 2.5s infinite;
-  }
-  @keyframes worksGlitch1 {
-    0%   { transform: none;                   opacity: 1;    }
-    7%   { transform: skew(-0.5deg, -0.9deg); opacity: 0.75; }
-    10%  { transform: none;                   opacity: 1;    }
-    27%  { transform: none;                   opacity: 1;    }
-    30%  { transform: skew(0.8deg, -0.1deg);  opacity: 0.75; }
-    35%  { transform: none;                   opacity: 1;    }
-    52%  { transform: none;                   opacity: 1;    }
-    55%  { transform: skew(-1deg, 0.2deg);    opacity: 0.75; }
-    50%  { transform: none;                   opacity: 1;    }
-    72%  { transform: none;                   opacity: 1;    }
-    75%  { transform: skew(0.4deg, 1deg);     opacity: 0.75; }
-    80%  { transform: none;                   opacity: 1;    }
-    100% { transform: none;                   opacity: 1;    }
-  }
-  @keyframes worksGlitch2 {
-    0%   { transform: none;                    opacity: 0.25; }
-    7%   { transform: translate(-2px, -3px);   opacity: 0.5;  }
-    10%  { transform: none;                    opacity: 0.25; }
-    27%  { transform: none;                    opacity: 0.25; }
-    30%  { transform: translate(-5px, -2px);   opacity: 0.5;  }
-    35%  { transform: none;                    opacity: 0.25; }
-    52%  { transform: none;                    opacity: 0.25; }
-    55%  { transform: translate(-5px, -1px);   opacity: 0.5;  }
-    50%  { transform: none;                    opacity: 0.25; }
-    72%  { transform: none;                    opacity: 0.25; }
-    75%  { transform: translate(-2px, -6px);   opacity: 0.5;  }
-    80%  { transform: none;                    opacity: 0.25; }
-    100% { transform: none;                    opacity: 0.25; }
-  }
-  @keyframes worksGlitch3 {
-    0%   { transform: none;                   opacity: 0.25; }
-    7%   { transform: translate(2px, 3px);    opacity: 0.5;  }
-    10%  { transform: none;                   opacity: 0.25; }
-    27%  { transform: none;                   opacity: 0.25; }
-    30%  { transform: translate(5px, 2px);    opacity: 0.5;  }
-    35%  { transform: none;                   opacity: 0.25; }
-    52%  { transform: none;                   opacity: 0.25; }
-    55%  { transform: translate(5px, 1px);    opacity: 0.5;  }
-    50%  { transform: none;                   opacity: 0.25; }
-    72%  { transform: none;                   opacity: 0.25; }
-    75%  { transform: translate(2px, 6px);    opacity: 0.5;  }
-    80%  { transform: none;                   opacity: 0.25; }
-    100% { transform: none;                   opacity: 0.25; }
+    margin-bottom: 8px;
   }
 
-  .works-hero-desc {
-    margin-top: 28px;
-    max-width: 560px;
+  .rw-hero-title {
+    font-family: "Noto Sans JP", sans-serif !important;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 900 !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0.02em !important;
+    color: var(--rw-text);
+    margin-bottom: 16px;
+  }
+
+  .rw-hero-desc {
     font-size: 15px;
-    color: var(--color-muted);
+    color: var(--rw-sub);
+    font-weight: 500;
     line-height: 1.9;
+    max-width: 520px;
+    margin: 0 auto;
   }
 
-  /* ── Stats Mini Bar ── */
-  .works-stats {
-    display: flex;
+  /* ── Stats Strip ── */
+  .rw-stats {
+    display: inline-flex;
     align-items: center;
     gap: 0;
-    margin-top: 40px;
-    padding: 20px 0;
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
+    margin-top: 32px;
+    background: #fff;
+    border-radius: 26px;
+    box-shadow: var(--rw-shadow);
+    padding: 20px 8px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  .works-stat-item {
+  .rw-stat {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 4px;
-    padding: 0 32px;
+    padding: 0 28px;
   }
-  .works-stat-item:first-child { padding-left: 0; }
-  .works-stat-item:last-child { padding-right: 0; }
-  .works-stat-num {
-    font-family: var(--font-serif);
-    font-size: clamp(24px, 3vw, 36px);
-    font-weight: 300;
-    line-height: 1;
-    letter-spacing: -0.02em;
+  .rw-stat-num {
+    font-family: "Inter", sans-serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 800;
+    color: var(--rw-primary);
+    line-height: 1.2;
   }
-  .works-stat-label {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-muted);
+  .rw-stat-label {
+    font-size: 12px;
+    color: var(--rw-sub);
+    font-weight: 700;
+    font-family: "Noto Sans JP", sans-serif;
   }
-  .works-stat-divider {
-    width: 1px;
-    height: 32px;
-    background: var(--color-border);
+  .rw-stat-divider {
+    width: 2px;
+    height: 28px;
+    background: #E7ECF2;
+    border-radius: 1px;
     flex-shrink: 0;
+  }
+
+  /* ── Wave ── */
+  .rw-wave {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+    z-index: 1;
+  }
+  .rw-wave-bot {
+    bottom: -1px;
+  }
+  .rw-wave svg {
+    width: 100%;
+    height: 60px;
+    display: block;
   }
 
   /* ── Filter ── */
-  .works-filter-wrap {
-    padding: 32px 0;
+  .rw-filter-section {
+    padding: 32px 22px;
   }
-  .works-filter-header {
+  .rw-filter-header {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
     flex-wrap: wrap;
   }
-  .works-filter-label {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--color-muted);
-    font-weight: 500;
+  .rw-filter-label {
+    font-size: 13px;
+    color: var(--rw-sub);
+    font-weight: 700;
+    font-family: "Noto Sans JP", sans-serif;
     white-space: nowrap;
     flex-shrink: 0;
   }
-  .works-filter-row {
+  .rw-filter-row {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
   }
-  .works-filter-btn {
+  .rw-filter-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 7px 18px;
-    border: 1px solid var(--color-border);
-    background: transparent;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    padding: 8px 20px;
+    border: 2px solid #CDEBFA;
+    background: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: "Noto Sans JP", sans-serif;
     cursor: pointer;
-    border-radius: 100px;
-    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-    font-family: var(--font-sans);
-    color: var(--color-muted);
+    border-radius: 999px;
+    color: var(--rw-primary-dark);
+    transition: all 0.2s ease;
     white-space: nowrap;
   }
-  .works-filter-btn:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
+  .rw-filter-btn:hover {
+    background: var(--rw-sky);
+    border-color: var(--rw-primary);
+    color: var(--rw-primary-dark);
   }
-  .works-filter-btn.active {
-    border-color: var(--color-primary);
-    background: var(--color-primary);
+  .rw-filter-btn.active {
+    background: var(--rw-primary);
+    border-color: var(--rw-primary);
     color: #fff;
+    box-shadow: 0 4px 0 var(--rw-primary-deep);
   }
 
   /* ── Grid ── */
-  .works-grid-section { padding-bottom: 120px; }
-  .works-grid {
+  .rw-grid-section {
+    padding-bottom: 80px;
+  }
+  .rw-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 48px 28px;
+    gap: 24px;
   }
-  .work-item {
+  .rw-item {
     display: block;
     min-width: 0;
-    animation: workFadeIn 0.8s cubic-bezier(0.19, 1, 0.22, 1) both;
+    animation: rwFadeUp 0.75s cubic-bezier(.22,1,.36,1) both;
   }
-  @keyframes workFadeIn {
-    from { opacity: 0; transform: translateY(32px); }
+  @keyframes rwFadeUp {
+    from { opacity: 0; transform: translateY(30px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  .work-item.hidden {
+  .rw-item.hidden {
     display: none;
   }
 
   /* ── Card ── */
-  .work-card {
+  .rw-card {
     display: block;
+    border-radius: var(--rw-radius);
+    overflow: hidden;
+    background: #fff;
+    box-shadow: var(--rw-shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
     text-decoration: none;
+    color: inherit;
+    height: 100%;
+  }
+  .rw-card:not(.rw-card-static):hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(58,66,86,.14);
+  }
+  .rw-card-static {
+    cursor: default;
   }
 
-  /* サムネイル */
-  .work-thumb {
+  /* Thumbnail */
+  .rw-thumb {
     position: relative;
     overflow: hidden;
-    background: var(--color-surface);
-    width: 100%;
-    padding-top: 66.67%;
-    border-radius: 4px;
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, #D7EFFB, #E9F7E4);
   }
-  .work-img {
-    position: absolute;
-    inset: 0;
+  .rw-thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: transform 0.45s ease;
   }
-  .work-overlay {
+  .rw-card:not(.rw-card-static):hover .rw-thumb img {
+    transform: scale(1.05);
+  }
+
+  .rw-thumb-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 50%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-
-  /* ホバー時に画像下部に出るバナー */
-  .work-hover-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px 20px 18px;
-    transform: translateY(8px);
-    opacity: 0;
-    transition: all 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+    background: linear-gradient(to top, rgba(58,66,86,0.6) 0%, transparent 50%);
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
-    gap: 8px;
+    justify-content: flex-end;
+    padding: 16px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
-  .work-hover-client {
-    font-family: var(--font-serif);
-    font-size: 14px;
-    color: #fff;
-    font-weight: 400;
-    line-height: 1.3;
+  .rw-card:not(.rw-card-static):hover .rw-thumb-overlay {
+    opacity: 1;
   }
-  .work-hover-link {
+
+  .rw-view-label {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.3);
-    padding: 5px 12px;
-    border-radius: 100px;
-    font-size: 10px;
-    color: #fff;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    flex-shrink: 0;
+    gap: 6px;
+    background: rgba(255,255,255,0.95);
+    color: var(--rw-primary-dark);
+    font-size: 12px;
+    font-weight: 700;
+    font-family: "Noto Sans JP", sans-serif;
+    padding: 6px 16px;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(58,66,86,0.15);
   }
-  .work-card:not(.work-card-static):hover .work-img { transform: scale(1.05); }
-  .work-card:not(.work-card-static):hover .work-overlay { opacity: 1; }
-  .work-card:not(.work-card-static):hover .work-hover-info { opacity: 1; transform: translateY(0); }
 
-  /* リンク無効のサムネ（旧ポートフォリオ）：クリック不可・ホバー演出なし */
-  .work-card-static { cursor: default; }
-  .work-card-static .work-thumb { pointer-events: none; }
-
-  /* メタ情報 */
-  .work-meta {
-    margin-top: 16px;
+  /* Card body */
+  .rw-body {
+    padding: 18px 20px 22px;
+  }
+  .rw-tags {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
   }
-  .work-meta-left { flex: 1; min-width: 0; }
-  .work-client {
-    font-family: var(--font-serif);
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 1.4;
-    color: var(--color-primary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .work-title-text {
+  .rw-tags span {
     font-size: 11px;
-    color: var(--color-muted);
-    letter-spacing: 0.04em;
-    margin-top: 3px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    background: var(--rw-sky);
+    color: var(--rw-primary-dark);
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-family: "Noto Sans JP", sans-serif;
   }
-  .work-meta-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
-    flex-shrink: 0;
+  .rw-tags .rw-year-tag {
+    background: var(--rw-cream);
+    color: var(--rw-orange-dark);
   }
-  .work-year {
-    font-size: 11px;
-    color: var(--color-muted);
-    letter-spacing: 0.06em;
-    font-variant-numeric: tabular-nums;
+  .rw-card-title {
+    font-family: "Noto Sans JP", sans-serif !important;
+    font-size: 17px;
+    font-weight: 900 !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0 !important;
+    color: var(--rw-text);
+    margin-bottom: 4px;
   }
-  .work-tag-first {
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-muted);
-    border: 1px solid var(--color-border);
-    padding: 2px 7px;
-    border-radius: 100px;
-    white-space: nowrap;
-  }
-
-  /* ── SP hide helper ── */
-  @media (max-width: 560px) {
-    .sp-hide { display: none; }
+  .rw-card-client {
+    font-size: 13px;
+    color: var(--rw-sub);
+    font-weight: 500;
   }
 
   /* ── Responsive ── */
-  @media (max-width: 1024px) {
-    .works-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 20px; }
-  }
   @media (max-width: 900px) {
-    .works-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 16px; }
+    .rw-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
   }
   @media (max-width: 560px) {
-    .works-hero-section { padding: 32px 0 48px; }
-    .works-hero-headline { font-size: clamp(32px, 10vw, 52px); }
-    .works-stats { flex-wrap: wrap; gap: 16px; }
-    .works-stat-divider { display: none; }
-    .works-stat-item { padding: 0 16px 0 0; }
-    .works-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
-    .works-filter-header { gap: 12px; }
-    .works-filter-row { gap: 6px; }
+    .rw-hero {
+      padding: 24px 0 64px;
+    }
+    .rw-hero-content {
+      margin-top: 24px;
+    }
+    .rw-hero-title {
+      font-size: 26px;
+    }
+    .rw-stats {
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px 24px;
+    }
+    .rw-stat-divider {
+      width: 60px;
+      height: 2px;
+    }
+    .rw-stat {
+      padding: 0;
+    }
+    .rw-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 20px;
+    }
+    .rw-filter-section {
+      padding: 24px 22px;
+    }
+    .rw-filter-header {
+      gap: 10px;
+    }
+    .rw-filter-row {
+      gap: 6px;
+    }
+    .rw-filter-btn {
+      font-size: 12px;
+      padding: 6px 14px;
+    }
+  }
+
+  /* ── Reduced motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    .rw-item {
+      animation: none !important;
+      opacity: 1 !important;
+    }
+    .rw-thumb img {
+      transition: none !important;
+    }
   }
 </style>
 
@@ -553,12 +523,12 @@ const itemListJsonLd = {
   const filterRow = document.getElementById('filter-row');
   if (filterRow) {
     filterRow.addEventListener('click', (e) => {
-      const btn = (e.target as HTMLElement).closest('.works-filter-btn') as HTMLElement | null;
+      const btn = (e.target as HTMLElement).closest('.rw-filter-btn') as HTMLElement | null;
       if (!btn) return;
-      filterRow.querySelectorAll('.works-filter-btn').forEach((b) => b.classList.remove('active'));
+      filterRow.querySelectorAll('.rw-filter-btn').forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
       const f = btn.dataset.filter;
-      document.querySelectorAll('.work-item').forEach((item) => {
+      document.querySelectorAll('.rw-item').forEach((item) => {
         const el = item as HTMLElement;
         const show = f === 'all' || (el.dataset.tags || '').split(',').includes(f as string);
         el.classList.toggle('hidden', !show);
@@ -598,12 +568,6 @@ const itemListJsonLd = {
       }
     });
   }, { threshold: 0.5 });
-  document.querySelectorAll('.count-up').forEach(el => countObserver.observe(el));
-
-  // ── Scroll Reveal ──
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-    { threshold: 0.05, rootMargin: '0px 0px -40px 0px' }
-  );
-  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  document.querySelectorAll('.rw-count').forEach(el => countObserver.observe(el));
 </script>
+</BaseLayout>
