@@ -1,6 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import CTABanner from '../../components/CTABanner.astro';
+import RenewalLayout from '../../layouts/RenewalLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 import { SITE_URL } from '../../consts';
@@ -29,7 +28,7 @@ const itemListJsonLd = {
 };
 ---
 
-<BaseLayout
+<RenewalLayout
   title="制作実績一覧｜ホームページ・LP・チラシ300件以上 | Sane Design"
   description="Sane Designのホームページ制作・LP・DTPデザイン実績一覧。コーポレートサイト、LP、サロン予約サイト、士業サイト、飲食店チラシなど300件以上の制作実績から代表作をご紹介します。"
   jsonLd={itemListJsonLd}
@@ -130,8 +129,32 @@ const itemListJsonLd = {
     </div>
   </section>
 
-  <CTABanner />
-</BaseLayout>
+  <!-- ── Renewal CTA Section ── -->
+  <section class="rw-cta-final">
+    <div class="rw-cta-wave-top">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="#fff"/></svg>
+    </div>
+    <div class="rw-wrap rw-cta-inner">
+      <img
+        class="rw-cta-illust"
+        src="/assets/male_creator_with_window.png"
+        alt="クリエイターのイラスト"
+        width="480"
+        height="480"
+        loading="lazy"
+      />
+      <h2 class="rw-cta-heading">まずはwebデザインを無料で相談！</h2>
+      <p class="rw-cta-text">
+        知識や説明があまりできなくても大丈夫です！<br />
+        まずは一度ご相談頂けましたら、こちらから様々な提案をさせて頂きます。
+      </p>
+      <a href="/contact/" class="rn-btn rn-btn-primary rw-cta-btn">
+        <span>無料で相談してみる</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </section>
+</RenewalLayout>
 
 <style is:global>
   /* ══════════════════════════════════════════════
@@ -503,6 +526,76 @@ const itemListJsonLd = {
     .rw-filter-btn {
       font-size: 12px;
       padding: 6px 14px;
+    }
+  }
+
+  /* ── CTA Section ── */
+  .rw-cta-final {
+    position: relative;
+    background: linear-gradient(135deg, #4FB4E8 0%, #69C6D9 100%);
+    color: #fff;
+    text-align: center;
+    padding: 0 0 80px;
+    margin-top: 40px;
+    overflow: hidden;
+  }
+  .rw-cta-wave-top {
+    line-height: 0;
+  }
+  .rw-cta-wave-top svg {
+    width: 100%;
+    height: 60px;
+    display: block;
+  }
+  .rw-cta-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .rw-cta-illust {
+    width: 420px;
+    max-width: 80%;
+    margin: 0 auto -10px;
+    filter: drop-shadow(0 10px 16px rgba(0,0,0,0.12));
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 98%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 98%);
+  }
+  .rw-cta-heading {
+    font-family: "Noto Sans JP", sans-serif !important;
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 900 !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0.02em !important;
+    margin-bottom: 16px;
+    color: #fff;
+  }
+  .rw-cta-text {
+    font-size: 16px;
+    opacity: 0.97;
+    margin-bottom: 24px;
+    font-weight: 500;
+    line-height: 1.9;
+  }
+  .rw-cta-btn {
+    font-size: 18px;
+    padding: 18px 44px;
+  }
+  @media (max-width: 560px) {
+    .rw-cta-final {
+      padding: 0 0 60px;
+    }
+    .rw-cta-btn {
+      font-size: 15px;
+      padding: 16px 28px;
+      white-space: nowrap;
+    }
+    .rw-cta-heading {
+      font-size: 22px;
+    }
+    .rw-cta-text {
+      font-size: 14px;
     }
   }
 

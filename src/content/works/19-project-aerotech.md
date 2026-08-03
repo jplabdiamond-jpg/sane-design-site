@@ -6,7 +6,6 @@ year: 2025
 thumbnail: '/works/work-19.jpg'
 tags:
   - Corporate
-  - Responsive
 role: 'Design & Development'
 order: 1
 draft: false

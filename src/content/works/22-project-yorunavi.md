@@ -5,8 +5,8 @@ industry: 'エンターテインメント'
 year: 2025
 thumbnail: '/works/work-22.jpg'
 tags:
-  - Web Design
-  - Entertainment
+  - ポータルサイト
+  - ナイトワーク
 role: 'Design & Development'
 order: 4
 draft: false

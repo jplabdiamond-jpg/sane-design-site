@@ -6,7 +6,7 @@ year: 2026
 thumbnail: '/works/work-32.jpg'
 tags:
   - LP
-  - Web
+  - 自動車
 role: 'Design & Development'
 order: -1
 draft: false

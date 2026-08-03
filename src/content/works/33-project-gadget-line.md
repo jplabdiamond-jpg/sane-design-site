@@ -7,7 +7,7 @@ thumbnail: '/works/work-33.jpg'
 tags:
   - Web
   - Media
-  - Responsive
+  - ブログ
 role: 'Design & Development'
 order: -3
 draft: false

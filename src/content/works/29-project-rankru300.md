@@ -6,7 +6,7 @@ year: 2025
 thumbnail: '/works/work-29.png'
 tags:
   - LP
-  - Web
+  - 自動車
 role: 'Design & Development'
 order: 4
 draft: false

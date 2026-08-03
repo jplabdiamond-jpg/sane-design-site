@@ -6,7 +6,7 @@ year: 2025
 thumbnail: '/works/work-20.jpg'
 tags:
   - Corporate
-  - Responsive
+  - 宿泊施設
 role: 'Design & Development'
 order: 2
 draft: false

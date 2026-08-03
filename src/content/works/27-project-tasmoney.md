@@ -6,7 +6,6 @@ year: 2025
 thumbnail: '/works/work-27.png'
 tags:
   - Web
-  - LP
 role: 'Design & Development'
 order: 2
 draft: false
