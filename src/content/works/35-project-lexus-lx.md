@@ -33,7 +33,7 @@ draft: false
 最も注力したのはモバイル最適化です。買取LPはスマホ流入が大半を占めるため、すべてモバイルファーストで構築し、横スクロールの発生やボタンの押しにくさを徹底的に排除しました。加えて、強調表現を盛り込みすぎると安っぽく見えるリスクがあるため、訴求の強さと品の良さのバランスを何度も調整。短納期の中でも「フラッグシップにふさわしい静けさ」を最後まで崩さないことを意識して仕上げています。
 
 <p class="lexus-cta">
-  <a href="https://lexus-lx-car-kaitori.net/" target="_blank" rel="noopener noreferrer" class="site-link-btn-md">公開サイトを見る ↗</a>
+  <a href="https://lexus-lx.car-kaitori.net/" target="_blank" rel="noopener noreferrer" class="site-link-btn-md">公開サイトを見る ↗</a>
 </p>
 
 </div>
