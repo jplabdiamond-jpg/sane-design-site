@@ -521,8 +521,10 @@ const jsonLd = {
   .btn-primary:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--orange-dark)}
   .btn-blue{background:var(--primary);color:#fff;box-shadow:0 5px 0 var(--primary-deep)}
   .btn-blue:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--primary-deep)}
-  .btn-ghost{background:#fff;color:var(--primary-dark);box-shadow:0 5px 0 #CDEBFA;border:2px solid #CDEBFA}
-  .btn-ghost:hover{transform:translateY(2px);box-shadow:0 3px 0 #CDEBFA}
+  .btn-ghost{background:#fff;color:var(--primary-dark)!important;box-shadow:0 5px 0 #CDEBFA;border:2px solid #CDEBFA}
+  .btn-ghost:hover{transform:translateY(2px);box-shadow:0 3px 0 #CDEBFA;color:var(--primary-dark)!important}
+  .btn-ghost::after{display:none!important}
+  .btn-primary::after{display:none!important}
 
   /* section base */
   section{padding:84px 0;position:relative}

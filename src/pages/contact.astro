@@ -374,7 +374,9 @@ import RenewalLayout from '../layouts/RenewalLayout.astro';
 .btn-primary:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--accent-shadow)}
 .btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .btn-ghost{background:#fff;color:var(--primary-dark)!important;box-shadow:0 5px 0 #CDEBFA;border:2px solid #CDEBFA}
-.btn-ghost:hover{transform:translateY(2px);box-shadow:0 3px 0 #CDEBFA}
+.btn-ghost:hover{transform:translateY(2px);box-shadow:0 3px 0 #CDEBFA;color:var(--primary-dark)!important}
+.btn-ghost::after{display:none!important}
+.btn-primary::after{display:none!important}
 
 .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
 .ct-hero{padding:72px 0 0;text-align:center}
