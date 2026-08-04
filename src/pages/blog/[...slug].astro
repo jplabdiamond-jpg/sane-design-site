@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CTABanner from '../../components/CTABanner.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
@@ -97,5 +96,276 @@ const articleJsonLd = {
     </section>
   </article>
 
-  <CTABanner />
+  <!-- ── Blog CTA Section — 5種類のCTAボタン ── -->
+  <section class="blog-cta-section">
+    <div class="blog-cta-wave-top">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="#fff"/></svg>
+    </div>
+    <div class="blog-cta-container">
+      <div class="blog-cta-header">
+        <span class="blog-cta-sub">Contact Us</span>
+        <h2 class="blog-cta-title">まずは、Webサイト制作について<br class="blog-cta-sp-hide" />相談してみませんか？</h2>
+        <p class="blog-cta-desc">
+          知識や説明があまりできなくても大丈夫です！<br />
+          まずは一度ご相談頂けましたら、こちらから様々な提案をさせて頂きます。
+        </p>
+      </div>
+
+      <div class="blog-cta-grid">
+        <!-- CTA 1: 無料相談 -->
+        <a href="/contact/" class="blog-cta-card blog-cta-card--primary">
+          <div class="blog-cta-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+            </svg>
+          </div>
+          <h3 class="blog-cta-card-title">まずは無料で相談してみる</h3>
+          <p class="blog-cta-card-desc">ホームページについて何でもお気軽にご質問ください。お見積りも無料です。</p>
+          <span class="blog-cta-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+
+        <!-- CTA 2: 制作実績を見る -->
+        <a href="/works/" class="blog-cta-card">
+          <div class="blog-cta-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a1.5 1.5 0 001.5-1.5V4.5a1.5 1.5 0 00-1.5-1.5H3.75a1.5 1.5 0 00-1.5 1.5v15a1.5 1.5 0 001.5 1.5z" />
+            </svg>
+          </div>
+          <h3 class="blog-cta-card-title">制作実績を見てみる</h3>
+          <p class="blog-cta-card-desc">WEB・DTP合わせて300件以上の制作実績をご覧いただけます。</p>
+          <span class="blog-cta-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+
+        <!-- CTA 3: 料金プランを見る -->
+        <a href="/services/web-design/" class="blog-cta-card">
+          <div class="blog-cta-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="blog-cta-card-title">料金プランを確認する</h3>
+          <p class="blog-cta-card-desc">ホームページ制作の料金プランと各種サービス内容をご案内しています。</p>
+          <span class="blog-cta-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+
+        <!-- CTA 4: 今すぐ注文する -->
+        <a href="/payment/" class="blog-cta-card">
+          <div class="blog-cta-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+            </svg>
+          </div>
+          <h3 class="blog-cta-card-title">今すぐ注文する</h3>
+          <p class="blog-cta-card-desc">プランが決まっている方はこちら。最速3日で納品いたします。</p>
+          <span class="blog-cta-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+
+        <!-- CTA 5: SEO対策について -->
+        <a href="/services/seo/" class="blog-cta-card">
+          <div class="blog-cta-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
+            </svg>
+          </div>
+          <h3 class="blog-cta-card-title">SEO対策を依頼する</h3>
+          <p class="blog-cta-card-desc">検索順位でお悩みの方へ。内部SEO対策でアクセスアップをサポートします。</p>
+          <span class="blog-cta-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<style is:global>
+  /* ══════════════════════════════════════════════
+     BLOG DETAIL CTA SECTION
+     ══════════════════════════════════════════════ */
+  .blog-cta-section {
+    position: relative;
+    background: linear-gradient(135deg, #4FB4E8 0%, #69C6D9 100%);
+    color: #fff;
+    padding: 0 0 80px;
+    margin-top: 0;
+    overflow: hidden;
+  }
+  .blog-cta-wave-top {
+    line-height: 0;
+  }
+  .blog-cta-wave-top svg {
+    width: 100%;
+    height: 60px;
+    display: block;
+  }
+  .blog-cta-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 22px;
+  }
+  .blog-cta-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .blog-cta-sub {
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .blog-cta-title {
+    font-family: "Noto Sans JP", sans-serif !important;
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 900 !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0.02em !important;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .blog-cta-desc {
+    font-size: 15px;
+    opacity: 0.9;
+    font-weight: 500;
+    line-height: 1.9;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  @media (max-width: 560px) {
+    .blog-cta-sp-hide { display: none; }
+  }
+
+  /* ── CTA Grid ── */
+  .blog-cta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .blog-cta-grid > :last-child {
+    grid-column: 1 / -1;
+  }
+
+  /* ── CTA Card ── */
+  .blog-cta-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-decoration: none;
+    color: #fff;
+    position: relative;
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    overflow: hidden;
+  }
+  .blog-cta-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255,255,255,0.2);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+  }
+  .blog-cta-card--primary {
+    background: #fff;
+    color: #3A4256;
+    border-color: transparent;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+  }
+  .blog-cta-card--primary:hover {
+    background: #fff;
+    box-shadow: 0 20px 48px rgba(0,0,0,0.16);
+  }
+
+  .blog-cta-card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    flex-shrink: 0;
+  }
+  .blog-cta-card .blog-cta-card-icon {
+    background: rgba(255,255,255,0.15);
+  }
+  .blog-cta-card--primary .blog-cta-card-icon {
+    background: #E4F4FD;
+    color: #2E90C4;
+  }
+  .blog-cta-card-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .blog-cta-card-title {
+    font-family: "Noto Sans JP", sans-serif !important;
+    font-size: 16px;
+    font-weight: 800 !important;
+    line-height: 1.5 !important;
+    margin-bottom: 8px;
+  }
+  .blog-cta-card-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    opacity: 0.8;
+    margin-bottom: 8px;
+  }
+  .blog-cta-card--primary .blog-cta-card-desc {
+    color: #7A8494;
+    opacity: 1;
+  }
+
+  .blog-cta-card-arrow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .blog-cta-card:hover .blog-cta-card-arrow {
+    opacity: 0.7;
+    transform: translateX(0);
+  }
+  .blog-cta-card--primary:hover .blog-cta-card-arrow {
+    opacity: 1;
+    color: #2E90C4;
+  }
+  .blog-cta-card-arrow svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .blog-cta-grid {
+      grid-template-columns: 1fr;
+    }
+    .blog-cta-grid > :last-child {
+      grid-column: auto;
+    }
+    .blog-cta-section {
+      padding: 0 0 60px;
+    }
+    .blog-cta-card {
+      padding: 22px 20px;
+    }
+    .blog-cta-title {
+      font-size: 20px;
+    }
+  }
+</style>

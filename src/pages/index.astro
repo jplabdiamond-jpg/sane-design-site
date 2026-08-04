@@ -8,6 +8,24 @@ const jsonLd = {
   "url": "https://sane-design.net",
   "description": "最速3日納品・20,000円〜。個人事業主・中小企業のホームページ制作と内部SEO対策を専門とするデザインスタジオ。DTP・WEB合わせて実績300件以上。"
 };
+
+// note RSS fetch（最新3件をトップページに表示）
+let noteLatest: { title: string; link: string; pubDate: string; thumbnail: string }[] = [];
+try {
+  const rssRes = await fetch('https://note.com/sane_design2026/rss');
+  const rssText = await rssRes.text();
+  const itemMatches = [...rssText.matchAll(/<item>([\s\S]*?)<\/item>/g)];
+  noteLatest = itemMatches.slice(0, 3).map((m) => {
+    const item = m[1];
+    const title = item.match(/<title>([\s\S]*?)<\/title>/)?.[1]?.replace(/<!\[CDATA\[|\]\]>/g, '').trim() ?? '';
+    const link = item.match(/<link>([\s\S]*?)<\/link>/)?.[1]?.trim() ?? '';
+    const pubDate = item.match(/<pubDate>([\s\S]*?)<\/pubDate>/)?.[1]?.trim() ?? '';
+    const thumbnail = item.match(/<media:thumbnail[^>]*>([^<]+)<\/media:thumbnail>/)?.[1]?.trim() ?? item.match(/<media:thumbnail[^>]+url="([^"]+)"/)?.[1] ?? '';
+    return { title, link, pubDate, thumbnail };
+  });
+} catch (e) {
+  // fetch失敗時は空配列
+}
 ---
 
 <RenewalLayout
@@ -187,18 +205,43 @@ const jsonLd = {
   <div class="wrap">
     <div class="sec-head"><span class="sec-sub">News</span><h2 class="sec-title">お役立ちブログ<small>web・IT・AIに関する情報を発信しています</small></h2></div>
     <div class="news-grid">
-      <a class="news-card" href="https://note.com/sane_design2026" target="_blank" rel="noopener">
-        <div class="news-thumb"><img src="/assets/news/consultant.jpg" alt=""></div>
-        <div class="news-body"><time class="news-date">2026.06.27</time><h4>【コンサルタント生産性4倍】リサーチ・分析・提案資料をAIで激変させる完全ガイド</h4><span class="news-more">続きを読む <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a>
-      <a class="news-card" href="https://note.com/sane_design2026" target="_blank" rel="noopener">
-        <div class="news-thumb"><img src="/assets/news/driver.jpg" alt=""></div>
-        <div class="news-body"><time class="news-date">2026.06.26</time><h4>【配達ドライバーの革命】Claude×Maps APIで走行距離20%削減・月収1.5倍の完全実装</h4><span class="news-more">続きを読む <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a>
-      <a class="news-card" href="https://note.com/sane_design2026/n/nb7f5ee560e29" target="_blank" rel="noopener">
-        <div class="news-thumb"><img src="/assets/news/trimmer.jpg" alt=""></div>
-        <div class="news-body"><time class="news-date">2026.06.07</time><h4>【トリマー＆ペット業界】AIで来店3倍・物販月10万円UPを実現する完全実装ガイド</h4><span class="news-more">続きを読む <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a>
+      {noteLatest.length > 0 ? (
+        noteLatest.map((article) => {
+          const d = new Date(article.pubDate);
+          const dateStr = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+          return (
+            <a class="news-card" href={article.link} target="_blank" rel="noopener noreferrer">
+              <div class="news-thumb">
+                {article.thumbnail ? (
+                  <img src={article.thumbnail} alt={article.title} loading="lazy" width="600" height="338" />
+                ) : (
+                  <div style="width:100%;height:100%;background:linear-gradient(135deg,#D7EFFB,#E9F7E4);display:flex;align-items:center;justify-content:center;font-size:14px;color:#7A8494;">No Image</div>
+                )}
+              </div>
+              <div class="news-body">
+                <time class="news-date">{dateStr}</time>
+                <h4>{article.title}</h4>
+                <span class="news-more">noteで読む <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </div>
+            </a>
+          );
+        })
+      ) : (
+        <>
+          <a class="news-card" href="https://note.com/sane_design2026" target="_blank" rel="noopener">
+            <div class="news-thumb"><img src="/assets/news/consultant.jpg" alt="" /></div>
+            <div class="news-body"><time class="news-date">2026.06.27</time><h4>【コンサルタント生産性4倍】リサーチ・分析・提案資料をAIで激変させる完全ガイド</h4><span class="news-more">続きを読む <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+          </a>
+          <a class="news-card" href="https://note.com/sane_design2026" target="_blank" rel="noopener">
+            <div class="news-thumb"><img src="/assets/news/driver.jpg" alt="" /></div>
+            <div class="news-body"><time class="news-date">2026.06.26</time><h4>【配達ドライバーの革命】Claude×Maps APIで走行距離20%削減・月収1.5倍の完全実装</h4><span class="news-more">続きを読む <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+          </a>
+          <a class="news-card" href="https://note.com/sane_design2026/n/nb7f5ee560e29" target="_blank" rel="noopener">
+            <div class="news-thumb"><img src="/assets/news/trimmer.jpg" alt="" /></div>
+            <div class="news-body"><time class="news-date">2026.06.07</time><h4>【トリマー＆ペット業界】AIで来店3倍・物販月10万円UPを実現する完全実装ガイド</h4><span class="news-more">続きを読む <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+          </a>
+        </>
+      )}
     </div>
     <div style="text-align:center;margin-top:36px"><a href="/blog/" class="btn btn-ghost">続きを見る →</a></div>
   </div>

@@ -1,6 +1,11 @@
 ---
 import RenewalLayout from '../../layouts/RenewalLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+// 内部ブログ記事を取得
+const internalPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
 
 // note RSS fetch（全件）
 let noteArticles: { title: string; link: string; pubDate: string; thumbnail: string; description: string }[] = [];
@@ -21,6 +26,40 @@ try {
 } catch (e) {
   // fetch失敗時は空配列
 }
+
+// 統合記事リスト（内部 + note を日付順でマージ）
+type UnifiedArticle = {
+  type: 'internal' | 'note';
+  title: string;
+  link: string;
+  pubDate: Date;
+  thumbnail: string;
+  description: string;
+  tags: string[];
+};
+
+const allArticles: UnifiedArticle[] = [
+  ...internalPosts.map((post) => ({
+    type: 'internal' as const,
+    title: post.data.title,
+    link: `/blog/${post.slug}/`,
+    pubDate: new Date(post.data.pubDate),
+    thumbnail: post.data.heroImage ?? '',
+    description: post.data.description,
+    tags: post.data.tags ?? [],
+  })),
+  ...noteArticles.map((article) => ({
+    type: 'note' as const,
+    title: article.title,
+    link: article.link,
+    pubDate: new Date(article.pubDate),
+    thumbnail: article.thumbnail,
+    description: article.description,
+    tags: ['AI活用'],
+  })),
+].sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
+
+const totalCount = allArticles.length;
 ---
 
 <RenewalLayout
@@ -43,13 +82,13 @@ try {
         <!-- Stats strip -->
         <div class="rb-count-badge">
           <div class="rb-stat">
-            <span class="rb-stat-num"><span class="rb-count" data-target={noteArticles.length} data-suffix="+">0</span></span>
+            <span class="rb-stat-num"><span class="rb-count" data-target={totalCount} data-suffix="+">0</span></span>
             <span class="rb-stat-label">公開記事数</span>
           </div>
           <div class="rb-stat-divider"></div>
           <div class="rb-stat">
-            <span class="rb-stat-note">noteで配信中</span>
-            <span class="rb-stat-label">外部メディア</span>
+            <span class="rb-stat-note">note + 内部ブログ</span>
+            <span class="rb-stat-label">配信メディア</span>
           </div>
         </div>
       </div>
@@ -64,27 +103,49 @@ try {
   <!-- ── Articles Grid ── -->
   <section class="rb-grid-section">
     <div class="rb-wrap">
-      {noteArticles.length > 0 ? (
+      {allArticles.length > 0 ? (
         <>
           <div class="rb-grid" id="rb-grid">
-            {noteArticles.map((article, i) => {
-              const d = new Date(article.pubDate);
+            {allArticles.map((article, i) => {
+              const d = article.pubDate;
               const dateStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+              const isNote = article.type === 'note';
               return (
                 <div class="rb-item" style={`animation-delay:${Math.min(i, 11) * 60}ms`}>
-                  <a href={article.link} target="_blank" rel="noopener noreferrer" class="rb-card">
+                  <a
+                    href={article.link}
+                    target={isNote ? '_blank' : undefined}
+                    rel={isNote ? 'noopener noreferrer' : undefined}
+                    class="rb-card"
+                  >
                     <div class="rb-thumb">
-                      {article.thumbnail && (
+                      {article.thumbnail ? (
                         <img src={article.thumbnail} alt={article.title} loading="lazy" width="600" height="338" />
+                      ) : (
+                        <div class="rb-thumb-placeholder">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;opacity:0.3;">
+                            <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                          </svg>
+                        </div>
                       )}
                       <div class="rb-thumb-overlay">
-                        <span class="rb-view-label">noteで読む ↗</span>
+                        <span class="rb-view-label">
+                          {isNote ? 'noteで読む ↗' : '記事を読む →'}
+                        </span>
                       </div>
+                      {isNote && (
+                        <span class="rb-source-badge rb-source-note">note</span>
+                      )}
+                      {!isNote && (
+                        <span class="rb-source-badge rb-source-internal">Original</span>
+                      )}
                     </div>
                     <div class="rb-body">
                       <div class="rb-meta">
                         <time datetime={dateStr}>{dateStr}</time>
-                        <span class="rb-tag">AI活用</span>
+                        {article.tags.length > 0 && (
+                          <span class="rb-tag">{article.tags[0]}</span>
+                        )}
                       </div>
                       <h2 class="rb-card-title">{article.title}</h2>
                       {article.description && (
@@ -341,6 +402,14 @@ try {
   .rb-card:hover .rb-thumb img {
     transform: scale(1.05);
   }
+  .rb-thumb-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #D7EFFB, #E9F7E4);
+  }
   .rb-thumb-overlay {
     position: absolute;
     inset: 0;
@@ -367,6 +436,29 @@ try {
     padding: 6px 16px;
     border-radius: 999px;
     box-shadow: 0 4px 12px rgba(58,66,86,0.15);
+  }
+
+  /* Source badge */
+  .rb-source-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 10px;
+    font-weight: 800;
+    font-family: "Inter", sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    z-index: 2;
+  }
+  .rb-source-note {
+    background: rgba(65, 179, 73, 0.9);
+    color: #fff;
+  }
+  .rb-source-internal {
+    background: rgba(79, 180, 232, 0.9);
+    color: #fff;
   }
 
   /* Card body */
