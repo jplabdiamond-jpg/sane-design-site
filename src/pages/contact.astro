@@ -494,8 +494,8 @@ import RenewalLayout from '../layouts/RenewalLayout.astro';
 .total-price .yen{font-size:18px;margin-right:2px}
 .total-price small{font-size:12px;font-weight:700;opacity:.7;margin-left:4px}
 
-.step-nav{display:flex;justify-content:space-between;margin-top:32px;gap:12px}
-.step-nav .btn{flex:1;justify-content:center;max-width:240px}
+.step-nav{display:flex;justify-content:center;margin-top:32px;gap:12px}
+.step-nav .btn{justify-content:center;white-space:nowrap;padding:16px 40px}
 .form-group{margin-bottom:20px}
 .form-group label{display:block;font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text)}
 .form-group label .req{color:#e53935;font-size:11px;margin-left:4px}
@@ -530,8 +530,8 @@ textarea.form-input{resize:vertical;line-height:1.8}
   .plan-selector{flex-direction:column}
   .opt-info{flex-direction:column;align-items:flex-start;gap:4px}
   .total-bar{flex-direction:column;gap:8px;text-align:center}
-  .step-nav{flex-direction:column}
-  .step-nav .btn{max-width:100%}
+  .step-nav{flex-direction:column;align-items:center}
+  .step-nav .btn{width:100%;max-width:100%}
 }
 </style>
 
