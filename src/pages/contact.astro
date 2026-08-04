@@ -1,305 +1,680 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import RenewalLayout from '../layouts/RenewalLayout.astro';
 ---
 
-<BaseLayout
-  title="Contact｜ご依頼・お問い合わせ | Sane Design"
-  description="Sane Designへのご依頼・お問い合わせ。ホームページ制作は¥20,000〜、SEO対策は¥10,000〜。フォームからお気軽にご相談ください。"
+<RenewalLayout
+  title="お問い合わせ｜Sane Design"
+  description="Sane Designへのお問い合わせ。ご依頼内容・ご予算・オプションを選ぶだけ。24時間以内にご返信します。"
 >
-  <!-- Hero -->
-  <section style="padding:80px 0 60px;">
-    <div class="container-editorial">
-      <p class="section-label reveal">Contact</p>
-      <h1 class="reveal" style="font-family:var(--font-serif); font-size:clamp(40px,7vw,100px); font-weight:300; line-height:1.05; letter-spacing:-0.02em; transition-delay:80ms;">
-        Let's make<br />
-        <span style="font-style:italic;">something.</span>
-      </h1>
-      <p class="reveal" style="margin-top:24px; max-width:480px; font-size:15px; color:var(--color-muted); line-height:1.9; transition-delay:160ms;">
-        ご依頼・ご相談はお気軽にどうぞ。<br />
-        通常24時間以内にご返信します。
-      </p>
-    </div>
-  </section>
 
-  <!-- Service Links -->
-  <section style="padding:0 0 80px;">
-    <div class="container-editorial">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;" class="contact-grid">
-        <div
-          class="reveal contact-card"
-          style="display:block; padding:56px 48px; border:1px solid var(--color-border); position:relative; overflow:hidden;"
-        >
-          <div style="position:absolute; top:0; left:0; right:0; height:2px; background:var(--color-primary); transform:scaleX(0); transform-origin:left; transition: transform 0.5s cubic-bezier(0.19,1,0.22,1);" class="card-line"></div>
-          <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-muted); margin-bottom:24px;">01 — Web Design</p>
-          <h2 style="font-family:var(--font-serif); font-size:clamp(22px,2.5vw,32px); font-weight:300; line-height:1.3; margin-bottom:20px;">
-            ホームページ制作を<br />依頼する
-          </h2>
-          <p style="font-size:13px; color:var(--color-muted); line-height:1.9; margin-bottom:32px;">
-            最速3日・¥20,000〜。画像とイメージをお渡しいただくだけで、完全オーダーメイドで制作します。
-          </p>
-          <span style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; border-bottom:1px solid currentColor; padding-bottom:2px;">詳細を見る →</span>
-        </div>
-
-        <div
-          class="reveal contact-card"
-          style="display:block; padding:56px 48px; border:1px solid var(--color-border); position:relative; overflow:hidden; transition-delay:100ms;"
-        >
-          <div style="position:absolute; top:0; left:0; right:0; height:2px; background:var(--color-primary); transform:scaleX(0); transform-origin:left; transition: transform 0.5s cubic-bezier(0.19,1,0.22,1);" class="card-line"></div>
-          <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-muted); margin-bottom:24px;">02 — SEO</p>
-          <h2 style="font-family:var(--font-serif); font-size:clamp(22px,2.5vw,32px); font-weight:300; line-height:1.3; margin-bottom:20px;">
-            SEO 対策を<br />依頼する
-          </h2>
-          <p style="font-size:13px; color:var(--color-muted); line-height:1.9; margin-bottom:32px;">
-            最短3日・¥10,000〜。指定KWの記事60本追加と内部SEO対策を実施します。
-          </p>
-          <span style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; border-bottom:1px solid currentColor; padding-bottom:2px;">詳細を見る →</span>
-        </div>
+  <!-- ── Hero ── -->
+  <section class="ct-hero reveal">
+    <div class="wrap">
+      <span class="sec-sub">Contact</span>
+      <h1>まずはお気軽に<span class="big">ご相談ください</span></h1>
+      <p class="lead">ご依頼内容・ご予算・オプションを選ぶだけ。<br>入力は約1分、24時間以内にご返信します。</p>
+      <div class="hero-badges">
+        <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>相談だけでもOK</span>
+        <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>しつこい営業なし</span>
+        <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>24時間以内に返信</span>
+      </div>
+      <div class="ct-hero-illust">
+        <img src="/assets/creator_thumbsup_tablet.png" alt="タブレットを持つクリエイター">
       </div>
     </div>
   </section>
 
-  <!-- Email Contact Form -->
-  <section style="padding:80px 0; border-top:1px solid var(--color-border);">
-    <div class="container-editorial">
-      <div style="max-width:640px;">
-        <p class="section-label reveal">Direct Message</p>
-        <h2 class="reveal" style="font-family:var(--font-serif); font-size:clamp(24px,3vw,40px); font-weight:300; margin-bottom:12px; transition-delay:80ms;">
-          メールでお問い合わせ
-        </h2>
-        <p class="reveal" style="font-size:13px; color:var(--color-muted); margin-bottom:40px; transition-delay:120ms;">
-          ご質問・お見積りのご相談など、お気軽にご連絡ください。通常24時間以内にご返信します。
-        </p>
+  <!-- ── Wave ── -->
+  <div class="wave"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="#fff"/></svg></div>
 
-        <form
-          class="reveal"
-          id="contact-form"
-          style="display:flex; flex-direction:column; gap:24px; transition-delay:160ms;"
-          action="https://api.web3forms.com/submit"
-          method="POST"
-        >
-          <input type="hidden" name="access_key" value="7bcc6bbc-01d3-4a99-a783-3cdad33fbaa5" />
-          <input type="hidden" name="subject" value="【Sane Design】お問い合わせ" />
-          <input type="hidden" name="from_name" value="Sane Design お問い合わせフォーム" />
-          <input type="checkbox" name="botcheck" style="display:none;" />
+  <!-- ── Form Section ── -->
+  <section class="ct-form-section" style="background:var(--cream-bg)">
+    <div class="wrap">
+      <div class="ct-form-wrap">
 
-          <div class="form-group">
-            <label style="display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; color:var(--color-muted);">
-              お名前 <span style="color:#c00;">*</span>
-            </label>
-            <input
-              type="text"
-              name="name"
-              required
-              placeholder="山田 太郎"
-              style="width:100%; padding:14px 16px; border:1px solid var(--color-border); background:#fff; font-size:14px; font-family:var(--font-sans); outline:none; transition: border-color 0.3s ease;"
-              class="form-input"
-            />
+        <!-- Step Tabs -->
+        <div class="step-tabs reveal" id="stepTabs">
+          <div class="step-tab active" data-step="1">
+            <span class="st-num">1</span>
+            <span class="st-label">プラン・オプション選択</span>
           </div>
-
-          <div class="form-group">
-            <label style="display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; color:var(--color-muted);">
-              メールアドレス <span style="color:#c00;">*</span>
-            </label>
-            <input
-              type="email"
-              name="email"
-              required
-              placeholder="your@email.com"
-              style="width:100%; padding:14px 16px; border:1px solid var(--color-border); background:#fff; font-size:14px; font-family:var(--font-sans); outline:none; transition: border-color 0.3s ease;"
-              class="form-input"
-            />
+          <div class="step-tab" data-step="2">
+            <span class="st-num">2</span>
+            <span class="st-label">お客様情報入力</span>
           </div>
-
-          <div class="form-group">
-            <label style="display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; color:var(--color-muted);">
-              ご依頼・ご相談の種類
-            </label>
-            <select
-              name="service"
-              style="width:100%; padding:14px 16px; border:1px solid var(--color-border); background:#fff; font-size:14px; font-family:var(--font-sans); outline:none; transition: border-color 0.3s ease; appearance:none; cursor:pointer;"
-              class="form-input"
-            >
-              <option value="">選択してください</option>
-              <option value="ホームページ制作">ホームページ制作</option>
-              <option value="LP制作">LP制作</option>
-              <option value="SEO対策">SEO対策</option>
-              <option value="その他">その他</option>
-            </select>
+          <div class="step-tab" data-step="3">
+            <span class="st-num">3</span>
+            <span class="st-label">送信完了</span>
           </div>
+        </div>
 
-          <div class="form-group">
-            <label style="display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; color:var(--color-muted);">
-              メッセージ <span style="color:#c00;">*</span>
-            </label>
-            <textarea
-              name="message"
-              required
-              rows="6"
-              placeholder="ご依頼内容・ご予算・ご希望納期などをご記入ください"
-              style="width:100%; padding:14px 16px; border:1px solid var(--color-border); background:#fff; font-size:14px; font-family:var(--font-sans); outline:none; resize:vertical; transition: border-color 0.3s ease; line-height:1.8;"
-              class="form-input"
-            ></textarea>
-          </div>
+        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+          <!-- Hidden fields -->
+          <input type="hidden" name="access_key" value="7bcc6bbc-01d3-4a99-a783-3cdad33fbaa5">
+          <input type="hidden" name="subject" value="【Sane Design】お問い合わせ（料金込み）">
+          <input type="hidden" name="from_name" value="Sane Design お問い合わせフォーム">
+          <input type="checkbox" name="botcheck" style="display:none">
+          <input type="hidden" name="selected_plan" id="hiddenPlan" value="LP・WEBサイト制作プラン（基本料金 ¥20,000〜）">
+          <input type="hidden" name="selected_options" id="hiddenOptions" value="">
+          <input type="hidden" name="total_amount" id="hiddenTotal" value="¥20,000〜">
 
-          <button
-            type="submit"
-            class="btn-primary"
-            style="align-self:flex-start;"
-            id="submit-btn"
-          >
-            <span>送信する →</span>
-          </button>
+          <!-- ════════ STEP 1: Plan & Options ════════ -->
+          <div class="step-panel active" id="step1">
+            <div class="form-card reveal">
+              <div class="form-sec-head">
+                <h2>プランとオプションを選ぶ</h2>
+                <p>ご希望のプランを選んで、必要なオプションを追加できます。</p>
+              </div>
 
-          <div id="form-message" style="display:none; padding:16px; font-size:13px;"></div>
-        </form>
-      </div>
-    </div>
-  </section>
+              <!-- Plan Selector -->
+              <div class="plan-selector" id="planSelector">
+                <div class="plan-sel-card active" data-plan="web" id="planCardWeb">
+                  <span class="ps-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                  <span class="ps-badge">WEB制作</span>
+                  <span class="ps-name">LP・WEBサイト制作</span>
+                  <span class="ps-price">¥20,000<small>〜</small></span>
+                  <span class="ps-desc">スマホ対応・フォーム込み</span>
+                </div>
+                <div class="plan-sel-card" data-plan="seo" id="planCardSeo">
+                  <span class="ps-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                  <span class="ps-badge">SEO</span>
+                  <span class="ps-name">SEO対策プラン</span>
+                  <span class="ps-price">¥10,000<small>〜</small></span>
+                  <span class="ps-desc">60記事追加＋内部SEO</span>
+                </div>
+              </div>
+              <p style="font-size:12px;color:var(--text-muted);margin-bottom:20px;margin-top:-16px;text-align:center">両方のプランを同時に選択して合算できます</p>
 
-  <!-- FAQ -->
-  <section style="padding:80px 0; border-top:1px solid var(--color-border);">
-    <div class="container-editorial">
-      <div style="max-width:720px;">
-        <p class="section-label reveal">FAQ</p>
-        <h2 class="reveal" style="font-family:var(--font-serif); font-size:clamp(24px,3vw,40px); font-weight:300; margin-bottom:48px; transition-delay:80ms;">
-          よくあるご質問
-        </h2>
-        <dl style="display:flex; flex-direction:column; gap:0;">
-          {[
-            { q: 'ご依頼の流れを教えてください。', a: 'ご連絡いただき内容を確認後、画像・テキスト等の素材をご入稿いただきます。その後3〜5営業日でデザインを仕上げ、確認URLをお送りします。' },
-            { q: 'ページ数や追加修正の対応は？', a: 'トップ+4ページが基本セットです。追加ページや修正は都度ご相談ください。1〜2回の微修正は無料で対応します。' },
-            { q: 'ドメイン・サーバーは自分で用意が必要ですか？', a: 'ご自身でご用意いただく形が基本ですが、初期設定のサポートもお受けしています。' },
-            { q: 'ご予算が少ない場合でも相談できますか？', a: 'もちろんです。まずはお気軽にご相談ください。内容に合わせた最適なプランをご提案します。' },
-          ].map((item, i) => (
-            <div class="reveal faq-item" style={`border-top:1px solid var(--color-border); transition-delay:${i * 60}ms;`}>
-              <button
-                class="faq-toggle"
-                style="width:100%; padding:24px 0; display:flex; justify-content:space-between; align-items:center; text-align:left; background:none; border:none; cursor:pointer; gap:16px;"
-              >
-                <span style="font-family:var(--font-serif); font-size:16px; font-weight:400; line-height:1.5;">Q. {item.q}</span>
-                <span class="faq-icon" style="font-size:18px; flex-shrink:0; transition: transform 0.4s ease; color:var(--color-muted);">+</span>
-              </button>
-              <div class="faq-body" style="overflow:hidden; max-height:0; transition: max-height 0.5s cubic-bezier(0.19,1,0.22,1);">
-                <p style="padding-bottom:24px; font-size:14px; color:var(--color-muted); line-height:1.9;">{item.a}</p>
+              <!-- Consultation Only -->
+              <div class="consult-only-wrap">
+                <div class="consult-card" id="consultCard">
+                  <span class="cc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                  <span class="cc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+                  <span class="cc-text">
+                    <span class="cc-name">まずは相談だけをする</span>
+                    <span class="cc-desc">プランが決まっていない方もお気軽にご相談ください</span>
+                  </span>
+                </div>
+                <div class="consult-alert" id="consultAlert">
+                  「LP・WEBサイト制作」または「SEO対策プラン」のチェックを外してから選択してください。
+                </div>
+              </div>
+
+              <!-- ▼ WEB制作プランパネル ▼ -->
+              <div class="plan-panel active" id="panelWeb">
+                <div class="plan-summary">
+                  <span class="plan-badge">基本プラン</span>
+                  <div class="plan-info">
+                    <h3>LP・WEBサイト制作プラン</h3>
+                    <div style="font-size:13px;color:var(--text-muted);margin-top:2px">スマホ対応・フォーム込み・オリジナルデザイン</div>
+                  </div>
+                  <div class="plan-price">¥20,000<small>〜</small></div>
+                </div>
+
+                <h4 style="font-size:15px;font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:8px">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:20px;height:20px;stroke-width:2.5"><path d="M12 5v14M5 12h14"/></svg>
+                  追加オプション
+                </h4>
+                <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">必要に応じて追加オプションをお選びください。</p>
+
+                <div class="opt-grid" id="optGrid">
+                  <div class="opt-item opt-page-add" data-price="0" id="optPageAdd">
+                    <div class="opt-row">
+                      <span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                      <span class="opt-info">
+                        <span class="opt-name">ページ追加</span>
+                        <span class="opt-price">1ページあたり + 5,000円</span>
+                      </span>
+                    </div>
+                    <select id="pageAddSelect" class="opt-select">
+                      <option value="0">追加なし（1P基本）</option>
+                      <option value="1">+1ページ（5,000円）</option>
+                      <option value="2">+2ページ（10,000円）</option>
+                      <option value="3">+3ページ（15,000円）</option>
+                      <option value="4">+4ページ（20,000円）</option>
+                      <option value="5">+5ページ（25,000円）</option>
+                    </select>
+                  </div>
+                  <label class="opt-item" data-price="3000" data-name="サーバーへの直接アップロード">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">サーバーへの直接アップロード（公開まで実施）</span><span class="opt-price">+ 3,000円</span></span>
+                  </label>
+                  <label class="opt-item" data-price="5000" data-name="予約機能付きカレンダー導入">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">予約機能付きカレンダー導入</span><span class="opt-price">+ 5,000円</span></span>
+                  </label>
+                  <label class="opt-item" data-price="5000" data-name="チャットボット導入">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">チャットボット導入（Tidio等）</span><span class="opt-price">+ 5,000円</span></span>
+                  </label>
+                  <label class="opt-item" data-price="2000" data-name="Googleアナリティクス（GA4）設置">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">Googleアナリティクス（GA4）設置</span><span class="opt-price">+ 2,000円</span></span>
+                  </label>
+                  <label class="opt-item" data-price="2000" data-name="GSC（Googleサーチコンソール）登録">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">GSC（Googleサーチコンソール）登録</span><span class="opt-price">+ 2,000円</span></span>
+                  </label>
+                  <label class="opt-item" data-price="2000" data-name="SNSフィード埋め込み">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">SNSフィード埋め込み（Instagram等）</span><span class="opt-price">+ 2,000円</span></span>
+                  </label>
+                  <label class="opt-item" data-price="1000" data-name="LINE公式アカウント連携">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">LINE公式アカウント連携</span><span class="opt-price">+ 1,000円</span></span>
+                  </label>
+                  <label class="opt-item" data-price="4000" data-name="ブログ/お知らせ更新機能">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">ブログ/お知らせ更新機能</span><span class="opt-price">+ 4,000円</span></span>
+                  </label>
+                  <label class="opt-item" data-price="6000" data-name="決済機能（Stripe等）">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">決済機能（Stripe等）</span><span class="opt-price">+ 6,000円</span></span>
+                  </label>
+                  <label class="opt-item" data-price="10000" data-name="会員限定コンテンツ（認証機能含む）">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">会員限定コンテンツ（認証機能含む）</span><span class="opt-price">+ 10,000円</span></span>
+                  </label>
+                  <label class="opt-item" data-price="5000" data-name="月額保守・更新代行">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">月額保守・更新代行</span><span class="opt-price">+ 5,000円/月</span></span>
+                  </label>
+                  <label class="opt-item" data-price="4000" data-name="ドメイン・サーバー初期設定">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">ドメイン・サーバー初期設定</span><span class="opt-price">+ 4,000円</span></span>
+                  </label>
+                  <div class="opt-item" data-price="10000" data-name="管理者ダッシュボード設置">
+                    <label style="display:flex;align-items:center;gap:12px;cursor:pointer;flex:1">
+                      <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                      <span class="opt-info">
+                        <span class="opt-name">管理者ダッシュボード設置</span>
+                        <span class="opt-price">+ 10,000円</span>
+                      </span>
+                    </label>
+                    <div class="opt-tip-wrap">
+                      <button type="button" class="opt-tip-btn" aria-label="詳細"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg></button>
+                      <div class="opt-tip-popup">サイトの各ページのテキストや見出し文言の変更、画像の変更・問い合わせ項目のテキスト変更ができるようになります。※変更できる箇所はサイト上の全ての画像やテキストではありませんので、まずはご相談ください。</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="scroll-hint" id="scrollHint" style="text-align:center;font-size:12px;color:var(--text-muted);padding:8px 0;display:flex;align-items:center;justify-content:center;gap:6px;opacity:.7">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:16px;height:16px;stroke-width:2.5;animation:bounceDown 1.2s infinite"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                  スクロールして他のオプションも見る
+                </div>
+              </div>
+
+              <!-- ▼ SEO対策プランパネル ▼ -->
+              <div class="plan-panel" id="panelSeo">
+                <div class="plan-divider">SEO対策プラン</div>
+                <div class="plan-summary seo-summary">
+                  <span class="plan-badge">SEOプラン</span>
+                  <div class="plan-info">
+                    <h3>SEO対策プラン</h3>
+                    <div style="font-size:13px;color:var(--text-muted);margin-top:2px">指定KW 60記事追加＋内部SEO対策</div>
+                  </div>
+                  <div class="plan-price">¥10,000<small>〜</small></div>
+                </div>
+
+                <h4 style="font-size:15px;font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:8px">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:20px;height:20px;stroke-width:2.5"><path d="M12 5v14M5 12h14"/></svg>
+                  SEOオプション
+                </h4>
+                <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">必要に応じて追加オプションをお選びください。</p>
+
+                <div class="opt-grid" id="optGridSeo">
+                  <div class="opt-item opt-page-add" data-price="0" id="optArticleAdd">
+                    <div class="opt-row">
+                      <span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                      <span class="opt-info">
+                        <span class="opt-name">追加記事</span>
+                        <span class="opt-price">10記事あたり + 3,000円</span>
+                      </span>
+                    </div>
+                    <select id="articleAddSelect" class="opt-select">
+                      <option value="0">追加なし（基本60記事）</option>
+                      <option value="1">+10記事（3,000円）</option>
+                      <option value="2">+20記事（6,000円）</option>
+                      <option value="3">+30記事（9,000円）</option>
+                      <option value="4">+40記事（12,000円）</option>
+                      <option value="5">+50記事（15,000円）</option>
+                    </select>
+                  </div>
+                  <label class="opt-item" data-price="2000" data-name="Googleアナリティクス（GA4）設置">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">Googleアナリティクス（GA4）設置</span><span class="opt-price">+ 2,000円</span></span>
+                  </label>
+                  <label class="opt-item" data-price="2000" data-name="GSC（Googleサーチコンソール）登録">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">GSC（Googleサーチコンソール）登録</span><span class="opt-price">+ 2,000円</span></span>
+                  </label>
+                  <label class="opt-item" data-price="5000" data-name="競合分析レポート">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">競合分析レポート</span><span class="opt-price">+ 5,000円</span></span>
+                  </label>
+                  <label class="opt-item" data-price="3000" data-name="メタタグ・構造化データ最適化">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">メタタグ・構造化データ最適化</span><span class="opt-price">+ 3,000円</span></span>
+                  </label>
+                  <label class="opt-item" data-price="5000" data-name="月額SEO保守・レポート">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">月額SEO保守・レポート</span><span class="opt-price">+ 5,000円/月</span></span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Total Bar -->
+              <div class="total-bar" id="totalBar">
+                <div class="total-label">お見積り合計<small>基本プラン＋選択オプション</small></div>
+                <div class="total-price"><span class="yen">¥</span><span id="totalAmount">20,000</span><small>〜（税込）</small></div>
+              </div>
+
+              <p style="font-size:12px;color:var(--text-muted);margin-top:12px;line-height:1.7;text-align:center">
+                ※ 上記は目安料金です。内容に応じて最適なお見積りをご提案します。
+              </p>
+
+              <!-- Step Nav -->
+              <div class="step-nav">
+                <span></span>
+                <button type="button" class="btn btn-primary" id="toStep2">
+                  お客様情報の入力へ
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </button>
               </div>
             </div>
-          ))}
-          <div style="border-top:1px solid var(--color-border);"></div>
-        </dl>
+          </div>
+
+          <!-- ════════ STEP 2: Contact Info ════════ -->
+          <div class="step-panel" id="step2">
+            <div class="form-card reveal">
+              <div class="form-sec-head">
+                <h2>お客様情報の入力</h2>
+                <p>ご連絡先とご要望をご入力ください。</p>
+              </div>
+
+              <div class="selected-summary" id="selectedSummary">
+                <h4>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                  選択中のプラン・オプション
+                </h4>
+                <div class="selected-list" id="selectedList"></div>
+              </div>
+
+              <div class="form-group">
+                <label>お名前<span class="req">*必須</span></label>
+                <input type="text" name="name" required placeholder="山田 太郎" class="form-input">
+              </div>
+              <div class="form-group">
+                <label>メールアドレス<span class="req">*必須</span></label>
+                <input type="email" name="email" required placeholder="your@email.com" class="form-input">
+              </div>
+              <div class="form-group">
+                <label>電話番号<small style="font-weight:400;color:var(--text-muted);margin-left:6px">（任意）</small></label>
+                <input type="tel" name="phone" placeholder="090-1234-5678" class="form-input">
+              </div>
+              <div class="form-group">
+                <label>ご依頼・ご相談の種類</label>
+                <select name="service" class="form-input" style="cursor:pointer">
+                  <option value="">選択してください</option>
+                  <option value="ホームページ制作">ホームページ制作</option>
+                  <option value="LP制作">LP制作</option>
+                  <option value="SEO対策">SEO対策</option>
+                  <option value="その他">その他</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>メッセージ<span class="req">*必須</span></label>
+                <textarea name="message" required rows="5" placeholder="ご依頼内容・ご予算・ご希望納期などをご記入ください" class="form-input"></textarea>
+              </div>
+
+              <div id="formError" class="error-msg"></div>
+
+              <div class="step-nav">
+                <button type="button" class="btn btn-ghost" id="backToStep1">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="transform:rotate(180deg)"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                  プラン選択に戻る
+                </button>
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                  この内容で送信する
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ════════ STEP 3: Confirmation ════════ -->
+          <div class="step-panel" id="step3">
+            <div class="confirm-card reveal">
+              <div class="check-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <h2>お問い合わせありがとうございます</h2>
+              <p>24時間以内にご入力のメールアドレス宛にご返信いたします。<br>しばらくお待ちくださいませ。</p>
+              <div style="margin-top:28px">
+                <a href="/" class="btn btn-ghost">トップページに戻る</a>
+              </div>
+            </div>
+          </div>
+        </form>
+
       </div>
     </div>
   </section>
 
-  <!-- Slide-in Notice Card -->
-  <a id="notice-card" href="/recruit/" aria-live="polite" style="display:block; text-decoration:none; position:fixed; right:0; bottom:32px; z-index:200; max-width:320px; padding:20px 44px 20px 24px; background:var(--color-primary); color:#fff; box-shadow:-8px 8px 32px rgba(0,0,0,0.18); transform:translateX(calc(100% + 24px)); transition: transform 0.7s cubic-bezier(0.19,1,0.22,1); border-radius:4px 0 0 4px;">
-    <button id="notice-close" aria-label="閉じる" type="button" style="position:absolute; top:10px; right:12px; background:none; border:none; color:#fff; font-size:18px; line-height:1; cursor:pointer; opacity:0.7;">×</button>
-    <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; opacity:0.7; margin-bottom:8px;">Open for work</p>
-    <p style="font-size:13px; line-height:1.8; font-weight:400;">単発・定期など、お仕事のご依頼随時受付中！まずはお問い合わせ下さいませ。</p>
-    <p style="font-size:11px; letter-spacing:0.05em; margin-top:10px; opacity:0.85; border-bottom:1px solid currentColor; display:inline-block; padding-bottom:2px;">仕事を依頼する →</p>
-  </a>
-</BaseLayout>
+  <!-- ── Wave ── -->
+  <div class="wave"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="var(--cream-bg)"/></svg></div>
 
-<style>
-  .form-input:focus {
-    border-color: var(--color-primary) !important;
-  }
-  .contact-card:hover .card-line {
-    transform: scaleX(1) !important;
-  }
-  @media (max-width: 768px) {
-    .contact-grid {
-      grid-template-columns: 1fr !important;
-    }
-  }
-  #notice-card.notice-show {
-    transform: translateX(0) !important;
-  }
-  @media (max-width: 480px) {
-    #notice-card {
-      left: 0;
-      right: 0;
-      bottom: 0;
-      max-width: 100%;
-      border-radius: 0;
-      transform: translateY(120%);
-    }
-    #notice-card.notice-show {
-      transform: translateY(0) !important;
-    }
-  }
+</RenewalLayout>
+
+<style is:global>
+:root{--primary:#4FB4E8;--primary-dark:#2E90C4;--accent:#F79B3E;--accent-shadow:#c76f14;--text:#3A4256;--text-muted:#7b8499;--sky-bg:#EAF6FC;--cream-bg:#FFF8F0;--border:#e2e6ed;--card-bg:#fff;--success:#34a853;--success-bg:#eaf7ee}
+
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:"Noto Sans JP",sans-serif;font-weight:700;border-radius:999px;padding:16px 34px;font-size:16px;transition:transform .12s,box-shadow .12s;cursor:pointer;border:none;text-decoration:none;position:relative;box-sizing:border-box}
+.btn svg{width:18px;height:18px;stroke-width:3}
+.btn-primary{background:var(--accent);color:#fff!important;box-shadow:0 5px 0 var(--accent-shadow)}
+.btn-primary:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--accent-shadow)}
+.btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.btn-ghost{background:#fff;color:var(--primary-dark)!important;box-shadow:0 5px 0 #CDEBFA;border:2px solid #CDEBFA}
+.btn-ghost:hover{transform:translateY(2px);box-shadow:0 3px 0 #CDEBFA}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.ct-hero{padding:72px 0 0;text-align:center}
+.ct-hero .sec-sub{display:inline-block;font-family:"Inter",sans-serif;font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--primary);margin-bottom:12px}
+.ct-hero h1{font-size:clamp(28px,5vw,48px);font-weight:900;line-height:1.3;margin-bottom:16px}
+.ct-hero h1 .big{color:var(--primary)}
+.ct-hero .lead{font-size:15px;color:var(--text-muted);line-height:1.9;max-width:520px;margin:0 auto}
+.ct-hero .hero-badges{display:flex;justify-content:center;gap:16px;margin-top:20px;flex-wrap:wrap}
+.ct-hero .hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--text)}
+.ct-hero .hero-badge .ck{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#e6f6ed}
+.ct-hero .hero-badge .ck svg{width:14px;height:14px;stroke:var(--success);stroke-width:3}
+.ct-hero-illust{margin-top:32px}
+.ct-hero-illust img{max-width:240px;height:auto}
+.ct-form-section{padding:60px 0 80px}
+.ct-form-wrap{max-width:820px;margin:0 auto}
+.step-tabs{display:flex;gap:0;margin-bottom:40px}
+.step-tab{flex:1;text-align:center;padding:16px 8px;position:relative;cursor:default}
+.step-tab .st-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:#e2e6ed;color:var(--text-muted);font-family:"Inter",sans-serif;font-weight:800;font-size:14px;margin-bottom:6px;transition:background .3s,color .3s}
+.step-tab .st-label{display:block;font-size:12px;font-weight:700;color:var(--text-muted);transition:color .3s}
+.step-tab.active .st-num{background:var(--primary);color:#fff}
+.step-tab.active .st-label{color:var(--text)}
+.step-tab.done .st-num{background:#e6f6ed;color:var(--success)}
+.step-tab::after{content:"";position:absolute;top:26px;right:-50%;width:100%;height:2px;background:#e2e6ed;z-index:-1}
+.step-tab:last-child::after{display:none}
+.step-tab.done::after{background:var(--primary)}
+.form-card{background:var(--card-bg);border:2px solid var(--border);border-radius:20px;padding:40px;box-shadow:0 8px 40px rgba(58,66,86,.06)}
+.step-panel{display:none}
+.step-panel.active{display:block}
+.form-sec-head{margin-bottom:28px}
+.form-sec-head h2{font-size:22px;font-weight:900;margin-bottom:6px}
+.form-sec-head p{font-size:14px;color:var(--text-muted)}
+
+.plan-selector{display:flex;gap:12px;margin-bottom:24px}
+.plan-sel-card{flex:1;padding:18px 16px;border:2px solid var(--border);border-radius:14px;background:#fff;cursor:pointer;text-align:center;transition:border-color .2s,background .2s,box-shadow .2s;position:relative;user-select:none}
+.plan-sel-card:hover{border-color:var(--primary);background:#f8fcff}
+.plan-sel-card.active{border-color:var(--primary);background:var(--sky-bg);box-shadow:0 0 0 3px rgba(79,180,232,.15)}
+.plan-sel-card[data-plan="seo"].active{border-color:#34a853;background:#eaf7ee;box-shadow:0 0 0 3px rgba(52,168,83,.15)}
+.plan-sel-card .ps-check{position:absolute;top:10px;right:10px;width:22px;height:22px;border-radius:6px;border:2px solid #ccd2db;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
+.plan-sel-card .ps-check svg{width:14px;height:14px;stroke:#fff;stroke-width:3;opacity:0;transition:opacity .2s}
+.plan-sel-card.active .ps-check{background:var(--primary);border-color:var(--primary)}
+.plan-sel-card[data-plan="seo"].active .ps-check{background:#34a853;border-color:#34a853}
+.plan-sel-card.active .ps-check svg{opacity:1}
+.plan-sel-card .ps-badge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px;margin-bottom:8px}
+.plan-sel-card[data-plan="web"] .ps-badge{background:var(--primary);color:#fff}
+.plan-sel-card[data-plan="seo"] .ps-badge{background:#34a853;color:#fff}
+.plan-sel-card .ps-name{display:block;font-size:14px;font-weight:900;margin-bottom:4px}
+.plan-sel-card .ps-price{font-family:"Inter",sans-serif;font-weight:800;font-size:22px;color:var(--primary)}
+.plan-sel-card[data-plan="seo"] .ps-price{color:#34a853}
+.plan-sel-card .ps-price small{font-size:12px;font-weight:700;color:var(--text-muted)}
+.plan-sel-card .ps-desc{display:block;font-size:11px;color:var(--text-muted);margin-top:4px}
+
+.consult-only-wrap{margin-top:4px;margin-bottom:20px}
+.consult-card{display:flex;align-items:center;gap:14px;padding:16px 18px;border:2px solid var(--border);border-radius:14px;background:#fff;cursor:pointer;transition:border-color .2s,background .2s,box-shadow .2s;position:relative;user-select:none}
+.consult-card:hover{border-color:#9b59b6;background:#faf5fd}
+.consult-card.active{border-color:#9b59b6;background:#f3e8fa;box-shadow:0 0 0 3px rgba(155,89,182,.15)}
+.consult-card .cc-check{width:22px;height:22px;min-width:22px;border-radius:6px;border:2px solid #ccd2db;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
+.consult-card .cc-check svg{width:14px;height:14px;stroke:#fff;stroke-width:3;opacity:0;transition:opacity .2s}
+.consult-card.active .cc-check{background:#9b59b6;border-color:#9b59b6}
+.consult-card.active .cc-check svg{opacity:1}
+.consult-card .cc-icon{width:36px;height:36px;min-width:36px;border-radius:10px;background:#f3e8fa;display:flex;align-items:center;justify-content:center}
+.consult-card .cc-icon svg{width:20px;height:20px;stroke:#9b59b6;stroke-width:2}
+.consult-card .cc-text{flex:1}
+.consult-card .cc-name{font-size:15px;font-weight:900;display:block}
+.consult-card .cc-desc{font-size:12px;color:var(--text-muted);display:block;margin-top:2px}
+.consult-alert{display:none;font-size:12px;color:#c0392b;background:#fdf2f2;border:1px solid #f5c6cb;border-radius:8px;padding:10px 14px;margin-top:8px;line-height:1.6;animation:fadeShake .4s ease}
+.consult-alert.show{display:block}
+@keyframes fadeShake{0%{opacity:0;transform:translateX(-6px)}30%{transform:translateX(4px)}60%{transform:translateX(-2px)}100%{opacity:1;transform:translateX(0)}}
+
+.plan-panel{display:none}
+.plan-panel.active{display:block}
+.plan-divider{display:flex;align-items:center;gap:12px;margin:32px 0 0;font-size:13px;font-weight:700;color:var(--text-muted)}
+.plan-divider::after{content:"";flex:1;height:1px;background:var(--border)}
+.plan-summary{background:var(--sky-bg);border-radius:16px;padding:24px 28px;margin-bottom:24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.plan-summary .plan-badge{background:var(--primary);color:#fff;font-weight:800;font-size:12px;padding:6px 16px;border-radius:999px;white-space:nowrap}
+.plan-summary.seo-summary{background:#eaf7ee}
+.plan-summary.seo-summary .plan-badge{background:#34a853}
+.plan-summary .plan-info h3{font-size:18px;font-weight:900;margin-bottom:2px}
+.plan-summary .plan-price{font-family:"Inter",sans-serif;font-weight:800;font-size:28px;color:var(--primary)}
+.plan-summary.seo-summary .plan-price{color:#34a853}
+.plan-summary .plan-price small{font-size:14px;font-weight:700;color:var(--text-muted)}
+
+.opt-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;max-height:420px;overflow-y:auto;padding-right:6px;scroll-behavior:smooth}
+.opt-grid::-webkit-scrollbar{width:6px}
+.opt-grid::-webkit-scrollbar-track{background:#f0f2f5;border-radius:3px}
+.opt-grid::-webkit-scrollbar-thumb{background:#c5cad4;border-radius:3px}
+.opt-grid::-webkit-scrollbar-thumb:hover{background:#a0a8b5}
+.opt-item{display:flex;align-items:center;gap:12px;padding:14px 18px;border:2px solid var(--border);border-radius:12px;cursor:pointer;transition:border-color .2s,background .2s;position:relative;user-select:none}
+.opt-item:hover{border-color:var(--primary);background:#f8fcff}
+.opt-item.is-on{border-color:var(--primary);background:var(--sky-bg)}
+.opt-item input[type=checkbox]{display:none}
+.opt-check{width:24px;height:24px;border-radius:6px;border:2px solid #ccd2db;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border-color .2s}
+.opt-check svg{width:14px;height:14px;stroke:#fff;stroke-width:3;opacity:0;transition:opacity .2s}
+.opt-item.is-on .opt-check{background:var(--primary);border-color:var(--primary)}
+.opt-item.is-on .opt-check svg{opacity:1}
+#panelSeo .opt-item.is-on{border-color:var(--success);background:var(--success-bg)}
+#panelSeo .opt-item.is-on .opt-check{background:var(--success);border-color:var(--success)}
+.opt-info{flex:1;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.opt-name{font-size:14px;font-weight:700}
+.opt-price{font-size:13px;font-weight:700;color:var(--primary);white-space:nowrap}
+.opt-page-add{flex-direction:column;align-items:stretch;gap:8px}
+.opt-page-add .opt-row{display:flex;align-items:center;gap:12px}
+.opt-select{padding:8px 12px;border:2px solid var(--border);border-radius:8px;font-size:14px;font-family:"Noto Sans JP",sans-serif;cursor:pointer;background:#fff;transition:border-color .2s;width:100%;max-width:280px}
+.opt-select:focus{outline:none;border-color:var(--primary)}
+.opt-tip-wrap{position:relative;display:inline-flex}
+.opt-tip-btn{width:22px;height:22px;border-radius:50%;background:#e2e6ed;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.opt-tip-btn svg{width:14px;height:14px;fill:var(--text-muted)}
+.opt-tip-popup{display:none;position:absolute;bottom:calc(100% + 8px);right:-8px;width:280px;padding:14px;background:var(--text);color:#fff;font-size:12px;line-height:1.7;border-radius:10px;z-index:10;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.opt-tip-popup::after{content:"";position:absolute;bottom:-6px;right:16px;width:12px;height:12px;background:var(--text);transform:rotate(45deg)}
+.opt-tip-wrap.is-open .opt-tip-popup{display:block}
+
+.total-bar{display:flex;justify-content:space-between;align-items:center;background:var(--text);color:#fff;border-radius:14px;padding:18px 28px;margin-top:16px;transition:transform .18s cubic-bezier(.34,1.4,.64,1)}
+.total-label{font-size:14px;font-weight:700}
+.total-label small{display:block;font-size:11px;opacity:.7;margin-top:2px}
+.total-price{font-family:"Inter",sans-serif;font-weight:800;font-size:26px}
+.total-price .yen{font-size:18px;margin-right:2px}
+.total-price small{font-size:12px;font-weight:700;opacity:.7;margin-left:4px}
+
+.step-nav{display:flex;justify-content:space-between;margin-top:32px;gap:12px}
+.step-nav .btn{flex:1;justify-content:center;max-width:240px}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.form-group label .req{color:#e53935;font-size:11px;margin-left:4px}
+.form-input{width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:10px;background:#fff;font-size:15px;font-family:"Noto Sans JP",sans-serif;outline:none;transition:border-color .2s,box-shadow .2s}
+.form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(79,180,232,.15)}
+textarea.form-input{resize:vertical;line-height:1.8}
+.selected-summary{background:var(--sky-bg);border-radius:14px;padding:20px 24px;margin-bottom:28px}
+.selected-summary h4{font-size:14px;font-weight:900;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.selected-summary h4 svg{width:18px;height:18px;stroke:var(--primary);stroke-width:2.5}
+.selected-list{display:flex;flex-direction:column;gap:6px}
+.selected-list .sel-row{display:flex;justify-content:space-between;font-size:13px;padding:4px 0}
+.selected-list .sel-row .sel-name{color:var(--text)}
+.selected-list .sel-row .sel-price{font-weight:700;color:var(--primary)}
+.selected-list .sel-total{display:flex;justify-content:space-between;font-size:15px;font-weight:900;padding-top:10px;margin-top:6px;border-top:2px solid rgba(79,180,232,.2)}
+
+.confirm-card{background:var(--success-bg);border:2px solid var(--success);border-radius:16px;padding:40px;text-align:center}
+.confirm-card .check-circle{width:64px;height:64px;border-radius:50%;background:var(--success);display:inline-flex;align-items:center;justify-content:center;margin-bottom:16px}
+.confirm-card .check-circle svg{width:32px;height:32px;stroke:#fff;stroke-width:3}
+.confirm-card h2{font-size:22px;font-weight:900;margin-bottom:8px}
+.confirm-card p{font-size:14px;color:var(--text-muted);line-height:1.8}
+.error-msg{background:#fff0f0;border:1px solid #e8b0b0;color:#6a2a2a;padding:14px 18px;border-radius:10px;font-size:13px;margin-top:16px;display:none}
+
+.wave{width:100%;overflow:hidden;line-height:0}
+.wave svg{width:100%;height:60px;display:block}
+@keyframes bounceDown{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+
+@media(max-width:860px){
+  .form-card{padding:24px 18px}
+  .plan-summary{flex-direction:column;align-items:flex-start;gap:12px}
+  .step-tabs{gap:0}
+  .step-tab .st-label{font-size:10px}
+  .plan-selector{flex-direction:column}
+  .opt-info{flex-direction:column;align-items:flex-start;gap:4px}
+  .total-bar{flex-direction:column;gap:8px;text-align:center}
+  .step-nav{flex-direction:column}
+  .step-nav .btn{max-width:100%}
+}
 </style>
 
-<script>
-  // Scroll Reveal
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-  );
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+<script is:inline>
+(function(){
+  var webOn=true,seoOn=false,consultOn=false;
+  var planCardWeb=document.getElementById('planCardWeb'),planCardSeo=document.getElementById('planCardSeo');
+  var consultCard=document.getElementById('consultCard'),consultAlert=document.getElementById('consultAlert');
+  var panelWeb=document.getElementById('panelWeb'),panelSeo=document.getElementById('panelSeo');
+  var totalBar=document.getElementById('totalBar'),toStep2Btn=document.getElementById('toStep2');
 
-  // Slide-in notice card
-  const noticeCard = document.getElementById('notice-card');
-  const noticeClose = document.getElementById('notice-close');
-  if (noticeCard) {
-    setTimeout(() => noticeCard.classList.add('notice-show'), 1200);
-    noticeClose?.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      noticeCard.classList.remove('notice-show');
-    });
+  function syncPlanUI(){
+    planCardWeb.classList.toggle('active',webOn);planCardSeo.classList.toggle('active',seoOn);consultCard.classList.toggle('active',consultOn);
+    panelWeb.classList.toggle('active',webOn);panelSeo.classList.toggle('active',seoOn);
+    totalBar.style.display=consultOn?'none':'';toStep2Btn.disabled=!(webOn||seoOn||consultOn);calcTotal();
+  }
+  function clearConsultAlert(){consultAlert.classList.remove('show');}
+
+  planCardWeb.addEventListener('click',function(){clearConsultAlert();if(consultOn){consultOn=false;webOn=true;syncPlanUI();return;}webOn=!webOn;syncPlanUI();});
+  planCardSeo.addEventListener('click',function(){clearConsultAlert();if(consultOn){consultOn=false;seoOn=true;syncPlanUI();return;}seoOn=!seoOn;syncPlanUI();});
+  consultCard.addEventListener('click',function(){
+    if(consultOn){consultOn=false;webOn=true;clearConsultAlert();syncPlanUI();return;}
+    if(webOn||seoOn){consultAlert.classList.add('show');setTimeout(function(){consultAlert.classList.remove('show');},5000);return;}
+    consultOn=true;clearConsultAlert();syncPlanUI();
+  });
+
+  var WEB_BASE=20000,SEO_BASE=10000,PAGE_UNIT=5000,ARTICLE_UNIT=3000;
+  var optGrid=document.getElementById('optGrid'),optGridSeo=document.getElementById('optGridSeo');
+  var totalEl=document.getElementById('totalAmount');
+  var pageSelect=document.getElementById('pageAddSelect'),pageAddItem=document.getElementById('optPageAdd');
+  var articleSelect=document.getElementById('articleAddSelect'),articleAddItem=document.getElementById('optArticleAdd');
+
+  function fmt(n){return n.toLocaleString('ja-JP');}
+
+  function calcTotal(){
+    if(consultOn){totalEl.textContent='—';updateHiddenFields(0);return;}
+    var total=0;
+    if(webOn){
+      total+=WEB_BASE;
+      optGrid.querySelectorAll('.opt-item:not(.opt-page-add)').forEach(function(item){
+        var cb=item.querySelector('input[type=checkbox]');
+        if(cb&&cb.checked){item.classList.add('is-on');total+=parseInt(item.getAttribute('data-price'),10)||0;}
+        else{item.classList.remove('is-on');}
+      });
+      var pages=parseInt(pageSelect.value,10)||0;total+=pages*PAGE_UNIT;pageAddItem.classList.toggle('is-on',pages>0);
+    }
+    if(seoOn){
+      total+=SEO_BASE;
+      optGridSeo.querySelectorAll('.opt-item:not(.opt-page-add)').forEach(function(item){
+        var cb=item.querySelector('input[type=checkbox]');
+        if(cb&&cb.checked){item.classList.add('is-on');total+=parseInt(item.getAttribute('data-price'),10)||0;}
+        else{item.classList.remove('is-on');}
+      });
+      var articles=parseInt(articleSelect.value,10)||0;total+=articles*ARTICLE_UNIT;articleAddItem.classList.toggle('is-on',articles>0);
+    }
+    totalEl.textContent=fmt(total);
+    totalBar.style.transform='scale(1.02)';totalBar.style.transition='transform .18s cubic-bezier(.34,1.4,.64,1)';
+    setTimeout(function(){totalBar.style.transform='';},200);
+    updateHiddenFields(total);
   }
 
-  // FAQ accordion
-  document.querySelectorAll('.faq-item').forEach(item => {
-    const toggle = item.querySelector('.faq-toggle');
-    const body = item.querySelector('.faq-body') as HTMLElement | null;
-    const icon = item.querySelector('.faq-icon');
-    toggle?.addEventListener('click', () => {
-      const isOpen = body?.style.maxHeight !== '0px' && body?.style.maxHeight !== '';
-      if (body) body.style.maxHeight = isOpen ? '0' : body.scrollHeight + 'px';
-      if (icon) (icon as HTMLElement).style.transform = isOpen ? '' : 'rotate(45deg)';
+  optGrid.addEventListener('change',calcTotal);optGridSeo.addEventListener('change',calcTotal);
+  pageAddItem.querySelector('.opt-row').addEventListener('click',function(){pageSelect.focus();});
+  articleAddItem.querySelector('.opt-row').addEventListener('click',function(){articleSelect.focus();});
+
+  document.querySelectorAll('.opt-tip-btn').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();
+      var wrap=btn.closest('.opt-tip-wrap'),open=wrap.classList.contains('is-open');
+      document.querySelectorAll('.opt-tip-wrap.is-open').forEach(function(w){w.classList.remove('is-open');});
+      if(!open)wrap.classList.add('is-open');
     });
   });
+  document.addEventListener('click',function(){document.querySelectorAll('.opt-tip-wrap.is-open').forEach(function(w){w.classList.remove('is-open');});});
 
-  // Form submission feedback
-  const form = document.getElementById('contact-form') as HTMLFormElement | null;
-  const msg = document.getElementById('form-message');
-  const btn = document.getElementById('submit-btn');
-
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (!btn || !msg) return;
-    btn.setAttribute('disabled', 'true');
-    (btn.querySelector('span') as HTMLElement).textContent = '送信中...';
-
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      });
-
-      const json = await res.json();
-
-      if (res.ok && json.success) {
-        msg.style.display = 'block';
-        msg.style.background = '#f0f9f0';
-        msg.style.border = '1px solid #b0d8b0';
-        msg.style.color = '#2a6a2a';
-        msg.textContent = 'お問い合わせありがとうございます。24時間以内にご返信いたします。';
-        form.reset();
-      } else {
-        throw new Error('送信エラー');
-      }
-    } catch {
-      msg.style.display = 'block';
-      msg.style.background = '#fff0f0';
-      msg.style.border = '1px solid #d8b0b0';
-      msg.style.color = '#6a2a2a';
-      msg.textContent = '送信に失敗しました。直接 saneatsu.designs@gmail.com へご連絡ください。';
-    } finally {
-      btn.removeAttribute('disabled');
-      (btn.querySelector('span') as HTMLElement).textContent = '送信する →';
+  function updateHiddenFields(total){
+    if(consultOn){document.getElementById('hiddenPlan').value='まずは相談だけ';document.getElementById('hiddenOptions').value='なし';document.getElementById('hiddenTotal').value='未定（ご相談）';return;}
+    var plans=[],opts=[];
+    if(webOn){
+      plans.push('LP・WEBサイト制作プラン（基本料金 ¥20,000〜）');
+      var pages=parseInt(pageSelect.value,10)||0;
+      if(pages>0)opts.push('【WEB】ページ追加 +'+pages+'P（'+fmt(pages*PAGE_UNIT)+'円）');
+      optGrid.querySelectorAll('.opt-item:not(.opt-page-add)').forEach(function(item){var cb=item.querySelector('input[type=checkbox]');if(cb&&cb.checked){var name=item.getAttribute('data-name')||item.querySelector('.opt-name').textContent;var price=item.getAttribute('data-price');opts.push('【WEB】'+name+'（+'+fmt(parseInt(price,10))+'円）');}});
     }
+    if(seoOn){
+      plans.push('SEO対策プラン（基本料金 ¥10,000〜）');
+      var articles=parseInt(articleSelect.value,10)||0;
+      if(articles>0)opts.push('【SEO】追加記事 +'+(articles*10)+'記事（'+fmt(articles*ARTICLE_UNIT)+'円）');
+      optGridSeo.querySelectorAll('.opt-item:not(.opt-page-add)').forEach(function(item){var cb=item.querySelector('input[type=checkbox]');if(cb&&cb.checked){var name=item.getAttribute('data-name')||item.querySelector('.opt-name').textContent;var price=item.getAttribute('data-price');opts.push('【SEO】'+name+'（+'+fmt(parseInt(price,10))+'円）');}});
+    }
+    document.getElementById('hiddenPlan').value=plans.join(' ＋ ');
+    document.getElementById('hiddenOptions').value=opts.length?opts.join('、'):'なし';
+    document.getElementById('hiddenTotal').value='¥'+fmt(total)+'〜';
+  }
+
+  var currentStep=1,step1=document.getElementById('step1'),step2=document.getElementById('step2'),step3=document.getElementById('step3');
+  var tabs=document.querySelectorAll('.step-tab');
+
+  function goToStep(n){
+    currentStep=n;step1.classList.toggle('active',n===1);step2.classList.toggle('active',n===2);step3.classList.toggle('active',n===3);
+    tabs.forEach(function(t){var s=parseInt(t.getAttribute('data-step'),10);t.classList.remove('active','done');if(s===n)t.classList.add('active');else if(s<n)t.classList.add('done');});
+    window.scrollTo({top:document.getElementById('stepTabs').offsetTop-90,behavior:'smooth'});
+    var panel=document.getElementById('step'+n);panel.querySelectorAll('.reveal:not(.visible)').forEach(function(c){setTimeout(function(){c.classList.add('visible');},100);});
+  }
+
+  toStep2Btn.addEventListener('click',function(){if(!webOn&&!seoOn&&!consultOn)return;buildSelectedSummary();goToStep(2);});
+  document.getElementById('backToStep1').addEventListener('click',function(){goToStep(1);});
+
+  function buildSelectedSummary(){
+    var list=document.getElementById('selectedList');list.innerHTML='';var total=0;
+    if(consultOn){
+      var cr=document.createElement('div');cr.className='sel-row';cr.innerHTML='<span class="sel-name" style="font-weight:700;color:#9b59b6">まずは相談だけ</span><span class="sel-price" style="color:#9b59b6">—</span>';list.appendChild(cr);
+      var tr=document.createElement('div');tr.className='sel-total';tr.innerHTML='<span>お見積り合計</span><span style="color:#9b59b6">ご相談の上お見積り</span>';list.appendChild(tr);return;
+    }
+    if(webOn){
+      var hdr=document.createElement('div');hdr.className='sel-row';hdr.style.borderBottom='2px solid var(--primary)';hdr.style.marginBottom='4px';hdr.style.paddingBottom='6px';
+      hdr.innerHTML='<span class="sel-name" style="font-weight:700;color:var(--primary)">LP・WEBサイト制作プラン（基本）</span><span class="sel-price">¥'+fmt(WEB_BASE)+'</span>';list.appendChild(hdr);total+=WEB_BASE;
+      var pages=parseInt(pageSelect.value,10)||0;
+      if(pages>0){var p=pages*PAGE_UNIT;total+=p;var r=document.createElement('div');r.className='sel-row';r.innerHTML='<span class="sel-name">　ページ追加 +'+pages+'P</span><span class="sel-price">+ ¥'+fmt(p)+'</span>';list.appendChild(r);}
+      optGrid.querySelectorAll('.opt-item:not(.opt-page-add)').forEach(function(item){var cb=item.querySelector('input[type=checkbox]');if(cb&&cb.checked){var name=item.getAttribute('data-name')||item.querySelector('.opt-name').textContent;var price=parseInt(item.getAttribute('data-price'),10)||0;total+=price;var r2=document.createElement('div');r2.className='sel-row';r2.innerHTML='<span class="sel-name">　'+name+'</span><span class="sel-price">+ ¥'+fmt(price)+'</span>';list.appendChild(r2);}});
+    }
+    if(seoOn){
+      if(webOn){var sep=document.createElement('div');sep.style.cssText='height:1px;background:#e2e6ed;margin:10px 0;';list.appendChild(sep);}
+      var hdr2=document.createElement('div');hdr2.className='sel-row';hdr2.style.borderBottom='2px solid var(--success)';hdr2.style.marginBottom='4px';hdr2.style.paddingBottom='6px';
+      hdr2.innerHTML='<span class="sel-name" style="font-weight:700;color:var(--success)">SEO対策プラン（基本）</span><span class="sel-price">¥'+fmt(SEO_BASE)+'</span>';list.appendChild(hdr2);total+=SEO_BASE;
+      var articles=parseInt(articleSelect.value,10)||0;
+      if(articles>0){var a=articles*ARTICLE_UNIT;total+=a;var ra=document.createElement('div');ra.className='sel-row';ra.innerHTML='<span class="sel-name">　追加記事 +'+(articles*10)+'記事</span><span class="sel-price">+ ¥'+fmt(a)+'</span>';list.appendChild(ra);}
+      optGridSeo.querySelectorAll('.opt-item:not(.opt-page-add)').forEach(function(item){var cb=item.querySelector('input[type=checkbox]');if(cb&&cb.checked){var name=item.getAttribute('data-name')||item.querySelector('.opt-name').textContent;var price=parseInt(item.getAttribute('data-price'),10)||0;total+=price;var r2=document.createElement('div');r2.className='sel-row';r2.innerHTML='<span class="sel-name">　'+name+'</span><span class="sel-price">+ ¥'+fmt(price)+'</span>';list.appendChild(r2);}});
+    }
+    var tr=document.createElement('div');tr.className='sel-total';tr.innerHTML='<span>お見積り合計</span><span style="color:var(--primary)">¥'+fmt(total)+'〜</span>';list.appendChild(tr);
+  }
+
+  var form=document.getElementById('contact-form'),submitBtn=document.getElementById('submitBtn'),errorEl=document.getElementById('formError');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();errorEl.style.display='none';submitBtn.disabled=true;
+    submitBtn.querySelector('svg').style.display='none';submitBtn.childNodes[0].textContent='送信中...';
+    fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+    .then(function(res){return res.json().then(function(json){return{ok:res.ok,json:json};});})
+    .then(function(data){if(data.ok&&data.json.success){goToStep(3);}else{throw new Error('fail');}})
+    .catch(function(){errorEl.textContent='送信に失敗しました。直接 saneatsu.designs@gmail.com へご連絡ください。';errorEl.style.display='block';})
+    .finally(function(){submitBtn.disabled=false;submitBtn.childNodes[0].textContent='この内容で送信する';if(submitBtn.querySelector('svg'))submitBtn.querySelector('svg').style.display='';});
   });
+
+  var scrollHint=document.getElementById('scrollHint');
+  optGrid.addEventListener('scroll',function(){var atBottom=optGrid.scrollTop+optGrid.clientHeight>=optGrid.scrollHeight-10;if(scrollHint)scrollHint.style.display=atBottom?'none':'flex';});
+  calcTotal();
+})();
 </script>
