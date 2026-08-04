@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import CTABanner from '../../components/CTABanner.astro';
+import RenewalLayout from '../../layouts/RenewalLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 // note RSS fetch（全件）
 let noteArticles: { title: string; link: string; pubDate: string; thumbnail: string; description: string }[] = [];
@@ -23,73 +23,688 @@ try {
 }
 ---
 
-<BaseLayout
-  title="Journal｜記事一覧 | Sane Design"
+<RenewalLayout
+  title="Journal｜ブログ記事一覧 | Sane Design"
   description="ホームページ制作とSEO対策に関する考察、ノウハウ、実例を発信しています。個人事業主・中小企業のWeb運用に役立つ情報を、実績300件以上のデザイナーがお届けします。"
 >
-  <section style="padding:80px 0 48px; border-bottom:1px solid var(--color-border);">
-    <div class="container-editorial">
-      <p class="section-label">Journal</p>
-      <h1 style="font-family:var(--font-serif); font-size:clamp(36px,6vw,80px); font-weight:300; line-height:1.1; margin-top:8px;">
-        Writings.
-      </h1>
-      <p style="margin-top:24px; max-width:480px; font-size:15px; color:var(--color-muted); line-height:1.9;">
-        ホームページ制作とSEO対策に関する考察・ノウハウ・実例。
-      </p>
-      <a href="https://note.com/sane_design2026" target="_blank" rel="noopener" style="display:inline-block; margin-top:16px; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-muted); text-decoration:none; border-bottom:1px solid currentColor; padding-bottom:2px;">
-        noteで読む →
-      </a>
+  <!-- ── Hero ── -->
+  <section class="rb-hero">
+    <div class="rb-wrap">
+      <Breadcrumbs items={[{ label: 'ブログ' }]} />
+
+      <div class="rb-hero-content">
+        <span class="rb-sec-sub">Journal</span>
+        <h1 class="rb-hero-title">ブログ・コラム</h1>
+        <p class="rb-hero-desc">
+          ホームページ制作とSEO対策に関する考察・ノウハウ・実例。<br class="rb-sp-hide" />
+          AI活用のヒントも発信しています。
+        </p>
+
+        <!-- Stats strip -->
+        <div class="rb-count-badge">
+          <div class="rb-stat">
+            <span class="rb-stat-num"><span class="rb-count" data-target={noteArticles.length} data-suffix="+">0</span></span>
+            <span class="rb-stat-label">公開記事数</span>
+          </div>
+          <div class="rb-stat-divider"></div>
+          <div class="rb-stat">
+            <span class="rb-stat-note">noteで配信中</span>
+            <span class="rb-stat-label">外部メディア</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wave divider -->
+    <div class="rb-wave rb-wave-bot">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,0 C300,60 900,60 1200,0 L1200,60 L0,60 Z" fill="#fff"/></svg>
     </div>
   </section>
 
-  <section style="padding:64px 0 120px;">
-    <div class="container-editorial">
+  <!-- ── Articles Grid ── -->
+  <section class="rb-grid-section">
+    <div class="rb-wrap">
       {noteArticles.length > 0 ? (
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
-          {noteArticles.map((article, i) => {
-            const d = new Date(article.pubDate);
-            const dateStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-            return (
-              <a href={article.link} target="_blank" rel="noopener" class="note-card-blog" style="display:block; text-decoration:none; border:1px solid var(--color-border); overflow:hidden; transition: box-shadow 0.3s ease, transform 0.3s ease;">
-                {article.thumbnail && (
-                  <div style="width:100%; aspect-ratio:16/9; overflow:hidden; background:var(--color-surface);">
-                    <img src={article.thumbnail} alt={article.title} loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.4s ease;" class="note-thumb-blog" />
-                  </div>
-                )}
-                <div style="padding:24px;">
-                  <time style="font-size:10px; letter-spacing:0.1em; color:var(--color-muted);">{dateStr}</time>
-                  <h2 style="font-family:var(--font-serif); font-size:18px; font-weight:400; margin-top:10px; line-height:1.6; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">{article.title}</h2>
-                  {article.description && (
-                    <p style="font-size:12px; color:var(--color-muted); margin-top:8px; line-height:1.8; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">{article.description}</p>
-                  )}
+        <>
+          <div class="rb-grid" id="rb-grid">
+            {noteArticles.map((article, i) => {
+              const d = new Date(article.pubDate);
+              const dateStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+              return (
+                <div class="rb-item" style={`animation-delay:${Math.min(i, 11) * 60}ms`}>
+                  <a href={article.link} target="_blank" rel="noopener noreferrer" class="rb-card">
+                    <div class="rb-thumb">
+                      {article.thumbnail && (
+                        <img src={article.thumbnail} alt={article.title} loading="lazy" width="600" height="338" />
+                      )}
+                      <div class="rb-thumb-overlay">
+                        <span class="rb-view-label">noteで読む ↗</span>
+                      </div>
+                    </div>
+                    <div class="rb-body">
+                      <div class="rb-meta">
+                        <time datetime={dateStr}>{dateStr}</time>
+                        <span class="rb-tag">AI活用</span>
+                      </div>
+                      <h2 class="rb-card-title">{article.title}</h2>
+                      {article.description && (
+                        <p class="rb-card-desc">{article.description}</p>
+                      )}
+                    </div>
+                  </a>
                 </div>
-              </a>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+
+          <!-- Pagination -->
+          <div class="rb-pagination" id="rb-pagination"></div>
+          <p class="rb-page-info" id="rb-page-info"></p>
+        </>
       ) : (
-        <p style="font-size:14px; color:var(--color-muted);">
+        <p style="font-size:14px; color:var(--rb-sub);">
           記事を読み込めませんでした。
-          <a href="https://note.com/sane_design2026" target="_blank" rel="noopener" style="color:var(--color-primary);">noteで読む →</a>
+          <a href="https://note.com/sane_design2026" target="_blank" rel="noopener" style="color:var(--rb-primary);">noteで読む →</a>
         </p>
       )}
     </div>
   </section>
 
-  <CTABanner />
-</BaseLayout>
+  <!-- ── CTA Section ── -->
+  <section class="rb-cta-final">
+    <div class="rb-cta-wave-top">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="#fff"/></svg>
+    </div>
+    <div class="rb-wrap rb-cta-inner">
+      <img
+        class="rb-cta-illust"
+        src="/assets/female_creator_tablet.png"
+        alt="タブレットを持つクリエイターのイラスト"
+        width="480"
+        height="480"
+        loading="lazy"
+      />
+      <h2 class="rb-cta-heading">まずはwebデザインを無料で相談！</h2>
+      <p class="rb-cta-text">
+        知識や説明があまりできなくても大丈夫です！<br />
+        まずは一度ご相談頂けましたら、こちらから様々な提案をさせて頂きます。
+      </p>
+      <a href="/contact/" class="rn-btn rn-btn-primary rb-cta-btn">
+        <span>無料で相談してみる</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </section>
+</RenewalLayout>
 
-<style>
-  .note-card-blog:hover {
-    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-    transform: translateY(-2px);
+<style is:global>
+  /* ══════════════════════════════════════════════
+     BLOG PAGE — RENEWAL PASTEL DESIGN
+     Matching works page design system
+     ══════════════════════════════════════════════ */
+
+  /* ── Design Tokens ── */
+  .rb-hero,
+  .rb-grid-section {
+    --rb-primary: #4FB4E8;
+    --rb-primary-dark: #2E90C4;
+    --rb-primary-deep: #1c6f9c;
+    --rb-sky: #E4F4FD;
+    --rb-cream: #FFF6E0;
+    --rb-mint: #E9F7E4;
+    --rb-orange: #F79B3E;
+    --rb-orange-dark: #c76f14;
+    --rb-text: #3A4256;
+    --rb-sub: #7A8494;
+    --rb-radius: 24px;
+    --rb-shadow: 0 10px 30px rgba(58,66,86,.08);
+
+    font-family: "Noto Sans JP", sans-serif;
+    color: var(--rb-text);
   }
-  .note-card-blog:hover .note-thumb-blog {
-    transform: scale(1.04);
+
+  /* ── Utility ── */
+  .rb-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 22px;
   }
-  @media (max-width: 768px) {
-    div[style*="grid-template-columns:repeat(3,1fr)"] {
-      grid-template-columns: 1fr !important;
+
+  @media (max-width: 560px) {
+    .rb-sp-hide { display: none; }
+  }
+
+  /* ── Hero ── */
+  .rb-hero {
+    position: relative;
+    background: radial-gradient(120% 90% at 50% 0%, #D7EFFB 0%, #EAF7FE 50%, #fff 100%);
+    padding: 36px 0 80px;
+  }
+  .rb-hero .breadcrumbs {
+    margin-bottom: 0;
+  }
+  .rb-hero .breadcrumbs a,
+  .rb-hero .breadcrumbs span {
+    color: var(--rb-sub) !important;
+  }
+  .rb-hero .breadcrumbs a:hover {
+    color: var(--rb-primary) !important;
+  }
+  .rb-hero-content {
+    text-align: center;
+    margin-top: 32px;
+  }
+  .rb-sec-sub {
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--rb-primary);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .rb-hero-title {
+    font-family: "Noto Sans JP", sans-serif !important;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 900 !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0.02em !important;
+    color: var(--rb-text);
+    margin-bottom: 16px;
+  }
+  .rb-hero-desc {
+    font-size: 15px;
+    color: var(--rb-sub);
+    font-weight: 500;
+    line-height: 1.9;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* ── Stats badge ── */
+  .rb-count-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 28px;
+    background: #fff;
+    border-radius: 26px;
+    box-shadow: var(--rb-shadow);
+    padding: 20px 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .rb-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 0 28px;
+  }
+  .rb-stat-num {
+    font-family: "Inter", sans-serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 800;
+    color: var(--rb-primary);
+    line-height: 1.2;
+  }
+  .rb-stat-label {
+    font-size: 12px;
+    color: var(--rb-sub);
+    font-weight: 700;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+  .rb-stat-note {
+    font-size: clamp(14px, 2vw, 18px);
+    font-family: "Noto Sans JP", sans-serif;
+    letter-spacing: 0.02em;
+    font-weight: 800;
+    color: var(--rb-primary);
+  }
+  .rb-stat-divider {
+    width: 2px;
+    height: 28px;
+    background: #E7ECF2;
+    border-radius: 1px;
+    flex-shrink: 0;
+  }
+
+  /* ── Wave ── */
+  .rb-wave {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+    z-index: 1;
+  }
+  .rb-wave-bot {
+    bottom: -1px;
+  }
+  .rb-wave svg {
+    width: 100%;
+    height: 60px;
+    display: block;
+  }
+
+  /* ── Grid ── */
+  .rb-grid-section {
+    padding: 48px 0 80px;
+  }
+  .rb-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .rb-item {
+    display: block;
+    min-width: 0;
+    animation: rbFadeUp 0.75s cubic-bezier(.22,1,.36,1) both;
+  }
+  @keyframes rbFadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Card ── */
+  .rb-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--rb-radius);
+    overflow: hidden;
+    background: #fff;
+    box-shadow: var(--rb-shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+  }
+  .rb-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(58,66,86,.14);
+  }
+
+  /* Thumbnail */
+  .rb-thumb {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, #D7EFFB, #E9F7E4);
+    flex-shrink: 0;
+  }
+  .rb-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.45s ease;
+  }
+  .rb-card:hover .rb-thumb img {
+    transform: scale(1.05);
+  }
+  .rb-thumb-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(58,66,86,0.6) 0%, transparent 50%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 16px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .rb-card:hover .rb-thumb-overlay {
+    opacity: 1;
+  }
+  .rb-view-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.95);
+    color: var(--rb-primary-dark);
+    font-size: 12px;
+    font-weight: 700;
+    font-family: "Noto Sans JP", sans-serif;
+    padding: 6px 16px;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(58,66,86,0.15);
+  }
+
+  /* Card body */
+  .rb-body {
+    padding: 20px 22px 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .rb-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .rb-meta time {
+    font-size: 11px;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    color: var(--rb-sub);
+    letter-spacing: 0.04em;
+  }
+  .rb-tag {
+    font-size: 11px;
+    background: var(--rb-sky);
+    color: var(--rb-primary-dark);
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+  .rb-card-title {
+    font-family: "Noto Sans JP", sans-serif !important;
+    font-size: 16px;
+    font-weight: 900 !important;
+    line-height: 1.6 !important;
+    letter-spacing: 0 !important;
+    color: var(--rb-text);
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .rb-card-desc {
+    font-size: 13px;
+    color: var(--rb-sub);
+    line-height: 1.8;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-top: auto;
+  }
+
+  /* ── Pagination ── */
+  .rb-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+  }
+  .rb-page-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 14px;
+    border: 2px solid #CDEBFA;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+    color: var(--rb-primary-dark);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+  .rb-page-btn:hover {
+    background: var(--rb-sky);
+    border-color: var(--rb-primary);
+  }
+  .rb-page-btn.active {
+    background: var(--rb-primary);
+    border-color: var(--rb-primary);
+    color: #fff;
+    box-shadow: 0 4px 0 var(--rb-primary-deep);
+    pointer-events: none;
+  }
+  .rb-page-btn.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .rb-page-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2.5;
+  }
+  .rb-page-info {
+    font-size: 13px;
+    color: var(--rb-sub);
+    font-weight: 500;
+    margin-top: 16px;
+    text-align: center;
+  }
+
+  /* ── CTA Section ── */
+  .rb-cta-final {
+    position: relative;
+    background: linear-gradient(135deg, #4FB4E8 0%, #69C6D9 100%);
+    color: #fff;
+    text-align: center;
+    padding: 0 0 80px;
+    margin-top: 40px;
+    overflow: hidden;
+  }
+  .rb-cta-wave-top {
+    line-height: 0;
+  }
+  .rb-cta-wave-top svg {
+    width: 100%;
+    height: 60px;
+    display: block;
+  }
+  .rb-cta-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .rb-cta-illust {
+    width: 420px;
+    max-width: 80%;
+    margin: 0 auto -10px;
+    filter: drop-shadow(0 10px 16px rgba(0,0,0,0.12));
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 98%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 98%);
+  }
+  .rb-cta-heading {
+    font-family: "Noto Sans JP", sans-serif !important;
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 900 !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0.02em !important;
+    margin-bottom: 16px;
+    color: #fff;
+  }
+  .rb-cta-text {
+    font-size: 16px;
+    opacity: 0.97;
+    margin-bottom: 24px;
+    font-weight: 500;
+    line-height: 1.9;
+  }
+  .rb-cta-btn {
+    font-size: 18px;
+    padding: 18px 44px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .rb-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+  }
+  @media (max-width: 560px) {
+    .rb-hero {
+      padding: 24px 0 64px;
+    }
+    .rb-hero-content {
+      margin-top: 24px;
+    }
+    .rb-hero-title {
+      font-size: 26px;
+    }
+    .rb-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 20px;
+    }
+    .rb-count-badge {
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px 24px;
+    }
+    .rb-stat-divider {
+      width: 60px;
+      height: 2px;
+    }
+    .rb-stat {
+      padding: 0;
+    }
+    .rb-cta-final {
+      padding: 0 0 60px;
+    }
+    .rb-cta-btn {
+      font-size: 15px;
+      padding: 16px 28px;
+      white-space: nowrap;
+    }
+    .rb-cta-heading {
+      font-size: 22px;
+    }
+    .rb-cta-text {
+      font-size: 14px;
+    }
+  }
+
+  /* ── Reduced motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    .rb-item {
+      animation: none !important;
+      opacity: 1 !important;
+    }
+    .rb-thumb img {
+      transition: none !important;
     }
   }
 </style>
+
+<script>
+  // ── Pagination ──
+  (function() {
+    const PER_PAGE = 15;
+    const allItems = Array.from(document.querySelectorAll('.rb-item'));
+    const totalPages = Math.ceil(allItems.length / PER_PAGE);
+    const paginationEl = document.getElementById('rb-pagination');
+    const pageInfoEl = document.getElementById('rb-page-info');
+    if (!paginationEl || !pageInfoEl) return;
+
+    let currentPage = 1;
+
+    function showPage(page: number) {
+      currentPage = page;
+      const start = (page - 1) * PER_PAGE;
+      const end = start + PER_PAGE;
+
+      allItems.forEach((item, i) => {
+        const el = item as HTMLElement;
+        if (i >= start && i < end) {
+          el.style.display = '';
+          el.style.animation = 'rbFadeUp 0.75s cubic-bezier(.22,1,.36,1) both';
+          el.style.animationDelay = Math.min(i - start, 11) * 60 + 'ms';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+
+      renderPagination();
+
+      // Scroll to grid top
+      const gridSection = document.querySelector('.rb-grid-section');
+      if (gridSection && page > 1) {
+        const headerH = 70;
+        const y = gridSection.getBoundingClientRect().top + window.pageYOffset - headerH - 16;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }
+
+    function renderPagination() {
+      if (totalPages <= 1) {
+        paginationEl.style.display = 'none';
+        pageInfoEl.style.display = 'none';
+        return;
+      }
+
+      let html = '';
+
+      // Prev button
+      html += `<button class="rb-page-btn${currentPage <= 1 ? ' disabled' : ''}" data-page="${currentPage - 1}" aria-label="前のページ">`;
+      html += '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M15 18l-6-6 6-6"/></svg>';
+      html += '</button>';
+
+      // Page numbers
+      for (let p = 1; p <= totalPages; p++) {
+        html += `<button class="rb-page-btn${p === currentPage ? ' active' : ''}" data-page="${p}">${p}</button>`;
+      }
+
+      // Next button
+      html += `<button class="rb-page-btn${currentPage >= totalPages ? ' disabled' : ''}" data-page="${currentPage + 1}" aria-label="次のページ">`;
+      html += '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6"/></svg>';
+      html += '</button>';
+
+      paginationEl.innerHTML = html;
+
+      // Page info
+      const start = (currentPage - 1) * PER_PAGE + 1;
+      const end = Math.min(currentPage * PER_PAGE, allItems.length);
+      pageInfoEl.textContent = `${allItems.length}件中 ${start}〜${end}件を表示`;
+
+      // Bind click events
+      paginationEl.querySelectorAll('.rb-page-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const page = parseInt((btn as HTMLElement).getAttribute('data-page') || '1');
+          if (page >= 1 && page <= totalPages) {
+            showPage(page);
+          }
+        });
+      });
+    }
+
+    // Initial render
+    showPage(1);
+  })();
+
+  // ── Count Up ──
+  function runCountUp(el: HTMLElement) {
+    const target = parseInt(el.dataset.target || '0');
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 900;
+    const steps = 40;
+    const interval = duration / steps;
+    let current = 0;
+    const increment = target / steps;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      el.innerHTML = prefix + Math.floor(current) + suffix;
+    }, interval);
+  }
+
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        runCountUp(entry.target as HTMLElement);
+        countObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.rb-count').forEach(el => countObserver.observe(el));
+</script>
