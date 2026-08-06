@@ -38,3 +38,6 @@ Disallow: /admin/
 Disallow: /payment/success/
 
 Sitemap: https://sane-design.net/sitemap-index.xml
+
+# RSS フィード — GSCでsitemapとして追加登録も可能
+# https://sane-design.net/rss.xml
