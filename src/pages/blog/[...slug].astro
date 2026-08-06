@@ -71,26 +71,22 @@ const articleJsonLd = {
           ]}
         />
       </div>
-      <p class="text-xs text-muted mb-4">
+      <p class="blog-header-date">
         <time>{post.data.pubDate.toISOString().slice(0, 10)}</time>
-        {
-          post.data.tags.length > 0 && (
-            <>
-              {' · '}
-              {post.data.tags.map((tag, i) => (
-                <span>
-                  #{tag}
-                  {i < post.data.tags.length - 1 ? ' ' : ''}
-                </span>
-              ))}
-            </>
-          )
-        }
       </p>
-      <h1 class="font-serif text-3xl md:text-5xl leading-tight">{post.data.title}</h1>
-      <p class="mt-6 text-base md:text-lg text-muted leading-relaxed">
+      <h1 class="blog-header-title">{post.data.title}</h1>
+      <p class="blog-header-desc">
         {post.data.description}
       </p>
+      {
+        post.data.tags.length > 0 && (
+          <div class="blog-header-tags">
+            {post.data.tags.map((tag) => (
+              <span class="blog-header-tag">#{tag}</span>
+            ))}
+          </div>
+        )
+      }
     </header>
 
     {
@@ -99,7 +95,7 @@ const articleJsonLd = {
           <img
             src={post.data.heroImage}
             alt={post.data.title}
-            class="w-full h-auto bg-[#fafafa]"
+            class="w-full h-auto bg-[#fafafa] rounded-2xl shadow-sm"
           />
         </div>
       )
@@ -181,6 +177,322 @@ const articleJsonLd = {
 </BaseLayout>
 
 <style is:global>
+  /* ══════════════════════════════════════════════
+     BLOG HEADER STYLES
+     ══════════════════════════════════════════════ */
+  .blog-header-date {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4FB4E8;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+  .blog-header-title {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 900;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+    color: #1a202c;
+  }
+  .blog-header-desc {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #6b7a8d;
+    font-weight: 400;
+  }
+  .blog-header-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .blog-header-tag {
+    display: inline-block;
+    background: #EBF5FB;
+    color: #4FB4E8;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ══════════════════════════════════════════════
+     PROSE CUSTOM — LIG-INSPIRED BLOG TYPOGRAPHY
+     ══════════════════════════════════════════════ */
+  .prose-custom {
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic Pro", "メイリオ", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 2;
+    letter-spacing: 0.04em;
+    color: #424242;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* ── Paragraphs ── */
+  .prose-custom p {
+    margin-bottom: 2em;
+  }
+
+  /* ── Headings ── */
+  .prose-custom h2 {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 800;
+    line-height: 1.4;
+    letter-spacing: 0.06em;
+    color: #2d3748;
+    margin-top: 4em;
+    margin-bottom: 1.2em;
+    padding-bottom: 0.6em;
+    border-bottom: 3px solid #4FB4E8;
+    position: relative;
+  }
+  .prose-custom h2::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: #69C6D9;
+  }
+
+  .prose-custom h3 {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: clamp(20px, 3.5vw, 26px);
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #2d3748;
+    margin-top: 3em;
+    margin-bottom: 1em;
+    padding-left: 16px;
+    border-left: 4px solid #4FB4E8;
+  }
+
+  .prose-custom h4 {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: clamp(17px, 3vw, 20px);
+    font-weight: 700;
+    line-height: 1.5;
+    color: #3A4256;
+    margin-top: 2.5em;
+    margin-bottom: 0.8em;
+  }
+
+  /* ── Strong / Bold — Yellow marker highlight ── */
+  .prose-custom strong {
+    font-weight: 700;
+    background-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 10%, rgba(255,255,100,0.45) 10%, rgba(255,255,100,0.45) 45%, rgba(0,0,0,0) 45%);
+    padding: 0 2px;
+  }
+
+  /* ── Links ── */
+  .prose-custom a {
+    color: #4FB4E8;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(79,180,232,0.3);
+    transition: color 0.2s, text-decoration-color 0.2s;
+  }
+  .prose-custom a:hover {
+    color: #3a9ad9;
+    text-decoration-color: #3a9ad9;
+  }
+
+  /* ── Horizontal rules ── */
+  .prose-custom hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #d0dbe8, transparent);
+    margin: 3.5em 0;
+  }
+
+  /* ── Unordered & Ordered lists ── */
+  .prose-custom ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 2em;
+  }
+  .prose-custom ul > li {
+    position: relative;
+    padding-left: 1.6em;
+    margin-bottom: 0.8em;
+    line-height: 1.9;
+  }
+  .prose-custom ul > li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 8px;
+    height: 8px;
+    background: #4FB4E8;
+    border-radius: 50%;
+  }
+
+  .prose-custom ol {
+    list-style: none;
+    padding-left: 0;
+    counter-reset: ol-counter;
+    margin-bottom: 2em;
+  }
+  .prose-custom ol > li {
+    position: relative;
+    padding-left: 2.4em;
+    margin-bottom: 0.8em;
+    counter-increment: ol-counter;
+    line-height: 1.9;
+  }
+  .prose-custom ol > li::before {
+    content: counter(ol-counter);
+    position: absolute;
+    left: 0;
+    top: 0.25em;
+    width: 1.6em;
+    height: 1.6em;
+    background: #4FB4E8;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  /* ── Blockquotes — Callout style ── */
+  .prose-custom blockquote {
+    background: #f0f7ff;
+    border-left: 4px solid #4FB4E8;
+    border-radius: 0 12px 12px 0;
+    padding: 1.4em 1.8em;
+    margin: 2em 0;
+    font-size: 15px;
+    color: #4a5568;
+    line-height: 1.9;
+  }
+  .prose-custom blockquote p {
+    margin-bottom: 0.6em;
+  }
+  .prose-custom blockquote p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ── Code inline ── */
+  .prose-custom code {
+    background: #f0f4f8;
+    color: #e53e3e;
+    font-size: 0.88em;
+    padding: 0.2em 0.5em;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  .prose-custom pre {
+    background: #1a202c;
+    color: #e2e8f0;
+    padding: 1.5em;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 2em 0;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .prose-custom pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+  }
+
+  /* ── Tables ── */
+  .prose-custom table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 2em 0;
+    font-size: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+  .prose-custom thead th {
+    background: #4FB4E8;
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+  }
+  .prose-custom tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e8edf3;
+  }
+  .prose-custom tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .prose-custom tbody tr:nth-child(even) {
+    background: #f8fbff;
+  }
+  .prose-custom tbody tr:hover {
+    background: #eef5fc;
+  }
+
+  /* ── Images inside prose ── */
+  .prose-custom img {
+    border-radius: 12px;
+    margin: 2em auto;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+
+  /* ── "この記事でわかること" TOC-like box ── */
+  .prose-custom ul:first-of-type {
+    background: #f5f8fb;
+    border-radius: 12px;
+    padding: 1.6em 1.8em 1.6em 1.8em;
+    border: 1px solid #e4eaf2;
+  }
+  .prose-custom ul:first-of-type > li::before {
+    background: #51cf66;
+  }
+
+  /* ── Mobile adjustments ── */
+  @media (max-width: 640px) {
+    .prose-custom {
+      font-size: 15px;
+      line-height: 1.95;
+    }
+    .prose-custom h2 {
+      margin-top: 3em;
+      margin-bottom: 1em;
+    }
+    .prose-custom h3 {
+      margin-top: 2.5em;
+    }
+    .prose-custom blockquote {
+      padding: 1em 1.2em;
+      margin: 1.5em 0;
+    }
+    .prose-custom table {
+      font-size: 13px;
+    }
+    .prose-custom thead th,
+    .prose-custom tbody td {
+      padding: 10px 12px;
+    }
+  }
+
   /* ══════════════════════════════════════════════
      BLOG PREV / NEXT NAVIGATION
      ══════════════════════════════════════════════ */
