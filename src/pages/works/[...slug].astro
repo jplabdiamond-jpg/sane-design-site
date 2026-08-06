@@ -39,14 +39,24 @@ const workJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CreativeWork',
   name: `${work.data.client} ${work.data.title}`,
+  description: pageDesc,
   about: work.data.industry,
   keywords: work.data.tags.join(', '),
   dateCreated: String(work.data.year),
+  inLanguage: 'ja',
   ...(work.data.heroImage
-    ? { image: new URL(work.data.heroImage, SITE_URL).href }
+    ? {
+        image: {
+          '@type': 'ImageObject',
+          url: new URL(work.data.heroImage, SITE_URL).href,
+          width: 1200,
+          height: 630,
+        },
+      }
     : {}),
   ...(hasUrl ? { url: work.data.url } : {}),
   creator: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+  provider: { '@id': `${SITE_URL}/#organization` },
 };
 ---
 

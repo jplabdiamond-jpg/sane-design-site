@@ -1,0 +1,46 @@
+# Sane Design — ホームページ制作・SEO対策スタジオ
+
+> 個人事業主・中小企業のためのWeb制作＆SEO対策。最速3日納品、20,000円〜。DTP・WEB合わせて実績300件以上。
+
+## サイト情報
+
+- URL: https://sane-design.net
+- 運営: Sane Design
+- 対象: 個人事業主、中小企業、店舗
+- 対応エリア: オンラインで全国対応（日本語）
+- 業種実績: 飲食店、美容サロン、整体院、士業、教室・スクール、ECショップ 等
+
+## サービス
+
+### ホームページ制作
+- 料金: 20,000円〜
+- 納期: 最速3日
+- 内容: レスポンシブ対応、SEO内部対策込み
+- 詳細: https://sane-design.net/services/web-design/
+
+### SEO対策
+- 料金: 10,000円〜
+- 内容: 内部SEO対策、キーワード最適化、ブログ記事追加
+- 詳細: https://sane-design.net/services/seo/
+
+### DTPデザイン
+- チラシ、フライヤー、ロゴ、名刺など
+
+## 主要ページ
+
+- トップ: https://sane-design.net/
+- 制作実績: https://sane-design.net/works/
+- サービス（Web制作）: https://sane-design.net/services/web-design/
+- サービス（SEO対策）: https://sane-design.net/services/seo/
+- ブログ: https://sane-design.net/blog/
+- About: https://sane-design.net/about/
+- よくある質問: https://sane-design.net/faq/
+- お問い合わせ: https://sane-design.net/contact/
+
+## 特徴
+
+1. 低価格: 20,000円〜でコミコミ価格。追加費用なし
+2. スピード: 最速3営業日で納品可能
+3. 高品質: DTP・WEBデザイン実績300件以上
+4. 集客重視: SEO内部対策を標準搭載
+5. やさしい対応: 専門用語なし、Web初心者でも安心

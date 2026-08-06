@@ -1,4 +1,40 @@
 User-agent: *
 Allow: /
 
+# AI検索エンジン・AIクローラーを明示的に許可
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# noindexページをクロールから除外
+User-agent: *
+Disallow: /admin/
+Disallow: /payment/success/
+
 Sitemap: https://sane-design.net/sitemap-index.xml

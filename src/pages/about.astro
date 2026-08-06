@@ -1,16 +1,32 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTABanner from '../components/CTABanner.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Sane Atsu',
+  jobTitle: 'Web Designer / Developer',
+  worksFor: { '@id': 'https://sane-design.net/#organization' },
+  sameAs: [
+    'https://www.instagram.com/sane_design2023/',
+    'https://x.com/sane_design',
+    'https://note.com/sane_design2026',
+  ],
+};
 ---
 
 <BaseLayout
   title="About｜Sane Designについて | Sane Design"
   description="Sane Designは、DTP・WEB合わせて300件以上のデザイン実績をもとに、「速くて、良い」を追求するWeb制作・SEOスタジオです。"
+  jsonLd={personJsonLd}
 >
   <!-- Hero -->
   <section style="padding:80px 0 60px;">
     <div class="container-editorial">
-      <p class="section-label reveal">About</p>
+      <Breadcrumbs items={[{ label: 'About' }]} />
+      <p class="section-label reveal" style="margin-top:18px;">About</p>
       <h1 class="reveal" style="font-family:var(--font-serif); font-size:clamp(40px,7vw,100px); font-weight:300; line-height:1.05; letter-spacing:-0.02em; transition-delay:80ms;">
         Design,<br />
         <span style="font-style:italic;">faster.</span>

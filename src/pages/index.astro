@@ -1,12 +1,45 @@
 ---
 import RenewalLayout from '../layouts/RenewalLayout.astro';
 
+// トップページ固有の構造化データ: サービスカタログ（WebSite は SEO.astro で出力済み）
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Sane Design",
-  "url": "https://sane-design.net",
-  "description": "最速3日納品・20,000円〜。個人事業主・中小企業のホームページ制作と内部SEO対策を専門とするデザインスタジオ。DTP・WEB合わせて実績300件以上。"
+  "@type": "OfferCatalog",
+  "name": "Sane Design サービス一覧",
+  "itemListElement": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "ホームページ制作",
+        "description": "レスポンシブ対応・SEO内部対策込みのホームページを最速3日で制作",
+        "url": "https://sane-design.net/services/web-design/",
+        "provider": { "@id": "https://sane-design.net/#organization" },
+      },
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "price": "20000",
+        "priceCurrency": "JPY",
+        "minPrice": "20000",
+      },
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "SEO対策",
+        "description": "内部SEO対策と指定キーワードに基づくブログ記事追加",
+        "url": "https://sane-design.net/services/seo/",
+        "provider": { "@id": "https://sane-design.net/#organization" },
+      },
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "price": "10000",
+        "priceCurrency": "JPY",
+        "minPrice": "10000",
+      },
+    },
+  ],
 };
 
 // note RSS fetch（最新3件をトップページに表示）

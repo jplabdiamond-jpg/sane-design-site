@@ -10,6 +10,8 @@ interface Props {
   noindex?: boolean;
   ogType?: string;
   jsonLd?: Record<string, any> | Record<string, any>[];
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
 const {
@@ -19,6 +21,8 @@ const {
   noindex = false,
   ogType = 'website',
   jsonLd,
+  publishedTime,
+  modifiedTime,
 } = Astro.props;
 ---
 
@@ -37,14 +41,18 @@ const {
       ogType={ogType}
       jsonLd={jsonLd}
       noindex={noindex}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
     />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
+    <meta name="format-detection" content="telephone=no" />
   </head>
   <body class="rn-body">
 
