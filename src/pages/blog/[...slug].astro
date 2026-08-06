@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import RenewalLayout from '../../layouts/RenewalLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
@@ -54,7 +54,7 @@ const articleJsonLd = {
 };
 ---
 
-<BaseLayout
+<RenewalLayout
   title={`${post.data.title} | Sane Design Journal`}
   description={post.data.description}
   image={post.data.heroImage}
@@ -174,7 +174,7 @@ const articleJsonLd = {
       <p class="blog-cta-illust-note">しつこい営業は一切しません。お気軽にどうぞ。</p>
     </div>
   </section>
-</BaseLayout>
+</RenewalLayout>
 
 <style is:global>
   /* ══════════════════════════════════════════════
