@@ -33,6 +33,7 @@ const ctaImages = [
   '/assets/webdesign_page_step3.png',
 ];
 const ctaImage = ctaImages[index % 3];
+const isWoman = ctaImage.includes('reason01_woman');
 
 const workJsonLd = {
   '@context': 'https://schema.org',
@@ -186,7 +187,7 @@ const workJsonLd = {
       <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="#fff"/></svg>
     </div>
     <div class="wd-wrap" style="text-align:center;">
-      <img class="wd-cta-illust" src={ctaImage} alt="お問い合わせイラスト">
+      <img class:list={["wd-cta-illust", { "wd-cta-illust-sm": isWoman }]} src={ctaImage} alt="お問い合わせイラスト">
       <h2>まずは気軽にご相談ください</h2>
       <p>相談は無料。「何も分からない」状態で大丈夫です。<br>しつこい営業は一切しません。</p>
       <a href="/contact/" class="rn-btn rn-btn-primary wd-cta-btn">
@@ -566,6 +567,10 @@ const workJsonLd = {
     width: 100%;
     height: 40px;
   }
+  .wd-cta-illust-sm {
+    width: 294px !important;
+    max-width: 56% !important;
+  }
   .wd-cta-illust {
     width: 420px;
     max-width: 80%;
@@ -673,6 +678,9 @@ const workJsonLd = {
     }
     .wd-cta-illust {
       width: 320px;
+    }
+    .wd-cta-illust-sm {
+      width: 224px !important;
     }
     .wd-content .detail-shot img {
       border-radius: 12px;
