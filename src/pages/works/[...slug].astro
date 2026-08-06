@@ -1,6 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import CTABanner from '../../components/CTABanner.astro';
+import RenewalLayout from '../../layouts/RenewalLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
@@ -8,23 +7,32 @@ import { SITE_URL, SITE_NAME } from '../../consts';
 
 export async function getStaticPaths() {
   const works = await getCollection('works', ({ data }) => !data.draft);
-  return works.map((work) => ({
+  return works.map((work, index) => ({
     params: { slug: work.slug },
-    props: { work },
+    props: { work, index },
   }));
 }
 
 interface Props {
   work: CollectionEntry<'works'>;
+  index: number;
 }
 
-const { work } = Astro.props;
+const { work, index } = Astro.props;
 const { Content } = await work.render();
 const hasUrl = !!work.data.url;
 
 const pageTitle = `${work.data.client} ${work.data.title}｜${work.data.industry}の制作実績 | Sane Design`;
 const pageDesc = `${work.data.industry}「${work.data.client}」様の${work.data.title}制作事例。${work.data.tags.join('・')}。実績300件以上のSane Designによるホームページ・デザイン制作実績をご紹介します。`;
 const heroAlt = `${work.data.client}（${work.data.industry}）の${work.data.title}｜Sane Design制作実績`;
+
+// CTA人物イラストを3枚ローテーション
+const ctaImages = [
+  '/assets/reason01_woman.png',
+  '/assets/reason03_man.png',
+  '/assets/webdesign_page_step3.png',
+];
+const ctaImage = ctaImages[index % 3];
 
 const workJsonLd = {
   '@context': 'https://schema.org',
@@ -41,191 +49,660 @@ const workJsonLd = {
 };
 ---
 
-<BaseLayout
+<RenewalLayout
   title={pageTitle}
   description={pageDesc}
   image={work.data.heroImage}
   ogType="article"
   jsonLd={workJsonLd}
 >
-  <article>
-    <header class="container-editorial pt-16 md:pt-24 pb-12">
+
+  <!-- Hero -->
+  <section class="wd-hero">
+    <div class="wd-wrap">
       <Breadcrumbs
         items={[
-          { label: 'Works', href: '/works/' },
+          { label: '制作実績', href: '/works/' },
           { label: work.data.client },
         ]}
       />
-      <p class="section-label" style="margin-top:20px;">{work.data.industry} / {work.data.year}</p>
-      <h1 class="font-serif text-4xl md:text-6xl leading-tight">{work.data.title}</h1>
-    </header>
+      <div class="wd-hero-content">
+        <div class="wd-hero-meta">
+          <span class="wd-tag">{work.data.industry}</span>
+          <span class="wd-tag wd-tag-year">{work.data.year}</span>
+          {work.data.tags.map((tag: string) => (
+            <span class="wd-tag wd-tag-sub">{tag}</span>
+          ))}
+        </div>
+        <h1 class="wd-hero-title">{work.data.title}</h1>
+      </div>
+    </div>
+    <div class="wd-wave wd-wave-bot">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,0 C300,60 900,60 1200,0 L1200,60 L0,60 Z" fill="#fff"/></svg>
+    </div>
+  </section>
 
-    {work.data.heroImage && (
-      <div class="container-editorial pb-16">
-        {hasUrl ? (
-          <a
-            href={work.data.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hero-img-link"
-            title={`${work.data.client} のサイトを見る`}
-          >
-            <img
-              src={work.data.heroImage}
-              alt={heroAlt}
-              width="1200"
-              height="800"
-              class="w-full h-auto bg-[#fafafa] hero-img"
-            />
-            <span class="hero-img-badge">サイトを見る ↗</span>
-          </a>
-        ) : (
+  <!-- Hero Image -->
+  {work.data.heroImage && (
+    <section class="wd-wrap wd-hero-img-section">
+      {hasUrl ? (
+        <a
+          href={work.data.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="wd-hero-img-link"
+          title={`${work.data.client} のサイトを見る`}
+        >
           <img
             src={work.data.heroImage}
             alt={heroAlt}
             width="1200"
             height="800"
-            class="w-full h-auto bg-[#fafafa]"
+            class="wd-hero-img"
           />
-        )}
-      </div>
-    )}
-
-    <section class="container-editorial pb-16">
-      <div class="grid md:grid-cols-4 gap-8 border-t border-primary pt-8">
-        <div>
-          <p class="text-xs uppercase tracking-widest text-muted mb-2">Client</p>
-          <p class="text-sm">{work.data.client}</p>
-        </div>
-        <div>
-          <p class="text-xs uppercase tracking-widest text-muted mb-2">Industry</p>
-          <p class="text-sm">{work.data.industry}</p>
-        </div>
-        <div>
-          <p class="text-xs uppercase tracking-widest text-muted mb-2">Year</p>
-          <p class="text-sm">{work.data.year}</p>
-        </div>
-        <div>
-          <p class="text-xs uppercase tracking-widest text-muted mb-2">Role</p>
-          <p class="text-sm">{work.data.role || 'Design & Development'}</p>
-        </div>
-      </div>
-
-      {hasUrl && (
-        <div class="mt-8">
-          <a
-            href={work.data.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="site-link-btn"
-          >
-            <span>公開サイトを見る</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-            </svg>
-          </a>
-        </div>
+          <span class="wd-hero-img-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            サイトを見る
+          </span>
+        </a>
+      ) : (
+        <img
+          src={work.data.heroImage}
+          alt={heroAlt}
+          width="1200"
+          height="800"
+          class="wd-hero-img"
+        />
       )}
     </section>
+  )}
 
-    <section class="container-editorial pb-16">
-      <div class="prose-custom">
-        <Content />
+  <!-- Info Strip -->
+  <section class="wd-wrap">
+    <div class="wd-info-strip">
+      <div class="wd-info-item">
+        <span class="wd-info-label">クライアント</span>
+        <span class="wd-info-value">{work.data.client}</span>
       </div>
-    </section>
-
-    <section class="container-editorial pb-24">
-      <div class="related-links">
-        <a href="/works/" class="related-link">← 制作実績の一覧へ戻る</a>
-        <a href="/services/web-design/" class="related-link">ホームページ制作のサービス詳細 →</a>
-        <a href="/contact/#contact-form" class="related-link">この実績について相談する →</a>
+      <div class="wd-info-item">
+        <span class="wd-info-label">業種</span>
+        <span class="wd-info-value">{work.data.industry}</span>
       </div>
-    </section>
-  </article>
+      <div class="wd-info-item">
+        <span class="wd-info-label">制作年</span>
+        <span class="wd-info-value">{work.data.year}</span>
+      </div>
+      <div class="wd-info-item">
+        <span class="wd-info-label">担当</span>
+        <span class="wd-info-value">{work.data.role || 'Design & Development'}</span>
+      </div>
+    </div>
 
-  <CTABanner
-    headline="Interested?"
-    subline="同様のプロジェクトはココナラから承っております"
-  />
-</BaseLayout>
+    {hasUrl && (
+      <div class="wd-site-link-wrap">
+        <a
+          href={work.data.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rn-btn rn-btn-primary wd-site-btn"
+        >
+          公開サイトを見る
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
+      </div>
+    )}
+  </section>
 
-<style>
-  /* 関連内部リンク */
-  .related-links {
-    border-top: 1px solid var(--color-border);
-    padding-top: 28px;
+  <!-- Content -->
+  <section class="wd-wrap wd-content-section">
+    <div class="wd-content">
+      <Content />
+    </div>
+  </section>
+
+  <!-- Related Links -->
+  <section class="wd-wrap wd-related-section">
+    <div class="wd-related">
+      <a href="/works/" class="wd-related-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        制作実績の一覧へ戻る
+      </a>
+      <a href="/services/web-design/" class="wd-related-link">
+        ホームページ制作のサービス詳細
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="/contact/#contact-form" class="wd-related-link">
+        この実績について相談する
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA Section (same as top page) -->
+  <section class="wd-final">
+    <div class="wd-wave-top">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="#fff"/></svg>
+    </div>
+    <div class="wd-wrap" style="text-align:center;">
+      <img class="wd-cta-illust" src={ctaImage} alt="お問い合わせイラスト">
+      <h2>まずは気軽にご相談ください</h2>
+      <p>相談は無料。「何も分からない」状態で大丈夫です。<br>しつこい営業は一切しません。</p>
+      <a href="/contact/" class="rn-btn rn-btn-primary wd-cta-btn">
+        無料で相談してみる（入力は1分）
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <p class="wd-sub-note">お問い合わせフォームは30秒ほどで完了します</p>
+    </div>
+  </section>
+
+</RenewalLayout>
+
+<style is:global>
+  /* ══════════════════════════════════════════════
+     WORKS DETAIL PAGE — RENEWAL STYLES
+     ══════════════════════════════════════════════ */
+
+  :root {
+    --primary: #4FB4E8;
+    --primary-dark: #2E90C4;
+    --primary-deep: #1c6f9c;
+    --sky-bg: #E4F4FD;
+    --cream-bg: #FFF6E0;
+    --text: #3A4256;
+    --sub: #7A8494;
+    --orange: #F79B3E;
+    --orange-dark: #c76f14;
+    --green: #78C25E;
+    --radius: 24px;
+    --shadow: 0 10px 30px rgba(58,66,86,.08);
+  }
+
+  .wd-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 22px;
+  }
+
+  /* ── Hero Section ── */
+  .wd-hero {
+    background: linear-gradient(135deg, var(--sky-bg) 0%, #f0faff 100%);
+    padding: 100px 0 40px;
+    position: relative;
+  }
+  .wd-hero-content {
+    margin-top: 20px;
+  }
+  .wd-hero-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px 40px;
+    gap: 8px;
+    margin-bottom: 18px;
   }
-  .related-link {
-    font-size: 13px;
-    color: var(--color-muted);
-    text-decoration: none;
-    transition: color 0.2s ease;
+  .wd-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: var(--primary);
+    color: #fff;
+    font-family: "Noto Sans JP", sans-serif;
   }
-  .related-link:hover { color: var(--color-primary); }
+  .wd-tag-year {
+    background: rgba(79,180,232,0.15);
+    color: var(--primary-dark);
+  }
+  .wd-tag-sub {
+    background: #fff;
+    color: var(--text);
+    border: 1px solid #dde6ed;
+  }
+  .wd-hero-title {
+    font-family: "Noto Sans JP", sans-serif !important;
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 900;
+    line-height: 1.35;
+    color: var(--text);
+    letter-spacing: 0;
+  }
+  .wd-wave {
+    position: relative;
+    width: 100%;
+    line-height: 0;
+  }
+  .wd-wave-bot {
+    margin-top: -1px;
+  }
+  .wd-wave svg {
+    display: block;
+    width: 100%;
+    height: 40px;
+  }
 
-  /* ヒーロー画像リンク */
-  .hero-img-link {
+  /* ── Hero Image ── */
+  .wd-hero-img-section {
+    margin-top: 8px;
+    margin-bottom: 48px;
+  }
+  .wd-hero-img-link {
     display: block;
     position: relative;
     overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
     cursor: pointer;
     text-decoration: none;
   }
-  .hero-img {
+  .wd-hero-img {
     display: block;
     width: 100%;
     height: auto;
-    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.6s cubic-bezier(0.19,1,0.22,1);
   }
-  .hero-img-badge {
+  .wd-hero-img-link .wd-hero-img {
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .wd-hero-img-badge {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    background: rgba(255,255,255,0.95);
-    color: #000;
-    padding: 8px 20px;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-weight: 500;
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 22px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: "Noto Sans JP", sans-serif;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px);
     transition: opacity 0.35s ease, transform 0.35s ease;
     pointer-events: none;
-    border-radius: 2px;
+    box-shadow: 0 4px 16px rgba(79,180,232,0.35);
   }
-  .hero-img-link::after {
+  .wd-hero-img-link:hover .wd-hero-img {
+    transform: scale(1.02);
+  }
+  .wd-hero-img-link:hover .wd-hero-img-badge {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Info Strip ── */
+  .wd-info-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .wd-info-item {
+    padding: 22px 24px;
+    text-align: center;
+    position: relative;
+  }
+  .wd-info-item:not(:last-child)::after {
     content: '';
     position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0);
-    transition: background 0.4s ease;
-    pointer-events: none;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: #e8edf3;
   }
-  .hero-img-link:hover .hero-img { transform: scale(1.02); }
-  .hero-img-link:hover::after { background: rgba(0,0,0,0.06); }
-  .hero-img-link:hover .hero-img-badge { opacity: 1; transform: translateY(0); }
+  .wd-info-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+  .wd-info-value {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    font-family: "Noto Sans JP", sans-serif;
+  }
 
-  /* 公開サイトリンクボタン */
-  .site-link-btn {
+  .wd-site-link-wrap {
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  .wd-site-btn {
+    font-size: 15px;
+    padding: 14px 36px;
+  }
+  .wd-site-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2.5;
+  }
+
+  /* ── Content ── */
+  .wd-content-section {
+    padding-bottom: 48px;
+  }
+  .wd-content {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  /* Override detail-page styles for renewal design */
+  .wd-content .detail-page {
+    max-width: 100%;
+    margin: 0;
+    text-align: left;
+  }
+  .wd-content .detail-period {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--sub);
+    margin-bottom: 14px;
+    font-family: "Noto Sans JP", sans-serif;
+    background: var(--sky-bg);
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-weight: 700;
+  }
+  .wd-content .detail-lead {
+    font-size: clamp(15px, 1.5vw, 17px);
+    line-height: 2;
+    color: var(--text);
+    max-width: 100%;
+    margin-bottom: 12px;
+    padding-bottom: 32px;
+    border-bottom: 2px solid var(--sky-bg);
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 500;
+  }
+  .wd-content .detail-body {
+    max-width: 100%;
+    text-align: left;
+  }
+  .wd-content .detail-body h2 {
+    text-align: left;
+    font-family: "Noto Sans JP", sans-serif !important;
+    font-size: clamp(19px, 2vw, 24px) !important;
+    font-weight: 900 !important;
+    margin-top: 44px !important;
+    margin-bottom: 16px !important;
+    padding-left: 16px;
+    border-left: 4px solid var(--primary);
+    line-height: 1.4 !important;
+    color: var(--text);
+    letter-spacing: 0 !important;
+  }
+  .wd-content .detail-body p {
+    text-align: left;
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 15px;
+    line-height: 2;
+    color: #5b6474;
+    font-weight: 500;
+  }
+  .wd-content .detail-cta {
+    margin: 36px 0 0;
+    text-align: left;
+  }
+  .wd-content .site-link-btn-md {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 12px 28px;
-    border: 1px solid var(--color-primary);
-    color: var(--color-primary);
+    background: var(--primary);
+    color: #fff !important;
     text-decoration: none;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    transition: background 0.25s ease, color 0.25s ease;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Noto Sans JP", sans-serif;
+    border-radius: 999px;
+    border: none;
+    transition: background 0.25s ease, transform 0.12s;
+    box-shadow: 0 4px 0 var(--primary-dark);
+  }
+  .wd-content .site-link-btn-md:hover {
+    background: var(--primary-dark);
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--primary-dark);
+    color: #fff !important;
+  }
+
+  .wd-content .detail-shot {
+    margin: 56px auto 0;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+  .wd-content .detail-shot img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+    border: 1px solid #e8edf3;
+    border-radius: 16px;
+    box-shadow: 0 16px 56px rgba(58,66,86,0.12);
+  }
+  .wd-content .detail-shot figcaption {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--sub);
+    letter-spacing: 0.06em;
+    font-family: "Noto Sans JP", sans-serif;
     font-weight: 500;
   }
-  .site-link-btn:hover {
-    background: var(--color-primary);
-    color: #fff;
+
+  /* prose-custom overrides */
+  .wd-content .prose-custom {
+    max-width: none !important;
+    font-family: "Noto Sans JP", sans-serif;
   }
-  .site-link-btn svg { flex-shrink: 0; }
+  .wd-content .prose-custom h2 {
+    font-family: "Noto Sans JP", sans-serif !important;
+    font-weight: 900 !important;
+    letter-spacing: 0 !important;
+  }
+
+  /* ── Related Links ── */
+  .wd-related-section {
+    padding-bottom: 0;
+  }
+  .wd-related {
+    border-top: 2px solid var(--sky-bg);
+    padding-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 48px;
+  }
+  .wd-related-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary-dark) !important;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: var(--sky-bg);
+    font-family: "Noto Sans JP", sans-serif;
+    transition: background 0.2s, transform 0.12s;
+  }
+  .wd-related-link:hover {
+    background: #d0edfa;
+    transform: translateY(-2px);
+  }
+  .wd-related-link svg {
+    flex-shrink: 0;
+    stroke-width: 2.5;
+  }
+
+  /* ── CTA Final ── */
+  .wd-final {
+    background: linear-gradient(135deg, #4FB4E8 0%, #69C6D9 100%);
+    color: #fff;
+    text-align: center;
+    padding-bottom: 60px;
+    position: relative;
+  }
+  .wd-wave-top svg {
+    display: block;
+    width: 100%;
+    height: 40px;
+  }
+  .wd-cta-illust {
+    width: 420px;
+    max-width: 80%;
+    margin: 0 auto -14px;
+    filter: drop-shadow(0 10px 16px rgba(0,0,0,.12));
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 65%, transparent 95%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 65%, transparent 95%);
+    animation: wd-floaty 5.5s ease-in-out infinite;
+  }
+  .wd-final h2 {
+    font-family: "Noto Sans JP", sans-serif !important;
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 900;
+    margin-bottom: 14px;
+    letter-spacing: 0;
+    line-height: 1.4 !important;
+  }
+  .wd-final p {
+    font-size: 16px;
+    opacity: .97;
+    margin-bottom: 14px;
+    font-weight: 500;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+  .wd-cta-btn {
+    margin-top: 8px;
+    font-size: 18px !important;
+    padding: 18px 44px !important;
+    animation: wd-pulseRing 2.4s infinite;
+  }
+  .wd-cta-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 3;
+  }
+  .wd-sub-note {
+    font-size: 13px !important;
+    opacity: .92;
+    margin-top: 18px !important;
+  }
+
+  @keyframes wd-floaty {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+  @keyframes wd-pulseRing {
+    0%, 100% { box-shadow: 0 5px 0 var(--orange-dark), 0 0 0 0 rgba(247,155,62,.55); }
+    70% { box-shadow: 0 5px 0 var(--orange-dark), 0 0 0 18px rgba(247,155,62,0); }
+    100% { box-shadow: 0 5px 0 var(--orange-dark), 0 0 0 0 rgba(247,155,62,0); }
+  }
+
+  /* breadcrumbs override */
+  .wd-hero .breadcrumbs {
+    margin-bottom: 0;
+  }
+  .wd-hero .breadcrumbs a,
+  .wd-hero .breadcrumbs span {
+    color: var(--sub) !important;
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 13px;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 860px) {
+    .wd-hero {
+      padding: 90px 0 30px;
+    }
+    .wd-hero-title {
+      font-size: 24px;
+    }
+    .wd-info-strip {
+      grid-template-columns: repeat(2, 1fr);
+      border-radius: 16px;
+    }
+    .wd-info-item:nth-child(2)::after {
+      display: none;
+    }
+    .wd-info-item:nth-child(1)::after,
+    .wd-info-item:nth-child(3)::after {
+      top: 10%;
+      height: 80%;
+    }
+    .wd-info-item:nth-child(1),
+    .wd-info-item:nth-child(2) {
+      border-bottom: 1px solid #e8edf3;
+    }
+    .wd-hero-img-section {
+      margin-bottom: 32px;
+    }
+    .wd-hero-img,
+    .wd-hero-img-link {
+      border-radius: 16px;
+    }
+    .wd-related {
+      gap: 10px;
+    }
+    .wd-related-link {
+      font-size: 13px;
+      padding: 8px 16px;
+    }
+    .wd-cta-btn {
+      font-size: 15px !important;
+      padding: 16px 28px !important;
+      white-space: nowrap;
+    }
+    .wd-cta-illust {
+      width: 320px;
+    }
+    .wd-content .detail-shot img {
+      border-radius: 12px;
+    }
+  }
+
+  /* ── Shine on CTA button ── */
+  .wd-cta-btn {
+    overflow: hidden;
+    position: relative;
+  }
+  .wd-cta-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 38%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+    transform: skewX(-20deg);
+    animation: wd-shine 3.4s ease-in-out infinite;
+  }
+  @keyframes wd-shine {
+    0% { left: -60%; }
+    100% { left: 140%; }
+  }
+
+  /* Override the old BaseLayout styles that might leak in */
+  .wd-content article header h1 {
+    font-size: clamp(26px, 3.4vw, 40px) !important;
+    line-height: 1.35 !important;
+  }
 </style>
