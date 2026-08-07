@@ -113,7 +113,7 @@ const latestPosts = allBlogPosts
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-sub">Worries</span>
-      <h2 class="sec-title"><span class="brk">＼</span><span class="nowrap-m">こんなこと、ありませんか？</span><span class="brk">／</span><small>ひとつでも当てはまったら、お気軽にどうぞ</small></h2>
+      <h2 class="sec-title"><span class="nowrap-m"><span class="brk">＼</span>こんなこと、ありませんか？<span class="brk">／</span></span><small>ひとつでも当てはまったら、お気軽にどうぞ</small></h2>
     </div>
     <div class="worry-stage">
       <div class="worry-col left">
@@ -218,37 +218,6 @@ const latestPosts = allBlogPosts
       <div class="step"><span class="st">STEP 03</span><div class="step-img"><img src="/assets/step3.png" alt="サイトを制作するイラスト"></div><h4>制作</h4><p>確認しながら進めます。丸投げOK。</p></div>
       <div class="step"><span class="st">STEP 04</span><div class="step-img"><img src="/assets/step4.png" alt="サイトが完成して喜ぶイラスト"></div><h4>公開・サポート</h4><p>公開後の運用もサポート。</p></div>
     </div>
-  </div>
-</section>
-
-<!-- 07 NEWS -->
-<section id="news">
-  <div class="wave top"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="var(--mint-bg)"/></svg></div>
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-sub">News</span><h2 class="sec-title">お役立ちブログ<small>web・IT・AIに関する情報を発信しています</small></h2></div>
-    <div class="news-grid">
-      {latestPosts.map((post) => {
-        const d = new Date(post.data.pubDate);
-        const dateStr = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
-        return (
-          <a class="news-card" href={`/blog/${post.slug}/`}>
-            <div class="news-thumb">
-              {post.data.heroImage ? (
-                <img src={post.data.heroImage} alt={post.data.title} loading="lazy" width="600" height="338" />
-              ) : (
-                <div style="width:100%;height:100%;background:linear-gradient(135deg,#D7EFFB,#E9F7E4);display:flex;align-items:center;justify-content:center;font-size:14px;color:#7A8494;">No Image</div>
-              )}
-            </div>
-            <div class="news-body">
-              <time class="news-date">{dateStr}</time>
-              <h4>{post.data.title}</h4>
-              <span class="news-more">続きを読む <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </div>
-          </a>
-        );
-      })}
-    </div>
-    <div style="text-align:center;margin-top:36px"><a href="/blog/" class="btn btn-ghost">続きを見る →</a></div>
   </div>
 </section>
 
@@ -514,9 +483,40 @@ const latestPosts = allBlogPosts
   </div>
 </section>
 
+<!-- BLOG (FAQ下に配置) -->
+<section id="news">
+  <div class="wave top"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="var(--cream-bg)"/></svg></div>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-sub">News</span><h2 class="sec-title">お役立ちブログ<small>web・IT・AIに関する情報を発信しています</small></h2></div>
+    <div class="news-grid">
+      {latestPosts.map((post) => {
+        const d = new Date(post.data.pubDate);
+        const dateStr = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+        return (
+          <a class="news-card" href={`/blog/${post.slug}/`}>
+            <div class="news-thumb">
+              {post.data.heroImage ? (
+                <img src={post.data.heroImage} alt={post.data.title} loading="lazy" width="600" height="338" />
+              ) : (
+                <div style="width:100%;height:100%;background:linear-gradient(135deg,#D7EFFB,#E9F7E4);display:flex;align-items:center;justify-content:center;font-size:14px;color:#7A8494;">No Image</div>
+              )}
+            </div>
+            <div class="news-body">
+              <time class="news-date">{dateStr}</time>
+              <h4>{post.data.title}</h4>
+              <span class="news-more">続きを読む <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+    <div style="text-align:center;margin-top:36px"><a href="/blog/" class="btn btn-ghost">続きを見る →</a></div>
+  </div>
+</section>
+
 <!-- 12 FINAL CTA -->
 <section class="final">
-  <div class="wave top"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="var(--cream-bg)"/></svg></div>
+  <div class="wave top"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="#fff"/></svg></div>
   <div class="wrap">
     <img class="cta-illust" src="/assets/creator_thumbsup_tablet.png" alt="タブレットを持って親指を立てるクリエイター">
     <h2>まずは気軽にご相談ください</h2>
@@ -653,7 +653,7 @@ const latestPosts = allBlogPosts
   .worry-center img{width:100%;filter:none}
 
   /* transition */
-  .transition{text-align:center;padding:77px 0 0}
+  .transition{text-align:center;padding:102px 0 0}
   .transition .lead{font-family:"Noto Sans JP";font-size:24px;font-weight:900}
   .transition .lead .logo{font-family:"Inter";color:var(--primary);font-size:28px}
   .transition .arrow{margin:10px auto 0;width:0;height:0;border-left:26px solid transparent;border-right:26px solid transparent;border-top:26px solid var(--primary)}
@@ -919,7 +919,8 @@ const latestPosts = allBlogPosts
     .step:not(:last-child)::after{display:none}
     .sec-title{font-size:22px}
     .sec-title .brk{display:inline;margin:0 2px}
-    .nowrap-m{white-space:nowrap}
+    .nowrap-m{white-space:nowrap;display:inline-block;max-width:100%}
+    #reasons .sec-title .nowrap-m{font-size:clamp(16px,5.2vw,22px)}
     section{padding:60px 0}
     .sec-head{margin-bottom:36px;padding-top:20px}
     .total-bar{flex-direction:column;align-items:center;text-align:center;padding:20px 16px}
