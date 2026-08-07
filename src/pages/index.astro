@@ -1,5 +1,6 @@
 ---
 import RenewalLayout from '../layouts/RenewalLayout.astro';
+import { getCollection } from 'astro:content';
 
 // トップページ固有の構造化データ: サービスカタログ（WebSite は SEO.astro で出力済み）
 const jsonLd = {
@@ -42,23 +43,11 @@ const jsonLd = {
   ],
 };
 
-// note RSS fetch（最新3件をトップページに表示）
-let noteLatest: { title: string; link: string; pubDate: string; thumbnail: string }[] = [];
-try {
-  const rssRes = await fetch('https://note.com/sane_design2026/rss');
-  const rssText = await rssRes.text();
-  const itemMatches = [...rssText.matchAll(/<item>([\s\S]*?)<\/item>/g)];
-  noteLatest = itemMatches.slice(0, 3).map((m) => {
-    const item = m[1];
-    const title = item.match(/<title>([\s\S]*?)<\/title>/)?.[1]?.replace(/<!\[CDATA\[|\]\]>/g, '').trim() ?? '';
-    const link = item.match(/<link>([\s\S]*?)<\/link>/)?.[1]?.trim() ?? '';
-    const pubDate = item.match(/<pubDate>([\s\S]*?)<\/pubDate>/)?.[1]?.trim() ?? '';
-    const thumbnail = item.match(/<media:thumbnail[^>]*>([^<]+)<\/media:thumbnail>/)?.[1]?.trim() ?? item.match(/<media:thumbnail[^>]+url="([^"]+)"/)?.[1] ?? '';
-    return { title, link, pubDate, thumbnail };
-  });
-} catch (e) {
-  // fetch失敗時は空配列
-}
+// ブログ記事を取得（最新3件をトップページに表示）
+const allBlogPosts = await getCollection('blog', ({ data }) => !data.draft);
+const latestPosts = allBlogPosts
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+  .slice(0, 3);
 ---
 
 <RenewalLayout
@@ -124,7 +113,7 @@ try {
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-sub">Worries</span>
-      <h2 class="sec-title"><span class="nowrap-m"><span class="brk">＼</span>こんなこと、ありませんか？<span class="brk">／</span></span><small>ひとつでも当てはまったら、お気軽にどうぞ</small></h2>
+      <h2 class="sec-title"><span class="brk">＼</span><span class="nowrap-m">こんなこと、ありませんか？</span><span class="brk">／</span><small>ひとつでも当てはまったら、お気軽にどうぞ</small></h2>
     </div>
     <div class="worry-stage">
       <div class="worry-col left">
@@ -132,7 +121,7 @@ try {
         <div class="bubble"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 10h4.5a1.5 1.5 0 010 3H9"/></svg></span>費用がいくらか不安…</div>
         <div class="bubble"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2M9 9h.01M15 9h.01"/></svg></span>作っても集客・問い合わせが増えない</div>
       </div>
-      <div class="worry-center"><img loading="lazy" class="p-illust" src="/assets/worry.png" alt="悩んでいるビジネスウーマンのイラスト"></div>
+      <div class="worry-center"><img class="p-illust" src="/assets/worry.png" alt="悩んでいるビジネスウーマンのイラスト"></div>
       <div class="worry-col right">
         <div class="bubble"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>今のサイトが古い・スマホで見づらい</div>
         <div class="bubble"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12a9 9 0 11-3-6.7L21 8M21 3v5h-5"/></svg></span>更新や運用を自分で続けられるか心配</div>
@@ -145,7 +134,7 @@ try {
 <!-- 03 TRANSITION -->
 <section class="sky" style="padding-top:0">
   <div class="wave top"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="var(--cream-bg)"/></svg></div>
-  <div class="transition" style="padding-top:77px">
+  <div class="transition">
     <div class="lead">その悩み、<span class="logo">SaneDesign</span> なら</div>
     <div class="arrow"></div>
   </div>
@@ -162,24 +151,24 @@ try {
       <div class="r-text"><div class="r-head"><div class="r-num" data-n="01"><span>01</span></div><h3>専門用語ゼロ。<br>とにかく<span class="mk">分かりやすい</span></h3></div><p>「何をすればいいか分からない」でも大丈夫。LINEでのやり取りだから気軽。専門用語はすべてかみ砕いてご説明するので、ほぼ丸投げでOKです。</p></div>
       <div class="r01-visual">
         <span class="r01-tag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.82 2 10.5c0 2.7 1.53 5.1 3.9 6.66-.13.9-.6 2.2-1.2 3.34 1.7-.5 3.4-1.2 4.6-2.1.86.16 1.76.25 2.7.25 5.52 0 10-3.82 10-8.4S17.52 2 12 2z"/></svg>LINEで相談</span>
-        <img loading="lazy" class="r01-chat" src="/assets/line_chat.jpg" alt="LINEでお客様と制作会社がやり取りしている画面">
-        <img loading="lazy" class="r01-woman" src="/assets/reason01_woman.png" alt="やさしく説明するビジネスウーマンのイラスト">
+        <img class="r01-chat" src="/assets/line_chat.jpg" alt="LINEでお客様と制作会社がやり取りしている画面">
+        <img class="r01-woman" src="/assets/reason01_woman.png" alt="やさしく説明するビジネスウーマンのイラスト">
       </div>
     </div>
     <div class="reason rev">
       <div class="r-text"><div class="r-head"><div class="r-num" data-n="02"><span>02</span></div><h3>コミコミ・明朗会計。<br><span class="mk">あとから追加請求なし</span></h3></div><p>「気づいたら高くなっていた」を防ぐため、最初に総額と含まれる内容をはっきり明示します。</p></div>
       <div class="r02-visual">
         <span class="r02-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>総額を最初に提示</span>
-        <img loading="lazy" class="r02-doc" src="/assets/price_doc.png" alt="総額23,000円と明記された見積書">
-        <img loading="lazy" class="r02-man" src="/assets/reason02_man.png" alt="見積書を手で示して説明するビジネスマンのイラスト">
+        <img class="r02-doc" src="/assets/price_doc.png" alt="総額23,000円と明記された見積書">
+        <img class="r02-man" src="/assets/reason02_man.png" alt="見積書を手で示して説明するビジネスマンのイラスト">
       </div>
     </div>
     <div class="reason">
       <div class="r-text"><div class="r-head"><div class="r-num" data-n="03"><span>03</span></div><h3>作って終わりじゃない。<br><span class="mk">集客・SEOまで一貫</span></h3></div><p>見た目だけでなく「問い合わせが増えるサイト」に。公開後の運用・SEO対策までサポートします。</p></div>
       <div class="r03-visual">
         <span class="r03-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 17l6-6 4 4 8-8M21 7v5M21 7h-5"/></svg>公開後もぐんぐん成長</span>
-        <img loading="lazy" class="r03-banner" src="/assets/seo_banner.jpg" alt="アクセス数・訪問者数・認知度がアップするSEOのイメージ">
-        <img loading="lazy" class="r03-man" src="/assets/reason03_man.png" alt="成果が出て喜ぶビジネスマンのイラスト">
+        <img class="r03-banner" src="/assets/seo_banner.jpg" alt="アクセス数・訪問者数・認知度がアップするSEOのイメージ">
+        <img class="r03-man" src="/assets/reason03_man.png" alt="成果が出て喜ぶビジネスマンのイラスト">
       </div>
     </div>
   </div>
@@ -192,13 +181,13 @@ try {
     <div class="sec-head"><span class="sec-sub">Service</span><h2 class="sec-title">できること<small>スマホで見やすいサイトも、検索対策もおまかせ</small></h2></div>
     <div class="svc-showcase">
       <div class="mock mock-phone">
-        <div class="mock-screen"><img loading="lazy" class="mock-shot" src="/assets/shot_mobile.jpg" alt="スマホで表示したサイトのスクリーンショット"></div>
-        <img loading="lazy" class="mock-frame" src="/assets/phone_frame.png" alt="">
+        <div class="mock-screen"><img class="mock-shot" src="/assets/shot_mobile.jpg" alt="スマホで表示したサイトのスクリーンショット"></div>
+        <img class="mock-frame" src="/assets/phone_frame.png" alt="">
       </div>
-      <img loading="lazy" class="svc-lead" src="/assets/service_man.png" alt="ひらめいた表情のビジネスマンのイラスト">
+      <img class="svc-lead" src="/assets/service_man.png" alt="ひらめいた表情のビジネスマンのイラスト">
       <div class="mock mock-laptop">
-        <div class="mock-screen"><img loading="lazy" class="mock-shot" src="/assets/shot_desktop.jpg" alt="パソコンで表示したサイトのスクリーンショット"></div>
-        <img loading="lazy" class="mock-frame" src="/assets/laptop_frame.png" alt="">
+        <div class="mock-screen"><img class="mock-shot" src="/assets/shot_desktop.jpg" alt="パソコンで表示したサイトのスクリーンショット"></div>
+        <img class="mock-frame" src="/assets/laptop_frame.png" alt="">
       </div>
     </div>
     <div class="svc-grid">
@@ -224,11 +213,42 @@ try {
   <div class="wrap">
     <div class="sec-head"><span class="sec-sub">Flow</span><h2 class="sec-title">かんたん4ステップ<small>むずかしい作業はありません。ご相談から始まります</small></h2></div>
     <div class="flow-grid">
-      <div class="step"><span class="st">STEP 01</span><div class="step-img"><img loading="lazy" class="step-shot" src="/assets/step1.jpg" alt="LINEで相談する画面"></div><h4>無料相談</h4><p>やりたいこと・ご予算を気軽に。</p></div>
-      <div class="step"><span class="st">STEP 02</span><div class="step-img"><img loading="lazy" src="/assets/step2.png" alt="見積書を提示するイラスト"></div><h4>お見積り</h4><p>総額をはっきり提示。ここまで無料。</p></div>
-      <div class="step"><span class="st">STEP 03</span><div class="step-img"><img loading="lazy" src="/assets/step3.png" alt="サイトを制作するイラスト"></div><h4>制作</h4><p>確認しながら進めます。丸投げOK。</p></div>
-      <div class="step"><span class="st">STEP 04</span><div class="step-img"><img loading="lazy" src="/assets/step4.png" alt="サイトが完成して喜ぶイラスト"></div><h4>公開・サポート</h4><p>公開後の運用もサポート。</p></div>
+      <div class="step"><span class="st">STEP 01</span><div class="step-img"><img class="step-shot" src="/assets/step1.jpg" alt="LINEで相談する画面"></div><h4>無料相談</h4><p>やりたいこと・ご予算を気軽に。</p></div>
+      <div class="step"><span class="st">STEP 02</span><div class="step-img"><img src="/assets/step2.png" alt="見積書を提示するイラスト"></div><h4>お見積り</h4><p>総額をはっきり提示。ここまで無料。</p></div>
+      <div class="step"><span class="st">STEP 03</span><div class="step-img"><img src="/assets/step3.png" alt="サイトを制作するイラスト"></div><h4>制作</h4><p>確認しながら進めます。丸投げOK。</p></div>
+      <div class="step"><span class="st">STEP 04</span><div class="step-img"><img src="/assets/step4.png" alt="サイトが完成して喜ぶイラスト"></div><h4>公開・サポート</h4><p>公開後の運用もサポート。</p></div>
     </div>
+  </div>
+</section>
+
+<!-- 07 NEWS -->
+<section id="news">
+  <div class="wave top"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="var(--mint-bg)"/></svg></div>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-sub">News</span><h2 class="sec-title">お役立ちブログ<small>web・IT・AIに関する情報を発信しています</small></h2></div>
+    <div class="news-grid">
+      {latestPosts.map((post) => {
+        const d = new Date(post.data.pubDate);
+        const dateStr = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+        return (
+          <a class="news-card" href={`/blog/${post.slug}/`}>
+            <div class="news-thumb">
+              {post.data.heroImage ? (
+                <img src={post.data.heroImage} alt={post.data.title} loading="lazy" width="600" height="338" />
+              ) : (
+                <div style="width:100%;height:100%;background:linear-gradient(135deg,#D7EFFB,#E9F7E4);display:flex;align-items:center;justify-content:center;font-size:14px;color:#7A8494;">No Image</div>
+              )}
+            </div>
+            <div class="news-body">
+              <time class="news-date">{dateStr}</time>
+              <h4>{post.data.title}</h4>
+              <span class="news-more">続きを読む <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+    <div style="text-align:center;margin-top:36px"><a href="/blog/" class="btn btn-ghost">続きを見る →</a></div>
   </div>
 </section>
 
@@ -241,10 +261,10 @@ try {
       <button class="test-nav test-prev" id="testPrev" type="button" aria-label="前へ">&#8249;</button>
       <div class="test-track-wrap">
         <div class="test-grid" id="testGrid">
-          <div class="test"><div class="stars">★★★★★</div><span class="metric">問い合わせ 2倍</span><p>「専門用語が分からない私にも、ひとつひとつ丁寧に教えてくれました。安いのに仕上がりは大満足です。」</p><div class="who"><div class="ava"><img loading="lazy" src="/assets/avatars/circle_20s_female.png" alt=""></div><div><b>20代 女性・飲食店オーナー 様</b><small>ホームページ制作</small></div></div></div>
-          <div class="test"><div class="stars">★★★★★</div><span class="metric">検索1ページ目</span><p>「他社の見積もりの半額以下。それでいてスマホでもきれいに見えるサイトになりました。」</p><div class="who"><div class="ava"><img loading="lazy" src="/assets/avatars/circle_30s_male.png" alt=""></div><div><b>30代 男性・整体院 様</b><small>LP制作＋SEO</small></div></div></div>
-          <div class="test"><div class="stars">★★★★★</div><span class="metric">最短3日で公開</span><p>「相談から公開までとても早く、追加費用も一切なし。安心しておまかせできました。」</p><div class="who"><div class="ava"><img loading="lazy" src="/assets/avatars/circle_40s_female.png" alt=""></div><div><b>40代 女性・個人事業主 様</b><small>ホームページ制作</small></div></div></div>
-          <div class="test"><div class="stars">★★★★★</div><span class="metric">売上アップに貢献</span><p>「難しいことはすべておまかせで、こちらは素材を渡すだけ。集客にもつながって助かっています。」</p><div class="who"><div class="ava"><img loading="lazy" src="/assets/avatars/circle_50s_male.png" alt=""></div><div><b>50代 男性・士業事務所 様</b><small>ホームページ制作＋SEO</small></div></div></div>
+          <div class="test"><div class="stars">★★★★★</div><span class="metric">問い合わせ 2倍</span><p>「専門用語が分からない私にも、ひとつひとつ丁寧に教えてくれました。安いのに仕上がりは大満足です。」</p><div class="who"><div class="ava"><img src="/assets/avatars/circle_20s_female.png" alt=""></div><div><b>20代 女性・飲食店オーナー 様</b><small>ホームページ制作</small></div></div></div>
+          <div class="test"><div class="stars">★★★★★</div><span class="metric">検索1ページ目</span><p>「他社の見積もりの半額以下。それでいてスマホでもきれいに見えるサイトになりました。」</p><div class="who"><div class="ava"><img src="/assets/avatars/circle_30s_male.png" alt=""></div><div><b>30代 男性・整体院 様</b><small>LP制作＋SEO</small></div></div></div>
+          <div class="test"><div class="stars">★★★★★</div><span class="metric">最短3日で公開</span><p>「相談から公開までとても早く、追加費用も一切なし。安心しておまかせできました。」</p><div class="who"><div class="ava"><img src="/assets/avatars/circle_40s_female.png" alt=""></div><div><b>40代 女性・個人事業主 様</b><small>ホームページ制作</small></div></div></div>
+          <div class="test"><div class="stars">★★★★★</div><span class="metric">売上アップに貢献</span><p>「難しいことはすべておまかせで、こちらは素材を渡すだけ。集客にもつながって助かっています。」</p><div class="who"><div class="ava"><img src="/assets/avatars/circle_50s_male.png" alt=""></div><div><b>50代 男性・士業事務所 様</b><small>ホームページ制作＋SEO</small></div></div></div>
         </div>
       </div>
       <button class="test-nav test-next" id="testNext" type="button" aria-label="次へ">&#8250;</button>
@@ -494,59 +514,11 @@ try {
   </div>
 </section>
 
-<!-- 07 NEWS (moved after FAQ) -->
-<section id="news">
-  <div class="wave top"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="var(--cream-bg)"/></svg></div>
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-sub">News</span><h2 class="sec-title">お役立ちブログ<small>web・IT・AIに関する情報を発信しています</small></h2></div>
-    <div class="news-grid">
-      {noteLatest.length > 0 ? (
-        noteLatest.map((article) => {
-          const d = new Date(article.pubDate);
-          const dateStr = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
-          return (
-            <a class="news-card" href={article.link} target="_blank" rel="noopener noreferrer">
-              <div class="news-thumb">
-                {article.thumbnail ? (
-                  <img src={article.thumbnail} alt={article.title} loading="lazy" width="600" height="338" />
-                ) : (
-                  <div style="width:100%;height:100%;background:linear-gradient(135deg,#D7EFFB,#E9F7E4);display:flex;align-items:center;justify-content:center;font-size:14px;color:#7A8494;">No Image</div>
-                )}
-              </div>
-              <div class="news-body">
-                <time class="news-date">{dateStr}</time>
-                <h4>{article.title}</h4>
-                <span class="news-more">noteで読む <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-              </div>
-            </a>
-          );
-        })
-      ) : (
-        <>
-          <a class="news-card" href="https://note.com/sane_design2026" target="_blank" rel="noopener">
-            <div class="news-thumb"><img loading="lazy" src="/assets/news/consultant.jpg" alt="" /></div>
-            <div class="news-body"><time class="news-date">2026.06.27</time><h4>【コンサルタント生産性4倍】リサーチ・分析・提案資料をAIで激変させる完全ガイド</h4><span class="news-more">続きを読む <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-          </a>
-          <a class="news-card" href="https://note.com/sane_design2026" target="_blank" rel="noopener">
-            <div class="news-thumb"><img loading="lazy" src="/assets/news/driver.jpg" alt="" /></div>
-            <div class="news-body"><time class="news-date">2026.06.26</time><h4>【配達ドライバーの革命】Claude×Maps APIで走行距離20%削減・月収1.5倍の完全実装</h4><span class="news-more">続きを読む <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-          </a>
-          <a class="news-card" href="https://note.com/sane_design2026/n/nb7f5ee560e29" target="_blank" rel="noopener">
-            <div class="news-thumb"><img loading="lazy" src="/assets/news/trimmer.jpg" alt="" /></div>
-            <div class="news-body"><time class="news-date">2026.06.07</time><h4>【トリマー＆ペット業界】AIで来店3倍・物販月10万円UPを実現する完全実装ガイド</h4><span class="news-more">続きを読む <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-          </a>
-        </>
-      )}
-    </div>
-    <div style="text-align:center;margin-top:36px"><a href="/blog/" class="btn btn-ghost">続きを見る →</a></div>
-  </div>
-</section>
-
 <!-- 12 FINAL CTA -->
 <section class="final">
   <div class="wave top"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="var(--cream-bg)"/></svg></div>
   <div class="wrap">
-    <img loading="lazy" class="cta-illust" src="/assets/creator_thumbsup_tablet.png" alt="タブレットを持って親指を立てるクリエイター">
+    <img class="cta-illust" src="/assets/creator_thumbsup_tablet.png" alt="タブレットを持って親指を立てるクリエイター">
     <h2>まずは気軽にご相談ください</h2>
     <p>相談は無料。「何も分からない」状態で大丈夫です。<br>しつこい営業は一切しません。</p>
     <a href="/contact/" class="btn btn-primary">無料で相談してみる（入力は1分）<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -593,15 +565,14 @@ try {
   /* buttons — 3D rounded pill */
   .btn{display:inline-flex;align-items:center;gap:10px;font-family:"Noto Sans JP";font-weight:700;border-radius:999px;padding:16px 34px;font-size:16px;transition:.12s;cursor:pointer;border:none;position:relative}
   .btn svg{width:18px;height:18px;stroke-width:3}
-  .btn-primary{background:var(--orange);color:#fff!important;box-shadow:0 5px 0 var(--orange-dark)}
-  .btn-primary:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--orange-dark);background:var(--orange);color:#fff!important}
-  .btn-blue{background:var(--primary);color:#fff!important;box-shadow:0 5px 0 var(--primary-deep)}
-  .btn-blue:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--primary-deep);background:var(--primary);color:#fff!important}
+  .btn-primary{background:var(--orange);color:#fff;box-shadow:0 5px 0 var(--orange-dark)}
+  .btn-primary:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--orange-dark)}
+  .btn-blue{background:var(--primary);color:#fff;box-shadow:0 5px 0 var(--primary-deep)}
+  .btn-blue:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--primary-deep)}
   .btn-ghost{background:#fff;color:var(--primary-dark)!important;box-shadow:0 5px 0 #CDEBFA;border:2px solid #CDEBFA}
-  .btn-ghost:hover{transform:translateY(2px);box-shadow:0 3px 0 #CDEBFA;color:var(--primary-dark)!important;background:#fff}
+  .btn-ghost:hover{transform:translateY(2px);box-shadow:0 3px 0 #CDEBFA;color:var(--primary-dark)!important}
   .btn-ghost::after{display:none!important}
   .btn-primary::after{display:none!important}
-  .btn-blue::after{display:none!important}
 
   /* section base */
   section{padding:84px 0;position:relative}
@@ -876,7 +847,7 @@ try {
   .modal-row-free{color:var(--green-dark);font-family:"Inter";font-size:14px;font-weight:800;white-space:nowrap;flex-shrink:0;background:var(--mint-bg);padding:4px 12px;border-radius:999px}
   @media(max-width:860px){
     .pricing-layout{grid-template-columns:1fr}
-    .opt-grid{grid-template-columns:1fr;max-height:600px}
+    .opt-grid{grid-template-columns:1fr;max-height:400px}
   }
 
   /* WORKS */
@@ -948,8 +919,7 @@ try {
     .step:not(:last-child)::after{display:none}
     .sec-title{font-size:22px}
     .sec-title .brk{display:inline;margin:0 2px}
-    .nowrap-m{white-space:nowrap;display:inline-block;max-width:100%}
-    #reasons .sec-title .nowrap-m{font-size:clamp(16px,5.2vw,22px)}
+    .nowrap-m{white-space:nowrap}
     section{padding:60px 0}
     .sec-head{margin-bottom:36px;padding-top:20px}
     .total-bar{flex-direction:column;align-items:center;text-align:center;padding:20px 16px}
