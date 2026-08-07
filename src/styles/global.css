@@ -115,13 +115,13 @@
     align-items: center;
     gap: 8px;
     padding: 16px 36px;
-    background: var(--color-primary);
+    background: #4FB4E8;
     color: #ffffff !important;
     text-decoration: none;
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.08em;
-    border: 1px solid var(--color-primary);
+    border: 1px solid #4FB4E8;
     cursor: pointer;
     font-family: var(--font-sans);
     position: relative;
@@ -141,7 +141,7 @@
     transform: translateX(0);
   }
   .btn-primary:hover {
-    color: var(--color-primary) !important;
+    color: #4FB4E8 !important;
   }
   .btn-primary span {
     position: relative;
@@ -154,12 +154,12 @@
     gap: 8px;
     padding: 16px 36px;
     background: transparent;
-    color: var(--color-primary) !important;
+    color: #4FB4E8 !important;
     text-decoration: none;
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.08em;
-    border: 1px solid var(--color-primary);
+    border: 1px solid #4FB4E8;
     cursor: pointer;
     font-family: var(--font-sans);
     position: relative;
@@ -170,7 +170,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: var(--color-primary);
+    background: #4FB4E8;
     transform: translateX(-101%);
     transition: transform 0.4s var(--ease-out-expo);
     z-index: 0;
