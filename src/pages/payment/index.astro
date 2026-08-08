@@ -353,14 +353,8 @@ const PRICE_IDS = {
     const key = row.dataset.key;
     const cb = row.querySelector('input[type=checkbox]');
     if (!cb) return;
-    row.addEventListener('click', e => {
-      if (e.target === cb) return;
-      if (cb.disabled) return;
-      cb.checked = !cb.checked;
-      toggleItem(key, cb.checked, row);
-    });
     cb.addEventListener('change', () => {
-      if (cb.disabled) return;
+      if (cb.disabled) { cb.checked = false; return; }
       toggleItem(key, cb.checked, row);
     });
   });
