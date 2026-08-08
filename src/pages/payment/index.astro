@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import RenewalLayout from '../../layouts/RenewalLayout.astro';
 
 const PRICE_IDS = {
   // ── Web Design 基本 ──
@@ -19,164 +19,337 @@ const PRICE_IDS = {
   maintenance:         { id: 'price_1TYShTE3wzB3B1Hb9UTIgX7T', label: 'Webサイト保守サービス', price: 5000, mode: 'subscription', category: 'maintenance' },
 };
 ---
-
-<BaseLayout
-  title="お支払い | Sane Design"
-  description="Sane Designのサービスをオンラインでご注文いただけます。"
+<RenewalLayout
+  title="お支払い｜Sane Design"
+  description="Sane Designのサービスをオンラインでご注文いただけます。カード決済（Visa / Mastercard / JCB / Amex）に対応。"
 >
-  <section class="container-editorial pt-16 md:pt-24 pb-8">
-    <p class="section-label">Order</p>
-    <h1 class="font-serif text-4xl md:text-6xl leading-tight mb-4">お支払い</h1>
-    <p class="text-muted text-sm md:text-base max-w-xl leading-relaxed">
-      ご希望のサービスを選択してお進みください。<br />
-      カード決済（Visa / Mastercard / JCB / Amex）に対応しています。
-    </p>
+
+  <!-- ── Hero ── -->
+  <section class="pay-hero reveal">
+    <div class="wrap">
+      <span class="sec-sub">Order</span>
+      <h1>オンライン<span class="big">お支払い</span></h1>
+      <p class="lead">ご希望のサービスを選択してお進みください。<br>カード決済（Visa / Mastercard / JCB / Amex）に対応しています。</p>
+      <div class="hero-badges">
+        <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>安心のStripe決済</span>
+        <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>2時間以内にご連絡</span>
+        <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>カード情報は送信されません</span>
+      </div>
+    </div>
   </section>
 
-  <section class="container-editorial pb-24" id="order-form">
+  <!-- ── Wave ── -->
+  <div class="wave"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="#fff"/></svg></div>
+  <!-- ── Order Section ── -->
+  <section class="pay-section" style="background:var(--cream-bg)">
+    <div class="wrap">
+      <div class="pay-wrap">
 
-    <!-- Step tabs -->
-    <div style="display:flex; gap:0; border-bottom:1px solid var(--color-border); margin-bottom:48px;">
-      <div class="step-tab active" data-step="1" style="padding:16px 32px; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; cursor:pointer; border-bottom:2px solid var(--color-primary); font-weight:600;">① サービス選択</div>
-      <div class="step-tab" data-step="2" style="padding:16px 32px; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; border-bottom:2px solid transparent; color:var(--color-muted);">② 確認・お支払い</div>
-    </div>
-
-    <!-- ─── Step 1 ─── -->
-    <div id="step1">
-
-      <!-- Web Design 基本 -->
-      <div style="margin-bottom:12px;">
-        <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-muted); margin-bottom:16px;">01 — Web Design</p>
-        <label class="price-row" data-key="web_standard" style="display:flex; align-items:center; justify-content:space-between; padding:20px 24px; border:1px solid var(--color-border); cursor:pointer; gap:16px;">
-          <div style="display:flex; align-items:center; gap:16px; flex:1;">
-            <input type="checkbox" id="cb_web_standard" data-key="web_standard" style="width:18px; height:18px; cursor:pointer; accent-color:var(--color-primary);" />
-            <span style="font-size:14px; font-weight:600; line-height:1.5;">ホームページ制作（スタンダード）</span>
+        <!-- Step Tabs -->
+        <div class="step-tabs reveal" id="stepTabs">
+          <div class="step-tab active" data-step="1">
+            <span class="st-num">1</span>
+            <span class="st-label">サービス選択</span>
           </div>
-          <span style="font-family:var(--font-serif); font-size:18px; white-space:nowrap;">¥20,000</span>
-        </label>
-      </div>
-
-      <!-- Web Design オプション -->
-      <div style="margin-bottom:40px; margin-left:24px;">
-        <p style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--color-muted); margin-bottom:12px; margin-top:8px;">オプション <span id="opt-lock-note" style="color:#aaa; font-size:9px; margin-left:8px;">※ スタンダードを選択すると追加できます</span></p>
-        <div id="opts-wrapper" style="display:grid; gap:2px; opacity:0.35; pointer-events:none; transition: opacity 0.25s;">
-          {Object.entries(PRICE_IDS).filter(([,v]) => v.category === 'web_opt').map(([key, item]) => (
-            <label class="price-row opt-row" data-key={key} style="display:flex; align-items:center; justify-content:space-between; padding:16px 24px; border:1px solid var(--color-border); cursor:not-allowed; gap:16px; background:var(--color-surface);">
-              <div style="display:flex; align-items:center; gap:16px; flex:1;">
-                <input type="checkbox" data-key={key} class="opt-cb" disabled style="width:16px; height:16px; accent-color:var(--color-primary);" />
-                <span style="font-size:13px; line-height:1.5;">{item.label}</span>
-              </div>
-              <span style="font-family:var(--font-serif); font-size:16px; white-space:nowrap;">¥{item.price.toLocaleString()}</span>
-            </label>
-          ))}
+          <div class="step-tab" data-step="2">
+            <span class="st-num">2</span>
+            <span class="st-label">確認・お支払い</span>
+          </div>
         </div>
-      </div>
 
-      <!-- SEO -->
-      <div style="margin-bottom:40px;">
-        <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-muted); margin-bottom:16px;">02 — SEO</p>
-        <div style="display:grid; gap:2px;">
-          {Object.entries(PRICE_IDS).filter(([,v]) => v.category === 'seo').map(([key, item]) => (
-            <label class="price-row" data-key={key} style="display:flex; align-items:center; justify-content:space-between; padding:20px 24px; border:1px solid var(--color-border); cursor:pointer; gap:16px;">
-              <div style="display:flex; align-items:center; gap:16px; flex:1;">
-                <input type="checkbox" data-key={key} style="width:18px; height:18px; cursor:pointer; accent-color:var(--color-primary);" />
-                <span style="font-size:14px; line-height:1.5;">{item.label}</span>
+        <!-- ════════ STEP 1 ════════ -->
+        <div class="step-panel active" id="step1">
+          <div class="form-card reveal">
+
+            <!-- 01 — Web Design -->
+            <div class="cat-section">
+              <div class="cat-header">
+                <span class="cat-badge web">WEB制作</span>
+                <span class="cat-label">01 — Web Design</span>
               </div>
-              <span style="font-family:var(--font-serif); font-size:18px; white-space:nowrap;">¥{item.price.toLocaleString()}</span>
-            </label>
-          ))}
-        </div>
-      </div>
+              <label class="price-item base-item" data-key="web_standard">
+                <input type="checkbox" id="cb_web_standard" data-key="web_standard" />
+                <span class="pi-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                <span class="pi-info">
+                  <span class="pi-name">ホームページ制作（スタンダード）</span>
+                  <span class="pi-desc">レスポンシブ対応・フォーム込み</span>
+                </span>
+                <span class="pi-price">¥20,000</span>
+              </label>
 
-      <!-- 保守 -->
-      <div style="margin-bottom:40px;">
-        <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-muted); margin-bottom:16px;">03 — 保守サービス</p>
-        <div style="display:grid; gap:2px;">
-          {Object.entries(PRICE_IDS).filter(([,v]) => v.category === 'maintenance').map(([key, item]) => (
-            <label class="price-row" data-key={key} style="display:flex; align-items:center; justify-content:space-between; padding:20px 24px; border:1px solid var(--color-border); cursor:pointer; gap:16px;">
-              <div style="display:flex; align-items:center; gap:16px; flex:1;">
-                <input type="checkbox" data-key={key} style="width:18px; height:18px; cursor:pointer; accent-color:var(--color-primary);" />
-                <div>
-                  <span style="font-size:14px; line-height:1.5;">{item.label}</span>
-                  <span style="display:inline-block; margin-left:8px; font-size:10px; background:var(--color-primary); color:#fff; padding:2px 8px; letter-spacing:0.08em;">月額自動更新</span>
+              <!-- オプション -->
+              <div class="opt-section" id="opts-wrapper">
+                <div class="opt-header">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:2.5"><path d="M12 5v14M5 12h14"/></svg>
+                  <span>追加オプション</span>
+                  <span class="opt-lock-note" id="opt-lock-note">※ スタンダードを選択すると追加できます</span>
+                </div>
+                <div class="opt-list" id="opts-list">
+                  {Object.entries(PRICE_IDS).filter(([,v]) => v.category === 'web_opt').map(([key, item]) => (
+                    <label class="price-item opt-item" data-key={key}>
+                      <input type="checkbox" data-key={key} class="opt-cb" disabled />
+                      <span class="pi-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                      <span class="pi-info">
+                        <span class="pi-name">{item.label.replace('オプション：', '')}</span>
+                      </span>
+                      <span class="pi-price">+ ¥{item.price.toLocaleString()}</span>
+                    </label>
+                  ))}
                 </div>
               </div>
-              <span style="font-family:var(--font-serif); font-size:18px; white-space:nowrap;">¥{item.price.toLocaleString()}/月</span>
-            </label>
-          ))}
-        </div>
-      </div>
+            </div>
+            <!-- 02 — SEO -->
+            <div class="cat-section">
+              <div class="cat-header">
+                <span class="cat-badge seo">SEO</span>
+                <span class="cat-label">02 — SEO</span>
+              </div>
 
-      <!-- 注意 -->
-      <div style="border-top:1px solid var(--color-border); padding-top:20px; margin-bottom:32px;">
-        <p style="font-size:12px; color:var(--color-muted); line-height:2;">
-          ※ ご注文後、2時間以内にメールにてご連絡いたします。<br />
-          ※ キャンセル・返金については<a href="/contact/#contact-form" style="text-decoration:underline;">お問い合わせ</a>ください。
-        </p>
-      </div>
+              {Object.entries(PRICE_IDS).filter(([,v]) => v.category === 'seo').map(([key, item]) => (
+                <label class="price-item" data-key={key}>
+                  <input type="checkbox" data-key={key} />
+                  <span class="pi-check seo-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                  <span class="pi-info">
+                    <span class="pi-name">{item.label}</span>
+                  </span>
+                  <span class="pi-price">¥{item.price.toLocaleString()}</span>
+                </label>
+              ))}
+            </div>
 
-      <!-- 合計・次へ -->
-      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; padding:32px; background:var(--color-surface); border:1px solid var(--color-border);">
-        <div>
-          <p style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-muted); margin-bottom:6px;">合計金額</p>
-          <p id="total-display" style="font-family:var(--font-serif); font-size:36px; font-weight:300;">¥0</p>
-          <p id="sub-note" style="font-size:12px; color:var(--color-muted); display:none; margin-top:4px;">※ 保守サービスは月額¥5,000が別途発生します</p>
+            <!-- 03 — 保守 -->
+            <div class="cat-section">
+              <div class="cat-header">
+                <span class="cat-badge maint">保守</span>
+                <span class="cat-label">03 — 保守サービス</span>
+              </div>
+
+              {Object.entries(PRICE_IDS).filter(([,v]) => v.category === 'maintenance').map(([key, item]) => (
+                <label class="price-item" data-key={key}>
+                  <input type="checkbox" data-key={key} />
+                  <span class="pi-check maint-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                  <span class="pi-info">
+                    <span class="pi-name">{item.label}</span>
+                    <span class="pi-badge-sub">月額自動更新</span>
+                  </span>
+                  <span class="pi-price">¥{item.price.toLocaleString()}<small>/月</small></span>
+                </label>
+              ))}
+            </div>
+            <!-- 注意事項 -->
+            <div class="pay-notes">
+              <p>※ ご注文後、2時間以内にメールにてご連絡いたします。</p>
+              <p>※ キャンセル・返金については<a href="/contact/#contact-form">お問い合わせ</a>ください。</p>
+            </div>
+
+            <!-- 合計バー -->
+            <div class="total-bar" id="totalBar">
+              <div class="total-label">合計金額<small>選択中のサービス</small></div>
+              <div class="total-price"><span class="yen">¥</span><span id="total-display">0</span></div>
+            </div>
+            <p id="sub-note" class="sub-note" style="display:none;">※ 保守サービスは月額¥5,000が別途発生します</p>
+
+            <!-- 次へボタン -->
+            <div class="step-nav">
+              <span></span>
+              <button type="button" class="rn-btn rn-btn-primary" id="next-btn" disabled>
+                確認・お支払いへ
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
-        <button
-          id="next-btn"
-          disabled
-          style="background:var(--color-primary); color:#fff; border:none; padding:18px 48px; font-size:13px; letter-spacing:0.08em; cursor:not-allowed; opacity:0.3; transition:opacity 0.25s;"
-          onclick="goToStep2()"
-        >
-          次へ → 確認・お支払い
-        </button>
+        <!-- ════════ STEP 2 ════════ -->
+        <div class="step-panel" id="step2">
+          <div class="form-card reveal">
+            <div class="form-sec-head">
+              <h2>ご注文内容の確認</h2>
+              <p>選択されたサービスをご確認のうえ、お支払いにお進みください。</p>
+            </div>
+
+            <div class="order-summary" id="order-summary"></div>
+
+            <div class="email-group">
+              <label>メールアドレス（任意・領収書送付用）</label>
+              <input id="customer-email" type="email" placeholder="example@email.com" class="form-input" />
+            </div>
+
+            <div id="payment-warning" class="payment-warning" style="display:none;"></div>
+
+            <div class="step-nav step-nav-dual">
+              <button type="button" class="rn-btn rn-btn-ghost" id="back-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="transform:rotate(180deg)"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                サービス選択に戻る
+              </button>
+              <button type="button" class="rn-btn rn-btn-primary" id="pay-btn-one" style="display:none;">
+                カードで支払う
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+              <button type="button" class="rn-btn rn-btn-primary" id="pay-btn-sub" style="display:none;">
+                保守サービスに申し込む
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+            <p class="secure-note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:16px;height:16px;stroke-width:2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              決済はStripeの安全なページで行われます。カード情報はSane Designには送信されません。
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
-
-    <!-- ─── Step 2 ─── -->
-    <div id="step2" style="display:none;">
-      <div style="max-width:600px;">
-        <h2 style="font-family:var(--font-serif); font-size:24px; font-weight:300; margin-bottom:32px;">ご注文内容の確認</h2>
-        <div id="order-summary" style="border:1px solid var(--color-border); margin-bottom:32px;"></div>
-
-        <div style="margin-bottom:32px;">
-          <label style="display:block; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;">メールアドレス（任意・領収書送付用）</label>
-          <input id="customer-email" type="email" placeholder="example@email.com"
-            style="width:100%; padding:14px 16px; border:1px solid var(--color-border); font-size:14px; outline:none; font-family:var(--font-sans); box-sizing:border-box;" />
-        </div>
-
-        <div id="payment-warning" style="display:none; padding:16px; background:#fff3cd; border:1px solid #ffc107; margin-bottom:24px; font-size:13px; line-height:1.8; color:#856404;"></div>
-
-        <div style="display:flex; gap:16px; flex-wrap:wrap;">
-          <button onclick="goToStep1()" style="background:transparent; border:1px solid var(--color-border); color:var(--color-text); padding:16px 32px; font-size:13px; cursor:pointer;">← 戻る</button>
-          <button id="pay-btn-one" style="display:none; background:var(--color-primary); color:#fff; border:none; padding:16px 40px; font-size:13px; letter-spacing:0.08em; cursor:pointer; flex:1;" onclick="checkout('payment')">カードで支払う →</button>
-          <button id="pay-btn-sub" style="display:none; background:var(--color-primary); color:#fff; border:none; padding:16px 40px; font-size:13px; letter-spacing:0.08em; cursor:pointer; flex:1;" onclick="checkout('subscription')">保守サービスに申し込む →</button>
-        </div>
-        <p style="font-size:11px; color:var(--color-muted); margin-top:16px; line-height:1.9;">
-          🔒 決済はStripeの安全なページで行われます。カード情報はSane Designには送信されません。
-        </p>
-      </div>
-    </div>
-
   </section>
-</BaseLayout>
 
-<style>
-  .price-row { transition: border-color 0.2s, background 0.2s; }
-  .price-row:not(.locked):hover { border-color: var(--color-primary) !important; background: var(--color-surface); }
-  .price-row.selected { border-color: var(--color-primary) !important; background: #f5f5f5; }
-  #next-btn:not([disabled]) { opacity: 1 !important; cursor: pointer !important; }
-  #next-btn:not([disabled]):hover { opacity: 0.8 !important; }
-  #pay-btn-one:hover, #pay-btn-sub:hover { opacity: 0.8; }
-  @media (max-width: 640px) {
-    .price-row { flex-direction: column; align-items: flex-start !important; }
-  }
+  <!-- ── Wave ── -->
+  <div class="wave"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="var(--cream-bg)"/></svg></div>
+
+</RenewalLayout>
+<style is:global>
+:root{--primary:#4FB4E8;--primary-dark:#2E90C4;--accent:#F79B3E;--accent-shadow:#c76f14;--text:#3A4256;--text-muted:#7b8499;--sky-bg:#EAF6FC;--cream-bg:#FFF8F0;--border:#e2e6ed;--card-bg:#fff;--success:#34a853;--success-bg:#eaf7ee}
+
+/* ── Hero ── */
+.pay-hero{padding:72px 0 0;text-align:center}
+.pay-hero .sec-sub{display:inline-block;font-family:"Inter",sans-serif;font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--primary);margin-bottom:12px}
+.pay-hero h1{font-size:clamp(28px,5vw,48px);font-weight:900;line-height:1.3;margin-bottom:16px}
+.pay-hero h1 .big{color:var(--primary)}
+.pay-hero .lead{font-size:15px;color:var(--text-muted);line-height:1.9;max-width:520px;margin:0 auto}
+.pay-hero .hero-badges{display:flex;justify-content:center;gap:16px;margin-top:20px;flex-wrap:wrap}
+.pay-hero .hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--text)}
+.pay-hero .hero-badge .ck{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#e6f6ed}
+.pay-hero .hero-badge .ck svg{width:14px;height:14px;stroke:var(--success);stroke-width:3}
+
+/* ── Wave ── */
+.wave{width:100%;overflow:hidden;line-height:0}
+.wave svg{width:100%;height:60px;display:block}
+
+/* ── Section ── */
+.pay-section{padding:60px 0 80px}
+.pay-wrap{max-width:820px;margin:0 auto}
+
+/* ── Step Tabs ── */
+.step-tabs{display:flex;gap:0;margin-bottom:40px}
+.step-tab{flex:1;text-align:center;padding:16px 8px;position:relative;cursor:default}
+.step-tab .st-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:#e2e6ed;color:var(--text-muted);font-family:"Inter",sans-serif;font-weight:800;font-size:14px;margin-bottom:6px;transition:background .3s,color .3s}
+.step-tab .st-label{display:block;font-size:12px;font-weight:700;color:var(--text-muted);transition:color .3s}.step-tab.active .st-num{background:var(--primary);color:#fff}
+.step-tab.active .st-label{color:var(--text)}
+.step-tab.done .st-num{background:#e6f6ed;color:var(--success)}
+.step-tab::after{content:"";position:absolute;top:26px;right:-50%;width:100%;height:2px;background:#e2e6ed;z-index:-1}
+.step-tab:last-child::after{display:none}
+.step-tab.done::after{background:var(--primary)}
+
+/* ── Card ── */
+.form-card{background:var(--card-bg);border:2px solid var(--border);border-radius:20px;padding:40px;box-shadow:0 8px 40px rgba(58,66,86,.06)}
+.step-panel{display:none}
+.step-panel.active{display:block}
+.form-sec-head{margin-bottom:28px}
+.form-sec-head h2{font-size:22px;font-weight:900;margin-bottom:6px}
+.form-sec-head p{font-size:14px;color:var(--text-muted)}
+
+/* ── Category Sections ── */
+.cat-section{margin-bottom:32px}
+.cat-section:last-of-type{margin-bottom:24px}
+.cat-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.cat-badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 14px;border-radius:999px;color:#fff}
+.cat-badge.web{background:var(--primary)}
+.cat-badge.seo{background:var(--success)}
+.cat-badge.maint{background:#9b59b6}
+.cat-label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}
+/* ── Price Items ── */
+.price-item{display:flex;align-items:center;gap:14px;padding:16px 20px;border:2px solid var(--border);border-radius:14px;cursor:pointer;transition:border-color .2s,background .2s,box-shadow .2s;margin-bottom:8px;user-select:none}
+.price-item:hover{border-color:var(--primary);background:#f8fcff}
+.price-item.selected{border-color:var(--primary);background:var(--sky-bg);box-shadow:0 0 0 3px rgba(79,180,232,.15)}
+.price-item input[type=checkbox]{display:none}
+.pi-check{width:24px;height:24px;min-width:24px;border-radius:6px;border:2px solid #ccd2db;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border-color .2s}
+.pi-check svg{width:14px;height:14px;stroke:#fff;stroke-width:3;opacity:0;transition:opacity .2s}
+.price-item.selected .pi-check{background:var(--primary);border-color:var(--primary)}
+.price-item.selected .pi-check svg{opacity:1}
+.price-item.selected .seo-check{background:var(--success);border-color:var(--success)}
+.price-item.selected .maint-check{background:#9b59b6;border-color:#9b59b6}
+.pi-info{flex:1;display:flex;flex-direction:column;gap:2px}
+.pi-name{font-size:14px;font-weight:700}
+.pi-desc{font-size:12px;color:var(--text-muted)}
+.pi-price{font-family:"Inter",sans-serif;font-weight:800;font-size:16px;color:var(--primary);white-space:nowrap}
+.pi-price small{font-size:12px;font-weight:700;color:var(--text-muted)}
+.pi-badge-sub{display:inline-block;font-size:10px;font-weight:800;background:#9b59b6;color:#fff;padding:2px 10px;border-radius:999px;width:fit-content}
+
+/* ── Base item highlight ── */
+.base-item{border-width:2px}
+.base-item .pi-name{font-size:15px}
+.base-item .pi-price{font-size:18px}
+/* ── Options ── */
+.opt-section{margin-left:16px;margin-top:-2px;margin-bottom:8px}
+.opt-header{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.opt-header svg{stroke:var(--primary)}
+.opt-lock-note{font-size:11px;font-weight:500;color:#aaa;margin-left:4px}
+.opt-list{opacity:.35;pointer-events:none;transition:opacity .3s}
+.opt-list.unlocked{opacity:1;pointer-events:auto}
+.opt-item{padding:12px 18px}
+.opt-item .pi-name{font-size:13px}
+.opt-item .pi-price{font-size:14px}
+
+/* ── Notes ── */
+.pay-notes{border-top:1px solid var(--border);padding-top:16px;margin-bottom:20px}
+.pay-notes p{font-size:12px;color:var(--text-muted);line-height:1.9}
+.pay-notes a{color:var(--primary);text-decoration:underline}
+
+/* ── Total Bar ── */
+.total-bar{display:flex;justify-content:space-between;align-items:center;background:var(--text);color:#fff;border-radius:14px;padding:18px 28px;transition:transform .18s cubic-bezier(.34,1.4,.64,1)}
+.total-label{font-size:14px;font-weight:700}
+.total-label small{display:block;font-size:11px;opacity:.7;margin-top:2px}
+.total-price{font-family:"Inter",sans-serif;font-weight:800;font-size:26px}
+.total-price .yen{font-size:18px;margin-right:2px}
+.sub-note{font-size:12px;color:#9b59b6;text-align:center;margin-top:8px;font-weight:700}
+/* ── Step Nav ── */
+.step-nav{display:flex;justify-content:center;margin-top:28px;gap:12px}
+.step-nav .rn-btn{font-size:15px;padding:16px 36px}
+.step-nav .rn-btn svg{width:18px;height:18px;stroke-width:3}
+.step-nav .rn-btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important;box-shadow:0 5px 0 #c76f14!important}
+.step-nav-dual{flex-wrap:wrap}
+.step-nav-dual .rn-btn{flex:1;justify-content:center;min-width:200px}
+
+/* ── Step 2 ── */
+.order-summary{border:2px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:24px}
+.order-summary .sum-section{padding:20px 24px;border-bottom:1px solid var(--border)}
+.order-summary .sum-section:last-child{border-bottom:none}
+.order-summary .sum-label{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px}
+.order-summary .sum-row{display:flex;justify-content:space-between;padding:8px 0;font-size:14px;border-bottom:1px solid #f0f2f5}
+.order-summary .sum-row:last-of-type{border-bottom:none}
+.order-summary .sum-row .sum-name{color:var(--text)}
+.order-summary .sum-row .sum-price{font-family:"Inter",sans-serif;font-weight:700;color:var(--primary)}
+.order-summary .sum-total{display:flex;justify-content:space-between;padding:14px 0 0;font-size:16px;font-weight:900;border-top:2px solid var(--border);margin-top:8px}
+.order-summary .sum-total .sum-price{font-size:18px}
+
+.email-group{margin-bottom:24px}
+.email-group label{display:block;font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.form-input{width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:10px;background:#fff;font-size:15px;font-family:"Noto Sans JP",sans-serif;outline:none;transition:border-color .2s,box-shadow .2s;box-sizing:border-box}
+.form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(79,180,232,.15)}
+.payment-warning{padding:16px 20px;background:#FFF8E1;border:2px solid #FFD54F;border-radius:12px;margin-bottom:24px;font-size:13px;line-height:1.8;color:#795548;font-weight:700}
+
+.secure-note{display:flex;align-items:center;gap:8px;justify-content:center;font-size:12px;color:var(--text-muted);margin-top:20px;font-weight:500}
+.secure-note svg{stroke:var(--success);flex-shrink:0}
+
+/* ── Mobile ── */
+@media(max-width:860px){
+  .form-card{padding:24px 18px}
+  .price-item{flex-wrap:wrap;gap:10px}
+  .pi-price{width:100%;text-align:right}
+  .opt-section{margin-left:0}
+  .total-bar{flex-direction:column;gap:8px;text-align:center}
+  .step-nav{flex-direction:column;align-items:center}
+  .step-nav .rn-btn{width:100%;max-width:100%;justify-content:center}
+  .step-nav-dual{flex-direction:column}
+  .step-nav-dual .rn-btn{min-width:0}
+  .step-tabs{gap:0}
+  .step-tab .st-label{font-size:10px}
+  .pay-hero .hero-badges{flex-direction:column;align-items:center;gap:10px}
+}
 </style>
-
 <script define:vars={{ PRICE_IDS }}>
   let selected = {};
 
-  document.querySelectorAll('.price-row').forEach(row => {
+  // ── Item toggle ──
+  document.querySelectorAll('.price-item').forEach(row => {
     const key = row.dataset.key;
     const cb = row.querySelector('input[type=checkbox]');
     if (!cb) return;
@@ -198,17 +371,16 @@ const PRICE_IDS = {
     if (key === 'web_standard') updateOptLock();
     updateTotal();
   }
-
+  // ── Option lock ──
   function updateOptLock() {
     const baseChecked = !!selected['web_standard'];
-    const wrapper = document.getElementById('opts-wrapper');
-    const note    = document.getElementById('opt-lock-note');
-    wrapper.style.opacity       = baseChecked ? '1' : '0.35';
-    wrapper.style.pointerEvents = baseChecked ? 'auto' : 'none';
-    note.style.display          = baseChecked ? 'none' : 'inline';
+    const optList = document.getElementById('opts-list');
+    const note = document.getElementById('opt-lock-note');
+    optList.classList.toggle('unlocked', baseChecked);
+    note.style.display = baseChecked ? 'none' : 'inline';
     document.querySelectorAll('.opt-cb').forEach(cb => {
       cb.disabled = !baseChecked;
-      const row = cb.closest('.price-row');
+      const row = cb.closest('.price-item');
       row.style.cursor = baseChecked ? 'pointer' : 'not-allowed';
       if (!baseChecked && cb.checked) {
         cb.checked = false;
@@ -218,91 +390,100 @@ const PRICE_IDS = {
     });
   }
 
+  // ── Total ──
   function updateTotal() {
     const oneTime = Object.values(selected).filter(i => i.mode === 'payment').reduce((s, i) => s + i.price, 0);
-    const hasSub  = Object.values(selected).some(i => i.mode === 'subscription');
-    document.getElementById('total-display').textContent = '¥' + oneTime.toLocaleString();
+    const hasSub = Object.values(selected).some(i => i.mode === 'subscription');
+    document.getElementById('total-display').textContent = oneTime.toLocaleString();
     document.getElementById('sub-note').style.display = hasSub ? 'block' : 'none';
     const hasAny = Object.keys(selected).length > 0;
     const btn = document.getElementById('next-btn');
-    btn.disabled       = !hasAny;
-    btn.style.opacity  = hasAny ? '1' : '0.3';
-    btn.style.cursor   = hasAny ? 'pointer' : 'not-allowed';
+    btn.disabled = !hasAny;
+    // Bounce the total bar
+    const bar = document.getElementById('totalBar');
+    bar.style.transform = 'scale(1.02)';
+    setTimeout(() => { bar.style.transform = ''; }, 200);
   }
-
-  function goToStep2() {
-    if (!Object.keys(selected).length) return;
-    document.getElementById('step1').style.display = 'none';
-    document.getElementById('step2').style.display = 'block';
-    setActiveTab(1); renderSummary();
-  }
-  function goToStep1() {
-    document.getElementById('step2').style.display = 'none';
-    document.getElementById('step1').style.display = 'block';
-    setActiveTab(0);
-  }
-  function setActiveTab(idx) {
+  // ── Step navigation ──
+  function goToStep(n) {
+    document.getElementById('step1').classList.toggle('active', n === 1);
+    document.getElementById('step2').classList.toggle('active', n === 2);
     document.querySelectorAll('.step-tab').forEach((t, i) => {
-      const a = i === idx;
-      t.style.borderBottomColor = a ? 'var(--color-primary)' : 'transparent';
-      t.style.color             = a ? 'var(--color-text)' : 'var(--color-muted)';
-      t.style.fontWeight        = a ? '600' : '400';
+      const s = parseInt(t.dataset.step);
+      t.classList.remove('active', 'done');
+      if (s === n) t.classList.add('active');
+      else if (s < n) t.classList.add('done');
     });
+    window.scrollTo({ top: document.getElementById('stepTabs').offsetTop - 90, behavior: 'smooth' });
   }
 
+  document.getElementById('next-btn').addEventListener('click', () => {
+    if (!Object.keys(selected).length) return;
+    renderSummary();
+    goToStep(2);
+  });
+
+  document.getElementById('back-btn').addEventListener('click', () => {
+    goToStep(1);
+  });
+  // ── Summary ──
   function renderSummary() {
     const oneTimeItems = Object.values(selected).filter(i => i.mode === 'payment');
-    const subItems     = Object.values(selected).filter(i => i.mode === 'subscription');
+    const subItems = Object.values(selected).filter(i => i.mode === 'subscription');
     const oneTimeTotal = oneTimeItems.reduce((s, i) => s + i.price, 0);
-    const subTotal     = subItems.reduce((s, i) => s + i.price, 0);
+    const subTotal = subItems.reduce((s, i) => s + i.price, 0);
     let html = '';
     if (oneTimeItems.length) {
-      html += '<div style="padding:20px 24px; border-bottom:1px solid var(--color-border);"><p style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-muted);margin-bottom:12px;">一括払い</p>';
-      oneTimeItems.forEach(i => { html += `<div style="display:flex;justify-content:space-between;padding:8px 0;font-size:14px;border-bottom:1px solid var(--color-border);"><span>${i.label}</span><span style="font-family:var(--font-serif)">¥${i.price.toLocaleString()}</span></div>`; });
-      html += `<div style="display:flex;justify-content:space-between;padding:12px 0;font-size:16px;font-weight:600;"><span>小計</span><span style="font-family:var(--font-serif)">¥${oneTimeTotal.toLocaleString()}</span></div></div>`;
+      html += '<div class="sum-section"><p class="sum-label">一括払い</p>';
+      oneTimeItems.forEach(i => {
+        html += '<div class="sum-row"><span class="sum-name">' + i.label + '</span><span class="sum-price">¥' + i.price.toLocaleString() + '</span></div>';
+      });
+      html += '<div class="sum-total"><span>小計</span><span class="sum-price">¥' + oneTimeTotal.toLocaleString() + '</span></div></div>';
     }
     if (subItems.length) {
-      html += '<div style="padding:20px 24px;"><p style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-muted);margin-bottom:12px;">月額（サブスクリプション）</p>';
-      subItems.forEach(i => { html += `<div style="display:flex;justify-content:space-between;padding:8px 0;font-size:14px;border-bottom:1px solid var(--color-border);"><span>${i.label}</span><span style="font-family:var(--font-serif)">¥${i.price.toLocaleString()}/月</span></div>`; });
-      html += `<div style="display:flex;justify-content:space-between;padding:12px 0;font-size:16px;font-weight:600;"><span>月額合計</span><span style="font-family:var(--font-serif)">¥${subTotal.toLocaleString()}/月</span></div></div>`;
+      html += '<div class="sum-section"><p class="sum-label">月額（サブスクリプション）</p>';
+      subItems.forEach(i => {
+        html += '<div class="sum-row"><span class="sum-name">' + i.label + '</span><span class="sum-price">¥' + i.price.toLocaleString() + '/月</span></div>';
+      });
+      html += '<div class="sum-total"><span>月額合計</span><span class="sum-price">¥' + subTotal.toLocaleString() + '/月</span></div></div>';
     }
     document.getElementById('order-summary').innerHTML = html;
     const warn = document.getElementById('payment-warning');
     if (oneTimeItems.length && subItems.length) {
       warn.style.display = 'block';
       warn.textContent = '一括払いとサブスクリプション（保守サービス）は別々の決済になります。それぞれのボタンからお支払いください。';
-      document.getElementById('pay-btn-one').style.display = 'block';
-      document.getElementById('pay-btn-sub').style.display = 'block';
+      document.getElementById('pay-btn-one').style.display = 'inline-flex';
+      document.getElementById('pay-btn-sub').style.display = 'inline-flex';
     } else if (oneTimeItems.length) {
       warn.style.display = 'none';
-      document.getElementById('pay-btn-one').style.display = 'block';
+      document.getElementById('pay-btn-one').style.display = 'inline-flex';
       document.getElementById('pay-btn-sub').style.display = 'none';
     } else {
       warn.style.display = 'none';
       document.getElementById('pay-btn-one').style.display = 'none';
-      document.getElementById('pay-btn-sub').style.display = 'block';
+      document.getElementById('pay-btn-sub').style.display = 'inline-flex';
     }
   }
-
+  // ── Checkout ──
   async function checkout(mode) {
     const btn = mode === 'payment' ? document.getElementById('pay-btn-one') : document.getElementById('pay-btn-sub');
-    btn.textContent = '処理中...'; btn.disabled = true;
+    const origText = btn.childNodes[0].textContent;
+    btn.childNodes[0].textContent = '処理中...';
+    btn.disabled = true;
     const items = Object.values(selected).filter(i => i.mode === mode).map(i => ({ priceId: i.id, quantity: 1, mode: i.mode }));
     const email = document.getElementById('customer-email').value.trim();
     try {
-      const res  = await fetch('https://sane-design.net/api/create-checkout-session', {
+      const res = await fetch('https://sane-design.net/api/create-checkout-session', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ items, customerEmail: email || undefined,
           successUrl: 'https://sane-design.net/payment/success/',
-          cancelUrl:  'https://sane-design.net/payment/' }),
+          cancelUrl: 'https://sane-design.net/payment/' }),
       });
       const data = await res.json();
       if (data.url) { window.location.href = data.url; }
-      else { alert('エラーが発生しました。\n' + (data.error || '')); btn.textContent = mode === 'payment' ? 'カードで支払う →' : '保守サービスに申し込む →'; btn.disabled = false; }
-    } catch { alert('通信エラーが発生しました。'); btn.textContent = mode === 'payment' ? 'カードで支払う →' : '保守サービスに申し込む →'; btn.disabled = false; }
+      else { alert('エラーが発生しました。\n' + (data.error || '')); btn.childNodes[0].textContent = origText; btn.disabled = false; }
+    } catch { alert('通信エラーが発生しました。'); btn.childNodes[0].textContent = origText; btn.disabled = false; }
   }
-
-  window.goToStep1 = goToStep1;
-  window.goToStep2 = goToStep2;
-  window.checkout  = checkout;
+  document.getElementById('pay-btn-one').addEventListener('click', () => checkout('payment'));
+  document.getElementById('pay-btn-sub').addEventListener('click', () => checkout('subscription'));
 </script>
