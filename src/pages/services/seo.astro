@@ -1,7 +1,6 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import { SITE_URL } from '../../consts';
+import RenewalLayout from '../../layouts/RenewalLayout.astro';
+import { SITE_URL, SITE_NAME } from '../../consts';
 
 const serviceJsonLd = {
   '@context': 'https://schema.org',
@@ -9,7 +8,7 @@ const serviceJsonLd = {
   serviceType: 'SEO対策',
   name: 'SEO対策・内部対策',
   description:
-    '最短3日・10,000円〜。指定キーワードに基づくブログ記事追加と内部SEO対策を実施。検索順位向上をサポートします。',
+    '10,000円〜・1日3記事ずつ公開。指定キーワードに基づくブログ記事追加と内部SEO対策を実施。検索順位向上をサポートします。',
   provider: { '@id': `${SITE_URL}/#organization` },
   areaServed: { '@type': 'Country', name: 'Japan' },
   url: `${SITE_URL}/services/seo/`,
@@ -22,131 +21,502 @@ const serviceJsonLd = {
 };
 ---
 
-<BaseLayout
-  title="SEO対策・内部SEO｜最短3日・10,000円〜 | Sane Design"
-  description="最短3日・10,000円〜。指定キーワードに基づくブログ記事60本追加と内部SEO対策を実施。実績200件以上のデザイナーが検索順位向上をサポートします。"
+<RenewalLayout
+  title="SEO対策・内部SEO｜10,000円〜・1日3記事ずつ公開 | Sane Design"
+  description="10,000円〜・1日3記事ずつ公開。指定キーワードに基づくブログ記事60本追加と内部SEO対策を実施。実績200件以上のデザイナーが検索順位向上をサポートします。"
   jsonLd={serviceJsonLd}
 >
-  <section class="container-editorial pt-16 md:pt-24 pb-16">
-    <Breadcrumbs items={[{ label: 'SEO' }]} />
-    <p class="section-label" style="margin-top:18px;">Services / 02</p>
-    <h1 class="font-serif text-4xl md:text-7xl leading-tight mb-6">
-      SEO.
-    </h1>
-    <p class="font-serif text-xl md:text-2xl leading-snug mb-4">
-      SEO対策・内部SEO対策
-    </p>
-    <p class="max-w-2xl text-base md:text-xl leading-relaxed">
-      SEO対策の実装を最短3日で完了します。<br />
-      指定キーワードに基づく厳選60記事追加と、内部SEO対策を実施します。<br />
-      <span style="font-size:0.85em; opacity:0.6;">※検索順位の変動には通常数週間〜数ヶ月かかります。</span>
-    </p>
-  </section>
 
-  <section class="container-editorial pb-16">
-    <div class="border-t border-primary pt-8 grid md:grid-cols-4 gap-8 text-sm">
-      <div>
-        <p class="text-xs uppercase tracking-widest text-muted mb-2">価格</p>
-        <p class="font-serif text-2xl">¥10,000〜</p>
+<!-- ═══ 01 HERO ═══ -->
+<section class="seo-hero reveal">
+  <div class="wrap">
+    <span class="sec-sub">SEO</span>
+    <h1>検索で<br><span class="big">見つかるサイト</span>に</h1>
+    <p class="lead">指定キーワードに基づく厳選記事追加と内部SEO対策で、<br>あなたのサイトの検索順位向上をサポートします。</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center">
+      <a href="/contact/" class="btn btn-primary">まずは無料で相談する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="/payment/" class="btn btn-ghost">今すぐ注文する</a>
+    </div>
+    <div class="hero-badges">
+      <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>相談だけでもOK</span>
+      <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>1日3記事ずつ公開</span>
+      <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>実績200件以上</span>
+    </div>
+    <div class="spec-strip">
+      <div class="spec-item">
+        <div class="lbl-top">コミコミ価格</div>
+        <div class="big"><span class="num">¥10,000</span>〜</div>
+        <div class="lbl">追加費用なし</div>
       </div>
-      <div>
-        <p class="text-xs uppercase tracking-widest text-muted mb-2">実装納期</p>
-        <p class="font-serif text-2xl">3営業日</p>
+      <div class="spec-item">
+        <div class="lbl-top">公開ペース</div>
+        <div class="big">1日<span class="num">3</span>記事</div>
+        <div class="lbl">じっくり公開</div>
       </div>
-      <div>
-        <p class="text-xs uppercase tracking-widest text-muted mb-2">記事数</p>
-        <p class="font-serif text-2xl">60本</p>
+      <div class="spec-item">
+        <div class="lbl-top">記事数</div>
+        <div class="big"><span class="num">60</span>本</div>
+        <div class="lbl">キーワード厳選</div>
       </div>
-      <div>
-        <p class="text-xs uppercase tracking-widest text-muted mb-2">納品形態</p>
-        <p class="font-serif text-2xl">テキスト / 直接UP</p>
+      <div class="spec-item">
+        <div class="lbl-top">納品形態</div>
+        <div class="big" style="font-size:20px;padding-top:4px">テキスト / 直接UP</div>
+        <div class="lbl">どちらでもOK</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="container-editorial pb-16">
-    <h2 class="font-serif text-3xl md:text-4xl mb-8">こんな方におすすめ</h2>
-    <ul class="space-y-4 text-base md:text-lg max-w-2xl">
-      <li class="flex gap-4">
-        <span class="text-accent">✓</span>短期でSEO効果を出したい
-      </li>
-      <li class="flex gap-4">
-        <span class="text-accent">✓</span>記事作成のリソースが不足している
-      </li>
-      <li class="flex gap-4">
-        <span class="text-accent">✓</span>内部対策の見直しをしたい
-      </li>
-      <li class="flex gap-4">
-        <span class="text-accent">✓</span>検索順位を上げて問い合わせを増やしたい
-      </li>
-    </ul>
-  </section>
-
-  <section class="container-editorial pb-16">
-    <h2 class="font-serif text-3xl md:text-4xl mb-8">実施内容</h2>
-    <div class="grid md:grid-cols-2 gap-8 max-w-4xl">
-      <div class="border-t border-primary pt-4">
-        <h3 class="font-serif text-xl mb-3">① コンテンツSEO</h3>
-        <p class="text-sm leading-relaxed text-muted">
-          指定キーワードに基づき、検索意図を満たす記事を60本作成・追加します。
-        </p>
+<!-- ═══ 02 こんな方におすすめ ═══ -->
+<section class="cream" style="padding-top:60px">
+  <div class="wave top"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="#fff"/></svg></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-sub">Recommend</span>
+      <h2 class="sec-title">こんな方に<span class="mk">おすすめ</span><small>ひとつでも当てはまったら、お気軽にご相談ください</small></h2>
+    </div>
+    <div class="seo-recommend-grid">
+      <div class="seo-rec-card reveal">
+        <div class="seo-rec-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h4>着実にSEO効果を<br>出したい方</h4>
+        <p>1日3記事ずつ計60記事を公開。検索エンジンに評価されやすいペースで着実に対策します。</p>
       </div>
-      <div class="border-t border-primary pt-4">
-        <h3 class="font-serif text-xl mb-3">② 内部SEO対策</h3>
-        <p class="text-sm leading-relaxed text-muted">
-          タイトル、メタディスクリプション、見出し構造、内部リンク、スキーマなどサイト全体を見直します。
-        </p>
+      <div class="seo-rec-card reveal">
+        <div class="seo-rec-icon orange">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h4>記事作成の<br>リソースが不足</h4>
+        <p>社内にライターがいなくても大丈夫。プロが60本すべて作成します。</p>
+      </div>
+      <div class="seo-rec-card reveal">
+        <div class="seo-rec-icon green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h4>内部対策の<br>見直しをしたい方</h4>
+        <p>タイトル・メタ・見出し構造・内部リンク・スキーマを徹底的に最適化。</p>
+      </div>
+      <div class="seo-rec-card reveal">
+        <div class="seo-rec-icon pink">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h4>検索順位を上げて<br>問い合わせを増やしたい</h4>
+        <p>コンテンツSEOと内部対策の両面から、検索流入の増加をサポートします。</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Coconala サービス情報 -->
-  <section class="container-editorial pb-16">
-    <h2 class="font-serif text-3xl md:text-4xl mb-8">サービス詳細</h2>
-    <div class="grid md:grid-cols-2 gap-8 max-w-4xl">
-      <div class="border-t border-primary pt-4">
-        <h3 class="font-serif text-xl mb-3">基本プランに含まれるもの</h3>
-        <ul class="space-y-2 text-sm text-muted leading-relaxed">
-          <li>✓ 指定キーワードに基づくブログ記事 60本作成・追加</li>
-          <li>✓ 内部SEO対策（タイトル・メタ・見出し構造・内部リンク・スキーマ）</li>
-          <li>✓ 実績200件以上のノウハウで対策を実施</li>
+<!-- ═══ 03 実施内容 ═══ -->
+<section class="mint">
+  <div class="wave top"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="var(--cream-bg)"/></svg></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-sub">Service</span>
+      <h2 class="sec-title">かんたん<span class="mk">2ステップ</span>で<br>SEO対策を実装<small>コンテンツSEOと内部対策の両面からアプローチ</small></h2>
+    </div>
+    <div class="seo-service-grid">
+      <!-- コンテンツSEO -->
+      <div class="seo-service-card reveal">
+        <div class="seo-service-num">01</div>
+        <div class="seo-service-body">
+          <h3>コンテンツSEO</h3>
+          <p class="seo-service-desc">指定キーワードに基づき、検索意図を満たす記事を<strong>60本</strong>作成・追加します。</p>
+          <div class="seo-feature-list">
+            <div class="seo-feature-item">
+              <span class="seo-fi-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              </span>
+              <span>キーワード調査・選定</span>
+            </div>
+            <div class="seo-feature-item">
+              <span class="seo-fi-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              </span>
+              <span>検索意図に合った記事構成</span>
+            </div>
+            <div class="seo-feature-item">
+              <span class="seo-fi-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              </span>
+              <span>SEOに最適化されたライティング</span>
+            </div>
+            <div class="seo-feature-item">
+              <span class="seo-fi-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              </span>
+              <span>内部リンク設計</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 内部SEO -->
+      <div class="seo-service-card reveal">
+        <div class="seo-service-num">02</div>
+        <div class="seo-service-body">
+          <h3>内部SEO対策</h3>
+          <p class="seo-service-desc">サイト全体の技術的なSEO要素を見直し、検索エンジンに正しく評価される構造に最適化します。</p>
+          <div class="seo-feature-list">
+            <div class="seo-feature-item">
+              <span class="seo-fi-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              </span>
+              <span>タイトルタグ・メタディスクリプション</span>
+            </div>
+            <div class="seo-feature-item">
+              <span class="seo-fi-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              </span>
+              <span>見出し構造（h1〜h6）最適化</span>
+            </div>
+            <div class="seo-feature-item">
+              <span class="seo-fi-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              </span>
+              <span>構造化データ（スキーマ）マークアップ</span>
+            </div>
+            <div class="seo-feature-item">
+              <span class="seo-fi-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              </span>
+              <span>サイト内リンク構造の改善</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 04 SEO効果のイメージ ═══ -->
+<section class="sky">
+  <div class="wave top"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="var(--mint-bg)"/></svg></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-sub">Flow</span>
+      <h2 class="sec-title">ご依頼から<span class="mk">公開まで</span><small>1日3記事ずつ、じっくり公開していきます</small></h2>
+    </div>
+    <div class="seo-flow-timeline">
+      <div class="seo-flow-step reveal">
+        <div class="seo-flow-dot"></div>
+        <div class="seo-flow-card">
+          <span class="seo-flow-day">STEP 1</span>
+          <h4>ヒアリング</h4>
+          <p>対策したいキーワードやサイトの現状をお伺いします。お気軽にご相談ください。</p>
+        </div>
+      </div>
+      <div class="seo-flow-step reveal">
+        <div class="seo-flow-dot"></div>
+        <div class="seo-flow-card">
+          <span class="seo-flow-day">STEP 2</span>
+          <h4>キーワード調査・記事作成</h4>
+          <p>ターゲットキーワードを選定し、検索意図に合った記事60本を作成します。</p>
+        </div>
+      </div>
+      <div class="seo-flow-step reveal">
+        <div class="seo-flow-dot active"></div>
+        <div class="seo-flow-card">
+          <span class="seo-flow-day">STEP 3</span>
+          <h4>1日3記事ずつ公開</h4>
+          <p>検索エンジンに評価されやすいペースで、1日3記事ずつじっくり公開していきます。</p>
+        </div>
+      </div>
+      <div class="seo-flow-step reveal">
+        <div class="seo-flow-dot done"></div>
+        <div class="seo-flow-card">
+          <span class="seo-flow-day">STEP 4</span>
+          <h4>内部SEO対策＋完了</h4>
+          <p>タイトル・メタ・見出し・スキーマなどの内部SEO対策を実施し、すべての作業が完了します。</p>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--sub);margin-top:32px;font-weight:500;line-height:1.8">
+      ※ SEO対策では一度に大量の記事を公開する事はマイナス評価に繋がる可能性があるので、じっくり公開して参ります。<br>
+      ※ 検索順位への反映には通常数週間〜数ヶ月かかります。即日の順位変動を保証するものではありません。
+    </p>
+  </div>
+</section>
+
+<!-- ═══ 05 サービス詳細 ═══ -->
+<section>
+  <div class="wave top"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="var(--sky-bg)"/></svg></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-sub">Detail</span>
+      <h2 class="sec-title">サービス詳細<small>基本プランに含まれるもの・オプション</small></h2>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-card reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg>含まれるもの</h3>
+        <ul class="detail-list">
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>指定キーワードに基づくブログ記事 <strong>60本</strong>作成・追加</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>内部SEO対策（タイトル・メタ・見出し構造・内部リンク・スキーマ）</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>実績200件以上のノウハウで対策を実施</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>キーワード調査・選定</li>
         </ul>
       </div>
-      <div class="border-t border-primary pt-4">
-        <h3 class="font-serif text-xl mb-3">オプション</h3>
-        <ul class="space-y-2 text-sm text-muted leading-relaxed">
-          <li>＋ ¥5,000 — サーバーへの直接アップロード（内部SEO対策実施含）</li>
-          <li>＋ ¥5,000 — 完全オリジナル画像付き記事 60本</li>
+      <div class="detail-card reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg>オプション</h3>
+        <ul class="detail-list">
+          <li><span class="plus">+</span>¥5,000 — サーバーへの直接アップロード（内部SEO対策実施含）</li>
+          <li><span class="plus">+</span>¥5,000 — 完全オリジナル画像付き記事 60本</li>
         </ul>
-        <p class="mt-4 text-xs text-muted leading-relaxed">
-          ※ SEO対策の実装は最短3日で完了しますが、検索順位への反映には通常数週間〜数ヶ月かかります。即日の順位変動を保証するものではありません。
+        <p style="font-size:12px;color:var(--sub);margin-top:16px;line-height:1.7;font-weight:500">
+          ご不明点はお気軽にご相談ください。<br>キーワード選定のアドバイスも無料で承ります。
         </p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="bg-accent text-white py-20 md:py-32 mt-12">
-    <div class="container-editorial text-center">
-      <h2 class="font-serif text-3xl md:text-5xl mb-6 leading-tight">
-        ¥10,000 / 実装3日
-      </h2>
-      <p class="mb-8 opacity-90">
-        フォームからお気軽にご相談ください
-      </p>
-      <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center;">
-        <a
-          href="/payment/"
-          class="inline-block bg-white text-black no-underline px-12 py-5 font-semibold hover:opacity-85 transition-opacity"
-        >
-          今すぐ注文する →
-        </a>
-        <a
-          href="/contact/#contact-form"
-          class="inline-block bg-transparent text-white no-underline px-12 py-5 font-semibold border border-white hover:opacity-85 transition-opacity"
-        >
-          まずは相談する →
-        </a>
+<!-- ═══ 06 パフォーマンス ═══ -->
+<section class="cream">
+  <div class="wave top"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="#fff"/></svg></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-sub">Performance</span>
+      <h2 class="sec-title">選ばれる<span class="mk">理由</span></h2>
+    </div>
+    <div class="perf-grid">
+      <div class="perf-card reveal">
+        <span class="perf-num perf-count" data-target="60">0</span><span class="perf-unit">本</span>
+        <span class="perf-label">厳選記事を追加</span>
+      </div>
+      <div class="perf-card reveal">
+        <span class="perf-num perf-count" data-target="3">0</span><span class="perf-unit">記事/日</span>
+        <span class="perf-label">じっくり公開</span>
+      </div>
+      <div class="perf-card reveal">
+        <span class="perf-num perf-count" data-target="200">0</span><span class="perf-unit">+</span>
+        <span class="perf-label">SEO対策実績</span>
       </div>
     </div>
-  </section>
-</BaseLayout>
+  </div>
+</section>
+
+<!-- ═══ 07 CTA ═══ -->
+<section class="cta-section">
+  <div class="wrap" style="position:relative;z-index:2">
+    <h2>¥10,000〜 / 1日3記事ずつ公開</h2>
+    <p class="cta-sub">フォームからお気軽にご相談ください</p>
+    <div class="cta-btns">
+      <a href="/payment/" class="btn btn-white">今すぐ注文する →</a>
+      <a href="/contact/#contact-form" class="btn btn-primary" style="box-shadow:0 5px 0 rgba(0,0,0,.2)">まずは相談する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+</RenewalLayout>
+
+<style is:global>
+/* ══════════════════════════════════════════════
+   SEO PAGE STYLES
+   ══════════════════════════════════════════════ */
+:root {
+  --primary:#4FB4E8; --primary-dark:#2E90C4; --primary-deep:#1c6f9c;
+  --sky-bg:#E4F4FD; --cream-bg:#FFF6E0; --mint-bg:#E9F7E4; --pink-bg:#FFEFF0;
+  --green:#78C25E; --green-dark:#4e8a3c;
+  --yellow:#FFCF4D; --yellow-dark:#a9821f;
+  --orange:#F79B3E; --orange-dark:#c76f14;
+  --text:#3A4256; --sub:#7A8494;
+  --white:#fff; --radius:24px; --shadow:0 10px 30px rgba(58,66,86,.08);
+}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{font-family:"Noto Sans JP",sans-serif}
+.en{font-family:"Inter",sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.mk{background:linear-gradient(transparent 60%, #FFE08A 60%);padding:0 2px}
+
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:"Noto Sans JP";font-weight:700;border-radius:999px;padding:16px 34px;font-size:16px;transition:.12s;cursor:pointer;border:none;position:relative;text-decoration:none;box-sizing:border-box}
+.btn svg{width:18px;height:18px;stroke-width:3}
+.btn-primary{background:var(--orange);color:#fff!important;box-shadow:0 5px 0 var(--orange-dark)}
+.btn-primary:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--orange-dark);background:var(--orange);color:#fff!important}
+.btn-primary::after{display:none!important}
+.btn-ghost{background:#fff;color:var(--primary-dark)!important;box-shadow:0 5px 0 #CDEBFA;border:2px solid #CDEBFA}
+.btn-ghost:hover{transform:translateY(2px);box-shadow:0 3px 0 #CDEBFA;color:var(--primary-dark)!important;background:#fff}
+.btn-ghost::after{display:none!important}
+.btn-white{background:#fff;color:var(--text)!important;box-shadow:0 5px 0 #ddd;border:2px solid #eee}
+.btn-white:hover{transform:translateY(2px);box-shadow:0 3px 0 #ddd;background:#fff;color:var(--text)!important}
+.btn-white::after{display:none!important}
+
+/* ── Section base ── */
+section{padding:84px 0;position:relative}
+.sky{background:var(--sky-bg)} .cream{background:var(--cream-bg)} .mint{background:var(--mint-bg)} .pink{background:var(--pink-bg)}
+.sec-head{text-align:center;margin-bottom:48px}
+.sec-sub{font-family:"Inter";font-weight:800;font-size:14px;letter-spacing:2px;color:var(--primary);text-transform:uppercase;display:block;margin-bottom:6px}
+.sec-title{font-size:34px;font-weight:900;line-height:1.5}
+.sec-title small{display:block;font-size:15px;color:var(--sub);font-weight:500;margin-top:12px;font-family:"Noto Sans JP"}
+.wave{position:absolute;left:0;width:100%;line-height:0;z-index:1}
+.wave.top{top:-1px}
+.wave svg{width:100%;height:60px;display:block}
+
+/* ── HERO ── */
+.seo-hero{background:radial-gradient(120% 90% at 80% 0%,#D7EFFB 0%,#EAF7FE 45%,#fff 100%);padding:80px 0 0;text-align:center}
+.seo-hero .sec-sub{margin-bottom:10px;font-size:clamp(28px,9vw,42px);letter-spacing:6px;white-space:nowrap}
+.seo-hero h1{font-size:clamp(28px,4.5vw,52px);font-weight:900;line-height:1.3;letter-spacing:1px}
+.seo-hero h1 .big{color:var(--primary);font-size:1.15em}
+.seo-hero .lead{font-size:17px;color:#5b6474;margin:20px 0 28px;font-weight:500;line-height:1.8}
+.seo-hero .hero-badges{display:flex;gap:20px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+.hero-badge{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700}
+.hero-badge svg{width:22px;height:22px;color:#fff;background:var(--green);border-radius:50%;padding:4px;stroke-width:3;display:block}
+.hero-badge .ck{position:relative;display:inline-flex;line-height:0}
+
+/* spec strip */
+.spec-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#fff;border-radius:26px;box-shadow:var(--shadow);overflow:hidden;margin-top:44px}
+.spec-item{text-align:center;padding:22px 14px;position:relative}
+.spec-item+.spec-item{border-left:2px dashed #E7ECF2}
+.spec-item .lbl-top{font-size:12px;color:var(--sub);font-weight:700;margin-bottom:4px}
+.spec-item .big{font-family:"Inter";font-size:28px;font-weight:800;color:var(--primary);line-height:1.2}
+.spec-item .big .num{font-size:1.3em;color:var(--orange);font-weight:800}
+.spec-item .lbl{font-size:11px;color:var(--sub);margin-top:2px}
+
+/* ── Recommend ── */
+.seo-recommend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.seo-rec-card{background:#fff;border-radius:20px;padding:32px 22px;text-align:center;box-shadow:var(--shadow);transition:transform .3s ease,box-shadow .3s ease;position:relative}
+.seo-rec-card:hover{transform:translateY(-8px);box-shadow:0 16px 40px rgba(58,66,86,.14)}
+.seo-rec-icon{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.seo-rec-icon svg{width:28px;height:28px}
+.seo-rec-icon.blue{background:#EAF7FE;color:var(--primary)}
+.seo-rec-icon.orange{background:#FFF0DB;color:var(--orange)}
+.seo-rec-icon.green{background:#E9F7E4;color:var(--green)}
+.seo-rec-icon.pink{background:#FFEFF0;color:#e06b7a}
+.seo-rec-card h4{font-size:16px;font-weight:900;margin-bottom:8px;line-height:1.5}
+.seo-rec-card p{font-size:13px;color:var(--sub);line-height:1.7}
+
+/* ── Service cards ── */
+.seo-service-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:960px;margin:0 auto}
+.seo-service-card{background:#fff;border-radius:24px;padding:40px 36px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.seo-service-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(58,66,86,.14)}
+.seo-service-num{font-family:"Inter";font-size:80px;font-weight:800;color:rgba(79,180,232,.08);position:absolute;top:-10px;right:16px;line-height:1;pointer-events:none}
+.seo-service-body{position:relative;z-index:2}
+.seo-service-body h3{font-size:22px;font-weight:900;margin-bottom:12px;color:var(--text)}
+.seo-service-desc{font-size:14px;color:var(--sub);line-height:1.7;margin-bottom:20px}
+.seo-feature-list{display:flex;flex-direction:column;gap:10px}
+.seo-feature-item{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--text)}
+.seo-fi-icon{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center}
+.seo-fi-icon svg{width:14px;height:14px}
+
+/* ── Flow timeline ── */
+.seo-flow-timeline{max-width:640px;margin:0 auto;position:relative;padding-left:40px}
+.seo-flow-timeline::before{content:"";position:absolute;left:15px;top:24px;bottom:24px;width:3px;background:linear-gradient(to bottom,var(--primary),var(--green));border-radius:3px}
+.seo-flow-step{position:relative;margin-bottom:28px}
+.seo-flow-step:last-child{margin-bottom:0}
+.seo-flow-dot{position:absolute;left:-33px;top:20px;width:16px;height:16px;border-radius:50%;background:var(--primary);border:3px solid #fff;box-shadow:0 0 0 3px var(--primary);z-index:2}
+.seo-flow-dot.active{background:var(--orange);box-shadow:0 0 0 3px var(--orange);animation:dotPulse 1.5s ease infinite}
+.seo-flow-dot.done{background:var(--green);box-shadow:0 0 0 3px var(--green)}
+@keyframes dotPulse{0%,100%{box-shadow:0 0 0 3px var(--orange)}50%{box-shadow:0 0 0 8px rgba(247,155,62,.2)}}
+.seo-flow-card{background:#fff;border-radius:16px;padding:24px 28px;box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s}
+.seo-flow-card:hover{transform:translateX(6px);box-shadow:0 12px 32px rgba(58,66,86,.12)}
+.seo-flow-day{font-family:"Inter";font-size:13px;font-weight:800;color:var(--primary);letter-spacing:1px;display:block;margin-bottom:6px}
+.seo-flow-card h4{font-size:17px;font-weight:900;margin-bottom:6px}
+.seo-flow-card p{font-size:13px;color:var(--sub);line-height:1.7;margin:0}
+
+/* ── Detail ── */
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:900px;margin:0 auto}
+.detail-card{background:#fff;border-radius:20px;padding:32px;box-shadow:var(--shadow)}
+.detail-card h3{font-size:20px;font-weight:900;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.detail-card h3 svg{width:24px;height:24px;color:var(--primary);stroke-width:2.5;flex-shrink:0}
+.detail-list{list-style:none;padding:0;margin:0}
+.detail-list li{font-size:14px;padding:10px 0;border-bottom:1px solid #f0f0f0;display:flex;align-items:flex-start;gap:10px;font-weight:500;line-height:1.5}
+.detail-list li:last-child{border-bottom:none}
+.detail-list .ck{color:var(--green);flex-shrink:0;margin-top:2px}
+.detail-list .ck svg{width:18px;height:18px;stroke-width:3}
+.detail-list .plus{color:var(--orange);flex-shrink:0;margin-top:2px;font-weight:800;font-size:16px}
+
+/* ── Performance ── */
+.perf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:700px;margin:0 auto}
+.perf-card{background:#fff;border-radius:20px;padding:28px 20px;text-align:center;box-shadow:var(--shadow)}
+.perf-card .perf-num{font-family:"Inter";font-size:56px;font-weight:800;color:var(--primary);line-height:1}
+.perf-card .perf-unit{font-size:16px;color:var(--primary);font-weight:700;margin-left:4px}
+.perf-card .perf-label{display:block;font-size:13px;color:var(--sub);font-weight:700;margin-top:8px}
+
+/* ── CTA ── */
+.cta-section{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-deep) 100%);padding:80px 0;text-align:center;color:#fff;position:relative;overflow:hidden}
+.cta-section::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:rgba(255,255,255,.06);border-radius:50%}
+.cta-section::after{content:"";position:absolute;bottom:-80px;left:-40px;width:260px;height:260px;background:rgba(255,255,255,.04);border-radius:50%}
+.cta-section h2{font-size:clamp(24px,4vw,42px);font-weight:900;margin-bottom:8px}
+.cta-section .cta-sub{font-size:16px;opacity:.85;margin-bottom:32px}
+.cta-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;position:relative;z-index:2}
+
+/* ── Scroll reveal ── */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.19,1,.22,1),transform .9s cubic-bezier(.19,1,.22,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── Mobile ── */
+@media(max-width:768px){
+  .spec-strip{grid-template-columns:repeat(2,1fr)}
+  .spec-item:nth-child(3){border-left:none}
+  .seo-recommend-grid{grid-template-columns:1fr 1fr}
+  .seo-service-grid{grid-template-columns:1fr}
+  .seo-flow-timeline{padding-left:36px}
+  .seo-flow-timeline::before{left:12px}
+  .seo-flow-dot{left:-30px}
+  .detail-grid{grid-template-columns:1fr}
+  .perf-grid{grid-template-columns:1fr}
+  .cta-btns{flex-direction:column;align-items:center}
+  .seo-rec-card:hover{transform:none;box-shadow:var(--shadow)}
+}
+@media(max-width:480px){
+  .seo-recommend-grid{grid-template-columns:1fr}
+  .spec-strip{grid-template-columns:1fr}
+  .spec-item+.spec-item{border-left:none;border-top:2px dashed #E7ECF2}
+}
+</style>
+
+<script>
+// ── Scroll reveal ──
+function initSeoReveal() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.01 });
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('visible');
+    } else {
+      observer.observe(el);
+    }
+  });
+}
+
+// ── Counter animation ──
+function initCounters() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        observer.unobserve(e.target);
+        var target = parseInt(e.target.getAttribute('data-target'));
+        var duration = 1200;
+        var start = performance.now();
+        function animate(now) {
+          var elapsed = now - start;
+          var progress = Math.min(elapsed / duration, 1);
+          var ease = 1 - Math.pow(1 - progress, 3);
+          e.target.textContent = Math.round(target * ease).toLocaleString();
+          if (progress < 1) requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.perf-count').forEach(function(el) {
+    observer.observe(el);
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function() { initSeoReveal(); initCounters(); });
+} else {
+  initSeoReveal();
+  initCounters();
+}
+document.addEventListener('astro:page-load', function() { initSeoReveal(); initCounters(); });
+</script>
