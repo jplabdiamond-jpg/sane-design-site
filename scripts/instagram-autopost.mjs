@@ -96,6 +96,66 @@ function buildHashtags(data) {
   return [...new Set([...own, ...FIXED_HASHTAGS])].slice(0, MAX_HASHTAGS);
 }
 
+/**
+ * WebP画像をJPEGに変換してローカルに保存し、
+ * リポジトリにcommit & pushしてCloudflare PagesでJPEG URLが使えるようにする。
+ * 既にJPEGの場合はそのまま返す。
+ */
+async function ensureJpegUrl(imageUrl) {
+  // 既にJPEGなら何もしない
+  if (/\.jpe?g$/i.test(imageUrl)) {
+    log(`image already JPEG: ${imageUrl}`);
+    return imageUrl;
+  }
+
+  // WebPの場合、JPEG版のURLを構築
+  const jpegUrl = imageUrl.replace(/\.webp$/i, '.jpg');
+
+  // まずJPEG版が既にデプロイ済みか確認
+  try {
+    const check = await fetch(jpegUrl, { method: 'HEAD' });
+    if (check.ok) {
+      log(`JPEG already available: ${jpegUrl}`);
+      return jpegUrl;
+    }
+  } catch (e) { /* 無ければ変換する */ }
+
+  log(`converting WebP to JPEG: ${imageUrl}`);
+
+  // sharp を使って変換
+  const sharp = (await import('sharp')).default;
+  const fs = await import('node:fs/promises');
+  const path = await import('node:path');
+  const { execSync } = await import('node:child_process');
+
+  // 画像をダウンロード
+  const res = await fetch(imageUrl);
+  if (!res.ok) throw new Error(`Failed to fetch image: ${res.status} ${imageUrl}`);
+  const buffer = Buffer.from(await res.arrayBuffer());
+
+  // WebP → JPEG 変換（品質90）
+  const jpegBuffer = await sharp(buffer).jpeg({ quality: 90 }).toBuffer();
+
+  // ローカルファイルに保存（public/works/ に配置）
+  const urlPath = new URL(imageUrl).pathname; // e.g. /works/work-37.webp
+  const localPath = path.join('public', urlPath.replace(/\.webp$/i, '.jpg'));
+  await fs.mkdir(path.dirname(localPath), { recursive: true });
+  await fs.writeFile(localPath, jpegBuffer);
+  log(`saved JPEG: ${localPath} (${jpegBuffer.length} bytes)`);
+
+  // git add & commit & push
+  try {
+    execSync(`git add "${localPath}"`, { stdio: 'pipe' });
+    execSync(`git commit -m "chore: add JPEG for Instagram autopost (${path.basename(localPath)})" --no-verify`, { stdio: 'pipe' });
+    execSync('git push', { stdio: 'pipe' });
+    log(`pushed JPEG to repo: ${localPath}`);
+  } catch (e) {
+    log(`git push warning: ${e.message}`);
+  }
+
+  return jpegUrl;
+}
+
 /** URLが本番公開されるまで待つ（Cloudflare Pages デプロイ待ち） */
 async function waitForImage(url, { tries = 30, intervalMs = 20000 } = {}) {
   for (let i = 1; i <= tries; i++) {
@@ -196,9 +256,14 @@ async function main() {
 
       const img = data.heroImage || data.thumbnail;
       if (!img) { err(`画像指定無し、skip: ${file}`); continue; }
-      const imageUrl = img.startsWith('http') ? img : `${SITE}${img.startsWith('/') ? '' : '/'}${img}`;
+      let imageUrl = img.startsWith('http') ? img : `${SITE}${img.startsWith('/') ? '' : '/'}${img}`;
 
-      const ok = await waitForImage(imageUrl);
+      // WebP → JPEG 変換（Instagram Graph API は JPEG のみ対応）
+      if (/\.webp$/i.test(imageUrl)) {
+        imageUrl = await ensureJpegUrl(imageUrl);
+      }
+
+      const ok = await waitForImage(imageUrl, { tries: 45, intervalMs: 20000 });
       if (!ok) { err(`画像が公開されず skip: ${imageUrl}`); results.push({ file, ok: false }); continue; }
 
       const slug = file.split('/').pop().replace(/\.md$/, '');
