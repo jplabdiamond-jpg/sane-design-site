@@ -3,7 +3,7 @@ title: '夏休み催事イベントチラシ'
 client: '商業施設'
 industry: '小売・イベント'
 year: 2025
-thumbnail: '/works/dtp-30.jpg'
+thumbnail: '/works/dtp-30.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-30-full.jpg" alt="夏休み催事イベントチラシ 全体" loading="lazy" />
+  <img src="/works/dtp-30-full.webp" alt="夏休み催事イベントチラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

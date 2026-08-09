@@ -3,7 +3,7 @@ title: '夜ナビ Shine LP'
 client: '夜ナビ Shine LP'
 industry: 'エンターテインメント'
 year: 2025
-thumbnail: '/works/work-23.jpg'
+thumbnail: '/works/work-23.webp'
 tags:
   - LP
   - Entertainment
@@ -39,7 +39,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-23-full.jpg" alt="夜ナビ Shine LP 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-23-full.webp" alt="夜ナビ Shine LP 全体キャプチャ" loading="lazy" />
   <figcaption>LP 全体ビュー</figcaption>
 </figure>
 

@@ -3,7 +3,7 @@ title: 'GADGET LINE'
 client: 'GADGET LINE'
 industry: 'メディア・ガジェットレビュー'
 year: 2026
-thumbnail: '/works/work-33.jpg'
+thumbnail: '/works/work-33.webp'
 tags:
   - Web
   - Media
@@ -40,7 +40,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-33-full.jpg" alt="GADGET LINE ガジェットレビューメディア 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-33-full.webp" alt="GADGET LINE ガジェットレビューメディア 全体キャプチャ" loading="lazy" />
   <figcaption>サイト全体ビュー</figcaption>
 </figure>
 

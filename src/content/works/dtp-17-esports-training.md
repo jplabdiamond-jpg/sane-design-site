@@ -3,7 +3,7 @@ title: 'eスポーツのチーム研修開催チラシデザイン制作'
 client: 'CHALLENGER''S PARK'
 industry: 'エンタメ・IT'
 year: 2025
-thumbnail: '/works/dtp-17.jpg'
+thumbnail: '/works/dtp-17.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-17-full.jpg" alt="eスポーツのチーム研修開催チラシデザイン制作 全体" loading="lazy" />
+  <img src="/works/dtp-17-full.webp" alt="eスポーツのチーム研修開催チラシデザイン制作 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

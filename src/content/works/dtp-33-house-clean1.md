@@ -3,7 +3,7 @@ title: 'ハウスクリーニング業者様の新規顧客獲得チラシ'
 client: 'ハウスセーバー SEISHO'
 industry: 'ハウスクリーニング'
 year: 2025
-thumbnail: '/works/dtp-33.jpg'
+thumbnail: '/works/dtp-33.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-33-full.jpg" alt="ハウスクリーニング業者様の新規顧客獲得チラシ 全体" loading="lazy" />
+  <img src="/works/dtp-33-full.webp" alt="ハウスクリーニング業者様の新規顧客獲得チラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

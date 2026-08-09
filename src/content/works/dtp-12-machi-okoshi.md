@@ -3,7 +3,7 @@ title: '町興しチラシ'
 client: '岡山県奈義町'
 industry: '自治体・地域'
 year: 2025
-thumbnail: '/works/dtp-12.jpg'
+thumbnail: '/works/dtp-12.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-12-full.jpg" alt="町興しチラシ 全体" loading="lazy" />
+  <img src="/works/dtp-12-full.webp" alt="町興しチラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

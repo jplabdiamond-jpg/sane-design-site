@@ -3,7 +3,7 @@ title: '就職マッチングアプリ告知チラシ'
 client: '就職マッチングアプリ'
 industry: 'IT・求人'
 year: 2025
-thumbnail: '/works/dtp-29.jpg'
+thumbnail: '/works/dtp-29.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -37,7 +37,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-29-full.jpg" alt="就職マッチングアプリ告知チラシ 全体" loading="lazy" />
+  <img src="/works/dtp-29-full.webp" alt="就職マッチングアプリ告知チラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

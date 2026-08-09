@@ -3,7 +3,7 @@ title: '書店のイベントチラシデザイン'
 client: '書店'
 industry: '小売・イベント'
 year: 2025
-thumbnail: '/works/dtp-22.jpg'
+thumbnail: '/works/dtp-22.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-22-full.jpg" alt="書店のイベントチラシデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-22-full.webp" alt="書店のイベントチラシデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

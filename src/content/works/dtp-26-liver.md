@@ -3,7 +3,7 @@ title: 'ライバー募集チラシデザイン'
 client: 'DOZAN - Colors Project'
 industry: 'エンタメ・IT'
 year: 2025
-thumbnail: '/works/dtp-26.jpg'
+thumbnail: '/works/dtp-26.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-26-full.jpg" alt="ライバー募集チラシデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-26-full.webp" alt="ライバー募集チラシデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

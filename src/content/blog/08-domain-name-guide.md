@@ -2,7 +2,7 @@
 title: '独自ドメインとは？取得方法と費用をやさしく解説'
 description: '独自ドメインって何？なぜ必要なの？取得方法から費用、おすすめのドメインサービスまで、初心者にもわかりやすく解説します。'
 pubDate: '2026-08-09'
-heroImage: '/assets/blog/7_Domain_Name.png'
+heroImage: '/assets/blog/7_Domain_Name.webp'
 tags:
   - ホームページ制作
   - ドメイン

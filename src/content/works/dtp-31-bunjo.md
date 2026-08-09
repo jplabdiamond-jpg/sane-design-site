@@ -3,7 +3,7 @@ title: '分譲住宅の販売チラシ'
 client: '分譲住宅会社'
 industry: '不動産・住宅'
 year: 2025
-thumbnail: '/works/dtp-31.jpg'
+thumbnail: '/works/dtp-31.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-31-full.jpg" alt="分譲住宅の販売チラシ 全体" loading="lazy" />
+  <img src="/works/dtp-31-full.webp" alt="分譲住宅の販売チラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

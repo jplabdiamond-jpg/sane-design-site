@@ -3,7 +3,7 @@ title: 'ゴールキーパー専門スクール生徒募集フライヤー'
 client: 'ゴールキーパー専門スクール YGKS'
 industry: 'スポーツ・教育'
 year: 2025
-thumbnail: '/works/dtp-48.jpg'
+thumbnail: '/works/dtp-48.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-48-full.jpg" alt="ゴールキーパー専門スクール生徒募集フライヤー 全体" loading="lazy" />
+  <img src="/works/dtp-48-full.webp" alt="ゴールキーパー専門スクール生徒募集フライヤー 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

@@ -3,7 +3,7 @@ title: 'AeroTech Co.'
 client: 'AeroTech Co.'
 industry: 'テクノロジー・航空'
 year: 2025
-thumbnail: '/works/work-19.jpg'
+thumbnail: '/works/work-19.webp'
 tags:
   - Corporate
 role: 'Design & Development'
@@ -38,7 +38,7 @@ BtoBのテクノロジー企業にとって、コーポレートサイトは「�
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-19-full.jpg" alt="AeroTech Co. コーポレートサイト 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-19-full.webp" alt="AeroTech Co. コーポレートサイト 全体キャプチャ" loading="lazy" />
   <figcaption>サイト全体ビュー</figcaption>
 </figure>
 

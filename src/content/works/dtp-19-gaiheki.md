@@ -3,7 +3,7 @@ title: '外壁塗装・屋根防水工事業者様チラシ'
 client: '外壁塗装・防水工事業者'
 industry: '建設・リフォーム'
 year: 2025
-thumbnail: '/works/dtp-19.jpg'
+thumbnail: '/works/dtp-19.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-19-full.jpg" alt="外壁塗装・屋根防水工事業者様チラシ 全体" loading="lazy" />
+  <img src="/works/dtp-19-full.webp" alt="外壁塗装・屋根防水工事業者様チラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

@@ -3,7 +3,7 @@ title: '接骨院オープニングチラシ'
 client: 'たき接骨院'
 industry: '治療院・整体'
 year: 2025
-thumbnail: '/works/dtp-05.jpg'
+thumbnail: '/works/dtp-05.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-05-full.jpg" alt="接骨院オープニングチラシ 全体" loading="lazy" />
+  <img src="/works/dtp-05-full.webp" alt="接骨院オープニングチラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

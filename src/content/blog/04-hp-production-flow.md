@@ -2,7 +2,7 @@
 title: 'ホームページ制作の流れを初心者向けにわかりやすく解説'
 description: 'ホームページ制作ってどんな手順で進むの？企画・デザイン・コーディング・公開まで、初心者でもわかるように全体の流れをステップごとに紹介します。'
 pubDate: '2026-08-07'
-heroImage: '/assets/blog/3_Production_Flow.png'
+heroImage: '/assets/blog/3_Production_Flow.webp'
 tags:
   - ホームページ制作
   - 制作の流れ

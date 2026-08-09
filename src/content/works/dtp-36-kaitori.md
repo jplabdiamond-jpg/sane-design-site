@@ -3,7 +3,7 @@ title: '買取屋様チラシ'
 client: '買取専門店'
 industry: '小売・買取'
 year: 2025
-thumbnail: '/works/dtp-36.jpg'
+thumbnail: '/works/dtp-36.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-36-full.jpg" alt="買取屋様チラシ 全体" loading="lazy" />
+  <img src="/works/dtp-36-full.webp" alt="買取屋様チラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

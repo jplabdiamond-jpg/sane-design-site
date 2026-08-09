@@ -3,7 +3,7 @@ title: 'ランクル300買取jp'
 client: 'ランクル300買取jp'
 industry: '自動車・買取'
 year: 2025
-thumbnail: '/works/work-29.png'
+thumbnail: '/works/work-29.webp'
 tags:
   - LP
   - 自動車
@@ -39,7 +39,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-29-full.jpg" alt="ランクル300買取jp LP 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-29-full.webp" alt="ランクル300買取jp LP 全体キャプチャ" loading="lazy" />
   <figcaption>LP 全体ビュー</figcaption>
 </figure>
 

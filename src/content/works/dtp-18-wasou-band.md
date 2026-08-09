@@ -3,7 +3,7 @@ title: '和装侍系音楽バンドのLIVE告知チラシデザイン制作'
 client: '和装侍系音楽バンド'
 industry: 'エンタメ・音楽'
 year: 2025
-thumbnail: '/works/dtp-18.jpg'
+thumbnail: '/works/dtp-18.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-18-full.jpg" alt="和装侍系音楽バンドのLIVE告知チラシデザイン制作 全体" loading="lazy" />
+  <img src="/works/dtp-18-full.webp" alt="和装侍系音楽バンドのLIVE告知チラシデザイン制作 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

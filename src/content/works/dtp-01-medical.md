@@ -3,7 +3,7 @@ title: '医療機器メーカー様のチラシデザイン'
 client: '医療機器メーカー'
 industry: '医療・歯科'
 year: 2025
-thumbnail: '/works/dtp-01.jpg'
+thumbnail: '/works/dtp-01.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-01-full.jpg" alt="医療機器メーカー様のチラシデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-01-full.webp" alt="医療機器メーカー様のチラシデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

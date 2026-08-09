@@ -3,7 +3,7 @@ title: '自動車販売会社様の決算大セールチラシデザイン'
 client: '自動車販売会社'
 industry: '自動車・販売'
 year: 2025
-thumbnail: '/works/dtp-47.jpg'
+thumbnail: '/works/dtp-47.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-47-full.jpg" alt="自動車販売会社様の決算大セールチラシデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-47-full.webp" alt="自動車販売会社様の決算大セールチラシデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

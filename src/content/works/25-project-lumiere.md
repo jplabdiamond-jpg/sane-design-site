@@ -3,7 +3,7 @@ title: 'Lumière Gems'
 client: 'Lumière Gems'
 industry: 'ジュエリー・EC'
 year: 2025
-thumbnail: '/works/work-25.jpg'
+thumbnail: '/works/work-25.webp'
 tags:
   - EC
   - Web Design
@@ -39,7 +39,7 @@ ECサイトはスマホからの購入が多いため、モバイルでの操作
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-25-full.jpg" alt="Lumière Gems ジュエリーECサイト 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-25-full.webp" alt="Lumière Gems ジュエリーECサイト 全体キャプチャ" loading="lazy" />
   <figcaption>サイト全体ビュー</figcaption>
 </figure>
 

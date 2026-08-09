@@ -3,7 +3,7 @@ title: 'ブラジリアン柔術ジムフライヤー'
 client: 'BLAST BJJ STUDIO'
 industry: 'スポーツ・フィットネス'
 year: 2025
-thumbnail: '/works/dtp-54.jpg'
+thumbnail: '/works/dtp-54.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-54-full.jpg" alt="ブラジリアン柔術ジムフライヤー 全体" loading="lazy" />
+  <img src="/works/dtp-54-full.webp" alt="ブラジリアン柔術ジムフライヤー 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

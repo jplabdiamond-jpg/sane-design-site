@@ -3,7 +3,7 @@ title: '訪問鍼灸マッサージ院の三つ折りリーフレット'
 client: '訪問鍼灸マッサージ院'
 industry: '治療院・福祉'
 year: 2025
-thumbnail: '/works/dtp-24.jpg'
+thumbnail: '/works/dtp-24.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-24-full.jpg" alt="訪問鍼灸マッサージ院の三つ折りリーフレット 全体" loading="lazy" />
+  <img src="/works/dtp-24-full.webp" alt="訪問鍼灸マッサージ院の三つ折りリーフレット 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

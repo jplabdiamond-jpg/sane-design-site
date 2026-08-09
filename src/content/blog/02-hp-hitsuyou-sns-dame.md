@@ -2,7 +2,7 @@
 title: 'ホームページって本当に必要？SNSだけじゃダメな理由'
 description: '「InstagramやXがあればホームページはいらないのでは？」そんな疑問にお答えします。SNSだけでは足りない5つの理由と、ホームページを持つメリットを初心者向けにわかりやすく解説。'
 pubDate: '2026-08-07'
-heroImage: '/assets/blog/1_Homepage_Necessity.png'
+heroImage: '/assets/blog/1_Homepage_Necessity.webp'
 tags:
   - ホームページ制作
   - 初心者向け

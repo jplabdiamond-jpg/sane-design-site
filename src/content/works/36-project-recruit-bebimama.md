@@ -3,7 +3,7 @@ title: 'bebi-mama ベビーシッター採用LP'
 client: 'bebi-mama（ベビママ）'
 industry: '保育・マッチング'
 year: 2026
-thumbnail: '/works/work-36.jpg'
+thumbnail: '/works/work-36.webp'
 tags:
   - LP
   - 採用
@@ -39,7 +39,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-36-full.jpg" alt="bebi-mama ベビーシッター採用LP 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-36-full.webp" alt="bebi-mama ベビーシッター採用LP 全体キャプチャ" loading="lazy" />
   <figcaption>LP 全体ビュー</figcaption>
 </figure>
 

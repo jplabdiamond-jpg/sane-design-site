@@ -3,7 +3,7 @@ title: 'エステ・脱毛のフライヤー'
 client: 'エステ・脱毛サロン'
 industry: '美容・サロン'
 year: 2025
-thumbnail: '/works/dtp-53.jpg'
+thumbnail: '/works/dtp-53.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-53-full.jpg" alt="エステ・脱毛のフライヤー 全体" loading="lazy" />
+  <img src="/works/dtp-53-full.webp" alt="エステ・脱毛のフライヤー 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

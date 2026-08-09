@@ -3,7 +3,7 @@ title: 'eスポーツイベント開催サポートサービスチラシ'
 client: 'CHALLENGER''S PARK'
 industry: 'エンタメ・IT'
 year: 2025
-thumbnail: '/works/dtp-03.jpg'
+thumbnail: '/works/dtp-03.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-03-full.jpg" alt="eスポーツイベント開催サポートサービスチラシ 全体" loading="lazy" />
+  <img src="/works/dtp-03-full.webp" alt="eスポーツイベント開催サポートサービスチラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

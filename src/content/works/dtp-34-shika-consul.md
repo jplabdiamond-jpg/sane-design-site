@@ -3,7 +3,7 @@ title: '歯科医院の経営コンサルセミナーチラシ'
 client: 'M&M PARTNERS'
 industry: 'コンサル・医療'
 year: 2025
-thumbnail: '/works/dtp-34.jpg'
+thumbnail: '/works/dtp-34.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -37,7 +37,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-34-full.jpg" alt="歯科医院の経営コンサルセミナーチラシ 全体" loading="lazy" />
+  <img src="/works/dtp-34-full.webp" alt="歯科医院の経営コンサルセミナーチラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

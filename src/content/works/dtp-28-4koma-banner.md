@@ -3,7 +3,7 @@ title: '求人用4コマバナーデザイン'
 client: '求人サービス'
 industry: '求人・広告'
 year: 2025
-thumbnail: '/works/dtp-28.jpg'
+thumbnail: '/works/dtp-28.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -37,7 +37,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-28-full.jpg" alt="求人用4コマバナーデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-28-full.webp" alt="求人用4コマバナーデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

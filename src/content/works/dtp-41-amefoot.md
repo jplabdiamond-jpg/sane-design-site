@@ -3,7 +3,7 @@ title: 'アメリカンフットボール部の部員募集ポスターデザイ
 client: 'アメリカンフットボール部 BONITO'
 industry: 'スポーツ・教育'
 year: 2025
-thumbnail: '/works/dtp-41.jpg'
+thumbnail: '/works/dtp-41.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-41-full.jpg" alt="アメリカンフットボール部の部員募集ポスターデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-41-full.webp" alt="アメリカンフットボール部の部員募集ポスターデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

@@ -3,7 +3,7 @@ title: 'VODナビ'
 client: 'VODナビ'
 industry: 'メディア・ガジェットレビュー'
 year: 2026
-thumbnail: '/works/work-34.jpg'
+thumbnail: '/works/work-34.webp'
 tags:
   - Web
   - Media
@@ -40,7 +40,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-34-full.jpg" alt="VODナビ レビューメディア 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-34-full.webp" alt="VODナビ レビューメディア 全体キャプチャ" loading="lazy" />
   <figcaption>サイト全体ビュー</figcaption>
 </figure>
 

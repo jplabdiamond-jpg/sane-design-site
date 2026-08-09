@@ -3,7 +3,7 @@ title: 'Tas Money お小遣い稼ぎサイト'
 client: 'Tas Money お小遣い稼ぎサイト'
 industry: 'ファイナンス・副業'
 year: 2025
-thumbnail: '/works/work-27.png'
+thumbnail: '/works/work-27.webp'
 tags:
   - Web
 role: 'Design & Development'
@@ -38,7 +38,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-27-full.jpg" alt="Tas Money お小遣い稼ぎサイト 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-27-full.webp" alt="Tas Money お小遣い稼ぎサイト 全体キャプチャ" loading="lazy" />
   <figcaption>サイト全体ビュー</figcaption>
 </figure>
 

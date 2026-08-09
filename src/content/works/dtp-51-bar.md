@@ -3,7 +3,7 @@ title: '高級会員制BARのフライヤー'
 client: 'Bar Laetus'
 industry: 'ナイト・飲食'
 year: 2025
-thumbnail: '/works/dtp-51.jpg'
+thumbnail: '/works/dtp-51.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-51-full.jpg" alt="高級会員制BARのフライヤー 全体" loading="lazy" />
+  <img src="/works/dtp-51-full.webp" alt="高級会員制BARのフライヤー 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

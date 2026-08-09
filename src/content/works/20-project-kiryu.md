@@ -3,7 +3,7 @@ title: 'お遍路宿 亀龍'
 client: 'お遍路宿 亀龍'
 industry: '宿泊・観光'
 year: 2025
-thumbnail: '/works/work-20.jpg'
+thumbnail: '/works/work-20.webp'
 tags:
   - Corporate
   - 宿泊施設
@@ -39,7 +39,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-20-full.jpg" alt="お遍路宿 亀龍 コーポレートサイト 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-20-full.webp" alt="お遍路宿 亀龍 コーポレートサイト 全体キャプチャ" loading="lazy" />
   <figcaption>サイト全体ビュー</figcaption>
 </figure>
 

@@ -3,7 +3,7 @@ title: 'XPost Pro'
 client: 'XPost Pro'
 industry: 'SaaS・SNSツール'
 year: 2025
-thumbnail: '/works/work-21.jpg'
+thumbnail: '/works/work-21.webp'
 tags:
   - LP
   - SaaS
@@ -39,7 +39,7 @@ SaaSらしい清潔感と信頼性を出すため、余白を広く取ったモ�
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-21-full.jpg" alt="XPost Pro SaaS LP 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-21-full.webp" alt="XPost Pro SaaS LP 全体キャプチャ" loading="lazy" />
   <figcaption>LP 全体ビュー</figcaption>
 </figure>
 

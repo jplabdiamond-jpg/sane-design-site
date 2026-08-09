@@ -3,7 +3,7 @@ title: 'News Now'
 client: 'News Now'
 industry: 'メディア・ニュース'
 year: 2026
-thumbnail: '/works/work-31.png'
+thumbnail: '/works/work-31.webp'
 tags:
   - Web
   - SaaS
@@ -40,7 +40,7 @@ Cloudflare Workers 上で動くSaaSとして、表示速度と安定性を重視
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-31-full.jpg" alt="News Now ニュースポータルサイト 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-31-full.webp" alt="News Now ニュースポータルサイト 全体キャプチャ" loading="lazy" />
   <figcaption>サイト全体ビュー</figcaption>
 </figure>
 

@@ -2,7 +2,7 @@
 title: 'ホームページ制作の費用相場【2026年最新版】'
 description: 'ホームページ制作の費用はピンからキリまで。個人事業主・中小企業向けに、制作タイプ別の料金相場と予算の決め方をわかりやすく解説します。'
 pubDate: '2026-08-07'
-heroImage: '/assets/blog/2_Cost_Market_Price.png'
+heroImage: '/assets/blog/2_Cost_Market_Price.webp'
 tags:
   - ホームページ制作
   - 費用相場

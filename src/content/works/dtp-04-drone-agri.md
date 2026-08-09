@@ -3,7 +3,7 @@ title: 'ドローン農薬散布サービスチラシ'
 client: 'Agri Drone Service'
 industry: '農業・テクノロジー'
 year: 2025
-thumbnail: '/works/dtp-04.jpg'
+thumbnail: '/works/dtp-04.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-04-full.jpg" alt="ドローン農薬散布サービスチラシ 全体" loading="lazy" />
+  <img src="/works/dtp-04-full.webp" alt="ドローン農薬散布サービスチラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

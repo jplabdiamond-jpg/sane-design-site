@@ -3,7 +3,7 @@ title: '夜ナビ Shine Check'
 client: '夜ナビ Shine Check'
 industry: 'エンターテインメント'
 year: 2025
-thumbnail: '/works/work-24.jpg'
+thumbnail: '/works/work-24.webp'
 tags:
   - LP
   - Entertainment
@@ -39,7 +39,7 @@ ABテストで効果を正しく比較できるよう、メインLPと構造の�
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-24-full.jpg" alt="夜ナビ Shine Check LP 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-24-full.webp" alt="夜ナビ Shine Check LP 全体キャプチャ" loading="lazy" />
   <figcaption>LP 全体ビュー</figcaption>
 </figure>
 

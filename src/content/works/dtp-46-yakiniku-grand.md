@@ -3,7 +3,7 @@ title: 'No.134_焼き肉屋さんオープニングチラシデザイン'
 client: '焼肉 牛司'
 industry: '飲食・グルメ'
 year: 2025
-thumbnail: '/works/dtp-46.jpg'
+thumbnail: '/works/dtp-46.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-46-full.jpg" alt="No.134_焼き肉屋さんオープニングチラシデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-46-full.webp" alt="No.134_焼き肉屋さんオープニングチラシデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

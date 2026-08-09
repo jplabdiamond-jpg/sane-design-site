@@ -2,7 +2,7 @@
 title: 'スマホ対応していないHPは損している？'
 description: 'スマホで見づらいホームページは、お客さんを逃しているかもしれません。スマホ対応（レスポンシブデザイン）の重要性と対策を解説します。'
 pubDate: '2026-08-09'
-heroImage: '/assets/blog/5_Mobile_Damage.png'
+heroImage: '/assets/blog/5_Mobile_Damage.webp'
 tags:
   - ホームページ制作
   - スマホ対応

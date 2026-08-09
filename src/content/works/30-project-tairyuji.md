@@ -3,7 +3,7 @@ title: '太龍寺ホームページ'
 client: '太龍寺ホームページ'
 industry: '寺院・観光'
 year: 2025
-thumbnail: '/works/work-30.png'
+thumbnail: '/works/work-30.webp'
 tags:
   - Web
   - Corporate
@@ -39,7 +39,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-30-full.jpg" alt="太龍寺ホームページ 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-30-full.webp" alt="太龍寺ホームページ 全体キャプチャ" loading="lazy" />
   <figcaption>サイト全体ビュー</figcaption>
 </figure>
 

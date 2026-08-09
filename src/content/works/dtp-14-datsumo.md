@@ -3,7 +3,7 @@ title: '脱毛サロンチラシデザイン'
 client: '脱毛サロン Re:A'
 industry: '美容・サロン'
 year: 2025
-thumbnail: '/works/dtp-14.jpg'
+thumbnail: '/works/dtp-14.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-14-full.jpg" alt="脱毛サロンチラシデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-14-full.webp" alt="脱毛サロンチラシデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

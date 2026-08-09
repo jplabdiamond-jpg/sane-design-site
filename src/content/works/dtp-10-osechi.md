@@ -3,7 +3,7 @@ title: 'おせち製造会社様チラシ'
 client: 'おせち製造会社'
 industry: '飲食・通販'
 year: 2025
-thumbnail: '/works/dtp-10.jpg'
+thumbnail: '/works/dtp-10.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-10-full.jpg" alt="おせち製造会社様チラシ 全体" loading="lazy" />
+  <img src="/works/dtp-10-full.webp" alt="おせち製造会社様チラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

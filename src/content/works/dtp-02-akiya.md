@@ -3,7 +3,7 @@ title: '空き家更生サービスのチラシデザイン'
 client: '日本の空家研究所'
 industry: '不動産・住宅'
 year: 2025
-thumbnail: '/works/dtp-02.jpg'
+thumbnail: '/works/dtp-02.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-02-full.jpg" alt="空き家更生サービスのチラシデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-02-full.webp" alt="空き家更生サービスのチラシデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

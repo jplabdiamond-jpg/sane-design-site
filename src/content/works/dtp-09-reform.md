@@ -3,7 +3,7 @@ title: 'リフォーム会社様チラシ'
 client: '建築廃材回収・リフォーム会社'
 industry: '建設・リフォーム'
 year: 2025
-thumbnail: '/works/dtp-09.jpg'
+thumbnail: '/works/dtp-09.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-09-full.jpg" alt="リフォーム会社様チラシ 全体" loading="lazy" />
+  <img src="/works/dtp-09-full.webp" alt="リフォーム会社様チラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

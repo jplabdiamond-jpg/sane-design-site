@@ -3,7 +3,7 @@ title: '地域の町おこし求人チラシデザイン制作'
 client: '岡山県奈義町'
 industry: '自治体・求人'
 year: 2025
-thumbnail: '/works/dtp-16.jpg'
+thumbnail: '/works/dtp-16.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -37,7 +37,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-16-full.jpg" alt="地域の町おこし求人チラシデザイン制作 全体" loading="lazy" />
+  <img src="/works/dtp-16-full.webp" alt="地域の町おこし求人チラシデザイン制作 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

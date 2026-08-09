@@ -3,7 +3,7 @@ title: 'ドローンによる農薬散布サービス事業様チラシ'
 client: 'ドローン農薬散布事業者'
 industry: '農業・テクノロジー'
 year: 2025
-thumbnail: '/works/dtp-37.jpg'
+thumbnail: '/works/dtp-37.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-37-full.jpg" alt="ドローンによる農薬散布サービス事業様チラシ 全体" loading="lazy" />
+  <img src="/works/dtp-37-full.webp" alt="ドローンによる農薬散布サービス事業様チラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

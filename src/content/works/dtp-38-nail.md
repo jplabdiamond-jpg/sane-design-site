@@ -3,7 +3,7 @@ title: 'ネイルサロン様の店舗オープンチラシデザイン'
 client: 'ネイルサロン heartnail'
 industry: '美容・サロン'
 year: 2025
-thumbnail: '/works/dtp-38.jpg'
+thumbnail: '/works/dtp-38.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-38-full.jpg" alt="ネイルサロン様の店舗オープンチラシデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-38-full.webp" alt="ネイルサロン様の店舗オープンチラシデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

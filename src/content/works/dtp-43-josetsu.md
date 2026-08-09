@@ -3,7 +3,7 @@ title: '除雪に関する注意喚起のポスターデザイン'
 client: '自治体・地域'
 industry: '自治体・地域'
 year: 2025
-thumbnail: '/works/dtp-43.jpg'
+thumbnail: '/works/dtp-43.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-43-full.jpg" alt="除雪に関する注意喚起のポスターデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-43-full.webp" alt="除雪に関する注意喚起のポスターデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

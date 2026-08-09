@@ -3,7 +3,7 @@ title: 'リハビリ型フィットネス様のチラシデザイン'
 client: 'リハビリ型フィットネスジム'
 industry: 'フィットネス・健康'
 year: 2025
-thumbnail: '/works/dtp-13.jpg'
+thumbnail: '/works/dtp-13.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-13-full.jpg" alt="リハビリ型フィットネス様のチラシデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-13-full.webp" alt="リハビリ型フィットネス様のチラシデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

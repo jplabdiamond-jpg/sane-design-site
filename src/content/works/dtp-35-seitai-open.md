@@ -3,7 +3,7 @@ title: '整体院様のオープニングキャンペーンチラシ'
 client: '鈴木トリートメント整体院'
 industry: '治療院・整体'
 year: 2025
-thumbnail: '/works/dtp-35.jpg'
+thumbnail: '/works/dtp-35.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-35-full.jpg" alt="整体院様のオープニングキャンペーンチラシ 全体" loading="lazy" />
+  <img src="/works/dtp-35-full.webp" alt="整体院様のオープニングキャンペーンチラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

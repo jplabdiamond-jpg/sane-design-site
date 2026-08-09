@@ -3,7 +3,7 @@ title: '焼肉屋さんのクーポン付きチラシデザイン'
 client: '焼肉 牛司'
 industry: '飲食・グルメ'
 year: 2025
-thumbnail: '/works/dtp-27.jpg'
+thumbnail: '/works/dtp-27.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-27-full.jpg" alt="焼肉屋さんのクーポン付きチラシデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-27-full.webp" alt="焼肉屋さんのクーポン付きチラシデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

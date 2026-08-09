@@ -3,7 +3,7 @@ title: 'FX自動売買システム'
 client: 'FX自動売買システム'
 industry: 'ファイナンス・FX'
 year: 2025
-thumbnail: '/works/work-28.png'
+thumbnail: '/works/work-28.webp'
 tags:
   - System
   - UI/UX
@@ -35,7 +35,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-28-full.jpg" alt="FX自動売買システム GUI 画面キャプチャ" loading="lazy" />
+  <img src="/works/work-28-full.webp" alt="FX自動売買システム GUI 画面キャプチャ" loading="lazy" />
   <figcaption>システム GUI ビュー</figcaption>
 </figure>
 

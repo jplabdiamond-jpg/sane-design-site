@@ -3,7 +3,7 @@ title: 'ビジネススクールチラシ'
 client: 'ハイスペ PCビジネススクール'
 industry: '教育・IT'
 year: 2025
-thumbnail: '/works/dtp-52.jpg'
+thumbnail: '/works/dtp-52.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -37,7 +37,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-52-full.jpg" alt="ビジネススクールチラシ 全体" loading="lazy" />
+  <img src="/works/dtp-52-full.webp" alt="ビジネススクールチラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

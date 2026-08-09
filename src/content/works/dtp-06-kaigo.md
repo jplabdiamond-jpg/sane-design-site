@@ -3,7 +3,7 @@ title: '介護職求人チラシデザイン'
 client: '介護施設'
 industry: '求人・福祉'
 year: 2025
-thumbnail: '/works/dtp-06.jpg'
+thumbnail: '/works/dtp-06.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-06-full.jpg" alt="介護職求人チラシデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-06-full.webp" alt="介護職求人チラシデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

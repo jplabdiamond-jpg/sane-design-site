@@ -3,7 +3,7 @@ title: 'レクサスRX買取専門店'
 client: 'レクサスRX買取専門店'
 industry: '自動車・買取'
 year: 2026
-thumbnail: '/works/work-32.jpg'
+thumbnail: '/works/work-32.webp'
 tags:
   - LP
   - 自動車
@@ -39,7 +39,7 @@ draft: false
 </div>
 
 <figure class="lexus-shot">
-  <img src="/works/work-32-full.jpg" alt="レクサスRX買取専門店様LP 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-32-full.webp" alt="レクサスRX買取専門店様LP 全体キャプチャ" loading="lazy" />
   <figcaption>LP 全体ビュー</figcaption>
 </figure>
 

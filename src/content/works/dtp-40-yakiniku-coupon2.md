@@ -3,7 +3,7 @@ title: '焼肉屋クーポンチラシ'
 client: '焼肉 牛司'
 industry: '飲食・グルメ'
 year: 2025
-thumbnail: '/works/dtp-40.jpg'
+thumbnail: '/works/dtp-40.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-40-full.jpg" alt="焼肉屋クーポンチラシ 全体" loading="lazy" />
+  <img src="/works/dtp-40-full.webp" alt="焼肉屋クーポンチラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

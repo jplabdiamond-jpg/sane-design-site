@@ -3,7 +3,7 @@ title: '星の光の宿BIEI'
 client: '星の光の宿BIEI'
 industry: '宿泊・観光'
 year: 2025
-thumbnail: '/works/work-26.png'
+thumbnail: '/works/work-26.webp'
 tags:
   - Web
   - 宿泊施設
@@ -39,7 +39,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-26-full.jpg" alt="星の光の宿BIEI ホームページ 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-26-full.webp" alt="星の光の宿BIEI ホームページ 全体キャプチャ" loading="lazy" />
   <figcaption>サイト全体ビュー</figcaption>
 </figure>
 

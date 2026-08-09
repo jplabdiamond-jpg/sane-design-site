@@ -2,7 +2,7 @@
 title: 'HPに最低限必要なページ構成とは'
 description: 'ホームページを作るとき、どんなページが必要？最低限押さえるべき5つのページ構成と、それぞれの役割を初心者向けに解説します。'
 pubDate: '2026-08-09'
-heroImage: '/assets/blog/6_Page_Structure.png'
+heroImage: '/assets/blog/6_Page_Structure.webp'
 tags:
   - ホームページ制作
   - ページ構成

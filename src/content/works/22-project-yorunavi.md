@@ -3,7 +3,7 @@ title: '夜ナビ Shine'
 client: '夜ナビ Shine'
 industry: 'エンターテインメント'
 year: 2025
-thumbnail: '/works/work-22.jpg'
+thumbnail: '/works/work-22.webp'
 tags:
   - ポータルサイト
   - ナイトワーク
@@ -39,7 +39,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/work-22-full.jpg" alt="夜ナビ Shine Webサイト 全体キャプチャ" loading="lazy" />
+  <img src="/works/work-22-full.webp" alt="夜ナビ Shine Webサイト 全体キャプチャ" loading="lazy" />
   <figcaption>サイト全体ビュー</figcaption>
 </figure>
 

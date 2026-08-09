@@ -3,7 +3,7 @@ title: 'ジャークチキン屋さんチラシデザイン'
 client: 'ジャークチキン店'
 industry: '飲食・グルメ'
 year: 2025
-thumbnail: '/works/dtp-08.jpg'
+thumbnail: '/works/dtp-08.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-08-full.jpg" alt="ジャークチキン屋さんチラシデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-08-full.webp" alt="ジャークチキン屋さんチラシデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

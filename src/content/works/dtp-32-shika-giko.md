@@ -3,7 +3,7 @@ title: '歯科技工所（セラミック制作）様オープニングチラシ
 client: 'Dental Studio Zebra'
 industry: '医療・歯科'
 year: 2025
-thumbnail: '/works/dtp-32.jpg'
+thumbnail: '/works/dtp-32.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ BtoBの技工所では、歯科医院に「技術が確かで任せられる」�
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-32-full.jpg" alt="歯科技工所（セラミック制作）様オープニングチラシ 全体" loading="lazy" />
+  <img src="/works/dtp-32-full.webp" alt="歯科技工所（セラミック制作）様オープニングチラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

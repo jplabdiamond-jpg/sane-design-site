@@ -2,7 +2,7 @@
 title: 'LP（ランディングページ）とHPの違いとは？'
 description: 'LP（ランディングページ）とホームページって何が違うの？それぞれの役割と使い分けを、具体例を交えてわかりやすく解説します。'
 pubDate: '2026-08-07'
-heroImage: '/assets/blog/4_LP_vs_Homepage.png'
+heroImage: '/assets/blog/4_LP_vs_Homepage.webp'
 tags:
   - ホームページ制作
   - LP

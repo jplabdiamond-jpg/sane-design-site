@@ -3,7 +3,7 @@ title: '住宅クリーニング業者様の営業チラシ'
 client: 'ハウスクリーニング業者'
 industry: 'ハウスクリーニング'
 year: 2025
-thumbnail: '/works/dtp-44.jpg'
+thumbnail: '/works/dtp-44.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-44-full.jpg" alt="住宅クリーニング業者様の営業チラシ 全体" loading="lazy" />
+  <img src="/works/dtp-44-full.webp" alt="住宅クリーニング業者様の営業チラシ 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

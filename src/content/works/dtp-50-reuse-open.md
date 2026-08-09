@@ -3,7 +3,7 @@ title: 'リユースショップのOPENフライヤー'
 client: 'リユースショップ そこね屋'
 industry: '小売・買取'
 year: 2025
-thumbnail: '/works/dtp-50.jpg'
+thumbnail: '/works/dtp-50.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-50-full.jpg" alt="リユースショップのOPENフライヤー 全体" loading="lazy" />
+  <img src="/works/dtp-50-full.webp" alt="リユースショップのOPENフライヤー 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

@@ -3,7 +3,7 @@ title: 'FPサービスのココナラ出品画像制作'
 client: 'FPサービス'
 industry: '金融・コンサル'
 year: 2025
-thumbnail: '/works/dtp-20.jpg'
+thumbnail: '/works/dtp-20.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -36,7 +36,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-20-full.jpg" alt="FPサービスのココナラ出品画像制作 全体" loading="lazy" />
+  <img src="/works/dtp-20-full.webp" alt="FPサービスのココナラ出品画像制作 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 

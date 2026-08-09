@@ -3,7 +3,7 @@ title: '仕事マッチングアプリの利用者募集チラシデザイン'
 client: '仕事マッチングアプリ'
 industry: 'IT・求人'
 year: 2025
-thumbnail: '/works/dtp-25.jpg'
+thumbnail: '/works/dtp-25.webp'
 tags:
   - DTPデザイン
   - チラシ
@@ -37,7 +37,7 @@ draft: false
 </div>
 
 <figure class="detail-shot">
-  <img src="/works/dtp-25-full.jpg" alt="仕事マッチングアプリの利用者募集チラシデザイン 全体" loading="lazy" />
+  <img src="/works/dtp-25-full.webp" alt="仕事マッチングアプリの利用者募集チラシデザイン 全体" loading="lazy" />
   <figcaption>チラシ全体ビュー</figcaption>
 </figure>
 
