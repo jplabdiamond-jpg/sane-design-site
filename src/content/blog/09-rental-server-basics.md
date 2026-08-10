@@ -2,7 +2,7 @@
 title: 'レンタルサーバーとは？初心者が知っておくべき基本知識'
 description: 'ホームページに必要なレンタルサーバーとは？仕組み・選び方・おすすめサービスを初心者向けにわかりやすく解説します。'
 pubDate: '2026-08-10'
-heroImage: '/assets/blog/8_Rental_Server.png'
+heroImage: '/assets/blog/8_Rental_Server.webp'
 tags:
   - ホームページ制作
   - サーバー

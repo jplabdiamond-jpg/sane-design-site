@@ -2,7 +2,7 @@
 title: 'WordPressとノーコードツール、どっちがいい？'
 description: 'ホームページを作るならWordPress？それともWixやSTUDIOなどのノーコードツール？それぞれのメリット・デメリットを比較して解説します。'
 pubDate: '2026-08-10'
-heroImage: '/assets/blog/10_WP_vs_NoCode.png'
+heroImage: '/assets/blog/10_WP_vs_NoCode.webp'
 tags:
   - ホームページ制作
   - WordPress

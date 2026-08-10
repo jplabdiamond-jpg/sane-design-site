@@ -2,7 +2,7 @@
 title: 'HPの「SSL化」って何？なぜ必要なの？'
 description: 'SSL化って何のこと？ホームページのセキュリティに欠かせないSSL（https化）の仕組みと、対応しないリスクをわかりやすく解説。'
 pubDate: '2026-08-10'
-heroImage: '/assets/blog/9_SSL_Security.png'
+heroImage: '/assets/blog/9_SSL_Security.webp'
 tags:
   - ホームページ制作
   - SSL
