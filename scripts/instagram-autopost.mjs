@@ -1,5 +1,5 @@
 // scripts/instagram-autopost.mjs
-// 新規追加された works/*.md を Instagram に自動投稿する。
+// 新規追加された works/*.md / blog/*.md を Instagram に自動投稿する。
 // GitHub Actions から実行。環境変数:
 //   IG_USER_ID       Instagram ビジネスアカウントID
 //   IG_ACCESS_TOKEN  長期アクセストークン
@@ -162,6 +162,51 @@ function buildCaption(data, body, slug) {
   return clen(caption) > CAPTION_LIMIT ? [...caption].slice(0, CAPTION_LIMIT).join('') : caption;
 }
 
+/** ブログ記事用のキャプションを生成 */
+function buildBlogCaption(data, body, slug) {
+  const headerStr = `【ブログ更新】${data.title}`;
+
+  const blogUrl = `${SITE}/blog/${slug}/`;
+  const footerLines = [];
+  footerLines.push('▼記事を読む', blogUrl, '');
+  footerLines.push('▼その他の記事はこちら', `${SITE}/blog/`, '');
+
+  const blogHashtags = Array.isArray(data.tags)
+    ? data.tags.map((t) => '#' + String(t).replace(/\s+/g, ''))
+    : [];
+  const blogFixed = [
+    '#ホームページ制作', '#Web制作', '#Webデザイン', '#フリーランスデザイナー',
+    '#SEO対策', '#集客', '#ブログ更新', '#SaneDesign',
+  ];
+  const allHashtags = [...new Set([...blogHashtags, ...blogFixed])].slice(0, MAX_HASHTAGS);
+  footerLines.push(allHashtags.join(' '));
+  const footer = footerLines.join('\n');
+
+  // 本文：descriptionを優先、なければ本文冒頭を抽出
+  let bodyText = '';
+  if (data.description) {
+    bodyText = data.description;
+  } else {
+    // Markdownの本文から最初の段落を取得
+    const plainBody = body
+      .replace(/^---[\s\S]*?---/, '')
+      .replace(/<[^>]+>/g, '')
+      .replace(/^#+\s.*$/gm, '')
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/\s+/g, ' ')
+      .trim();
+    bodyText = plainBody.slice(0, 300);
+  }
+
+  const budget = CAPTION_LIMIT - clen(headerStr) - clen(footer) - 4;
+  if (clen(bodyText) > budget) {
+    bodyText = [...bodyText].slice(0, Math.max(0, budget - 1)).join('').trimEnd() + '…';
+  }
+
+  const caption = [headerStr, '', bodyText, '', footer].join('\n');
+  return clen(caption) > CAPTION_LIMIT ? [...caption].slice(0, CAPTION_LIMIT).join('') : caption;
+}
+
 async function graphPost(path, params) {
   const url = `${GRAPH}/${path}`;
   const body = new URLSearchParams({ ...params, access_token: IG_ACCESS_TOKEN });
@@ -189,9 +234,9 @@ async function main() {
   const fs = await import('node:fs/promises');
   const files = (CHANGED_FILES || '').split(/\r?\n/)
     .map((s) => s.trim())
-    .filter((s) => s && s.endsWith('.md') && s.includes('content/works/'));
+    .filter((s) => s && s.endsWith('.md') && (s.includes('content/works/') || s.includes('content/blog/')));
 
-  if (files.length === 0) { log('対象の新規 work なし。終了。'); return; }
+  if (files.length === 0) { log('対象の新規ファイルなし。終了。'); return; }
   log(`対象 ${files.length} 件: ${files.join(', ')}`);
 
   const results = [];
@@ -214,8 +259,11 @@ async function main() {
       if (!ok) { err(`画像が公開されず skip: ${imageUrl}`); results.push({ file, ok: false }); continue; }
 
       const slug = file.split('/').pop().replace(/\.md$/, '');
-      const caption = buildCaption(data, body, slug);
-      log(`caption ${clen(caption)}文字 / ハッシュタグ${buildHashtags(data).length}個`);
+      const isBlog = file.includes('content/blog/');
+      const caption = isBlog
+        ? buildBlogCaption(data, body, slug)
+        : buildCaption(data, body, slug);
+      log(`[${isBlog ? 'blog' : 'work'}] caption ${clen(caption)}文字`);
       const id = await postOne(imageUrl, caption);
       results.push({ file, ok: true, id });
     } catch (e) {

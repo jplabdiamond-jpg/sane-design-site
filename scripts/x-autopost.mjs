@@ -1,5 +1,5 @@
 // scripts/x-autopost.mjs
-// 新規追加された works/*.md を X（旧Twitter）に自動投稿する。
+// 新規追加された works/*.md / blog/*.md を X（旧Twitter）に自動投稿する。
 // GitHub Actions から実行。環境変数:
 //   X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET, CHANGED_FILES
 
@@ -117,6 +117,43 @@ function buildTweetText(data, body, slug) {
   return lines.join('\n');
 }
 
+/** ブログ記事用のツイートテキストを生成 */
+function buildBlogTweetText(data, body, slug) {
+  const blogUrl = `${SITE}/blog/${slug}/`;
+  const tags = Array.isArray(data.tags)
+    ? data.tags.slice(0, 3).map((t) => `#${String(t).replace(/\s+/g, '')}`)
+    : [];
+  const fixedTags = ['#ブログ更新', '#ホームページ制作', '#SaneDesign'];
+  const allTags = [...new Set([...tags, ...fixedTags])];
+  const tagStr = allTags.join(' ');
+
+  const lines = [`【ブログ更新】${data.title}`];
+  const headerLen = lines.join('\n').length;
+  const reserved = 23 + 2 + tagStr.length + 4;
+  const budget = TWEET_LIMIT - headerLen - reserved;
+
+  // descriptionを優先、なければ本文冒頭
+  let desc = data.description || '';
+  if (!desc) {
+    desc = body
+      .replace(/^---[\s\S]*?---/, '')
+      .replace(/<[^>]+>/g, '')
+      .replace(/^#+\s.*$/gm, '')
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 200);
+  }
+
+  if (desc && budget > 30) {
+    const trimmedDesc = desc.length > budget ? desc.slice(0, budget - 1) + '…' : desc;
+    lines.push('', trimmedDesc);
+  }
+  lines.push('', blogUrl);
+  lines.push('', tagStr);
+  return lines.join('\n');
+}
+
 async function postTweet(text) {
   const authHeader = buildAuthHeader('POST', X_API_URL);
   const res = await fetch(X_API_URL, {
@@ -136,9 +173,9 @@ async function main() {
   const fs = await import('node:fs/promises');
   const files = (CHANGED_FILES || '').split(/\r?\n/)
     .map((s) => s.trim())
-    .filter((s) => s && s.endsWith('.md') && s.includes('content/works/'));
+    .filter((s) => s && s.endsWith('.md') && (s.includes('content/works/') || s.includes('content/blog/')));
 
-  if (files.length === 0) { log('対象の新規 work なし。終了。'); return; }
+  if (files.length === 0) { log('対象の新規ファイルなし。終了。'); return; }
   log(`対象 ${files.length} 件: ${files.join(', ')}`);
 
   const results = [];
@@ -150,8 +187,11 @@ async function main() {
       if (!data.title) { err(`title 無し、skip: ${file}`); continue; }
 
       const slug = file.split('/').pop().replace(/\.md$/, '');
-      const text = buildTweetText(data, body, slug);
-      log(`tweet text (${text.length}文字):\n${text}`);
+      const isBlog = file.includes('content/blog/');
+      const text = isBlog
+        ? buildBlogTweetText(data, body, slug)
+        : buildTweetText(data, body, slug);
+      log(`[${isBlog ? 'blog' : 'work'}] tweet text (${text.length}文字):\n${text}`);
 
       const result = await postTweet(text);
       const tweetId = result.data?.id;
