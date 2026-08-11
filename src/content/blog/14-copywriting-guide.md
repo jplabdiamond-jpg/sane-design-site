@@ -2,7 +2,7 @@
 title: 'HPの文章、何を書けばいい？'
 description: 'ホームページの文章が思いつかない…そんな方へ。お客さんに伝わる文章の書き方と、各ページに書くべき内容を具体例付きで解説します。'
 pubDate: '2026-08-11'
-heroImage: '/assets/blog/13_Copywriting_Guide.png'
+heroImage: '/assets/blog/13_Copywriting_Guide.webp'
 tags:
   - ホームページ制作
   - コピーライティング
