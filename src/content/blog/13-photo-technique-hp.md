@@ -2,7 +2,7 @@
 title: 'HPに載せるべき写真の選び方・撮り方'
 description: 'ホームページの印象は写真で決まる！プロに頼まなくてもできる、効果的な写真の選び方と撮影テクニックを紹介します。'
 pubDate: '2026-08-11'
-heroImage: '/assets/blog/12_Photo_Technique.png'
+heroImage: '/assets/blog/12_Photo_Technique.webp'
 tags:
   - ホームページ制作
   - 写真
