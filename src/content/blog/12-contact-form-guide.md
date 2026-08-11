@@ -2,7 +2,7 @@
 title: 'お問い合わせフォームの作り方と必須項目'
 description: 'ホームページのお問い合わせフォーム、何を入れるべき？必須項目の選び方から、問い合わせが増えるフォーム設計のコツまで解説します。'
 pubDate: '2026-08-11'
-heroImage: '/assets/blog/11_Contact_Form.png'
+heroImage: '/assets/blog/11_Contact_Form.webp'
 tags:
   - ホームページ制作
   - お問い合わせ
