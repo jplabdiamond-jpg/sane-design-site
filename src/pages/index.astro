@@ -62,32 +62,30 @@ const latestPosts = allBlogPosts
     <div class="hero-head">
       <h1>高品質なwebサイトを、<span class="big">低価格で！</span></h1>
     </div>
-    <div class="hero-mid">
-      <div class="hero-copy">
-        <p class="lead">あなたのお店・事業にぴったりのホームページを、<br>むずかしい話ぬきで、分かりやすく・低価格でお作りします。</p>
-        <div class="hero-cta">
-          <a href="/contact/" class="btn btn-primary">まずは無料で相談する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a href="#works" class="btn btn-ghost">制作実績を見る</a>
-        </div>
-        <div class="hero-badges">
-          <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>相談だけでもOK</span>
-          <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>しつこい営業なし</span>
-          <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>公開後もサポート</span>
-        </div>
-      </div>
-      <div class="hero-person-wrap">
-        <div class="hero-bubble">
-          <img src="/assets/bubble.svg" alt="">
-          <span>Web・ITに<br>くわしくない方も<br>大歓迎です！</span>
-        </div>
-        <img class="hero-person" src="/assets/hero.webp" alt="ノートパソコンを前にひらめくビジネスウーマンのイラスト">
-      </div>
-    </div>
     <div class="hero-visual">
       <div class="cover" id="cover" aria-label="制作実績スライダー">
         <div class="cover-stage" id="coverStage"></div>
       </div>
       <p class="cover-cap"><span id="coverTitle"></span><em>クリックで実績ページへ</em></p>
+    </div>
+    <div class="hero-person-wrap">
+      <div class="hero-bubble">
+        <img src="/assets/bubble.svg" alt="">
+        <span>Web・ITに<br>くわしくない方も<br>大歓迎です！</span>
+      </div>
+      <img class="hero-person" src="/assets/hero.webp" alt="ノートパソコンを前にひらめくビジネスウーマンのイラスト">
+    </div>
+    <div class="hero-copy">
+      <p class="lead">あなたのお店・事業にぴったりのホームページを、<br>むずかしい話ぬきで、分かりやすく・低価格でお作りします。</p>
+      <div class="hero-cta">
+        <a href="/contact/" class="btn btn-primary">まずは無料で相談する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#works" class="btn btn-ghost">制作実績を見る</a>
+      </div>
+      <div class="hero-badges">
+        <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>相談だけでもOK</span>
+        <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>しつこい営業なし</span>
+        <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>公開後もサポート</span>
+      </div>
     </div>
   </div>
   <div class="wrap">
@@ -590,17 +588,24 @@ const latestPosts = allBlogPosts
 
   /* HERO */
   .hero{background:radial-gradient(120% 90% at 80% 0%, #D7EFFB 0%, #EAF7FE 45%, #fff 100%);padding:14px 0 72px;position:relative}
-  .hero-grid{display:block;text-align:center}
+  .hero{--cardw:clamp(432px,62vh,816px);--personw:clamp(190px,26vh,315px)}
+  .hero-grid{display:flex;flex-direction:column;align-items:center;text-align:center}
   .hero h1{font-size:clamp(26px,4.3vw,50px);font-weight:900;line-height:1.18;letter-spacing:1px;white-space:nowrap}
   .hero h1 .big{color:var(--primary);font-size:1.18em}
   .hero p.lead{font-size:17px;color:#5b6474;margin:12px 0 20px;font-weight:500}
   .hero-cta{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
-  .hero{--cardw:clamp(432px,62vh,816px);--personw:clamp(190px,26vh,315px)}
-  .hero-head{text-align:center}
-  .hero-mid{display:flex;align-items:center;justify-content:center;gap:34px;margin-top:6px}
-  .hero-copy{flex:0 0 auto;max-width:520px}
-  .hero-visual{position:relative;display:flex;flex-direction:column;align-items:center;margin-top:8px}
+  .hero-head{text-align:center;width:100%}
+  .hero-copy{max-width:520px}
+  .hero-visual{position:relative;display:flex;flex-direction:column;align-items:center}
   .hero-person-wrap{position:relative;flex:0 0 auto}
+  /* Desktop: head → copy+person side-by-side → visual (reorder from DOM) */
+  @media(min-width:861px){
+    .hero-grid{display:grid;grid-template-areas:"head head" "copy person" "visual visual";grid-template-columns:1fr auto;justify-items:center;gap:6px 34px}
+    .hero-head{grid-area:head}
+    .hero-copy{grid-area:copy;justify-self:end}
+    .hero-person-wrap{grid-area:person;justify-self:start}
+    .hero-visual{grid-area:visual;width:100%;margin-top:8px}
+  }
   .hero-person{width:var(--personw);display:block;position:relative;z-index:2;filter:drop-shadow(0 14px 20px rgba(58,66,86,.15))}
   .hero-bubble{position:absolute;z-index:1;left:66%;top:2%;width:89%}
   .hero-bubble img{width:100%;display:block}
@@ -905,13 +910,15 @@ const latestPosts = allBlogPosts
     .r03-visual{padding:18px 16px 0 4px;max-width:460px;margin:0 auto}
     .r03-man{width:185px;bottom:-16px;right:-12px}
     .hero h1{white-space:normal;font-size:30px}
-    .hero-mid{flex-direction:column;gap:18px;margin-top:12px}
+    .hero-grid{gap:0}
+    .hero-head{margin-bottom:8px}
+    .hero-visual{margin-top:0;margin-bottom:10px}
+    .hero-person-wrap{margin-bottom:10px}
     .hero-bubble{width:172px;left:55%;top:-2%}
     .hero-bubble span{font-size:13px;padding:0 9% 4.07% 12%}
     .cover{height:236px}
     .cover-card{width:418px;margin-left:-209px}
     .hero-person{width:210px}
-    .hero-visual{margin-top:26px}
     .worry-stage{grid-template-columns:1fr} .worry-center{width:270px;height:auto;margin:0 auto;order:-1}
     .worry-col.left .bubble::after,.worry-col.right .bubble::after{display:none}
     .worry-grid,.work-grid,.flow-grid{grid-template-columns:1fr}
