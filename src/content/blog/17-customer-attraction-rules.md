@@ -2,7 +2,7 @@
 title: '個人事業主がホームページで集客するための3つの鉄則'
 description: '個人事業主がホームページで集客するために絶対押さえるべき3つの鉄則。小さなお店でもWebから新規顧客を獲得する方法を解説します。'
 pubDate: '2026-08-12'
-heroImage: '/assets/blog/16_Customer_Attraction.png'
+heroImage: '/assets/blog/16_Customer_Attraction.webp'
 tags:
   - 個人事業主
   - 集客

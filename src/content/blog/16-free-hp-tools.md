@@ -2,7 +2,7 @@
 title: '無料HP作成ツールのメリット・デメリット'
 description: '無料でホームページが作れるツールはたくさんあるけれど、本当にそれで大丈夫？メリットとデメリット、向いている人を解説します。'
 pubDate: '2026-08-12'
-heroImage: '/assets/blog/15_Free_Tools.png'
+heroImage: '/assets/blog/15_Free_Tools.webp'
 tags:
   - ホームページ制作
   - 無料ツール

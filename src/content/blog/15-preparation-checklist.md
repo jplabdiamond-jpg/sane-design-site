@@ -2,7 +2,7 @@
 title: 'HP制作を依頼する前に準備すべきこと5選'
 description: 'ホームページ制作を依頼する前に、これだけは準備しておきたい5つのポイント。事前準備でスムーズに、そして理想通りのHPを作りましょう。'
 pubDate: '2026-08-12'
-heroImage: '/assets/blog/14_Preparation_Checklist.png'
+heroImage: '/assets/blog/14_Preparation_Checklist.webp'
 tags:
   - ホームページ制作
   - 準備
