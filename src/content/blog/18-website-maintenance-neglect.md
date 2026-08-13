@@ -2,7 +2,7 @@
 title: '中小企業のHP、作っただけで放置していませんか？'
 description: 'せっかく作ったホームページ、放置していませんか？更新しないHPがもたらすデメリットと、簡単にできる運用のコツを紹介します。'
 pubDate: '2026-08-13'
-heroImage: '/assets/blog/17_Website_Maintenance.png'
+heroImage: '/assets/blog/17_Website_Maintenance.webp'
 tags:
   - 中小企業
   - HP運用
