@@ -2,7 +2,7 @@
 title: '名刺代わりのHPで信頼度がアップする理由'
 description: '名刺にURLを載せるだけで信頼感が段違いに。ビジネスの信頼度を高める「名刺代わりのHP」の作り方と活用法を解説します。'
 pubDate: '2026-08-13'
-heroImage: '/assets/blog/18_Trust_Website.png'
+heroImage: '/assets/blog/18_Trust_Website.webp'
 tags:
   - 個人事業主
   - 信頼性
