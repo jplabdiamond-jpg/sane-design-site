@@ -43,10 +43,50 @@ const jsonLd = {
   ],
 };
 
-// ブログ記事を取得（最新3件をトップページに表示）
+// ブログ記事を取得
 const allBlogPosts = await getCollection('blog', ({ data }) => !data.draft);
-const latestPosts = allBlogPosts
-  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+
+// note RSS取得（ビルド時）
+let noteArticles: { title: string; link: string; pubDate: string; thumbnail: string; description: string }[] = [];
+try {
+  const rssRes = await fetch('https://note.com/sane_design2026/rss');
+  const rssText = await rssRes.text();
+  const itemMatches = [...rssText.matchAll(/<item>([\s\S]*?)<\/item>/g)];
+  noteArticles = itemMatches.map((m) => {
+    const item = m[1];
+    const title = item.match(/<title>([\s\S]*?)<\/title>/)?.[1]?.replace(/<!\[CDATA\[|\]\]>/g, '').trim() ?? '';
+    const link = item.match(/<link>([\s\S]*?)<\/link>/)?.[1]?.trim() ?? '';
+    const pubDate = item.match(/<pubDate>([\s\S]*?)<\/pubDate>/)?.[1]?.trim() ?? '';
+    const thumbnail = item.match(/<media:thumbnail[^>]*>([^<]+)<\/media:thumbnail>/)?.[1]?.trim() ?? item.match(/<media:thumbnail[^>]+url="([^"]+)"/)?.[1] ?? '';
+    return { title, link, pubDate, thumbnail, description: '' };
+  });
+} catch {}
+
+// 内部 + note を統合して最新3件をトップページに表示
+type TopArticle = {
+  type: 'internal' | 'note';
+  title: string;
+  link: string;
+  pubDate: Date;
+  heroImage: string;
+};
+const latestPosts: TopArticle[] = [
+  ...allBlogPosts.map((post) => ({
+    type: 'internal' as const,
+    title: post.data.title,
+    link: `/blog/${post.slug}/`,
+    pubDate: new Date(post.data.pubDate),
+    heroImage: post.data.heroImage ?? '',
+  })),
+  ...noteArticles.map((a) => ({
+    type: 'note' as const,
+    title: a.title,
+    link: a.link,
+    pubDate: new Date(a.pubDate),
+    heroImage: a.thumbnail,
+  })),
+]
+  .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime())
   .slice(0, 3);
 ---
 
@@ -488,21 +528,33 @@ const latestPosts = allBlogPosts
     <div class="sec-head"><span class="sec-sub">News</span><h2 class="sec-title">お役立ちブログ<small>web・IT・AIに関する情報を発信しています</small></h2></div>
     <div class="news-grid">
       {latestPosts.map((post) => {
-        const d = new Date(post.data.pubDate);
+        const d = post.pubDate;
         const dateStr = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+        const isNote = post.type === 'note';
         return (
-          <a class="news-card" href={`/blog/${post.slug}/`}>
+          <a
+            class="news-card"
+            href={post.link}
+            target={isNote ? '_blank' : undefined}
+            rel={isNote ? 'noopener noreferrer' : undefined}
+          >
             <div class="news-thumb">
-              {post.data.heroImage ? (
-                <img src={post.data.heroImage} alt={post.data.title} loading="lazy" width="600" height="338" />
+              {post.heroImage ? (
+                <img src={post.heroImage} alt={post.title} loading="lazy" width="600" height="338" />
               ) : (
                 <div style="width:100%;height:100%;background:linear-gradient(135deg,#D7EFFB,#E9F7E4);display:flex;align-items:center;justify-content:center;font-size:14px;color:#7A8494;">No Image</div>
+              )}
+              {isNote && (
+                <span class="news-note-badge">note</span>
               )}
             </div>
             <div class="news-body">
               <time class="news-date">{dateStr}</time>
-              <h4>{post.data.title}</h4>
-              <span class="news-more">続きを読む <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <h4>{post.title}</h4>
+              <span class="news-more">
+                {isNote ? 'noteで読む ↗' : '続きを読む'}{' '}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
             </div>
           </a>
         );
@@ -761,6 +813,8 @@ const latestPosts = allBlogPosts
     display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .news-more{margin-top:auto;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--primary-dark)}
   .news-more svg{width:15px;height:15px}
+  .news-thumb{position:relative}
+  .news-note-badge{position:absolute;top:10px;left:10px;font-size:10px;font-weight:800;font-family:"Inter",sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:999px;background:rgba(65,179,73,.9);color:#fff;z-index:2}
 
   /* TESTIMONIALS */
   .test-carousel{position:relative}
