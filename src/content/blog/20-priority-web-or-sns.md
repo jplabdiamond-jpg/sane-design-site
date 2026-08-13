@@ -2,7 +2,7 @@
 title: '開業したらまずHP？それともSNS？'
 description: '開業したばかりの個人事業主が最初にやるべきはHP？SNS？それぞれの特徴と、あなたのビジネスに合った優先順位の決め方を解説します。'
 pubDate: '2026-08-13'
-heroImage: '/assets/blog/19_Priority_Web_SNS.png'
+heroImage: '/assets/blog/19_Priority_Web_SNS.webp'
 tags:
   - 個人事業主
   - 開業
