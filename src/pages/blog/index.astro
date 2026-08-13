@@ -7,59 +7,18 @@ import { getCollection } from 'astro:content';
 const internalPosts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
 
-// note RSS fetch（全件）
-let noteArticles: { title: string; link: string; pubDate: string; thumbnail: string; description: string }[] = [];
-try {
-  const rssRes = await fetch('https://note.com/sane_design2026/rss');
-  const rssText = await rssRes.text();
-  const itemMatches = [...rssText.matchAll(/<item>([\s\S]*?)<\/item>/g)];
-  noteArticles = itemMatches.map((m) => {
-    const item = m[1];
-    const title = item.match(/<title>([\s\S]*?)<\/title>/)?.[1]?.replace(/<!\[CDATA\[|\]\]>/g, '').trim() ?? '';
-    const link = item.match(/<link>([\s\S]*?)<\/link>/)?.[1]?.trim() ?? '';
-    const pubDate = item.match(/<pubDate>([\s\S]*?)<\/pubDate>/)?.[1]?.trim() ?? '';
-    const thumbnail = item.match(/<media:thumbnail[^>]*>([^<]+)<\/media:thumbnail>/)?.[1]?.trim() ?? item.match(/<media:thumbnail[^>]+url="([^"]+)"/)?.[1] ?? '';
-    const descRaw = item.match(/<description>([\s\S]*?)<\/description>/)?.[1]?.replace(/<!\[CDATA\[|\]\]>/g, '') ?? '';
-    const description = descRaw.replace(/<[^>]+>/g, '').replace(/続きをみる$/, '').trim().slice(0, 100);
-    return { title, link, pubDate, thumbnail, description };
-  }).sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
-} catch (e) {
-  // fetch失敗時は空配列
-}
+// 内部記事をJSON化してクライアントに渡す（note記事とマージ用）
+const internalData = internalPosts.map((post) => ({
+  type: 'internal' as const,
+  title: post.data.title,
+  link: `/blog/${post.slug}/`,
+  pubDate: new Date(post.data.pubDate).toISOString(),
+  thumbnail: post.data.heroImage ?? '',
+  description: post.data.description,
+  tags: post.data.tags ?? [],
+}));
 
-// 統合記事リスト（内部 + note を日付順でマージ）
-type UnifiedArticle = {
-  type: 'internal' | 'note';
-  title: string;
-  link: string;
-  pubDate: Date;
-  thumbnail: string;
-  description: string;
-  tags: string[];
-};
-
-const allArticles: UnifiedArticle[] = [
-  ...internalPosts.map((post) => ({
-    type: 'internal' as const,
-    title: post.data.title,
-    link: `/blog/${post.slug}/`,
-    pubDate: new Date(post.data.pubDate),
-    thumbnail: post.data.heroImage ?? '',
-    description: post.data.description,
-    tags: post.data.tags ?? [],
-  })),
-  ...noteArticles.map((article) => ({
-    type: 'note' as const,
-    title: article.title,
-    link: article.link,
-    pubDate: new Date(article.pubDate),
-    thumbnail: article.thumbnail,
-    description: article.description,
-    tags: ['AI活用'],
-  })),
-].sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
-
-const totalCount = allArticles.length;
+const internalCount = internalData.length;
 ---
 
 <RenewalLayout
@@ -82,7 +41,7 @@ const totalCount = allArticles.length;
         <!-- Stats strip -->
         <div class="rb-count-badge">
           <div class="rb-stat">
-            <span class="rb-stat-num"><span class="rb-count" data-target={totalCount} data-suffix="+">0</span></span>
+            <span class="rb-stat-num"><span class="rb-count" id="rb-total-count" data-target={internalCount} data-suffix="+">0</span></span>
             <span class="rb-stat-label">公開記事数</span>
           </div>
           <div class="rb-stat-divider"></div>
@@ -103,71 +62,65 @@ const totalCount = allArticles.length;
   <!-- ── Articles Grid ── -->
   <section class="rb-grid-section">
     <div class="rb-wrap">
-      {allArticles.length > 0 ? (
-        <>
-          <div class="rb-grid" id="rb-grid">
-            {allArticles.map((article, i) => {
-              const d = article.pubDate;
-              const dateStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-              const isNote = article.type === 'note';
-              return (
-                <div class="rb-item" style={`animation-delay:${Math.min(i, 11) * 60}ms`}>
-                  <a
-                    href={article.link}
-                    target={isNote ? '_blank' : undefined}
-                    rel={isNote ? 'noopener noreferrer' : undefined}
-                    class="rb-card"
-                  >
-                    <div class="rb-thumb">
-                      {article.thumbnail ? (
-                        <img src={article.thumbnail} alt={article.title} loading="lazy" width="600" height="338" />
-                      ) : (
-                        <div class="rb-thumb-placeholder">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;opacity:0.3;">
-                            <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                          </svg>
-                        </div>
-                      )}
-                      <div class="rb-thumb-overlay">
-                        <span class="rb-view-label">
-                          {isNote ? 'noteで読む ↗' : '記事を読む →'}
-                        </span>
-                      </div>
-                      {isNote && (
-                        <span class="rb-source-badge rb-source-note">note</span>
-                      )}
-                      {!isNote && (
-                        <span class="rb-source-badge rb-source-internal">Original</span>
-                      )}
+      <!-- 内部ブログ記事を先にSSGレンダリング（note記事はクライアントサイドで追加） -->
+      <div class="rb-grid" id="rb-grid">
+        {internalData.map((article, i) => {
+          const d = new Date(article.pubDate);
+          const dateStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+          return (
+            <div class="rb-item" data-pubdate={article.pubDate} style={`animation-delay:${Math.min(i, 11) * 60}ms`}>
+              <a
+                href={article.link}
+                class="rb-card"
+              >
+                <div class="rb-thumb">
+                  {article.thumbnail ? (
+                    <img src={article.thumbnail} alt={article.title} loading="lazy" width="600" height="338" />
+                  ) : (
+                    <div class="rb-thumb-placeholder">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;opacity:0.3;">
+                        <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                      </svg>
                     </div>
-                    <div class="rb-body">
-                      <div class="rb-meta">
-                        <time datetime={dateStr}>{dateStr}</time>
-                        {article.tags.length > 0 && (
-                          <span class="rb-tag">{article.tags[0]}</span>
-                        )}
-                      </div>
-                      <h2 class="rb-card-title">{article.title}</h2>
-                      {article.description && (
-                        <p class="rb-card-desc">{article.description}</p>
-                      )}
-                    </div>
-                  </a>
+                  )}
+                  <div class="rb-thumb-overlay">
+                    <span class="rb-view-label">記事を読む →</span>
+                  </div>
+                  <span class="rb-source-badge rb-source-internal">Original</span>
                 </div>
-              );
-            })}
-          </div>
+                <div class="rb-body">
+                  <div class="rb-meta">
+                    <time datetime={dateStr}>{dateStr}</time>
+                    {article.tags.length > 0 && (
+                      <span class="rb-tag">{article.tags[0]}</span>
+                    )}
+                  </div>
+                  <h2 class="rb-card-title">{article.title}</h2>
+                  {article.description && (
+                    <p class="rb-card-desc">{article.description}</p>
+                  )}
+                </div>
+              </a>
+            </div>
+          );
+        })}
+      </div>
 
-          <!-- Pagination -->
-          <div class="rb-pagination" id="rb-pagination"></div>
-          <p class="rb-page-info" id="rb-page-info"></p>
-        </>
-      ) : (
-        <p style="font-size:14px; color:var(--rb-sub);">
-          記事を読み込めませんでした。
-          <a href="https://note.com/sane_design2026" target="_blank" rel="noopener" style="color:var(--rb-primary);">noteで読む →</a>
-        </p>
-      )}
+      <!-- note記事読み込み中の表示 -->
+      <div id="rb-note-loading" style="text-align:center;margin-top:16px;font-size:13px;color:#7A8494;display:none;">
+        note記事を読み込み中...
+      </div>
+
+      <!-- Pagination -->
+      <div class="rb-pagination" id="rb-pagination"></div>
+      <p class="rb-page-info" id="rb-page-info"></p>
+
+      <!-- noteへのフォールバックリンク -->
+      <div id="rb-note-fallback" style="display:none;text-align:center;margin-top:16px;">
+        <a href="https://note.com/sane_design2026" target="_blank" rel="noopener" style="color:#4FB4E8;font-size:14px;font-weight:600;">
+          noteの記事も読む →
+        </a>
+      </div>
     </div>
   </section>
 
@@ -197,6 +150,11 @@ const totalCount = allArticles.length;
     </div>
   </section>
 </RenewalLayout>
+
+<!-- 内部記事データをクライアントに渡す -->
+<script define:vars={{ internalDataJSON: JSON.stringify(internalData) }}>
+  window.__INTERNAL_ARTICLES__ = JSON.parse(internalDataJSON);
+</script>
 
 <style is:global>
   /* ══════════════════════════════════════════════
@@ -685,8 +643,117 @@ const totalCount = allArticles.length;
 </style>
 
 <script>
-  // ── Pagination ──
-  (function() {
+  // ══════════════════════════════════════════════
+  // クライアントサイドでnote記事を取得し、内部記事とマージ
+  // ══════════════════════════════════════════════
+
+  interface Article {
+    type: 'internal' | 'note';
+    title: string;
+    link: string;
+    pubDate: string;
+    thumbnail: string;
+    description: string;
+    tags: string[];
+  }
+
+  function createCardHTML(article: Article, index: number): string {
+    const d = new Date(article.pubDate);
+    const dateStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const isNote = article.type === 'note';
+    const target = isNote ? ' target="_blank" rel="noopener noreferrer"' : '';
+    const viewLabel = isNote ? 'noteで読む ↗' : '記事を読む →';
+    const badgeClass = isNote ? 'rb-source-note' : 'rb-source-internal';
+    const badgeText = isNote ? 'note' : 'Original';
+    const tag = article.tags.length > 0 ? `<span class="rb-tag">${article.tags[0]}</span>` : '';
+    const desc = article.description ? `<p class="rb-card-desc">${article.description}</p>` : '';
+
+    let thumbHTML: string;
+    if (article.thumbnail) {
+      thumbHTML = `<img src="${article.thumbnail}" alt="${article.title.replace(/"/g, '&quot;')}" loading="lazy" width="600" height="338" />`;
+    } else {
+      thumbHTML = `<div class="rb-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;opacity:0.3;"><path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg></div>`;
+    }
+
+    return `<div class="rb-item" data-pubdate="${d.toISOString()}" style="animation-delay:${Math.min(index, 11) * 60}ms">
+      <a href="${article.link}"${target} class="rb-card">
+        <div class="rb-thumb">
+          ${thumbHTML}
+          <div class="rb-thumb-overlay"><span class="rb-view-label">${viewLabel}</span></div>
+          <span class="rb-source-badge ${badgeClass}">${badgeText}</span>
+        </div>
+        <div class="rb-body">
+          <div class="rb-meta">
+            <time datetime="${dateStr}">${dateStr}</time>
+            ${tag}
+          </div>
+          <h2 class="rb-card-title">${article.title}</h2>
+          ${desc}
+        </div>
+      </a>
+    </div>`;
+  }
+
+  // ── メイン処理 ──
+  (async function() {
+    const grid = document.getElementById('rb-grid');
+    const loadingEl = document.getElementById('rb-note-loading');
+    const fallbackEl = document.getElementById('rb-note-fallback');
+    const countEl = document.getElementById('rb-total-count');
+    if (!grid) return;
+
+    // 内部記事データを取得
+    const internalArticles: Article[] = (window as any).__INTERNAL_ARTICLES__ || [];
+
+    // note記事をクライアントサイドで取得
+    let noteArticles: Article[] = [];
+    try {
+      if (loadingEl) loadingEl.style.display = 'block';
+      const res = await fetch('/api/note-rss');
+      if (res.ok) {
+        const noteData = await res.json();
+        noteArticles = noteData.map((a: any) => ({
+          type: 'note' as const,
+          title: a.title,
+          link: a.link,
+          pubDate: new Date(a.pubDate).toISOString(),
+          thumbnail: a.thumbnail,
+          description: a.description,
+          tags: ['AI活用'],
+        }));
+      }
+    } catch {
+      // fetch失敗時はnote記事なしで続行
+    } finally {
+      if (loadingEl) loadingEl.style.display = 'none';
+    }
+
+    // note記事が取得できなかった場合、フォールバックリンクを表示
+    if (noteArticles.length === 0 && fallbackEl) {
+      fallbackEl.style.display = 'block';
+    }
+
+    // 統合リストを日付順でソート
+    const allArticles = [...internalArticles, ...noteArticles]
+      .sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+
+    // 記事数を更新
+    const totalCount = allArticles.length;
+    if (countEl) {
+      countEl.setAttribute('data-target', String(totalCount));
+    }
+
+    // グリッドを再構築
+    grid.innerHTML = allArticles.map((article, i) => createCardHTML(article, i)).join('');
+
+    // ── Pagination ──
+    initPagination();
+
+    // ── Count Up ──
+    initCountUp();
+  })();
+
+  function initPagination() {
     const PER_PAGE = 15;
     const allItems = Array.from(document.querySelectorAll('.rb-item'));
     const totalPages = Math.ceil(allItems.length / PER_PAGE);
@@ -725,8 +792,8 @@ const totalCount = allArticles.length;
 
     function renderPagination() {
       if (totalPages <= 1) {
-        paginationEl.style.display = 'none';
-        pageInfoEl.style.display = 'none';
+        paginationEl!.style.display = 'none';
+        pageInfoEl!.style.display = 'none';
         return;
       }
 
@@ -747,15 +814,15 @@ const totalCount = allArticles.length;
       html += '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6"/></svg>';
       html += '</button>';
 
-      paginationEl.innerHTML = html;
+      paginationEl!.innerHTML = html;
 
       // Page info
       const start = (currentPage - 1) * PER_PAGE + 1;
       const end = Math.min(currentPage * PER_PAGE, allItems.length);
-      pageInfoEl.textContent = `${allItems.length}件中 ${start}〜${end}件を表示`;
+      pageInfoEl!.textContent = `${allItems.length}件中 ${start}〜${end}件を表示`;
 
       // Bind click events
-      paginationEl.querySelectorAll('.rb-page-btn').forEach((btn) => {
+      paginationEl!.querySelectorAll('.rb-page-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
           const page = parseInt((btn as HTMLElement).getAttribute('data-page') || '1');
           if (page >= 1 && page <= totalPages) {
@@ -767,36 +834,37 @@ const totalCount = allArticles.length;
 
     // Initial render
     showPage(1);
-  })();
-
-  // ── Count Up ──
-  function runCountUp(el: HTMLElement) {
-    const target = parseInt(el.dataset.target || '0');
-    const prefix = el.dataset.prefix || '';
-    const suffix = el.dataset.suffix || '';
-    const duration = 900;
-    const steps = 40;
-    const interval = duration / steps;
-    let current = 0;
-    const increment = target / steps;
-
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        current = target;
-        clearInterval(timer);
-      }
-      el.innerHTML = prefix + Math.floor(current) + suffix;
-    }, interval);
   }
 
-  const countObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        runCountUp(entry.target as HTMLElement);
-        countObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('.rb-count').forEach(el => countObserver.observe(el));
+  function initCountUp() {
+    function runCountUp(el: HTMLElement) {
+      const target = parseInt(el.dataset.target || '0');
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const duration = 900;
+      const steps = 40;
+      const interval = duration / steps;
+      let current = 0;
+      const increment = target / steps;
+
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        el.innerHTML = prefix + Math.floor(current) + suffix;
+      }, interval);
+    }
+
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          runCountUp(entry.target as HTMLElement);
+          countObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.rb-count').forEach(el => countObserver.observe(el));
+  }
 </script>
