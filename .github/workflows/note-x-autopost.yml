@@ -1,0 +1,47 @@
+name: Note → X Auto Post
+
+on:
+  schedule:
+    # 毎時0分にチェック（UTC）— 日本時間で毎時チェック
+    - cron: '0 * * * *'
+  workflow_dispatch: # 手動実行も可能
+
+concurrency:
+  group: note-x-autopost
+  cancel-in-progress: false
+
+jobs:
+  check-and-post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # 前回チェック日時のキャッシュを復元
+      - name: Restore last check timestamp
+        uses: actions/cache@v4
+        with:
+          path: .note-last-check
+          key: note-last-check-${{ github.run_id }}
+          restore-keys: |
+            note-last-check-
+
+      - name: Check note RSS and post to X
+        env:
+          NOTE_USERNAME: sane_design2026
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+        run: node scripts/note-x-autopost.mjs
+
+      # チェック日時を保存（成功・失敗に関わらず）
+      - name: Save last check timestamp
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .note-last-check
+          key: note-last-check-${{ github.run_id }}
