@@ -574,7 +574,10 @@ const latestPosts: TopArticle[] = [
     <img class="cta-illust" src="/assets/creator_thumbsup_tablet.webp" alt="タブレットを持って親指を立てるクリエイター">
     <h2>まずは気軽にご相談ください</h2>
     <p>相談は無料。「何も分からない」状態で大丈夫です。<br>しつこい営業は一切しません。</p>
-    <a href="/contact/" class="btn btn-primary">無料で相談してみる（入力は1分）<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <div class="final-cta">
+      <a href="/contact/" class="btn btn-primary">無料で相談してみる（入力は1分）<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="https://line.me/R/ti/p/@000eyrej" class="btn btn-line" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M12 2C6.48 2 2 5.69 2 10.23c0 4.07 3.55 7.48 8.35 8.12.32.07.77.21.88.49.1.25.06.64.03.9l-.14.86c-.04.25-.2.99.87.54s5.77-3.4 7.87-5.82C21.4 13.72 22 12.05 22 10.23 22 5.69 17.52 2 12 2ZM8.13 12.79H6.14c-.29 0-.52-.24-.52-.52V8.29c0-.29.24-.52.52-.52s.52.24.52.52v3.45h1.47c.29 0 .52.24.52.52s-.24.53-.52.53Zm2.02-.52c0 .29-.24.52-.52.52s-.52-.24-.52-.52V8.29c0-.29.24-.52.52-.52s.52.24.52.52v3.98Zm4.79 0c0 .23-.15.43-.36.5-.06.02-.11.03-.17.03-.17 0-.32-.08-.42-.21l-2.04-2.78v2.46c0 .29-.24.52-.52.52s-.52-.24-.52-.52V8.29c0-.22.14-.42.36-.5.05-.02.11-.03.17-.03.16 0 .31.08.41.2l2.05 2.79V8.29c0-.29.24-.52.52-.52s.52.24.52.52v3.98Zm3.14-2.51c.29 0 .52.24.52.52s-.24.52-.52.52h-1.47v.95h1.47c.29 0 .52.24.52.52s-.24.53-.52.53h-1.99c-.29 0-.52-.24-.52-.52V8.29c0-.29.24-.52.52-.52h1.99c.29 0 .52.24.52.52s-.24.52-.52.52h-1.47v.95h1.47Z"/></svg>LINEで相談する</a>
+    </div>
     <p class="sub-note">お問い合わせフォームは30秒ほどで完了します</p>
   </div>
 </section>
@@ -622,6 +625,10 @@ const latestPosts: TopArticle[] = [
   .btn-primary:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--orange-dark)}
   .btn-blue{background:var(--primary);color:#fff;box-shadow:0 5px 0 var(--primary-deep)}
   .btn-blue:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--primary-deep)}
+  .btn-line{background:#06C755;color:#fff !important;box-shadow:0 5px 0 #04913e}
+  .btn-line:hover{transform:translateY(2px);box-shadow:0 3px 0 #04913e}
+  .btn-line::after{display:none!important}
+  .btn-line svg{width:22px;height:22px;stroke-width:0}
   .btn-ghost{background:#fff;color:var(--primary-dark)!important;box-shadow:0 5px 0 #CDEBFA;border:2px solid #CDEBFA}
   .btn-ghost:hover{transform:translateY(2px);box-shadow:0 3px 0 #CDEBFA;color:var(--primary-dark)!important}
   .btn-ghost::after{display:none!important}
@@ -939,7 +946,9 @@ const latestPosts: TopArticle[] = [
   .cta-illust{width:570px;margin:0 auto -20px;filter:drop-shadow(0 10px 16px rgba(0,0,0,.12));-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 65%,transparent 95%);mask-image:linear-gradient(to bottom,#000 0%,#000 65%,transparent 95%)}
   .final h2{font-size:36px;font-weight:900;margin-bottom:14px}
   .final p{font-size:16px;opacity:.97;margin-bottom:14px;font-weight:500}
-  .final .btn-primary{margin-top:8px;font-size:18px;padding:18px 44px}
+  .final-cta{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:8px}
+  .final .btn-primary{font-size:18px;padding:18px 44px}
+  .final .btn-line{font-size:18px;padding:18px 40px}
   .final .sub-note{font-size:13px;opacity:.92;margin-top:18px}
 
   /* mobile responsive */
@@ -991,7 +1000,9 @@ const latestPosts: TopArticle[] = [
     .test-track-wrap{overflow:hidden;width:100%}
     .test-grid{display:flex!important;flex-wrap:nowrap;gap:12px;animation:testScroll 12s linear infinite}
     .test{min-width:75vw!important;max-width:75vw!important;flex:0 0 75vw!important;box-sizing:border-box;padding:20px!important}
-    .final .btn-primary{font-size:15px;padding:16px 28px;white-space:nowrap}
+    .final .btn-primary,.final .btn-line{font-size:15px;padding:16px 28px;white-space:nowrap}
+    .final-cta{width:100%}
+    .final-cta .btn{width:100%;max-width:340px;justify-content:center}
   }
 
   /* ===== animations ===== */
