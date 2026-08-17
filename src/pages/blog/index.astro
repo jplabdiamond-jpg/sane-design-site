@@ -86,7 +86,7 @@ const buildTimeNoteLinks = noteArticles.map(a => a.link);
         <!-- Stats strip -->
         <div class="rb-count-badge">
           <div class="rb-stat">
-            <span class="rb-stat-num"><span class="rb-count" id="rb-total-count" data-target={totalCount} data-suffix="+">0</span></span>
+            <span class="rb-stat-num"><span class="rb-count" id="rb-total-count" data-target={totalCount} data-suffix="+">{totalCount}+</span></span>
             <span class="rb-stat-label">公開記事数</span>
           </div>
           <div class="rb-stat-divider"></div>
@@ -902,6 +902,7 @@ const buildTimeNoteLinks = noteArticles.map(a => a.link);
       }, interval);
     }
 
+    const countEls = document.querySelectorAll('.rb-count');
     const countObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -909,7 +910,15 @@ const buildTimeNoteLinks = noteArticles.map(a => a.link);
           countObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.5 });
-    document.querySelectorAll('.rb-count').forEach(el => countObserver.observe(el));
+    }, { threshold: 0.3 });
+    countEls.forEach(el => {
+      // If element is already visible (above the fold), run immediately
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        runCountUp(el as HTMLElement);
+      } else {
+        countObserver.observe(el);
+      }
+    });
   }
 </script>
