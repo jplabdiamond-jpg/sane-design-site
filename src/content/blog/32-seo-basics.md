@@ -2,7 +2,7 @@
 title: 'SEO対策とは？初心者にもわかる基本のキ'
 description: 'SEO対策って何？検索エンジンの仕組みから基本的な対策方法まで、初心者にもわかりやすく解説します。'
 pubDate: '2026-08-16'
-heroImage: ''
+heroImage: '/assets/blog/31_SEO_Basics.webp'
 tags:
   - SEO
   - 初心者向け
