@@ -1,7 +1,7 @@
 ---
 title: 'ブログ機能付きHPのメリットと活用法'
 description: 'HPにブログ機能を付けるメリットとは？SEO効果から信頼性アップまで、ブログ活用のコツを初心者向けに解説します。'
-pubDate: '2026-08-06'
+pubDate: '2026-08-16'
 heroImage: '/assets/blog/30_Blog_Benefits.webp'
 tags:
   - ブログ
