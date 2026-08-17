@@ -2,7 +2,7 @@
 title: 'タイトルタグとメタディスクリプションの書き方'
 description: 'SEOの基本中の基本、タイトルタグとメタディスクリプション。検索結果でクリックされるための書き方のコツを具体例付きで解説。'
 pubDate: '2026-08-17'
-heroImage: ''
+heroImage: '/assets/blog/34_Title_Tag.webp'
 tags:
   - タイトルタグ
   - メタディスクリプション
