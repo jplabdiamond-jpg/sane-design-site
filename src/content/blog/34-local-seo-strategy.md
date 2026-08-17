@@ -2,7 +2,7 @@
 title: '「地域名＋サービス名」で検索1位を取るSEO戦略'
 description: '地域密着ビジネスに最適なローカルSEO戦略。「地域名＋サービス名」で上位表示されるための具体的な方法を解説します。'
 pubDate: '2026-08-17'
-heroImage: ''
+heroImage: '/assets/blog/33_Local_SEO.webp'
 tags:
   - ローカルSEO
   - 地域集客
