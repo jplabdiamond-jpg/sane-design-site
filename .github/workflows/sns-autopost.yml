@@ -6,6 +6,11 @@ on:
     paths:
       - 'src/content/works/**.md'
       - 'src/content/blog/**.md'
+  workflow_dispatch:
+    inputs:
+      test_file:
+        description: 'テスト投稿するファイルパス（例: src/content/blog/32-seo-basics.md）'
+        required: false
 
 concurrency:
   group: sns-autopost
@@ -26,7 +31,11 @@ jobs:
       - name: Detect newly added work/blog files
         id: changed
         run: |
-          FILES=$(git diff --name-only --diff-filter=A ${{ github.event.before }} ${{ github.sha }} -- 'src/content/works/**.md' 'src/content/blog/**.md' || true)
+          if [ -n "${{ github.event.inputs.test_file }}" ]; then
+            FILES="${{ github.event.inputs.test_file }}"
+          else
+            FILES=$(git diff --name-only --diff-filter=A ${{ github.event.before }} ${{ github.sha }} -- 'src/content/works/**.md' 'src/content/blog/**.md' || true)
+          fi
           echo "added files:"
           echo "$FILES"
           {
