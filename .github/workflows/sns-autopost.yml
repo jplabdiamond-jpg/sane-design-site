@@ -25,7 +25,8 @@ jobs:
 
       - name: Detect newly added work/blog files
         id: changed
-        run: |          FILES=$(git diff --name-only --diff-filter=A ${{ github.event.before }} ${{ github.sha }} -- 'src/content/works/**.md' 'src/content/blog/**.md' || true)
+        run: |
+          FILES=$(git diff --name-only --diff-filter=A ${{ github.event.before }} ${{ github.sha }} -- 'src/content/works/**.md' 'src/content/blog/**.md' || true)
           echo "added files:"
           echo "$FILES"
           {
@@ -53,7 +54,8 @@ jobs:
         run: npm install sharp
 
       - name: Configure git for JPEG push
-        run: |          git config user.name "github-actions[bot]"
+        run: |
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Post to Instagram
