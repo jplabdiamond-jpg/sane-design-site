@@ -2,7 +2,7 @@
 title: 'Google検索で上位に表示される仕組みを図解で理解'
 description: 'Google検索の仕組みを図解でわかりやすく解説。クロール・インデックス・ランキングの3ステップを理解してSEOに活かそう。'
 pubDate: '2026-08-17'
-heroImage: ''
+heroImage: '/assets/blog/32_Google_Mechanism.webp'
 tags:
   - Google
   - 検索順位
