@@ -1,7 +1,7 @@
 ---
 title: 'HPで「選ばれる理由」を伝える方法'
 description: '競合との差別化に悩んでいませんか？HPで「あなたが選ばれる理由」を効果的に伝えるための構成とライティング術を解説します。'
-pubDate: '2026-08-06'
+pubDate: '2026-08-16'
 heroImage: '/assets/blog/29_Reasons_to_be_Chosen.webp'
 tags:
   - 差別化
