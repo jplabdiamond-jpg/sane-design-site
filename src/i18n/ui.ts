@@ -15,6 +15,9 @@ export const EN_AVAILABLE: string[] = [
   '/about/',
   '/faq/',
   '/recruit/',
+  '/services/web-design/',
+  '/services/seo/',
+  '/contact/',
 ];
 
 // 共通 UI（ヘッダー・フッター・CTA など）の翻訳

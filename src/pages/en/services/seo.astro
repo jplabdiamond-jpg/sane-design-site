@@ -1,0 +1,31 @@
+---
+import RenewalLayout from '../../../layouts/RenewalLayout.astro';
+import SeoContent from '../../../components/pages/services/SeoContent.astro';
+import { SITE_URL } from '../../../consts';
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'SEO',
+  name: 'SEO & Internal Optimization',
+  description:
+    'From ¥10,000, published 3 articles per day. We add blog articles based on your target keywords and perform internal SEO to help lift your search rankings.',
+  provider: { '@id': `${SITE_URL}/#organization` },
+  areaServed: { '@type': 'Country', name: 'Japan' },
+  url: `${SITE_URL}/en/services/seo/`,
+  offers: {
+    '@type': 'Offer',
+    price: '10000',
+    priceCurrency: 'JPY',
+    description: '60 curated articles + internal SEO',
+  },
+};
+---
+
+<RenewalLayout
+  title="SEO & Internal SEO | From ¥10,000, 3 articles/day | Sane Design"
+  description="From ¥10,000, published 3 articles per day. We add 60 blog articles based on your target keywords and perform internal SEO. A designer with 200+ projects supports your search rankings."
+  jsonLd={serviceJsonLd}
+>
+  <SeoContent lang="en" />
+</RenewalLayout>
