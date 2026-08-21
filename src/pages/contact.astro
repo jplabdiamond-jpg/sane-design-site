@@ -183,6 +183,14 @@ import RenewalLayout from '../layouts/RenewalLayout.astro';
                     <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
                     <span class="opt-info"><span class="opt-name">ドメイン・サーバー初期設定</span><span class="opt-price">+ 4,000円</span></span>
                   </label>
+                  <label class="opt-item" data-price="10000" data-name="自分でサイトを更新できる機能追加">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">自分でサイトを更新できる機能追加</span><span class="opt-price">+ 10,000円</span></span>
+                  </label>
+                  <label class="opt-item" data-price="15000" data-name="チャットボット追加">
+                    <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                    <span class="opt-info"><span class="opt-name">チャットボット追加</span><span class="opt-price">+ 15,000円</span></span>
+                  </label>
                   <div class="opt-item" data-price="10000" data-name="管理者ダッシュボード設置">
                     <label style="display:flex;align-items:center;gap:12px;cursor:pointer;flex:1">
                       <input type="checkbox"><span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
@@ -529,6 +537,7 @@ textarea.form-input{resize:vertical;line-height:1.8}
   .step-tab .st-label{font-size:10px}
   .plan-selector{flex-direction:column}
   .opt-info{flex-direction:column;align-items:flex-start;gap:4px}
+  .opt-grid{max-height:min(66vh,600px)}
   .total-bar{flex-direction:column;gap:8px;text-align:center}
   .step-nav{flex-direction:column;align-items:center}
   .step-nav .btn{width:100%;max-width:100%}
