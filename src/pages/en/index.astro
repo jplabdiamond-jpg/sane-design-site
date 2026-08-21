@@ -1,0 +1,15 @@
+---
+import RenewalLayout from '../../layouts/RenewalLayout.astro';
+import HomeContent from '../../components/pages/HomeContent.astro';
+import { getLatestPosts, homeJsonLd } from '../../lib/homeData';
+
+const latestPosts = await getLatestPosts();
+---
+
+<RenewalLayout
+  title="Sane Design | High-quality websites, at a low price"
+  description="Delivery in as few as 3 days, from ¥20,000. A studio specializing in websites and internal SEO for sole proprietors and small businesses — 300+ projects across print and web."
+  jsonLd={homeJsonLd}
+>
+  <HomeContent lang="en" latestPosts={latestPosts} />
+</RenewalLayout>

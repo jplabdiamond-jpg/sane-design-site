@@ -1,25 +1,32 @@
 ---
 import { SITE_NAME, NAV_LINKS } from '../consts';
+import { getLangFromUrl, localizePath, useTranslations } from '../i18n/utils';
+import LangSwitcher from './LangSwitcher.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const homeHref = lang === 'en' ? '/en/' : '/';
 ---
 
 <header class="site-header" id="site-header">
   <div class="container-editorial flex items-center justify-between" style="height:64px;">
-    <a href="/" class="font-serif text-base tracking-widest uppercase" aria-label={SITE_NAME} style="letter-spacing:0.2em;font-weight:400;">
+    <a href={homeHref} class="font-serif text-base tracking-widest uppercase" aria-label={SITE_NAME} style="letter-spacing:0.2em;font-weight:400;">
       {SITE_NAME}
     </a>
     <nav class="hidden md:flex items-center gap-10" aria-label="Global">
       {
         NAV_LINKS.map((link) => (
-          <a href={link.href} class="hover-underline text-xs tracking-widest uppercase" style="letter-spacing:0.12em;color:var(--color-text);">
+          <a href={localizePath(link.href, lang)} class="hover-underline text-xs tracking-widest uppercase" style="letter-spacing:0.12em;color:var(--color-text);">
             {link.label}
           </a>
         ))
       }
+      <LangSwitcher />
     </nav>
     <button
       id="menu-toggle"
       class="md:hidden flex flex-col gap-[5px] justify-center items-end w-8 h-8"
-      aria-label="メニューを開く"
+      aria-label={t('nav.menu')}
       type="button"
     >
       <span class="menu-bar block h-px bg-current w-6 transition-all duration-300"></span>
@@ -39,13 +46,16 @@ import { SITE_NAME, NAV_LINKS } from '../consts';
       {
         NAV_LINKS.map((link) => (
           <li class="border-b border-[var(--color-border)]">
-            <a href={link.href} class="flex items-center justify-between px-5 py-5 text-sm tracking-widest uppercase" style="letter-spacing:0.1em;">
+            <a href={localizePath(link.href, lang)} class="flex items-center justify-between px-5 py-5 text-sm tracking-widest uppercase" style="letter-spacing:0.1em;">
               {link.label}
               <span style="font-size:10px;">→</span>
             </a>
           </li>
         ))
       }
+      <li class="px-5 py-4">
+        <LangSwitcher compact />
+      </li>
     </ul>
   </nav>
 </header>

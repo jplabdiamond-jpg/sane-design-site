@@ -1,7 +1,14 @@
 ---
 import '../styles/global.css';
 import SEO from '../components/SEO.astro';
+import LangRedirect from '../components/LangRedirect.astro';
+import LangSwitcher from '../components/LangSwitcher.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getLangFromUrl, localizePath, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const homeHref = lang === 'en' ? '/en/' : '/';
 
 interface Props {
   title?: string;
@@ -27,10 +34,11 @@ const {
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <LangRedirect />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-17VLB3PB4C"></script>
     <script is:inline>
@@ -47,6 +55,7 @@ const {
     <SEO
       title={title}
       description={description}
+      lang={lang}
       image={image}
       ogType={ogType}
       jsonLd={jsonLd}
@@ -70,17 +79,18 @@ const {
     <!-- ── Renewal Header ── -->
     <header class="rn-header" id="rn-header">
       <div class="rn-nav-wrap">
-        <a href="/" class="rn-logo" aria-label="Sane Design">Sane<b>Design</b></a>
+        <a href={homeHref} class="rn-logo" aria-label="Sane Design">Sane<b>Design</b></a>
         <nav class="rn-nav-links" id="rn-nav-links">
-          <a href="/#reasons">選ばれる理由</a>
-          <a href="/#services">サービス</a>
-          <a href="/#pricing">料金</a>
-          <a href="/works/">制作実績</a>
-          <a href="/blog/">ブログ</a>
-          <a href="/#faq">よくある質問</a>
-          <a href="/contact/" class="rn-btn rn-btn-primary rn-btn-nav">無料で相談</a>
+          <a href={localizePath('/#reasons', lang)}>{t('rn.reasons')}</a>
+          <a href={localizePath('/#services', lang)}>{t('rn.services')}</a>
+          <a href={localizePath('/#pricing', lang)}>{t('rn.pricing')}</a>
+          <a href={localizePath('/works/', lang)}>{t('rn.works')}</a>
+          <a href={localizePath('/blog/', lang)}>{t('rn.blog')}</a>
+          <a href={localizePath('/#faq', lang)}>{t('rn.faq')}</a>
+          <a href={localizePath('/contact/', lang)} class="rn-btn rn-btn-primary rn-btn-nav">{t('rn.consult')}</a>
+          <LangSwitcher />
         </nav>
-        <button class="rn-menu-btn" id="rn-menu-btn" aria-label="メニュー">
+        <button class="rn-menu-btn" id="rn-menu-btn" aria-label={t('nav.menu')}>
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -88,13 +98,14 @@ const {
       <!-- Mobile menu overlay -->
       <div class="rn-mobile-menu" id="rn-mobile-menu">
         <nav class="rn-mobile-nav">
-          <a href="/#reasons">選ばれる理由</a>
-          <a href="/#services">サービス</a>
-          <a href="/#pricing">料金</a>
-          <a href="/works/">制作実績</a>
-          <a href="/blog/">ブログ</a>
-          <a href="/#faq">よくある質問</a>
-          <a href="/contact/" class="rn-btn rn-btn-primary" style="margin-top:12px;width:100%;justify-content:center;">無料で相談</a>
+          <a href={localizePath('/#reasons', lang)}>{t('rn.reasons')}</a>
+          <a href={localizePath('/#services', lang)}>{t('rn.services')}</a>
+          <a href={localizePath('/#pricing', lang)}>{t('rn.pricing')}</a>
+          <a href={localizePath('/works/', lang)}>{t('rn.works')}</a>
+          <a href={localizePath('/blog/', lang)}>{t('rn.blog')}</a>
+          <a href={localizePath('/#faq', lang)}>{t('rn.faq')}</a>
+          <a href={localizePath('/contact/', lang)} class="rn-btn rn-btn-primary" style="margin-top:12px;width:100%;justify-content:center;">{t('rn.consult')}</a>
+          <div style="margin-top:14px;display:flex;justify-content:center;"><LangSwitcher compact /></div>
         </nav>
       </div>
     </header>
@@ -107,23 +118,23 @@ const {
     <footer class="rn-footer">
       <div class="rn-footer-wrap">
         <div class="rn-foot-grid">
-          <a href="/" class="rn-foot-logo">Sane<b>Design</b></a>
+          <a href={homeHref} class="rn-foot-logo">Sane<b>Design</b></a>
           <div class="rn-foot-links">
-            <a href="/#services">サービス</a>
-            <a href="/#pricing">料金</a>
-            <a href="/works/">制作実績</a>
-            <a href="/#faq">よくある質問</a>
-            <a href="/contact/">お問い合わせ</a>
+            <a href={localizePath('/#services', lang)}>{t('rn.services')}</a>
+            <a href={localizePath('/#pricing', lang)}>{t('rn.pricing')}</a>
+            <a href={localizePath('/works/', lang)}>{t('rn.works')}</a>
+            <a href={localizePath('/#faq', lang)}>{t('rn.faq')}</a>
+            <a href={localizePath('/contact/', lang)}>{t('rn.footContact')}</a>
           </div>
         </div>
-        <div class="rn-copy">高品質なwebサイトを、低価格で。 &copy; 2026 Sane Design</div>
+        <div class="rn-copy">{t('rn.copy')} &copy; 2026 Sane Design</div>
       </div>
     </footer>
 
     <!-- ── Mobile Sticky CTA ── -->
     <div class="rn-sticky-cta">
-      <a href="/works/" class="rn-btn rn-btn-ghost">実績</a>
-      <a href="/contact/" class="rn-btn rn-btn-primary">無料で相談する</a>
+      <a href={localizePath('/works/', lang)} class="rn-btn rn-btn-ghost">{t('rn.footWorks')}</a>
+      <a href={localizePath('/contact/', lang)} class="rn-btn rn-btn-primary">{t('rn.stickyConsult')}</a>
     </div>
 
   </body>

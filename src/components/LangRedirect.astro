@@ -1,0 +1,26 @@
+---
+// 初回アクセス時の言語自動判定 + 明示選択の永続化リダイレクト。
+// <head> 内で描画前に実行させるため is:inline。英語版が存在するルートのみ
+// リダイレクト対象にして 404 を防ぐ。
+import { EN_AVAILABLE } from '../i18n/ui';
+
+const enList = JSON.stringify(EN_AVAILABLE);
+const script = `(function(){
+  try{
+    var EN=${enList};
+    var path=location.pathname;
+    var isEn = path==='/en' || path.indexOf('/en/')===0;
+    function baseOf(p){ p=p.replace(/^\\/en(?=\\/|$)/,'')||'/'; if(p!=='/'&&p.slice(-1)!=='/')p+='/'; return p; }
+    function hasEn(p){ return EN.indexOf(baseOf(p))!==-1; }
+    function toEn(){ return ('/en'+location.pathname).replace(/\\/en$/,'/en/')+location.search+location.hash; }
+    function toJa(){ return (location.pathname.replace(/^\\/en(?=\\/|$)/,'')||'/')+location.search+location.hash; }
+    var saved=null; try{ saved=localStorage.getItem('preferred-lang'); }catch(e){}
+    if(saved==='en'){ if(!isEn && hasEn(path)) location.replace(toEn()); return; }
+    if(saved==='ja'){ if(isEn) location.replace(toJa()); return; }
+    // 明示選択なし = 初回。ブラウザ言語が日本語以外なら英語版へ。
+    var nav=(navigator.language||navigator.userLanguage||'').toLowerCase();
+    if(nav.indexOf('ja')!==0 && !isEn && hasEn(path)){ location.replace(toEn()); }
+  }catch(e){}
+})();`;
+---
+<script is:inline set:html={script} />

@@ -1,5 +1,6 @@
 ---
 import { SITE_URL } from '../consts';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 interface Crumb {
   label: string;
@@ -12,8 +13,11 @@ interface Props {
 
 const { items } = Astro.props;
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 // 先頭に Home を固定で付与
-const crumbs: Crumb[] = [{ label: 'Home', href: '/' }, ...items];
+const crumbs: Crumb[] = [{ label: t('crumb.home'), href: lang === 'en' ? '/en/' : '/' }, ...items];
 
 const jsonLd = {
   '@context': 'https://schema.org',

@@ -1,12 +1,17 @@
 ---
+import { getLangFromUrl, localizePath, useTranslations } from '../i18n/utils';
+
 interface Props {
   headline?: string;
   subline?: string;
 }
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const {
-  headline = 'Let\'s work together.',
-  subline = '新しいプロジェクトのご依頼・ご相談をお待ちしております',
+  headline = t('cta.headline'),
+  subline = t('cta.subline'),
 } = Astro.props;
 ---
 
@@ -19,7 +24,7 @@ const {
   </div>
 
   <div class="container-editorial" style="position:relative; z-index:1; text-align:center;">
-    <p style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; opacity:0.5; margin-bottom:24px;">New Project</p>
+    <p style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; opacity:0.5; margin-bottom:24px;">{t('cta.newProject')}</p>
     <h2 class="reveal" style="font-family:var(--font-serif); font-size:clamp(36px,6vw,80px); font-weight:300; line-height:1.1; margin-bottom:24px; letter-spacing:-0.01em;">
       {headline}
     </h2>
@@ -28,23 +33,23 @@ const {
     </p>
     <div class="reveal" style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; transition-delay:200ms;">
       <a
-        href="/payment/"
+        href={localizePath('/payment/', lang)}
         style="display:inline-flex; align-items:center; gap:10px; padding:18px 48px; background:#ffffff; color:#000000; font-size:13px; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; transition: opacity 0.3s ease; text-decoration:none;"
         class="cta-btn-primary"
       >
-        <span>今すぐ注文する →</span>
+        <span>{t('cta.order')}</span>
       </a>
       <a
-        href="/contact/#contact-form"
+        href={localizePath('/contact/', lang) + '#contact-form'}
         style="display:inline-flex; align-items:center; gap:10px; padding:18px 36px; border:1px solid rgba(255,255,255,0.6); color:#ffffff; font-size:13px; letter-spacing:0.1em; text-transform:uppercase; position:relative; overflow:hidden; transition: border-color 0.3s ease; text-decoration:none;"
         class="cta-btn"
       >
-        <span style="position:relative;z-index:1;">まずは相談する</span>
+        <span style="position:relative;z-index:1;">{t('cta.consult')}</span>
       </a>
     </div>
     <div class="reveal" style="margin-top:40px; transition-delay:300ms;">
-      <a href="/contact/#contact-form" style="font-size:12px; letter-spacing:0.12em; text-transform:uppercase; opacity:0.6; border-bottom:1px solid rgba(255,255,255,0.4); padding-bottom:2px; text-decoration:none; color:#fff; transition: opacity 0.3s ease;">
-        またはメールで問い合わせる →
+      <a href={localizePath('/contact/', lang) + '#contact-form'} style="font-size:12px; letter-spacing:0.12em; text-transform:uppercase; opacity:0.6; border-bottom:1px solid rgba(255,255,255,0.4); padding-bottom:2px; text-decoration:none; color:#fff; transition: opacity 0.3s ease;">
+        {t('cta.email')}
       </a>
     </div>
   </div>

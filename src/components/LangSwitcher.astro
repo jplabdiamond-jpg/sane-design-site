@@ -1,0 +1,52 @@
+---
+// 言語切替ボタン（JP / EN）。現在言語をハイライトし、クリックで選択を
+// localStorage に保存してから対応ページへ遷移する。
+import { getLangFromUrl, alternatePath } from '../i18n/utils';
+
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const jaHref = alternatePath(Astro.url, 'ja');
+const enHref = alternatePath(Astro.url, 'en');
+---
+
+<div class={`lang-switch${compact ? ' compact' : ''}`} role="group" aria-label="Language / 言語">
+  <a href={jaHref} data-lang="ja" class={lang === 'ja' ? 'is-active' : ''} aria-current={lang === 'ja' ? 'true' : 'false'}>JP</a>
+  <span class="sep" aria-hidden="true">/</span>
+  <a href={enHref} data-lang="en" class={lang === 'en' ? 'is-active' : ''} aria-current={lang === 'en' ? 'true' : 'false'}>EN</a>
+</div>
+
+<style>
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .lang-switch a {
+    color: var(--color-muted, #7A8494);
+    text-decoration: none;
+    padding: 3px 4px;
+    border-radius: 4px;
+    transition: color 0.2s ease;
+  }
+  .lang-switch a:hover { color: var(--color-primary, #4FB4E8); }
+  .lang-switch a.is-active { color: var(--color-primary, #4FB4E8); }
+  .lang-switch .sep { color: var(--color-muted, #7A8494); opacity: 0.5; }
+  .lang-switch.compact { font-size: 13px; }
+</style>
+
+<script>
+  // クリックで言語の明示選択を保存（自動リダイレクトより優先される）
+  document.addEventListener('click', (e) => {
+    const a = (e.target as HTMLElement)?.closest?.('.lang-switch a[data-lang]') as HTMLAnchorElement | null;
+    if (!a) return;
+    try { localStorage.setItem('preferred-lang', a.dataset.lang || 'ja'); } catch (err) {}
+  });
+</script>

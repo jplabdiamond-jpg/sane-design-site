@@ -6,6 +6,13 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://sane-design.net',
+  i18n: {
+    defaultLocale: 'ja',
+    locales: ['ja', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   integrations: [
     mdx(),
     sitemap({
