@@ -12,6 +12,9 @@ export type Locale = (typeof LOCALES)[number];
 // 実在する /en/... だけを指し、未翻訳ページは日本語版へフォールバックする。
 export const EN_AVAILABLE: string[] = [
   '/', // トップページ
+  '/about/',
+  '/faq/',
+  '/recruit/',
 ];
 
 // 共通 UI（ヘッダー・フッター・CTA など）の翻訳

@@ -1,0 +1,144 @@
+---
+import CTABanner from '../CTABanner.astro';
+import Breadcrumbs from '../Breadcrumbs.astro';
+import type { Locale } from '../../i18n/ui';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+
+const S = {
+  ja: {
+    heroP: 'DTP・WEB 合わせて 300 件以上のデザイン実績をもとに、<br>「速くて、良い」を追求するスタジオです。',
+    storyH: '私たちについて',
+    story1: '複雑なブリーフィングや長い打ち合わせは不要。画像とざっくりしたイメージを共有いただければ、最短3日でお届けします。',
+    story2: '「ホームページ制作に何週間もかけたくない」「でも見栄えは妥協したくない」という声に応えるために、Sane Design は立ち上がりました。',
+    story3: 'グラフィックデザインの現場で培った審美眼と、Web 開発の技術を掛け合わせることで、スピードとクオリティの両立を実現しています。',
+    policyH: '3 つのポリシー',
+    policies: [
+      { num: '01', title: '速く納品する', desc: 'ビジネスのスピードに合わせます。1ヶ月待つ間に失われる機会損失を、3日で解決します。' },
+      { num: '02', title: '無駄を省く', desc: '過剰な打ち合わせ・CMS・ページ数を排除。本当に必要なものだけで勝負します。' },
+      { num: '03', title: '運用しやすく作る', desc: '納品して終わりではなく、クライアント自身が運用しやすいサイトを設計します。' },
+    ],
+    expertiseH: '得意分野',
+    skills: [
+      { cat: 'Web Design', items: ['コーポレートサイト', 'LP・ランディングページ', '士業・サロン・医療', '飲食店・個人事業主', 'EC・予約サイト'] },
+      { cat: 'SEO', items: ['内部 SEO 対策', 'コンテンツ SEO', '記事執筆・追加（60本〜）', 'Google Search Console', 'サイト速度改善'] },
+      { cat: 'Technologies', items: ['HTML / CSS / JavaScript', 'Astro / Next.js', 'Tailwind CSS', 'WordPress', 'Cloudflare Pages / Vercel'] },
+    ],
+  },
+  en: {
+    heroP: 'Built on 300+ design projects across print and web,<br>a studio pursuing "fast and good."',
+    storyH: 'About us',
+    story1: 'No complex briefings or long meetings. Share images and a rough idea, and we deliver in as few as 3 days.',
+    story2: 'Sane Design started to answer a common wish: "I don\'t want to spend weeks on a website — but I don\'t want to compromise on how it looks, either."',
+    story3: 'By combining an eye honed in graphic design with web development skills, we achieve both speed and quality.',
+    policyH: 'Our three policies',
+    policies: [
+      { num: '01', title: 'Deliver fast', desc: "We match your business's pace. The opportunities lost while waiting a month, we solve in three days." },
+      { num: '02', title: 'Cut the waste', desc: 'We remove excessive meetings, CMS, and page counts, and compete with only what is truly needed.' },
+      { num: '03', title: 'Build for easy operation', desc: "We don't just deliver and leave — we design sites clients can run themselves with ease." },
+    ],
+    expertiseH: 'Areas of expertise',
+    skills: [
+      { cat: 'Web Design', items: ['Corporate sites', 'Landing pages', 'Professionals, salons, medical', 'Restaurants & sole proprietors', 'E-commerce & booking sites'] },
+      { cat: 'SEO', items: ['Internal SEO', 'Content SEO', 'Article writing & additions (60+)', 'Google Search Console', 'Site speed improvement'] },
+      { cat: 'Technologies', items: ['HTML / CSS / JavaScript', 'Astro / Next.js', 'Tailwind CSS', 'WordPress', 'Cloudflare Pages / Vercel'] },
+    ],
+  },
+} as const;
+const t = S[lang];
+---
+
+<!-- Hero -->
+<section style="padding:80px 0 60px;">
+  <div class="container-editorial">
+    <Breadcrumbs items={[{ label: 'About' }]} />
+    <p class="section-label reveal" style="margin-top:18px;">About</p>
+    <h1 class="reveal" style="font-family:var(--font-serif); font-size:clamp(40px,7vw,100px); font-weight:300; line-height:1.05; letter-spacing:-0.02em; transition-delay:80ms;">
+      Design,<br />
+      <span style="font-style:italic;">faster.</span>
+    </h1>
+    <p class="reveal" style="margin-top:24px; max-width:560px; font-size:16px; color:var(--color-muted); line-height:1.9; transition-delay:160ms;" set:html={t.heroP}></p>
+  </div>
+</section>
+
+<!-- Profile section -->
+<section style="padding:80px 0; border-top:1px solid var(--color-border);">
+  <div class="container-editorial">
+    <div style="display:grid; grid-template-columns:1fr 1.4fr; gap:80px; align-items:start;" class="about-grid">
+      <!-- Left: Label -->
+      <div class="reveal">
+        <p class="section-label" style="margin-bottom:8px;">Designer</p>
+        <h2 style="font-family:var(--font-serif); font-size:clamp(32px,4vw,56px); font-weight:300; line-height:1.2;">
+          Sane<br />Atsu
+        </h2>
+        <div style="margin-top:32px; display:flex; flex-direction:column; gap:16px;">
+          <a href="https://www.instagram.com/sane_design2023/" target="_blank" rel="noopener" class="hover-underline" style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; color:var(--color-muted);">Instagram →</a>
+          <a href="https://x.com/sane_design" target="_blank" rel="noopener" class="hover-underline" style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; color:var(--color-muted);">X / Twitter →</a>
+        </div>
+      </div>
+
+      <!-- Right: Story -->
+      <div class="reveal prose-custom" style="transition-delay:120ms;">
+        <h2 style="font-size:clamp(20px,2.5vw,28px); margin-top:0;">{t.storyH}</h2>
+        <p>{t.story1}</p>
+        <p>{t.story2}</p>
+        <p>{t.story3}</p>
+
+        <h2>{t.policyH}</h2>
+        <div style="display:flex; flex-direction:column; gap:24px; margin-top:24px;">
+          {t.policies.map((item) => (
+            <div style="display:flex; gap:24px; padding-top:24px; border-top:1px solid var(--color-border);">
+              <span style="font-family:var(--font-serif); font-size:13px; color:var(--color-muted); flex-shrink:0; padding-top:2px;">{item.num}</span>
+              <div>
+                <h3 style="font-size:16px; font-weight:500; margin-bottom:8px; margin-top:0;">{item.title}</h3>
+                <p style="font-size:13px; color:var(--color-muted); line-height:1.9; margin-bottom:0;">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills / Expertise -->
+<section style="padding:80px 0; background:var(--color-surface);">
+  <div class="container-editorial">
+    <p class="section-label reveal">Expertise</p>
+    <h2 class="reveal" style="font-family:var(--font-serif); font-size:clamp(24px,3vw,40px); font-weight:300; margin-bottom:48px; transition-delay:80ms;">{t.expertiseH}</h2>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px;" class="skills-grid">
+      {t.skills.map((col, i) => (
+        <div class="reveal" style={`padding:40px 32px; background:#fff; transition-delay:${i * 80}ms;`}>
+          <p style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--color-muted); margin-bottom:20px;">{col.cat}</p>
+          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;">
+            {col.items.map((item) => (
+              <li style="font-size:14px; display:flex; align-items:center; gap:8px;">
+                <span style="width:4px; height:4px; border-radius:50%; background:var(--color-primary); flex-shrink:0;"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<CTABanner />
+
+<style>
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+    .skills-grid { grid-template-columns: 1fr !important; }
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>

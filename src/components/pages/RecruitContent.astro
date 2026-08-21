@@ -1,0 +1,202 @@
+---
+import type { Locale } from '../../i18n/ui';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+
+const S = {
+  ja: {
+    heroP: '単発・長期など様々な形態でご対応可能です。<br>Web制作・SEO・DTPデザインなど、まずはお気軽にご相談ください。',
+    cards: [
+      { no: '01', t: '単発のご依頼', d: 'チラシ1枚、LP1本、記事制作など。スポットでの制作をその都度お受けします。' },
+      { no: '02', t: '長期・継続のご依頼', d: '定期的なデザイン制作やSEO運用、サイトの継続的な更新など、長期パートナーとして伴走します。' },
+      { no: '03', t: '柔軟なご相談', d: 'ご予算・納期・稼働量に合わせて、最適な進め方をご提案します。お気軽にご相談ください。' },
+    ],
+    formLabel: 'Request Form', formH: 'お仕事のご依頼フォーム',
+    formP: '単発・長期どちらも歓迎です。ご依頼内容をお書きください。通常24時間以内にご返信します。',
+    subject: '【Sane Design】お仕事のご依頼', fromName: 'Sane Design お仕事依頼フォーム',
+    lName: 'お名前', lEmail: 'メールアドレス', lType: 'ご依頼の形態', lService: 'ご依頼の内容', lMessage: 'ご依頼内容の詳細',
+    phName: '山田 太郎', phMessage: 'ご依頼内容・ご予算・ご希望納期・稼働量などをご記入ください',
+    selPlaceholder: '選択してください',
+    types: ['単発のご依頼', '長期・継続のご依頼', '未定・要相談'],
+    services: ['ホームページ制作', 'LP制作', 'SEO対策', 'DTP・チラシデザイン', 'その他'],
+    submit: '依頼を送信する →',
+    jsSending: '送信中...', jsSuccess: 'お仕事のご依頼ありがとうございます。24時間以内にご返信いたします。',
+    jsError: '送信に失敗しました。直接 saneatsu.designs@gmail.com へご連絡ください。', jsSubmit: '依頼を送信する →',
+  },
+  en: {
+    heroP: 'We take on projects in many forms — one-off or long-term.<br>Web production, SEO, DTP design — feel free to reach out first.',
+    cards: [
+      { no: '01', t: 'One-off requests', d: 'A single flyer, one landing page, article production, and the like. We take on spot work as needed.' },
+      { no: '02', t: 'Long-term / ongoing', d: 'Regular design work, SEO operation, ongoing site updates — we walk alongside you as a long-term partner.' },
+      { no: '03', t: 'Flexible consultation', d: 'We propose the best approach for your budget, timeline, and workload. Feel free to consult us.' },
+    ],
+    formLabel: 'Request Form', formH: 'Work request form',
+    formP: 'Both one-off and long-term are welcome. Tell us what you need. We usually reply within 24 hours.',
+    subject: '[Sane Design] Work request (EN)', fromName: 'Sane Design Work Request Form',
+    lName: 'Name', lEmail: 'Email', lType: 'Type of request', lService: 'What you need', lMessage: 'Details of your request',
+    phName: 'John Smith', phMessage: 'Please include the details, budget, desired timeline, workload, etc.',
+    selPlaceholder: 'Please select',
+    types: ['One-off request', 'Long-term / ongoing', 'Undecided / to discuss'],
+    services: ['Website production', 'Landing page', 'SEO', 'DTP / flyer design', 'Other'],
+    submit: 'Send request →',
+    jsSending: 'Sending...', jsSuccess: 'Thank you for your request. We will reply within 24 hours.',
+    jsError: 'Submission failed. Please contact saneatsu.designs@gmail.com directly.', jsSubmit: 'Send request →',
+  },
+} as const;
+const t = S[lang];
+---
+
+<!-- Hero -->
+<section style="padding:80px 0 60px;">
+  <div class="container-editorial">
+    <p class="section-label reveal">Work Request</p>
+    <h1 class="reveal" style="font-family:var(--font-serif); font-size:clamp(40px,7vw,100px); font-weight:300; line-height:1.05; letter-spacing:-0.02em; transition-delay:80ms;">
+      Let's work<br />
+      <span style="font-style:italic;">together.</span>
+    </h1>
+    <p class="reveal" style="margin-top:24px; max-width:520px; font-size:15px; color:var(--color-muted); line-height:1.9; transition-delay:160ms;" set:html={t.heroP}></p>
+  </div>
+</section>
+
+<!-- Work Styles -->
+<section style="padding:0 0 80px;">
+  <div class="container-editorial">
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px;" class="recruit-grid">
+      {t.cards.map((item, i) => (
+        <div class="reveal" style={`padding:48px 40px; border:1px solid var(--color-border); position:relative; overflow:hidden; transition-delay:${i * 100}ms;`}>
+          <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-muted); margin-bottom:24px;">{item.no}</p>
+          <h2 style="font-family:var(--font-serif); font-size:clamp(20px,2.2vw,26px); font-weight:300; line-height:1.4; margin-bottom:16px;">
+            {item.t}
+          </h2>
+          <p style="font-size:13px; color:var(--color-muted); line-height:1.9;">
+            {item.d}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Work Request Form -->
+<section style="padding:80px 0; border-top:1px solid var(--color-border);">
+  <div class="container-editorial">
+    <div style="max-width:640px;">
+      <p class="section-label reveal">{t.formLabel}</p>
+      <h2 class="reveal" style="font-family:var(--font-serif); font-size:clamp(24px,3vw,40px); font-weight:300; margin-bottom:12px; transition-delay:80ms;">
+        {t.formH}
+      </h2>
+      <p class="reveal" style="font-size:13px; color:var(--color-muted); margin-bottom:40px; transition-delay:120ms;">
+        {t.formP}
+      </p>
+
+      <form class="reveal" id="recruit-form" style="display:flex; flex-direction:column; gap:24px; transition-delay:160ms;" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="7bcc6bbc-01d3-4a99-a783-3cdad33fbaa5" />
+        <input type="hidden" name="subject" value={t.subject} />
+        <input type="hidden" name="from_name" value={t.fromName} />
+        <input type="checkbox" name="botcheck" style="display:none;" />
+
+        <div class="form-group">
+          <label style="display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; color:var(--color-muted);">
+            {t.lName} <span style="color:#c00;">*</span>
+          </label>
+          <input type="text" name="name" required placeholder={t.phName} style="width:100%; padding:14px 16px; border:1px solid var(--color-border); background:#fff; font-size:14px; font-family:var(--font-sans); outline:none; transition: border-color 0.3s ease;" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label style="display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; color:var(--color-muted);">
+            {t.lEmail} <span style="color:#c00;">*</span>
+          </label>
+          <input type="email" name="email" required placeholder="your@email.com" style="width:100%; padding:14px 16px; border:1px solid var(--color-border); background:#fff; font-size:14px; font-family:var(--font-sans); outline:none; transition: border-color 0.3s ease;" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label style="display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; color:var(--color-muted);">
+            {t.lType}
+          </label>
+          <select name="work_type" style="width:100%; padding:14px 16px; border:1px solid var(--color-border); background:#fff; font-size:14px; font-family:var(--font-sans); outline:none; transition: border-color 0.3s ease; appearance:none; cursor:pointer;" class="form-input">
+            <option value="">{t.selPlaceholder}</option>
+            {t.types.map((v) => (<option value={v}>{v}</option>))}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label style="display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; color:var(--color-muted);">
+            {t.lService}
+          </label>
+          <select name="service" style="width:100%; padding:14px 16px; border:1px solid var(--color-border); background:#fff; font-size:14px; font-family:var(--font-sans); outline:none; transition: border-color 0.3s ease; appearance:none; cursor:pointer;" class="form-input">
+            <option value="">{t.selPlaceholder}</option>
+            {t.services.map((v) => (<option value={v}>{v}</option>))}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label style="display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; color:var(--color-muted);">
+            {t.lMessage} <span style="color:#c00;">*</span>
+          </label>
+          <textarea name="message" required rows="6" placeholder={t.phMessage} style="width:100%; padding:14px 16px; border:1px solid var(--color-border); background:#fff; font-size:14px; font-family:var(--font-sans); outline:none; resize:vertical; transition: border-color 0.3s ease; line-height:1.8;" class="form-input"></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" style="align-self:flex-start;" id="recruit-submit-btn">
+          <span>{t.submit}</span>
+        </button>
+
+        <div id="recruit-form-message" style="display:none; padding:16px; font-size:13px;"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .form-input:focus { border-color: var(--color-primary) !important; }
+  @media (max-width: 900px) {
+    .recruit-grid { grid-template-columns: 1fr !important; }
+  }
+</style>
+
+<script define:vars={{ msgs: { sending: t.jsSending, success: t.jsSuccess, error: t.jsError, submit: t.jsSubmit } }}>
+  const observer = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const form = document.getElementById('recruit-form');
+  const msg = document.getElementById('recruit-form-message');
+  const btn = document.getElementById('recruit-submit-btn');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!btn || !msg) return;
+    btn.setAttribute('disabled', 'true');
+    btn.querySelector('span').textContent = msgs.sending;
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      const json = await res.json();
+      if (res.ok && json.success) {
+        msg.style.display = 'block';
+        msg.style.background = '#f0f9f0';
+        msg.style.border = '1px solid #b0d8b0';
+        msg.style.color = '#2a6a2a';
+        msg.textContent = msgs.success;
+        form.reset();
+      } else {
+        throw new Error('error');
+      }
+    } catch {
+      msg.style.display = 'block';
+      msg.style.background = '#fff0f0';
+      msg.style.border = '1px solid #d8b0b0';
+      msg.style.color = '#6a2a2a';
+      msg.textContent = msgs.error;
+    } finally {
+      btn.removeAttribute('disabled');
+      btn.querySelector('span').textContent = msgs.submit;
+    }
+  });
+</script>

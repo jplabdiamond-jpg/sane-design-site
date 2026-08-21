@@ -1,0 +1,77 @@
+---
+import CTABanner from '../CTABanner.astro';
+import Breadcrumbs from '../Breadcrumbs.astro';
+import { getFaqs } from '../../lib/faqData';
+import { localizePath } from '../../i18n/utils';
+import type { Locale } from '../../i18n/ui';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const faqs = getFaqs(lang);
+
+const S = {
+  ja: {
+    label: 'FAQ', h1: 'よくある質問',
+    introA: 'ホームページ制作・SEO対策について、よくいただくご質問をまとめました。',
+    introB: 'お問い合わせ', introC: 'よりお気軽にご相談ください。',
+    ctaHead: 'まずはご相談ください', ctaSub: '料金・納期のお見積もりは無料です',
+  },
+  en: {
+    label: 'FAQ', h1: 'Frequently Asked Questions',
+    introA: "Here are the questions we're most often asked about website production and SEO.",
+    introB: 'Contact', introC: ' — feel free to reach out for anything not covered here.',
+    ctaHead: "Let's talk first", ctaSub: 'Quotes for pricing and delivery are free',
+  },
+} as const;
+const t = S[lang];
+---
+
+<section class="container-editorial pt-16 md:pt-24 pb-12">
+  <Breadcrumbs items={[{ label: 'FAQ' }]} />
+  <p class="section-label" style="margin-top:18px;">{t.label}</p>
+  <h1 class="font-serif text-4xl md:text-6xl leading-tight mb-6">
+    {t.h1}
+  </h1>
+  <p class="max-w-2xl text-base md:text-lg text-muted leading-relaxed">
+    {t.introA}<br />
+    <a href={localizePath('/contact/', lang) + '#contact-form'} class="faq-inline-link">{t.introB}</a>{t.introC}
+  </p>
+</section>
+
+<section class="container-editorial pb-24">
+  <dl class="faq-list">
+    {faqs.map((f) => (
+      <div class="faq-item">
+        <dt class="faq-q">{f.q}</dt>
+        <dd class="faq-a">{f.a}</dd>
+      </div>
+    ))}
+  </dl>
+</section>
+
+<CTABanner headline={t.ctaHead} subline={t.ctaSub} />
+
+<style>
+  .faq-list { border-top: 1px solid var(--color-border); margin: 0; }
+  .faq-item { padding: 32px 0; border-bottom: 1px solid var(--color-border); }
+  .faq-q {
+    font-family: var(--font-serif);
+    font-size: clamp(18px, 2.5vw, 22px);
+    font-weight: 400; line-height: 1.5;
+    color: var(--color-primary);
+    margin-bottom: 14px; position: relative; padding-left: 28px;
+  }
+  .faq-q::before { content: 'Q'; position: absolute; left: 0; top: 0; font-size: 16px; opacity: 0.4; }
+  .faq-a {
+    margin: 0; font-size: 15px; line-height: 1.9;
+    color: var(--color-text); padding-left: 28px; position: relative;
+  }
+  .faq-a::before {
+    content: 'A'; position: absolute; left: 0; top: 0;
+    font-family: var(--font-serif); font-size: 16px; opacity: 0.3;
+  }
+  .faq-inline-link,
+  .faq-a :global(a) {
+    color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px;
+  }
+</style>

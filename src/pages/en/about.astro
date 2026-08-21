@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import AboutContent from '../components/pages/AboutContent.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AboutContent from '../../components/pages/AboutContent.astro';
 
 const personJsonLd = {
   '@context': 'https://schema.org',
@@ -17,9 +17,9 @@ const personJsonLd = {
 ---
 
 <BaseLayout
-  title="About｜Sane Designについて | Sane Design"
-  description="Sane Designは、DTP・WEB合わせて300件以上のデザイン実績をもとに、「速くて、良い」を追求するWeb制作・SEOスタジオです。"
+  title="About | About Sane Design | Sane Design"
+  description="Sane Design is a web & SEO studio pursuing 'fast and good,' built on 300+ design projects across print and web."
   jsonLd={personJsonLd}
 >
-  <AboutContent lang="ja" />
+  <AboutContent lang="en" />
 </BaseLayout>
