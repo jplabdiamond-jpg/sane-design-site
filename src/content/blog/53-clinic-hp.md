@@ -1,7 +1,7 @@
 ---
 title: 'クリニック・歯科医院のHPに必要な要素とは'
 description: 'クリニックや歯科医院のHPに必要な情報と、患者さんに安心感を与えるデザインのポイントを解説します。'
-pubDate: '2026-08-06'
+pubDate: '2026-08-23'
 heroImage: '/assets/blog/52_Clinic_Website.webp'
 tags:
   - クリニック
