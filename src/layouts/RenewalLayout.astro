@@ -104,8 +104,11 @@ const {
           <a href={localizePath('/works/', lang)}>{t('rn.works')}</a>
           <a href={localizePath('/blog/', lang)}>{t('rn.blog')}</a>
           <a href={localizePath('/#faq', lang)}>{t('rn.faq')}</a>
-          <a href={localizePath('/contact/', lang)} class="rn-btn rn-btn-primary" style="margin-top:12px;width:100%;justify-content:center;">{t('rn.consult')}</a>
-          <div style="margin-top:14px;display:flex;justify-content:center;"><LangSwitcher compact /></div>
+          <a href={localizePath('/contact/', lang)} class="rn-btn rn-btn-primary" style="margin-top:16px;width:100%;justify-content:center;">{t('rn.consult')}</a>
+          <div class="rn-lang-row">
+            <span class="rn-lang-label">Language / 言語</span>
+            <LangSwitcher compact />
+          </div>
         </nav>
       </div>
     </header>
@@ -276,22 +279,22 @@ const {
     border-top: 1px solid #e8e8e8;
   }
   .rn-mobile-menu.open {
-    max-height: 420px;
+    max-height: 680px;
   }
   .rn-mobile-nav {
     display: flex;
     flex-direction: column;
-    padding: 16px 22px 20px;
+    padding: 12px 22px 28px;
     gap: 0;
   }
   .rn-mobile-nav a {
     display: block;
-    padding: 14px 0;
-    font-size: 15px;
+    padding: 20px 4px;
+    font-size: 16px;
     font-weight: 700;
     color: #3A4256;
     text-decoration: none;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #eef1f4;
   }
   .rn-mobile-nav a:hover {
     color: #4FB4E8;
@@ -300,6 +303,24 @@ const {
     display: flex;
     justify-content: center;
     text-align: center;
+    border-bottom: none;
+  }
+  .rn-lang-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #eef1f4;
+  }
+  .rn-lang-label {
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9aa3b0;
   }
 
   /* ── Footer ── */

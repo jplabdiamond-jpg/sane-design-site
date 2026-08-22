@@ -1,6 +1,7 @@
 ---
 // 言語切替ボタン（JP / EN）。現在言語をハイライトし、クリックで選択を
 // localStorage に保存してから対応ページへ遷移する。
+// compact=true でモバイルメニュー向けのセグメント型トグル（大きめタップ領域）。
 import { getLangFromUrl, alternatePath } from '../i18n/utils';
 
 interface Props { compact?: boolean }
@@ -12,12 +13,16 @@ const enHref = alternatePath(Astro.url, 'en');
 ---
 
 <div class={`lang-switch${compact ? ' compact' : ''}`} role="group" aria-label="Language / 言語">
+  <span class="lang-globe" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+  </span>
   <a href={jaHref} data-lang="ja" class={lang === 'ja' ? 'is-active' : ''} aria-current={lang === 'ja' ? 'true' : 'false'}>JP</a>
   <span class="sep" aria-hidden="true">/</span>
   <a href={enHref} data-lang="en" class={lang === 'en' ? 'is-active' : ''} aria-current={lang === 'en' ? 'true' : 'false'}>EN</a>
 </div>
 
 <style>
+  /* ── Desktop / default: コンパクトなテキスト切替 ── */
   .lang-switch {
     display: inline-flex;
     align-items: center;
@@ -29,6 +34,7 @@ const enHref = alternatePath(Astro.url, 'en');
     line-height: 1;
     white-space: nowrap;
   }
+  .lang-switch .lang-globe { display: none; }
   .lang-switch a {
     color: var(--color-muted, #7A8494);
     text-decoration: none;
@@ -39,7 +45,43 @@ const enHref = alternatePath(Astro.url, 'en');
   .lang-switch a:hover { color: var(--color-primary, #4FB4E8); }
   .lang-switch a.is-active { color: var(--color-primary, #4FB4E8); }
   .lang-switch .sep { color: var(--color-muted, #7A8494); opacity: 0.5; }
-  .lang-switch.compact { font-size: 13px; }
+
+  /* ── compact: モバイル向けセグメント型トグル ── */
+  .lang-switch.compact {
+    gap: 10px;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    padding: 6px 8px 6px 14px;
+    border: 1.5px solid #d8dee6;
+    border-radius: 999px;
+    background: #fff;
+  }
+  .lang-switch.compact .lang-globe {
+    display: inline-flex;
+    align-items: center;
+    color: #7A8494;
+  }
+  .lang-switch.compact .lang-globe svg { width: 18px; height: 18px; display: block; }
+  .lang-switch.compact .sep { display: none; }
+  .lang-switch.compact a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 52px;
+    min-height: 40px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    color: #3A4256;
+    background: #f1f4f8;
+    font-weight: 800;
+  }
+  .lang-switch.compact a.is-active {
+    color: #fff;
+    background: #4FB4E8;
+    box-shadow: 0 2px 6px rgba(79,180,232,.35);
+  }
+  .lang-switch.compact a:hover { color: #3A4256; }
+  .lang-switch.compact a.is-active:hover { color: #fff; }
 </style>
 
 <script>
