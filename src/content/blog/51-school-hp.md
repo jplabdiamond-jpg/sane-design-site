@@ -1,7 +1,7 @@
 ---
 title: '教室・スクール・習い事のHP集客術'
 description: '教室やスクールのHPで生徒を増やすためのポイント。体験レッスンの申込みにつながるHP設計を解説します。'
-pubDate: '2026-08-06'
+pubDate: '2026-08-23'
 heroImage: '/assets/blog/50_School_Marketing.webp'
 tags:
   - 教室
