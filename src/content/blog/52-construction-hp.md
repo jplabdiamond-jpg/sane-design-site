@@ -1,7 +1,7 @@
 ---
 title: '工務店・リフォーム会社のHPで受注を増やす方法'
 description: '工務店やリフォーム会社がHPから問い合わせを増やすためのポイント。施工事例の見せ方と信頼構築を解説。'
-pubDate: '2026-08-06'
+pubDate: '2026-08-23'
 heroImage: '/assets/blog/51_Construction_Sales.webp'
 tags:
   - 工務店
