@@ -1,7 +1,7 @@
 ---
 title: '不動産会社のHPで物件問い合わせを増やすコツ'
 description: '不動産会社がHPから物件問い合わせを増やすためのポイント。物件情報の見せ方とSEO対策を解説します。'
-pubDate: '2026-08-21'
+pubDate: '2026-08-24'
 heroImage: '/assets/blog/53_Real_Estate_Tips.webp'
 tags:
   - 不動産
