@@ -1,7 +1,7 @@
 ---
 title: 'ECショップ開業ガイド'
 description: 'ECショップを始めたい方へ。プラットフォーム選びから商品ページの作り方まで、開業に必要な知識を網羅的に解説。'
-pubDate: '2026-08-21'
+pubDate: '2026-08-24'
 heroImage: '/assets/blog/54_EC_Shop_Guide.webp'
 tags:
   - EC
