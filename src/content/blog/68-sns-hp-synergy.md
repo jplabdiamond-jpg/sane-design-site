@@ -2,7 +2,7 @@
 title: 'SNSとHPを連携させて集客力を倍増させる方法'
 description: 'SNSとHPを上手に連携させることで集客力が倍増。具体的な連携方法とそれぞれの役割分担を解説します。'
 pubDate: '2026-08-25'
-heroImage: ''
+heroImage: '/assets/blog/67_sns_hp_synergy.webp'
 tags:
   - SNS連携
   - 集客
