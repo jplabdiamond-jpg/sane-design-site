@@ -2,7 +2,7 @@
 title: 'HPのセキュリティ対策入門'
 description: 'HPのセキュリティ対策、何から始めればいい？初心者でもできる基本的なセキュリティ対策を解説します。'
 pubDate: '2026-08-25'
-heroImage: ''
+heroImage: '/assets/blog/66_security_intro.webp'
 tags:
   - セキュリティ
   - HP運用
