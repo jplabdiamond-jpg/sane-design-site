@@ -1,7 +1,7 @@
 ---
 title: 'HPのバックアップ、取っていますか？'
 description: 'HPのバックアップを取っていないと大変なことに…バックアップの重要性と簡単な取り方を解説します。'
-pubDate: '2026-08-06'
+pubDate: '2026-08-27'
 heroImage: '/assets/blog/68_hp_backup.webp'
 tags:
   - バックアップ
