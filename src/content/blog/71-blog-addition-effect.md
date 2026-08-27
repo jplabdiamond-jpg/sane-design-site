@@ -1,7 +1,7 @@
 ---
 title: 'HPにブログを追加する効果と書き方のコツ'
 description: 'HPにブログを追加するメリットと、SEO効果を最大化する記事の書き方のコツを解説します。'
-pubDate: '2026-08-06'
+pubDate: '2026-08-27'
 heroImage: '/assets/blog/70_hp_blog_effect.webp'
 tags:
   - ブログ
