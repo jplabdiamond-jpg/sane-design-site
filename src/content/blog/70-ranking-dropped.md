@@ -1,7 +1,7 @@
 ---
 title: '検索順位が下がった！原因と対処法'
 description: '突然検索順位が下がった…考えられる原因と、順位を回復させるための具体的な対処法を解説します。'
-pubDate: '2026-08-06'
+pubDate: '2026-08-27'
 heroImage: '/assets/blog/69_search_rank_down.webp'
 tags:
   - 検索順位
