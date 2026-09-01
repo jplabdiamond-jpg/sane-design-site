@@ -2,7 +2,7 @@
 title: '「SEO対策込み」のHP制作、本当にSEOされてる？'
 description: '「SEO対策込み」を謳うHP制作サービスの実態。本当にSEO対策されているか確認するポイントを解説。'
 pubDate: '2026-08-30'
-heroImage: ''
+heroImage: '/assets/blog/85_seo_included_truth.webp'
 tags:
   - SEO
   - HP制作
