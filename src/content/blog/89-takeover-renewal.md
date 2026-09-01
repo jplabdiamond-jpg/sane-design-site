@@ -2,7 +2,7 @@
 title: '他社で作ったHPの引き継ぎ・リニューアルは可能？'
 description: '他社で作ったHPを引き継いでリニューアルしたい…可能かどうかと、スムーズに進めるためのポイントを解説。'
 pubDate: '2026-08-31'
-heroImage: ''
+heroImage: '/assets/blog/88_takeover_renewal.webp'
 tags:
   - 引き継ぎ
   - リニューアル
