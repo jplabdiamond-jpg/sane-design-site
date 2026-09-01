@@ -2,7 +2,7 @@
 title: 'HP制作後に月額費用はいくらかかる？'
 description: 'HP制作後にかかる月額費用の内訳と相場。サーバー代・ドメイン代・保守費用など、ランニングコストを解説。'
 pubDate: '2026-08-30'
-heroImage: ''
+heroImage: '/assets/blog/84_monthly_cost.webp'
 tags:
   - 月額費用
   - ランニングコスト
