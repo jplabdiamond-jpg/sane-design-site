@@ -2,7 +2,7 @@
 title: 'HP制作でよくあるトラブルと予防法'
 description: 'HP制作で起こりがちなトラブルと、それを未然に防ぐための具体的な予防法を解説します。'
 pubDate: '2026-08-31'
-heroImage: ''
+heroImage: '/assets/blog/87_common_troubles.webp'
 tags:
   - トラブル
   - 予防
