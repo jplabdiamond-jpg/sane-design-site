@@ -2,7 +2,7 @@
 title: 'HPを自作して失敗した人がプロに依頼し直す理由'
 description: '自作HPで失敗した方がプロに依頼し直す理由と、失敗から学べるポイントを解説します。'
 pubDate: '2026-08-31'
-heroImage: ''
+heroImage: '/assets/blog/86_diy_fail_then_pro.webp'
 tags:
   - 自作
   - 失敗
