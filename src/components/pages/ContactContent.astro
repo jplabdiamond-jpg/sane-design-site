@@ -16,7 +16,7 @@ const S = {
     badge1: '相談だけでもOK', badge2: 'しつこい営業なし', badge3: '24時間以内に返信',
     tab1: 'プラン・オプション選択', tab2: 'お客様情報入力', tab3: '送信完了',
     subject: '【Sane Design】お問い合わせ（料金込み）', fromName: 'Sane Design お問い合わせフォーム',
-    hiddenPlanDefault: 'LP・WEBサイト制作プラン（基本料金 ¥20,000〜）', hiddenTotalDefault: '¥20,000〜',
+    hiddenPlanDefault: 'LP・WEBサイト制作プラン（基本料金 ¥30,000〜）', hiddenTotalDefault: '¥30,000〜',
     s1h: 'プランとオプションを選ぶ', s1p: 'ご希望のプランを選んで、必要なオプションを追加できます。',
     psWebBadge: 'WEB制作', psWebName: 'LP・WEBサイト制作', psWebDesc: 'スマホ対応・フォーム込み',
     psSeoBadge: 'SEO', psSeoName: 'SEO対策プラン', psSeoDesc: '60記事追加＋内部SEO',
@@ -28,7 +28,7 @@ const S = {
     pageAddName: 'ページ追加', pageAddPrice: '1ページあたり + 5,000円',
     pageAddOpts: ['追加なし（1P基本）', '+1ページ（5,000円）', '+2ページ（10,000円）', '+3ページ（15,000円）', '+4ページ（20,000円）', '+5ページ（25,000円）'],
     webOpts: [
-      { p: '3000', name: 'サーバーへの直接アップロード（公開まで実施）', disp: '+ 3,000円' },
+      { p: '5000', name: 'サーバーへの直接アップロード（公開まで実施）', disp: '+ 5,000円' },
       { p: '5000', name: '予約機能付きカレンダー導入', disp: '+ 5,000円' },
       { p: '5000', name: 'チャットボット導入（Tidio等）', disp: '+ 5,000円' },
       { p: '2000', name: 'Googleアナリティクス（GA4）設置', disp: '+ 2,000円' },
@@ -39,7 +39,7 @@ const S = {
       { p: '6000', name: '決済機能（Stripe等）', disp: '+ 6,000円' },
       { p: '10000', name: '会員限定コンテンツ（認証機能含む）', disp: '+ 10,000円' },
       { p: '5000', name: '月額保守・更新代行', disp: '+ 5,000円/月' },
-      { p: '4000', name: 'ドメイン・サーバー初期設定', disp: '+ 4,000円' },
+      { p: '5000', name: 'ドメイン・サーバー初期設定', disp: '+ 5,000円' },
       { p: '15000', name: 'チャットボット追加', disp: '+ 15,000円' },
     ],
     dashName: '管理者ダッシュボード設置', dashDisp: '+ 10,000円', dashTip: 'サイトの各ページのテキストや見出し文言の変更、画像の変更・問い合わせ項目のテキスト変更ができるようになります。※変更できる箇所はサイト上の全ての画像やテキストではありませんので、まずはご相談ください。',
@@ -71,7 +71,7 @@ const S = {
       locale: 'ja-JP', tilde: '〜', yen: '円',
       tagWeb: '【WEB】', tagSeo: '【SEO】',
       consultPlan: 'まずは相談だけ', optNone: 'なし', totalTbd: '未定（ご相談）',
-      webPlanFull: 'LP・WEBサイト制作プラン（基本料金 ¥20,000〜）', seoPlanFull: 'SEO対策プラン（基本料金 ¥10,000〜）',
+      webPlanFull: 'LP・WEBサイト制作プラン（基本料金 ¥30,000〜）', seoPlanFull: 'SEO対策プラン（基本料金 ¥10,000〜）',
       pageAddWord: 'ページ追加 +', pUnit: 'P', articleAddWord: '追加記事 +', articleUnit: '記事',
       webPlanBasic: 'LP・WEBサイト制作プラン（基本）', seoPlanBasic: 'SEO対策プラン（基本）',
       pageAddShort: '　ページ追加 +', articleAddShort: '　追加記事 +',
@@ -86,7 +86,7 @@ const S = {
     badge1: 'Just a chat is fine', badge2: 'No pushy sales', badge3: 'Reply within 24 hours',
     tab1: 'Choose plan & options', tab2: 'Your details', tab3: 'Done',
     subject: '[Sane Design] Inquiry (with quote)', fromName: 'Sane Design Contact Form',
-    hiddenPlanDefault: 'Landing Page / Website Plan (base ¥20,000~)', hiddenTotalDefault: '¥20,000~',
+    hiddenPlanDefault: 'Landing Page / Website Plan (base ¥30,000~)', hiddenTotalDefault: '¥30,000~',
     s1h: 'Choose your plan and options', s1p: 'Pick a plan and add any options you need.',
     psWebBadge: 'WEB', psWebName: 'Landing Page / Website', psWebDesc: 'Mobile-ready, form included',
     psSeoBadge: 'SEO', psSeoName: 'SEO Plan', psSeoDesc: '60 articles + internal SEO',
@@ -98,7 +98,7 @@ const S = {
     pageAddName: 'Add a page', pageAddPrice: '+ ¥5,000 per page',
     pageAddOpts: ['None (1-page base)', '+1 page (¥5,000)', '+2 pages (¥10,000)', '+3 pages (¥15,000)', '+4 pages (¥20,000)', '+5 pages (¥25,000)'],
     webOpts: [
-      { p: '3000', name: 'Direct upload to your server (through go-live)', disp: '+ ¥3,000' },
+      { p: '5000', name: 'Direct upload to your server (through go-live)', disp: '+ ¥5,000' },
       { p: '5000', name: 'Booking calendar with reservations', disp: '+ ¥5,000' },
       { p: '5000', name: 'Chatbot setup (Tidio, etc.)', disp: '+ ¥5,000' },
       { p: '2000', name: 'Google Analytics (GA4) setup', disp: '+ ¥2,000' },
@@ -109,7 +109,7 @@ const S = {
       { p: '6000', name: 'Payments (Stripe, etc.)', disp: '+ ¥6,000' },
       { p: '10000', name: 'Members-only content (incl. authentication)', disp: '+ ¥10,000' },
       { p: '5000', name: 'Monthly maintenance & updates', disp: '+ ¥5,000/mo' },
-      { p: '4000', name: 'Domain & server initial setup', disp: '+ ¥4,000' },
+      { p: '5000', name: 'Domain & server initial setup', disp: '+ ¥5,000' },
       { p: '15000', name: 'Add a chatbot', disp: '+ ¥15,000' },
     ],
     dashName: 'Admin dashboard', dashDisp: '+ ¥10,000', dashTip: 'Lets you edit text and headings on each page, swap images, and change contact form fields. *Not every image or text on the site can be edited, so please consult us first.',
@@ -140,7 +140,7 @@ const S = {
       locale: 'en-US', tilde: '~', yen: ' yen',
       tagWeb: '[WEB] ', tagSeo: '[SEO] ',
       consultPlan: 'Consultation only', optNone: 'None', totalTbd: 'TBD (to discuss)',
-      webPlanFull: 'Landing Page / Website Plan (base ¥20,000~)', seoPlanFull: 'SEO Plan (base ¥10,000~)',
+      webPlanFull: 'Landing Page / Website Plan (base ¥30,000~)', seoPlanFull: 'SEO Plan (base ¥10,000~)',
       pageAddWord: 'Add pages +', pUnit: 'P', articleAddWord: 'Add articles +', articleUnit: ' articles',
       webPlanBasic: 'Landing Page / Website Plan (base)', seoPlanBasic: 'SEO Plan (base)',
       pageAddShort: '  Add pages +', articleAddShort: '  Add articles +',
@@ -200,7 +200,7 @@ const L = t.js;
                 <span class="ps-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
                 <span class="ps-badge">{t.psWebBadge}</span>
                 <span class="ps-name">{t.psWebName}</span>
-                <span class="ps-price">¥20,000<small>〜</small></span>
+                <span class="ps-price">¥30,000<small>〜</small></span>
                 <span class="ps-desc">{t.psWebDesc}</span>
               </div>
               <div class="plan-sel-card" data-plan="seo" id="planCardSeo">
@@ -233,7 +233,7 @@ const L = t.js;
                   <h3>{t.webPlanName}</h3>
                   <div style="font-size:13px;color:var(--text-muted);margin-top:2px">{t.webPlanSub}</div>
                 </div>
-                <div class="plan-price">¥20,000<small>〜</small></div>
+                <div class="plan-price">¥30,000<small>〜</small></div>
               </div>
 
               <h4 style="font-size:15px;font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:8px">
@@ -314,7 +314,7 @@ const L = t.js;
 
             <div class="total-bar" id="totalBar">
               <div class="total-label">{t.totalLabel}<small>{t.totalSub}</small></div>
-              <div class="total-price"><span class="yen">¥</span><span id="totalAmount">20,000</span><small>{t.totalTax}</small></div>
+              <div class="total-price"><span class="yen">¥</span><span id="totalAmount">30,000</span><small>{t.totalTax}</small></div>
             </div>
 
             <p style="font-size:12px;color:var(--text-muted);margin-top:12px;line-height:1.7;text-align:center">{t.priceNote}</p>
@@ -408,7 +408,7 @@ const L = t.js;
 .btn{display:inline-flex;align-items:center;gap:10px;font-family:"Noto Sans JP",sans-serif;font-weight:700;border-radius:999px;padding:16px 34px;font-size:16px;transition:transform .12s,box-shadow .12s;cursor:pointer;border:none;text-decoration:none;position:relative;box-sizing:border-box}
 .btn svg{width:18px;height:18px;stroke-width:3}
 .btn-primary{background:var(--accent);color:#fff!important;box-shadow:0 5px 0 var(--accent-shadow)}
-.btn-primary:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--accent-shadow)}
+.btn-primary:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--accent-shadow);color:#fff!important}
 .btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .btn-ghost{background:#fff;color:var(--primary-dark)!important;box-shadow:0 5px 0 #CDEBFA;border:2px solid #CDEBFA}
 .btn-ghost:hover{transform:translateY(2px);box-shadow:0 3px 0 #CDEBFA;color:var(--primary-dark)!important}
@@ -596,7 +596,7 @@ textarea.form-input{resize:vertical;line-height:1.8}
     consultOn=true;clearConsultAlert();syncPlanUI();
   });
 
-  var WEB_BASE=20000,SEO_BASE=10000,PAGE_UNIT=5000,ARTICLE_UNIT=3000;
+  var WEB_BASE=30000,SEO_BASE=10000,PAGE_UNIT=5000,ARTICLE_UNIT=3000;
   var optGrid=document.getElementById('optGrid'),optGridSeo=document.getElementById('optGridSeo');
   var totalEl=document.getElementById('totalAmount');
   var pageSelect=document.getElementById('pageAddSelect'),pageAddItem=document.getElementById('optPageAdd');

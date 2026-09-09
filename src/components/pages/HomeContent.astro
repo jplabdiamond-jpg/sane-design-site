@@ -219,7 +219,7 @@ const t = S[lang];
   </div>
   <div class="wrap">
     <div class="price-strip">
-      <div class="ps-item"><div class="lbl-top">{t.ps1top}</div><div class="big"><span class="num" data-count="20000" data-prefix="¥" data-comma="1">¥20,000</span>〜</div><div class="lbl">{t.ps1bot}</div></div>
+      <div class="ps-item"><div class="lbl-top">{t.ps1top}</div><div class="big"><span class="num" data-count="30000" data-prefix="¥" data-comma="1">¥30,000</span>〜</div><div class="lbl">{t.ps1bot}</div></div>
       <div class="ps-item"><div class="lbl-top">{t.ps2top}</div><div class="big">{t.ps2mid1}<span class="num" data-count="3">3</span>{t.ps2mid2}</div><div class="lbl">{t.ps2bot}</div></div>
       <div class="ps-item"><div class="lbl-top">{t.ps3top}</div><div class="big"><span class="num" data-count="300">300</span>+</div><div class="lbl">{t.ps3bot}</div></div>
     </div>
@@ -395,7 +395,7 @@ const t = S[lang];
       <div class="plan">
         <div class="ribbon">{t.ribbon}</div>
         <h3 style="padding-top:10px">{t.planName}</h3><div class="for">{t.planFor}</div>
-        <div class="price">¥20,000<small>〜</small></div>
+        <div class="price">¥30,000<small>〜</small></div>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg>{t.planLi1}</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg>{t.planLi2}</li>
@@ -428,9 +428,9 @@ const t = S[lang];
               </select>
             </span>
           </div>
-          <label class="opt-item" data-price="3000">
+          <label class="opt-item" data-price="5000">
             <span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
-            <span class="opt-info"><span class="opt-name">{t.optServer}</span><span class="opt-price">{lang === 'en' ? '+ 3,000 yen' : '+ 3,000円'}</span></span>
+            <span class="opt-info"><span class="opt-name">{t.optServer}</span><span class="opt-price">{lang === 'en' ? '+ 5,000 yen' : '+ 5,000円'}</span></span>
           </label>
           <label class="opt-item" data-price="5000">
             <span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
@@ -468,9 +468,9 @@ const t = S[lang];
             <span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
             <span class="opt-info"><span class="opt-name">{t.optMaint}</span><span class="opt-price">{lang === 'en' ? '+ 5,000 yen/mo' : '+ 5,000円/月'}</span></span>
           </label>
-          <label class="opt-item" data-price="4000">
+          <label class="opt-item" data-price="5000">
             <span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
-            <span class="opt-info"><span class="opt-name">{t.optDomain}</span><span class="opt-price">{lang === 'en' ? '+ 4,000 yen' : '+ 4,000円'}</span></span>
+            <span class="opt-info"><span class="opt-name">{t.optDomain}</span><span class="opt-price">{lang === 'en' ? '+ 5,000 yen' : '+ 5,000円'}</span></span>
           </label>
           <label class="opt-item" data-price="10000">
             <span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
@@ -543,7 +543,7 @@ const t = S[lang];
     <!-- 合計金額バー -->
     <div class="total-bar" id="totalBar">
       <div class="total-label">{t.totalLabel}<small>{t.totalSub}</small></div>
-      <div class="total-price"><span class="yen">¥</span><span id="totalAmount">20,000</span><small>{t.totalTax}</small></div>
+      <div class="total-price"><span class="yen">¥</span><span id="totalAmount">30,000</span><small>{t.totalTax}</small></div>
     </div>
     <p class="price-note">💡 <b>{t.priceNoteB}</b><br>{t.priceNoteRest}</p>
   </div>
@@ -678,7 +678,7 @@ const t = S[lang];
   .btn{display:inline-flex;align-items:center;gap:10px;font-family:"Noto Sans JP";font-weight:700;border-radius:999px;padding:16px 34px;font-size:16px;transition:.12s;cursor:pointer;border:none;position:relative}
   .btn svg{width:18px;height:18px;stroke-width:3}
   .btn-primary{background:var(--orange);color:#fff;box-shadow:0 5px 0 var(--orange-dark)}
-  .btn-primary:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--orange-dark)}
+  .btn-primary:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--orange-dark);color:#fff!important}
   .btn-blue{background:var(--primary);color:#fff;box-shadow:0 5px 0 var(--primary-deep)}
   .btn-blue:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--primary-deep)}
   .btn-line{background:#06C755;color:#fff !important;box-shadow:0 5px 0 #04913e}
@@ -1341,7 +1341,7 @@ const t = S[lang];
 
 /* ===== pricing option toggle + total calc ===== */
 (function(){
-  var BASE = 20000;
+  var BASE = 30000;
   var PAGE_UNIT = 5000;
   var grid = document.getElementById('optGrid');
   var totalEl = document.getElementById('totalAmount');

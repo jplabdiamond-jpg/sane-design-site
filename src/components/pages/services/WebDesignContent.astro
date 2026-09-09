@@ -22,7 +22,7 @@ const S = {
     rec1bubble: '何日までにWebサイトを作りたい…', rec1alt: '急ぎでHPが必要な方', rec1h: '急ぎでHPが必要な<br>個人事業主・店舗の方', rec1p: '開業に合わせて、すぐにホームページが欲しい方に最適です。',
     rec2bubble: 'どんなサイトが良いんだろう？…', rec2alt: 'デザインのイメージが固まっていない方', rec2h: 'デザインのイメージが<br>固まっていない方', rec2p: '「おまかせ」でOK。ヒアリングからご提案します。',
     rec3bubble: '表示が遅いサイトは嫌だな…', rec3alt: '軽くて速いサイトが欲しい方', rec3h: '軽くて速い<br>サイトが欲しい方', rec3p: 'WordPressを使わない軽量な構成で、高速表示を実現します。',
-    rec4bubble: 'なるべくコストを抑えたい…', rec4alt: '予算を抑えたい方', rec4h: '予算を<br>抑えたい方', rec4p: '20,000円〜のコミコミ価格。あとから追加請求はありません。',
+    rec4bubble: 'なるべくコストを抑えたい…', rec4alt: '予算を抑えたい方', rec4h: '予算を<br>抑えたい方', rec4p: '30,000円〜のコミコミ価格。あとから追加請求はありません。',
     flowTitlePre: 'かんたん', flowTitleMk: '5ステップ', flowSub: 'ご依頼から納品まで、最短3営業日',
     s1h: 'ご依頼', s1p: 'フォームまたはLINEから<br>お気軽にご連絡ください。', s1imgAlt: 'ご依頼イメージ',
     fmH: 'お客様情報の入力', fmP: 'ご連絡先とご要望をご入力ください。',
@@ -66,7 +66,7 @@ const S = {
       ['/works/34-project-vod-navi/', '/assets/works/34-project-vod-navi.webp', 'VODナビ', ['メディア', 'Web', '2026'], 'VODナビ', '50超のカテゴリを扱う大規模レビューメディア。'],
     ],
     worksAll: 'すべての実績を見る →',
-    ctaH: '¥20,000〜 / 最短3日納品', ctaSubBottom: 'フォームからお気軽にご相談ください',
+    ctaH: '¥30,000〜 / 最短3日納品', ctaSubBottom: 'フォームからお気軽にご相談ください',
     ctaOrderBtn: '今すぐ注文する →', ctaConsultBtn: 'まずは相談する',
   },
   en: {
@@ -83,7 +83,7 @@ const S = {
     rec1bubble: 'By when do I need my site…', rec1alt: 'For those who need a site fast', rec1h: 'Sole proprietors & shops<br>who need a site fast', rec1p: 'Perfect for those who want a website ready in time for opening.',
     rec2bubble: 'What kind of site would be good?…', rec2alt: 'For those unsure of the design', rec2h: 'Those unsure about<br>the design direction', rec2p: '"Leave it to us" is fine. We propose from an interview.',
     rec3bubble: 'I hate slow-loading sites…', rec3alt: 'For those who want a fast site', rec3h: 'Those who want a<br>light, fast site', rec3p: 'A lightweight build without WordPress delivers fast loading.',
-    rec4bubble: 'I want to keep costs down…', rec4alt: 'For those on a budget', rec4h: 'Those who want to<br>keep costs down', rec4p: 'All-inclusive from ¥20,000. No surprise charges later.',
+    rec4bubble: 'I want to keep costs down…', rec4alt: 'For those on a budget', rec4h: 'Those who want to<br>keep costs down', rec4p: 'All-inclusive from ¥30,000. No surprise charges later.',
     flowTitlePre: 'Simple ', flowTitleMk: '5 steps', flowSub: 'From request to delivery, in as few as 3 business days',
     s1h: 'Request', s1p: 'Reach out easily via<br>the form or LINE.', s1imgAlt: 'Request image',
     fmH: 'Enter your details', fmP: 'Please enter your contact and request.',
@@ -127,7 +127,7 @@ const S = {
       ['/works/34-project-vod-navi/', '/assets/works/34-project-vod-navi.webp', 'VOD Navi', ['Media', 'Web', '2026'], 'VOD Navi', 'A large-scale review media covering 50+ categories.'],
     ],
     worksAll: 'View all work →',
-    ctaH: '¥20,000~ / delivered in as few as 3 days', ctaSubBottom: 'Feel free to reach out via the form',
+    ctaH: '¥30,000~ / delivered in as few as 3 days', ctaSubBottom: 'Feel free to reach out via the form',
     ctaOrderBtn: 'Order now →', ctaConsultBtn: 'Get in touch',
   },
 } as const;
@@ -151,7 +151,7 @@ const t = S[lang];
       <span class="hero-badge"><i class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></i>{t.badge3}</span>
     </div>
     <div class="spec-strip">
-      <div class="spec-item"><div class="lbl-top">{t.spec1t}</div><div class="big"><span class="num">¥20,000</span>〜</div><div class="lbl">{t.spec1b}</div></div>
+      <div class="spec-item"><div class="lbl-top">{t.spec1t}</div><div class="big"><span class="num">¥30,000</span>〜</div><div class="lbl">{t.spec1b}</div></div>
       <div class="spec-item"><div class="lbl-top">{t.spec2t}</div><div class="big">{t.spec2pre}<span class="num">3</span>{t.spec2post}</div><div class="lbl">{t.spec2b}</div></div>
       <div class="spec-item"><div class="lbl-top">{t.spec3t}</div><div class="big">{t.spec3pre}<span class="num">4</span>{t.spec3post}</div><div class="lbl">{t.spec3b}</div></div>
       <div class="spec-item"><div class="lbl-top">{t.spec4t}</div><div class="big" style="font-size:20px;padding-top:4px">{t.spec4big}</div><div class="lbl">{t.spec4b}</div></div>
