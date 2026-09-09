@@ -1,7 +1,8 @@
 ---
-title: 'アクセス解析の基本｜どの数字を見ればいい？'
+title: 'アクセス解析の基本｜どの数字を見ればいい？【初心者向け】'
 description: 'HPのアクセス解析って何を見ればいいの？初心者が押さえるべき基本的な指標と改善のヒントを解説。'
 pubDate: '2026-08-24'
+updatedDate: '2026-09-09'
 heroImage: '/assets/blog/63_access_analytics_basics.webp'
 tags:
   - アクセス解析
