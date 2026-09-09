@@ -83,9 +83,9 @@ export const homeJsonLd = {
       },
       priceSpecification: {
         '@type': 'PriceSpecification',
-        price: '10000',
+        price: '15000',
         priceCurrency: 'JPY',
-        minPrice: '10000',
+        minPrice: '15000',
       },
     },
   ],

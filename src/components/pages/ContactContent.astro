@@ -71,7 +71,7 @@ const S = {
       locale: 'ja-JP', tilde: '〜', yen: '円',
       tagWeb: '【WEB】', tagSeo: '【SEO】',
       consultPlan: 'まずは相談だけ', optNone: 'なし', totalTbd: '未定（ご相談）',
-      webPlanFull: 'LP・WEBサイト制作プラン（基本料金 ¥30,000〜）', seoPlanFull: 'SEO対策プラン（基本料金 ¥10,000〜）',
+      webPlanFull: 'LP・WEBサイト制作プラン（基本料金 ¥30,000〜）', seoPlanFull: 'SEO対策プラン（基本料金 ¥15,000〜）',
       pageAddWord: 'ページ追加 +', pUnit: 'P', articleAddWord: '追加記事 +', articleUnit: '記事',
       webPlanBasic: 'LP・WEBサイト制作プラン（基本）', seoPlanBasic: 'SEO対策プラン（基本）',
       pageAddShort: '　ページ追加 +', articleAddShort: '　追加記事 +',
@@ -140,7 +140,7 @@ const S = {
       locale: 'en-US', tilde: '~', yen: ' yen',
       tagWeb: '[WEB] ', tagSeo: '[SEO] ',
       consultPlan: 'Consultation only', optNone: 'None', totalTbd: 'TBD (to discuss)',
-      webPlanFull: 'Landing Page / Website Plan (base ¥30,000~)', seoPlanFull: 'SEO Plan (base ¥10,000~)',
+      webPlanFull: 'Landing Page / Website Plan (base ¥30,000~)', seoPlanFull: 'SEO Plan (base ¥15,000~)',
       pageAddWord: 'Add pages +', pUnit: 'P', articleAddWord: 'Add articles +', articleUnit: ' articles',
       webPlanBasic: 'Landing Page / Website Plan (base)', seoPlanBasic: 'SEO Plan (base)',
       pageAddShort: '  Add pages +', articleAddShort: '  Add articles +',
@@ -207,7 +207,7 @@ const L = t.js;
                 <span class="ps-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
                 <span class="ps-badge">{t.psSeoBadge}</span>
                 <span class="ps-name">{t.psSeoName}</span>
-                <span class="ps-price">¥10,000<small>〜</small></span>
+                <span class="ps-price">¥15,000<small>〜</small></span>
                 <span class="ps-desc">{t.psSeoDesc}</span>
               </div>
             </div>
@@ -284,7 +284,7 @@ const L = t.js;
                   <h3>{t.seoPlanName}</h3>
                   <div style="font-size:13px;color:var(--text-muted);margin-top:2px">{t.seoPlanSub}</div>
                 </div>
-                <div class="plan-price">¥10,000<small>〜</small></div>
+                <div class="plan-price">¥15,000<small>〜</small></div>
               </div>
 
               <h4 style="font-size:15px;font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:8px">
@@ -596,7 +596,7 @@ textarea.form-input{resize:vertical;line-height:1.8}
     consultOn=true;clearConsultAlert();syncPlanUI();
   });
 
-  var WEB_BASE=30000,SEO_BASE=10000,PAGE_UNIT=5000,ARTICLE_UNIT=3000;
+  var WEB_BASE=30000,SEO_BASE=15000,PAGE_UNIT=5000,ARTICLE_UNIT=3000;
   var optGrid=document.getElementById('optGrid'),optGridSeo=document.getElementById('optGridSeo');
   var totalEl=document.getElementById('totalAmount');
   var pageSelect=document.getElementById('pageAddSelect'),pageAddItem=document.getElementById('optPageAdd');
