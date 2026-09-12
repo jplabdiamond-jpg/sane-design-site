@@ -27,6 +27,32 @@ const { Content } = await post.render();
 const prevPost = index > 0 ? allPosts[index - 1] : null;
 const nextPost = index < allPosts.length - 1 ? allPosts[index + 1] : null;
 
+// 関連記事: 同じタグを多く共有する記事を優先（不足分は日付が近い記事で補完）
+const currentTags = new Set(post.data.tags ?? []);
+const relatedScored = allPosts
+  .filter((p) => p.slug !== post.slug)
+  .map((p) => ({ p, shared: (p.data.tags ?? []).filter((t) => currentTags.has(t)).length }))
+  .filter((x) => x.shared > 0)
+  .sort(
+    (a, b) =>
+      b.shared - a.shared ||
+      new Date(b.p.data.pubDate).getTime() - new Date(a.p.data.pubDate).getTime()
+  );
+const relatedPosts: CollectionEntry<'blog'>[] = relatedScored.slice(0, 3).map((x) => x.p);
+if (relatedPosts.length < 3) {
+  const used = new Set([post.slug, ...relatedPosts.map((p) => p.slug)]);
+  const fillers = [prevPost, nextPost, ...[...allPosts].reverse()].filter(
+    Boolean
+  ) as CollectionEntry<'blog'>[];
+  for (const f of fillers) {
+    if (relatedPosts.length >= 3) break;
+    if (!used.has(f.slug)) {
+      relatedPosts.push(f);
+      used.add(f.slug);
+    }
+  }
+}
+
 // CTA人物イラストを3枚ローテーション（制作実績ページと同じ）
 const ctaImages = [
   '/assets/reason01_woman.webp',
@@ -127,38 +153,21 @@ const articleJsonLd = {
     <div class="blog-prev-next-container">
       <h3 class="blog-prev-next-heading">関連記事</h3>
       <div class="blog-prev-next-grid">
-        {prevPost && (
-          <a href={`/blog/${prevPost.slug}/`} class="blog-prev-next-card blog-prev-card">
-            {prevPost.data.heroImage && (
+        {relatedPosts.map((rp) => (
+          <a href={`/blog/${rp.slug}/`} class="blog-prev-next-card">
+            {rp.data.heroImage && (
               <div class="blog-prev-next-thumb">
-                <img src={prevPost.data.heroImage} alt={prevPost.data.title} loading="lazy" />
+                <img src={rp.data.heroImage} alt={rp.data.title} loading="lazy" />
               </div>
             )}
             <div class="blog-prev-next-info">
-              <span class="blog-prev-next-label">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                前の記事
-              </span>
-              <span class="blog-prev-next-title">{prevPost.data.title}</span>
+              {rp.data.tags?.[0] && (
+                <span class="blog-prev-next-label blog-related-tag">{rp.data.tags[0]}</span>
+              )}
+              <span class="blog-prev-next-title">{rp.data.title}</span>
             </div>
           </a>
-        )}
-        {nextPost && (
-          <a href={`/blog/${nextPost.slug}/`} class="blog-prev-next-card blog-next-card">
-            {nextPost.data.heroImage && (
-              <div class="blog-prev-next-thumb">
-                <img src={nextPost.data.heroImage} alt={nextPost.data.title} loading="lazy" />
-              </div>
-            )}
-            <div class="blog-prev-next-info">
-              <span class="blog-prev-next-label">
-                次の記事
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </span>
-              <span class="blog-prev-next-title">{nextPost.data.title}</span>
-            </div>
-          </a>
-        )}
+        ))}
       </div>
     </div>
   </section>
@@ -570,8 +579,11 @@ const articleJsonLd = {
   }
   .blog-prev-next-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+  }
+  @media (max-width: 900px) {
+    .blog-prev-next-grid { grid-template-columns: repeat(2, 1fr); }
   }
   .blog-prev-next-card {
     display: flex;
