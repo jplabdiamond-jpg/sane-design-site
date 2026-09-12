@@ -2,6 +2,7 @@
 title: 'Googleビジネスプロフィールの登録方法｜MEO対策の第一歩を完全ガイド'
 description: '店舗集客に必須のGoogleビジネスプロフィールの登録手順をゼロから解説します。'
 pubDate: '2026-09-02'
+updatedDate: '2026-09-12'
 heroImage: '/assets/blog/92_google_business_profile_registration_meo.webp'
 tags:
   - MEO
@@ -194,5 +195,13 @@ Googleビジネスプロフィールの登録は、店舗集客の第一歩と�
 - NAP情報の一貫性と口コミ対応がMEO対策の基本
 
 「まだ登録していなかった…」という方は、今日からでも始めてみてくださいね。10分程度の作業で、お店の集客力が大きく変わる可能性がありますよ。
+
+## あわせて読みたい
+
+登録が済んだら、次は運用で差をつけましょう。
+
+- [Googleビジネスプロフィール活用術｜投稿・写真・クチコミ](/blog/37-google-business-profile/)
+- [MEO対策で上位表示する7つのポイント](/blog/99-meo-ranking-factors/)
+- [Googleクチコミを増やす方法](/blog/107-google-reviews-guide/)
 
 Sane Designでは、Googleビジネスプロフィールの登録サポートやMEO対策のアドバイスも行っています。「自分でやるのはちょっと不安…」という方は、お気軽にご相談ください！

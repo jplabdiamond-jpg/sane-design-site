@@ -2,6 +2,7 @@
 title: '「地域名＋サービス名」で検索1位を取るSEO戦略'
 description: '地域密着ビジネスに最適なローカルSEO戦略。「地域名＋サービス名」で上位表示されるための具体的な方法を解説します。'
 pubDate: '2026-08-17'
+updatedDate: '2026-09-12'
 heroImage: '/assets/blog/33_Local_SEO.webp'
 tags:
   - ローカルSEO
@@ -163,4 +164,4 @@ InstagramやFacebook、Xなどで地域のハッシュタグを活用し、地�
 
 地域密着型のビジネスにとって、ローカルSEOは最も費用対効果の高い集客方法です。全国の競合と戦う必要はありません。まずは自分のエリアで一番になることを目指して、今日からできることから始めてみましょう。
 
-Googleビジネスプロフィールの具体的な登録方法と活用術については、[こちらの記事](/blog/37-google-business-profile)で詳しく解説していますので、あわせて参考にしてくださいね。
+Googleビジネスプロフィールの具体的な登録方法は[こちらの完全ガイド](/blog/93-google-business-profile-setup/)、Googleマップでの上位表示のコツは[MEO対策の7つのポイント](/blog/99-meo-ranking-factors/)で詳しく解説しています。あわせて参考にしてくださいね。

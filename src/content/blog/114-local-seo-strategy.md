@@ -2,6 +2,7 @@
 title: 'ローカルSEOとは？地域密着ビジネスが検索上位を取る方法'
 description: '地域名＋業種で上位表示するためのローカルSEO戦略を解説します。'
 pubDate: '2026-09-09'
+updatedDate: '2026-09-12'
 heroImage: '/assets/blog/113_local_seo_local_business_ranking.webp'
 tags:
   - ローカルSEO
@@ -141,3 +142,11 @@ Google Search Consoleでは、どんなキーワードでホームページが�
 一度にすべてを完璧にする必要はありません。まずはGoogleビジネスプロフィールの情報を見直すところから始めてみてください。それだけでも検索結果に変化が現れるはずです。
 
 地域のお客さんに「見つけてもらえるお店」になるために、今日からローカルSEOに取り組んでみましょう。
+
+---
+
+### あわせて読みたい（ローカルSEO・MEO）
+
+- [「地域名＋サービス名」で検索1位を取るSEO戦略](/blog/34-local-seo-strategy/)
+- [MEO対策で上位表示する7つのポイント](/blog/99-meo-ranking-factors/)
+- [Googleビジネスプロフィールの登録方法【完全ガイド】](/blog/93-google-business-profile-setup/)
