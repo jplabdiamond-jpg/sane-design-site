@@ -556,13 +556,13 @@ const t = S[lang];
     <div class="sec-head"><span class="sec-sub">Works</span><h2 class="sec-title">{t.worksExTitle}</h2></div>
     <div class="work-grid" id="worksGrid">
       {(lang === 'en' ? [
+        { href:'/works/41-project-teiki-houkoku/', img:'/assets/works/41-project-teiki-houkoku.webp', alt:'Building Standards Act Art.12 Periodic Report LP', tags:['Legal Inspection','LP','2026'], h:'Building Standards Act Art.12 Periodic Report LP', p:'A lead-gen LP that turns the hard-to-grasp legal "periodic report" notice into a clear next step for building owners.' },
         { href:'/works/40-project-scf/', img:'/assets/works/40-project-scf.webp', alt:'SCF Smart Consul Firm', tags:['Consulting','LP','2026'], h:'SCF Smart Consul Firm', p:'A one-stop consulting LP that supports SMEs from planning to SNS, with an empathetic tone.' },
         { href:'/works/39-project-bebimama-matching/', img:'/assets/works/39-project-bebimama-matching.webp', alt:'bebi-mama Babysitter Matching Site', tags:['Childcare / Matching','Web','2026'], h:'bebi-mama Babysitter Matching Site', p:'A matching platform where parents choose a qualified sitter by profile and reviews.' },
-        { href:'/works/38-project-bebimama-babysitter/', img:'/assets/works/38-project-bebimama-babysitter.webp', alt:'bebi-mama Babysitter LP', tags:['Childcare / Matching','LP','2026'], h:'bebi-mama Babysitter LP', p:'A babysitter matching LP that encourages sign-ups with warmth and reassurance.' },
       ] : [
+        { href:'/works/41-project-teiki-houkoku/', img:'/assets/works/41-project-teiki-houkoku.webp', alt:'建築基準法12条 定期報告 LP', tags:['法定点検','LP','2026'], h:'建築基準法12条 定期報告 LP', p:'分かりにくい「定期報告」の通知を、建物オーナーの次の一歩へつなぐ課題喚起型LP。' },
         { href:'/works/40-project-scf/', img:'/assets/works/40-project-scf.webp', alt:'SCF スマートコンサルファーム', tags:['コンサルティング','LP','2026'], h:'SCF スマートコンサルファーム', p:'企画からSNS運用まで一貫支援する、中小企業向けワンストップ型コンサルLP。' },
         { href:'/works/39-project-bebimama-matching/', img:'/assets/works/39-project-bebimama-matching.webp', alt:'ベビ♡ママ ベビーシッターマッチングサイト', tags:['保育・マッチング','Web','2026'], h:'ベビ♡ママ マッチングサイト', p:'資格・研修済のシッターをプロフィールとレビューで選べる、マッチングサイト。' },
-        { href:'/works/38-project-bebimama-babysitter/', img:'/assets/works/38-project-bebimama-babysitter.webp', alt:'bebi-mama ベビーシッターLP', tags:['保育・マッチング','LP','2026'], h:'bebi-mama ベビーシッターLP', p:'親しみやすさと安心感で登録を後押しする、ベビーシッターマッチングLP。' },
       ]).map((w) => (
         <a class="work" href={lp(w.href)}>
           <div class="thumb"><img src={w.img} alt={w.alt} loading="lazy"></div>
@@ -1255,6 +1255,7 @@ const t = S[lang];
 /* ===== hero works coverflow ===== */
 (function(){
   var WORKS = [
+    {img:"/assets/works/41-project-teiki-houkoku.webp",title:"建築基準法12条 定期報告",url:"/works/41-project-teiki-houkoku/"},
     {img:"/assets/works/38-project-bebimama-babysitter.webp",title:"bebi-mama ベビーシッターLP",url:"/works/38-project-bebimama-babysitter/"},
     {img:"/assets/works/37-project-kokubunrei.webp",title:"映画『國分玲』公式サイト",url:"/works/37-project-kokubunrei/"},
     {img:"/assets/works/36-project-recruit-bebimama.webp",title:"bebi-mama ベビーシッター採用LP",url:"/works/36-project-recruit-bebimama/"},
