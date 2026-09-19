@@ -28,6 +28,10 @@ const blog = defineCollection({
     heroImage: z.string().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    // AEO用: AIが引用しやすい一問一答（任意）。指定するとFAQ表示＋FAQPage JSON-LDを自動出力
+    faq: z
+      .array(z.object({ q: z.string(), a: z.string() }))
+      .optional(),
   }),
 });
 

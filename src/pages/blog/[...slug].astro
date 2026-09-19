@@ -92,6 +92,23 @@ const articleJsonLd = {
     cssSelector: ['h1', '.blog-header-desc'],
   },
 };
+
+// AEO用: frontmatterにfaqがあればFAQPage構造化データを生成（AI検索の回答で引用されやすくする）
+const faqItems = post.data.faq ?? [];
+const faqJsonLd =
+  faqItems.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqItems.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      }
+    : null;
+
+const blogJsonLd = faqJsonLd ? [articleJsonLd, faqJsonLd] : articleJsonLd;
 ---
 
 <RenewalLayout
@@ -99,7 +116,7 @@ const articleJsonLd = {
   description={post.data.description}
   image={post.data.heroImage}
   ogType="article"
-  jsonLd={articleJsonLd}
+  jsonLd={blogJsonLd}
   publishedTime={pubISO}
   modifiedTime={modISO}
 >
@@ -146,6 +163,22 @@ const articleJsonLd = {
         <Content />
       </div>
     </section>
+
+    {
+      faqItems.length > 0 && (
+        <section class="blog-faq-section" aria-labelledby="blog-faq-heading">
+          <h2 id="blog-faq-heading" class="blog-faq-heading">よくある質問</h2>
+          <div class="blog-faq-list">
+            {faqItems.map((f) => (
+              <details class="blog-faq-item">
+                <summary class="blog-faq-q">{f.q}</summary>
+                <div class="blog-faq-a">{f.a}</div>
+              </details>
+            ))}
+          </div>
+        </section>
+      )
+    }
   </article>
 
   <!-- ── 前後の記事ナビゲーション ── -->
@@ -227,6 +260,58 @@ const articleJsonLd = {
   }
   .blog-article-body {
     padding-bottom: 64px;
+  }
+  /* ── AEO用 FAQ ── */
+  .blog-faq-section {
+    max-width: 780px;
+    margin: 0 auto 56px;
+  }
+  .blog-faq-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a2b3c;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #4FB4E8;
+  }
+  .blog-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .blog-faq-item {
+    border: 1px solid #e4eaf0;
+    border-radius: 12px;
+    background: #fafcfe;
+    overflow: hidden;
+  }
+  .blog-faq-q {
+    cursor: pointer;
+    list-style: none;
+    padding: 16px 48px 16px 20px;
+    font-weight: 600;
+    color: #1a2b3c;
+    position: relative;
+    line-height: 1.6;
+  }
+  .blog-faq-q::-webkit-details-marker { display: none; }
+  .blog-faq-q::after {
+    content: '+';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+    color: #4FB4E8;
+    transition: transform 0.2s;
+  }
+  .blog-faq-item[open] .blog-faq-q::after {
+    content: '\2212';
+  }
+  .blog-faq-a {
+    padding: 0 20px 18px;
+    color: #445;
+    line-height: 1.9;
   }
 
   @media (max-width: 640px) {
