@@ -1,0 +1,49 @@
+name: Note → SNS Auto Post (X / Instagram)
+
+on:
+  schedule:
+    # 毎時0分にチェック（UTC）
+    - cron: '0 * * * *'
+  workflow_dispatch: # 手動実行も可能
+
+concurrency:
+  group: note-sns-autopost
+  cancel-in-progress: false
+
+jobs:
+  check-and-post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # 前回チェック日時のキャッシュを復元
+      - name: Restore last check timestamp
+        uses: actions/cache@v4
+        with:
+          path: .note-last-check
+          key: note-last-check-${{ github.run_id }}
+          restore-keys: |
+            note-last-check-
+
+      - name: Check note RSS and post to X + Instagram
+        env:
+          NOTE_USERNAME: sane_design2026
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: node scripts/note-sns-autopost.mjs
+
+      # チェック日時を保存
+      - name: Save last check timestamp
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .note-last-check
+          key: note-last-check-${{ github.run_id }}
