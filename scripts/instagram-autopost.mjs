@@ -4,9 +4,15 @@
 //   IG_USER_ID       Instagram ビジネスアカウントID
 //   IG_ACCESS_TOKEN  長期アクセストークン
 //   CHANGED_FILES    今回追加された .md のパス（改行区切り、workflow から渡す）
+//
+// 画像は images.weserv.nl 経由で「元画像URL → 正方形JPEG公開URL」に即時変換する。
+// これにより sharp での変換・リポジトリへの git push・公開待ちが不要になり、
+// 権限やデプロイ待ちに依存しない堅牢な投稿ができる。
 
 const SITE = 'https://sane-design.net';
 const GRAPH = 'https://graph.facebook.com/v21.0';
+// heroImage / thumbnail が無いときのフォールバック画像（サイトのOGP画像）
+const FALLBACK_IMAGE = `${SITE}/og-image.png`;
 const { IG_USER_ID, IG_ACCESS_TOKEN, CHANGED_FILES } = process.env;
 
 const CAPTION_LIMIT = 2200;
@@ -85,50 +91,26 @@ function buildHashtags(data) {
   return [...new Set([...own, ...FIXED_HASHTAGS])].slice(0, MAX_HASHTAGS);
 }
 
-async function ensureJpegUrl(imageUrl) {
-  if (/\.jpe?g$/i.test(imageUrl)) {
-    log(`image already JPEG: ${imageUrl}`);
-    return imageUrl;
-  }
-  const jpegUrl = imageUrl.replace(/\.webp$/i, '.jpg');
-  try {
-    const check = await fetch(jpegUrl, { method: 'HEAD' });
-    if (check.ok) { log(`JPEG already available: ${jpegUrl}`); return jpegUrl; }
-  } catch (e) { /* 無ければ変換する */ }
-
-  log(`converting WebP to JPEG: ${imageUrl}`);
-  const sharp = (await import('sharp')).default;
-  const fs = await import('node:fs/promises');
-  const path = await import('node:path');
-  const { execSync } = await import('node:child_process');
-
-  const res = await fetch(imageUrl);
-  if (!res.ok) throw new Error(`Failed to fetch image: ${res.status} ${imageUrl}`);
-  const buffer = Buffer.from(await res.arrayBuffer());
-  const jpegBuffer = await sharp(buffer).jpeg({ quality: 90 }).toBuffer();
-
-  const urlPath = new URL(imageUrl).pathname;
-  const localPath = path.join('public', urlPath.replace(/\.webp$/i, '.jpg'));
-  await fs.mkdir(path.dirname(localPath), { recursive: true });
-  await fs.writeFile(localPath, jpegBuffer);
-  log(`saved JPEG: ${localPath} (${jpegBuffer.length} bytes)`);
-
-  try {
-    execSync(`git add "${localPath}"`, { stdio: 'pipe' });
-    execSync(`git commit -m "chore: add JPEG for Instagram autopost (${path.basename(localPath)})" --no-verify`, { stdio: 'pipe' });
-    execSync('git push', { stdio: 'pipe' });
-    log(`pushed JPEG to repo: ${localPath}`);
-  } catch (e) { log(`git push warning: ${e.message}`); }
-  return jpegUrl;
+/**
+ * 元画像URLを images.weserv.nl 経由で 1080x1080 正方形JPEGの公開URLに変換する。
+ * Instagram Graph API はサーバー側でこのURLを取得するため、
+ * 変換画像を自分のサイトへ公開する必要がない。
+ */
+function toInstagramJpegUrl(srcUrl) {
+  // weserv は「//」以降のURLを受け取る（プロトコルは付けない形が推奨）
+  const noScheme = srcUrl.replace(/^https?:\/\//, '');
+  const enc = encodeURIComponent(noScheme);
+  return `https://images.weserv.nl/?url=${enc}&output=jpg&q=90&w=1080&h=1080&fit=cover&we`;
 }
 
-async function waitForImage(url, { tries = 30, intervalMs = 20000 } = {}) {
+/** 元画像URLが公開されるまで待つ（Cloudflare Pages のデプロイ待ち）。 */
+async function waitForImage(url, { tries = 15, intervalMs = 20000 } = {}) {
   for (let i = 1; i <= tries; i++) {
     try {
       const res = await fetch(url, { method: 'HEAD' });
-      if (res.ok) { log(`image live: ${url}`); return true; }
-      log(`image not ready (${res.status}) [${i}/${tries}] ${url}`);
-    } catch (e) { log(`image check failed [${i}/${tries}]: ${e.message}`); }
+      if (res.ok) { log(`source image live: ${url}`); return true; }
+      log(`source not ready (${res.status}) [${i}/${tries}] ${url}`);
+    } catch (e) { log(`source check failed [${i}/${tries}]: ${e.message}`); }
     if (i < tries) await sleep(intervalMs);
   }
   return false;
@@ -187,7 +169,6 @@ function buildBlogCaption(data, body, slug) {
   if (data.description) {
     bodyText = data.description;
   } else {
-    // Markdownの本文から最初の段落を取得
     const plainBody = body
       .replace(/^---[\s\S]*?---/, '')
       .replace(/<[^>]+>/g, '')
@@ -247,16 +228,25 @@ async function main() {
       if (String(data.draft) === 'true') { log(`skip (draft): ${file}`); continue; }
       if (!data.title) { err(`title 無し、skip: ${file}`); continue; }
 
+      // 画像URLを決定。heroImage/thumbnail が無ければサイトのOGP画像を使う。
       const img = data.heroImage || data.thumbnail;
-      if (!img) { err(`画像指定無し、skip: ${file}`); continue; }
-      let imageUrl = img.startsWith('http') ? img : `${SITE}${img.startsWith('/') ? '' : '/'}${img}`;
-
-      if (/\.webp$/i.test(imageUrl)) {
-        imageUrl = await ensureJpegUrl(imageUrl);
+      let srcUrl;
+      if (img) {
+        srcUrl = img.startsWith('http') ? img : `${SITE}${img.startsWith('/') ? '' : '/'}${img}`;
+      } else {
+        log(`画像指定なし → フォールバック画像を使用: ${file}`);
+        srcUrl = FALLBACK_IMAGE;
       }
 
-      const ok = await waitForImage(imageUrl, { tries: 45, intervalMs: 20000 });
-      if (!ok) { err(`画像が公開されず skip: ${imageUrl}`); results.push({ file, ok: false }); continue; }
+      // 元画像がサイト上に公開されるまで待つ（新規追加時のデプロイ待ち）
+      const ok = await waitForImage(srcUrl, { tries: 15, intervalMs: 20000 });
+      if (!ok) {
+        log(`元画像が公開されず → フォールバック画像に切替: ${srcUrl}`);
+        srcUrl = FALLBACK_IMAGE;
+      }
+
+      const imageUrl = toInstagramJpegUrl(srcUrl);
+      log(`instagram image url: ${imageUrl}`);
 
       const slug = file.split('/').pop().replace(/\.md$/, '');
       const isBlog = file.includes('content/blog/');
@@ -266,6 +256,7 @@ async function main() {
       log(`[${isBlog ? 'blog' : 'work'}] caption ${clen(caption)}文字`);
       const id = await postOne(imageUrl, caption);
       results.push({ file, ok: true, id });
+      await sleep(2000);
     } catch (e) {
       err(`${file}: ${e.message}`);
       results.push({ file, ok: false, error: e.message });
