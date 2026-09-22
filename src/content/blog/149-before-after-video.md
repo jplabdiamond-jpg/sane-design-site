@@ -2,7 +2,7 @@
 title: 'ビフォーアフター動画で説得力アップ｜施工・美容・リフォーム業種向け'
 description: 'ビフォーアフター動画がもたらす説得力と制作のポイントを業種別に解説します。'
 pubDate: '2026-09-21'
-heroImage: ''
+heroImage: '/assets/blog/148_before_after_video_construction_beauty.webp'
 tags:
   - 動画
   - ビフォーアフター
