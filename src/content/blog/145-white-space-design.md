@@ -2,7 +2,7 @@
 title: 'ホームページの余白デザインの効果｜プロっぽく見せる秘訣'
 description: '余白（ホワイトスペース）がWebデザインの印象と使いやすさに与える影響を解説します。'
 pubDate: '2026-09-20'
-heroImage: ''
+heroImage: '/assets/blog/144_homepage_whitespace_design.webp'
 tags:
   - 余白
   - デザイン
