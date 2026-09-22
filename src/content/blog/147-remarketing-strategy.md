@@ -2,7 +2,7 @@
 title: 'リマーケティング戦略の組み方｜見込み客を顧客に変える広告設計'
 description: 'サイト訪問者を追跡して再アプローチするリマーケティングの戦略設計を解説します。'
 pubDate: '2026-09-21'
-heroImage: ''
+heroImage: '/assets/blog/146_remarketing_strategy_conversion.webp'
 tags:
   - リマーケティング
   - Web広告
