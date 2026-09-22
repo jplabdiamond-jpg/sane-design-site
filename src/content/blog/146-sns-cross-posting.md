@@ -2,7 +2,7 @@
 title: 'SNSクロスポストの正しいやり方｜各プラットフォームに最適化する方法'
 description: '複数SNSへの同時投稿の効率化と各プラットフォームに合わせた最適化方法を解説します。'
 pubDate: '2026-09-20'
-heroImage: ''
+heroImage: '/assets/blog/145_social_crossposting_strategy.webp'
 tags:
   - SNS
   - クロスポスト
