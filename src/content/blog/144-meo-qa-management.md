@@ -2,7 +2,7 @@
 title: 'Googleビジネスプロフィールの質問と回答（Q&A）を管理する方法'
 description: 'GBPのQ&A機能を活用して、見込み客の疑問に先回りして回答する方法を解説します。'
 pubDate: '2026-09-20'
-heroImage: ''
+heroImage: '/assets/blog/143_google_business_profile_qa.webp'
 tags:
   - Googleビジネスプロフィール
   - Q&A
