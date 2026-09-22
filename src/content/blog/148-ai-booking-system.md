@@ -2,7 +2,7 @@
 title: 'AI予約システムで業務を効率化｜24時間自動受付の導入方法'
 description: 'AI搭載の予約管理システムの選び方と導入手順を解説します。'
 pubDate: '2026-09-21'
-heroImage: ''
+heroImage: '/assets/blog/147_ai_booking_system_efficiency.webp'
 tags:
   - AI
   - 予約システム
