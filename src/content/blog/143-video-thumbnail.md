@@ -2,7 +2,7 @@
 title: '動画のサムネイルで再生数が変わる｜クリックされるサムネの作り方'
 description: 'YouTube動画やSNS動画のサムネイル制作のコツとデザインのポイントを解説します。'
 pubDate: '2026-09-19'
-heroImage: ''
+heroImage: '/assets/blog/142_video_thumbnail_views.webp'
 tags:
   - 動画
   - サムネイル
