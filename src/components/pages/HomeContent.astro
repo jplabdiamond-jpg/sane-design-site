@@ -61,12 +61,17 @@ const S = {
     step3Alt: 'サイトを制作するイラスト', step3h: '制作', step3p: '確認しながら進めます。丸投げOK。',
     step4Alt: 'サイトが完成して喜ぶイラスト', step4h: '公開・サポート', step4p: '公開後の運用もサポート。',
     voiceTitle: 'お客様の声',
-    pricePre: '＼ webサイトの制作は ／', priceTitleA: 'シンプルな', priceTitleB: '1つのプランのみ！', priceSub: 'すべてコミコミ価格。あとから追加請求はありません',
+    pricePre: '＼ わかりやすい料金体系 ／', priceTitleA: '選べる', priceTitleB: '3つのプラン', priceSub: 'すべてコミコミ価格。あとから追加請求はありません',
     ribbon: '基本プラン', planName: 'LP・WEBサイト制作プラン', planFor: 'お店・事業のサイトをまるごと制作',
     planLi1: '1ページ（LP：1Pで、10,000px程度まで：デスクトップ画面10画面分ほど）',
     planLi2: '5ページ（WEBサイト：トップページ、会社概要、商品内容、よくある質問、お問い合わせ 等）',
     planLi3: 'スマホ対応', planLi4: 'お問い合わせフォーム', planLi5: 'オリジナルデザイン', planLi6: '公開後サポート',
     btnFreeFeats: 'その他対応可能な機能（追加料金なし）', btnConsultPlan: '相談する',
+    plansHeadTitle: '3つのプランから選べる', plansHeadSub: '組み合わせも、単体でのご依頼もOKです。',
+    planWebBadge: 'WEB制作', planWebName: 'LP・WEBサイト制作', planWebPrice: '¥30,000', planWebUnit: '〜', planWebDesc: 'スマホ対応・フォーム込み・オリジナルデザイン',
+    planSeoBadge: 'SEO', planSeoName: 'SEO対策プラン', planSeoPrice: '¥15,000', planSeoUnit: '〜', planSeoDesc: '指定キーワード記事＋内部SEO対策',
+    planMaintBadge: '保守', planMaintName: '月額保守・更新代行', planMaintPrice: '¥5,000', planMaintUnit: '/月', planMaintDesc: '公開後の更新代行・運用サポート',
+    planCardCta: 'このプランを相談する', plansNote: '※ WEB制作は基本1ページ¥30,000〜。ページ数やご要望に応じてお見積りします。',
     optTitle: '有料オプション', optSub: '必要なものだけ選んで、自分だけのプランに。',
     optPageAdd: 'ページ追加', optPageAddPrice: '1Pあたり + 5,000円', optPageAddNone: '追加なし',
     optServer: 'サーバーへの直接アップロード（公開まで実施）', optCalendar: '予約機能付きカレンダー導入',
@@ -140,12 +145,17 @@ const S = {
     step3Alt: 'Illustration of building the site', step3h: 'Production', step3p: 'We proceed while checking with you. Hands-off is fine.',
     step4Alt: 'Illustration celebrating a finished site', step4h: 'Launch & support', step4p: 'We support operations after launch too.',
     voiceTitle: 'Customer voices',
-    pricePre: '＼ For website production ／', priceTitleA: 'Just ', priceTitleB: 'one simple plan!', priceSub: 'Everything included. No surprise charges later',
+    pricePre: '＼ Clear, simple pricing ／', priceTitleA: 'Three ', priceTitleB: 'plans to choose from', priceSub: 'Everything included. No surprise charges later',
     ribbon: 'Basic plan', planName: 'Landing Page / Website Plan', planFor: 'A complete site for your shop or business',
     planLi1: '1 page (Landing page: up to ~10,000px on 1 page — about 10 desktop screens)',
     planLi2: '5 pages (Website: home, about, products/services, FAQ, contact, etc.)',
     planLi3: 'Mobile-ready', planLi4: 'Contact form', planLi5: 'Original design', planLi6: 'Post-launch support',
     btnFreeFeats: 'Other supported features (no extra charge)', btnConsultPlan: 'Get in touch',
+    plansHeadTitle: 'Choose from three plans', plansHeadSub: 'Combine them, or order any one on its own.',
+    planWebBadge: 'WEB', planWebName: 'LP / Website Design', planWebPrice: '¥30,000', planWebUnit: '~', planWebDesc: 'Mobile-ready, form included, original design',
+    planSeoBadge: 'SEO', planSeoName: 'SEO Plan', planSeoPrice: '¥15,000', planSeoUnit: '~', planSeoDesc: 'Targeted-keyword articles + on-page SEO',
+    planMaintBadge: 'Maint.', planMaintName: 'Monthly Maintenance', planMaintPrice: '¥5,000', planMaintUnit: '/mo', planMaintDesc: 'Post-launch updates & ongoing support',
+    planCardCta: 'Ask about this plan', plansNote: '* Web design starts at ¥30,000 for 1 page. We quote based on page count and requirements.',
     optTitle: 'Paid options', optSub: 'Pick only what you need to build your own plan.',
     optPageAdd: 'Add a page', optPageAddPrice: '+ 5,000 yen per page', optPageAddNone: 'None',
     optServer: 'Direct upload to your server (through go-live)', optCalendar: 'Booking calendar with reservations',
@@ -390,8 +400,41 @@ const t = S[lang];
   <div class="wave top"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="var(--pink-bg)"/></svg></div>
   <div class="wrap">
     <div class="sec-head"><span class="sec-sub">Price</span><span class="sec-sub en" style="letter-spacing:0;font-family:'Noto Sans JP';font-size:15px;color:var(--text);font-weight:700;text-transform:none"><span class="nowrap-m">{t.pricePre}</span></span><h2 class="sec-title"><span class="nowrap-m">{t.priceTitleA}<span class="mk">{t.priceTitleB}</span></span><small>{t.priceSub}</small></h2></div>
-    <div class="pricing-layout">
-      <!-- 左: プランカード -->
+    <!-- 3プラン横並びカード -->
+    <div class="plans-head-2">
+      <h3>{t.plansHeadTitle}</h3>
+      <p>{t.plansHeadSub}</p>
+    </div>
+    <div class="plan-cards-3">
+      <!-- WEB制作 -->
+      <div class="plan-card-3" data-plan="web">
+        <span class="pc-badge web">{t.planWebBadge}</span>
+        <span class="pc-name">{t.planWebName}</span>
+        <span class="pc-price">{t.planWebPrice}<small>{t.planWebUnit}</small></span>
+        <span class="pc-desc">{t.planWebDesc}</span>
+        <a href={lp('/contact/')} class="pc-cta web">{t.planCardCta}</a>
+      </div>
+      <!-- SEO -->
+      <div class="plan-card-3" data-plan="seo">
+        <span class="pc-badge seo">{t.planSeoBadge}</span>
+        <span class="pc-name">{t.planSeoName}</span>
+        <span class="pc-price">{t.planSeoPrice}<small>{t.planSeoUnit}</small></span>
+        <span class="pc-desc">{t.planSeoDesc}</span>
+        <a href={lp('/contact/')} class="pc-cta seo">{t.planCardCta}</a>
+      </div>
+      <!-- 保守 -->
+      <div class="plan-card-3" data-plan="maint">
+        <span class="pc-badge maint">{t.planMaintBadge}</span>
+        <span class="pc-name">{t.planMaintName}</span>
+        <span class="pc-price">{t.planMaintPrice}<small>{t.planMaintUnit}</small></span>
+        <span class="pc-desc">{t.planMaintDesc}</span>
+        <a href={lp('/contact/')} class="pc-cta maint">{t.planCardCta}</a>
+      </div>
+    </div>
+    <p class="plans-note-2">{t.plansNote}</p>
+
+    <div class="pricing-layout single-col">
+      <!-- WEB制作に含まれるもの -->
       <div class="plan">
         <div class="ribbon">{t.ribbon}</div>
         <h3 style="padding-top:10px">{t.planName}</h3><div class="for">{t.planFor}</div>
@@ -900,6 +943,32 @@ const t = S[lang];
   .test .who small{font-size:12px;color:var(--sub)}
 
   /* PRICING */
+  /* 3プラン横並びカード */
+  .plans-head-2{text-align:center;margin-bottom:22px}
+  .plans-head-2 h3{font-size:20px;font-weight:900;margin-bottom:6px}
+  .plans-head-2 p{font-size:14px;color:var(--sub);font-weight:500}
+  .plan-cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:14px;max-width:900px;margin-left:auto;margin-right:auto}
+  .plan-card-3{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;background:#fff;border-radius:var(--radius);padding:28px 20px 24px;border:2px solid #e2e6ed;box-shadow:0 8px 26px rgba(58,66,86,.08);transition:transform .2s,box-shadow .2s,border-color .2s}
+  .plan-card-3:hover{transform:translateY(-5px);box-shadow:0 16px 38px rgba(58,66,86,.14)}
+  .plan-card-3[data-plan="web"]{border-color:var(--primary)}
+  .plan-card-3[data-plan="seo"]{border-color:var(--green)}
+  .plan-card-3[data-plan="maint"]{border-color:#9b59b6}
+  .pc-badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 14px;border-radius:999px;color:#fff}
+  .pc-badge.web{background:var(--primary)}
+  .pc-badge.seo{background:var(--green)}
+  .pc-badge.maint{background:#9b59b6}
+  .pc-name{font-size:15px;font-weight:900;margin-top:4px;line-height:1.4}
+  .pc-price{font-family:"Inter",sans-serif;font-weight:800;font-size:30px;color:var(--text);line-height:1.1}
+  .pc-price small{font-size:15px;font-weight:700;color:var(--sub);margin-left:2px}
+  .pc-desc{font-size:12px;color:var(--sub);line-height:1.6;font-weight:500;min-height:2.6em}
+  .pc-cta{margin-top:8px;display:inline-flex;align-items:center;justify-content:center;width:100%;padding:11px 16px;border-radius:999px;font-family:"Noto Sans JP",sans-serif;font-size:13px;font-weight:700;color:#fff!important;text-decoration:none;transition:transform .12s,box-shadow .12s}
+  .pc-cta.web{background:var(--primary);box-shadow:0 4px 0 var(--primary-deep)}
+  .pc-cta.seo{background:var(--green);box-shadow:0 4px 0 #04913e}
+  .pc-cta.maint{background:#9b59b6;box-shadow:0 4px 0 #6f3d8a}
+  .pc-cta:hover{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.2)}
+  .plans-note-2{text-align:center;font-size:12px;color:var(--sub);margin-bottom:34px;font-weight:500;line-height:1.7}
+  .pricing-layout.single-col .plan{margin:0 auto}
+
   .pricing-layout{display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:start}
   .plan{background:#fff;border-radius:var(--radius);padding:34px 26px;box-shadow:0 12px 34px rgba(79,180,232,.28);border:3px solid var(--primary);text-align:center;position:relative;overflow:visible}
   .plan .ribbon{position:absolute;top:-16px;left:0;right:0;margin:0 auto;width:fit-content;background:var(--orange);color:#fff;font-family:"Noto Sans JP";font-size:13px;font-weight:700;padding:6px 22px;border-radius:999px;white-space:nowrap;box-shadow:0 4px 0 var(--orange-dark)}
@@ -970,6 +1039,8 @@ const t = S[lang];
   @media(max-width:860px){
     .pricing-layout{grid-template-columns:1fr}
     .opt-grid{grid-template-columns:1fr;max-height:min(66vh,560px)}
+    .plan-cards-3{grid-template-columns:1fr;gap:14px}
+    .pc-desc{min-height:0}
   }
 
   /* WORKS */
