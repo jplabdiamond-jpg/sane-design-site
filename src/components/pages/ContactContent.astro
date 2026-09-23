@@ -20,7 +20,9 @@ const S = {
     s1h: 'プランとオプションを選ぶ', s1p: 'ご希望のプランを選んで、必要なオプションを追加できます。',
     psWebBadge: 'WEB制作', psWebName: 'LP・WEBサイト制作', psWebDesc: 'スマホ対応・フォーム込み',
     psSeoBadge: 'SEO', psSeoName: 'SEO対策プラン', psSeoDesc: '60記事追加＋内部SEO',
-    bothNote: '両方のプランを同時に選択して合算できます',
+    psMaintBadge: '保守', psMaintName: '月額保守・更新代行', psMaintDesc: '公開後の更新代行・運用', psMaintUnit: '/月',
+    maintPlanFull: '月額保守・更新代行（¥5,000/月）', maintPlanBasic: '月額保守・更新代行', maintMonthlyNote: '※ 保守は月額¥5,000（税込）が別途発生します',
+    bothNote: '3つのプランは組み合わせて選択できます。保守のみのご依頼も可能です。',
     consultName: 'まずは相談だけをする', consultDesc: 'プランが決まっていない方もお気軽にご相談ください',
     consultAlert: '「LP・WEBサイト制作」または「SEO対策プラン」のチェックを外してから選択してください。',
     webBadge: '基本プラン', webPlanName: 'LP・WEBサイト制作プラン', webPlanSub: 'スマホ対応・フォーム込み・オリジナルデザイン',
@@ -72,6 +74,7 @@ const S = {
       tagWeb: '【WEB】', tagSeo: '【SEO】',
       consultPlan: 'まずは相談だけ', optNone: 'なし', totalTbd: '未定（ご相談）',
       webPlanFull: 'LP・WEBサイト制作プラン（基本料金 ¥30,000〜）', seoPlanFull: 'SEO対策プラン（基本料金 ¥15,000〜）',
+      maintPlanFull: '月額保守・更新代行（¥5,000/月）', maintPlanBasic: '月額保守・更新代行', psMaintUnit: '/月',
       pageAddWord: 'ページ追加 +', pUnit: 'P', articleAddWord: '追加記事 +', articleUnit: '記事',
       webPlanBasic: 'LP・WEBサイト制作プラン（基本）', seoPlanBasic: 'SEO対策プラン（基本）',
       pageAddShort: '　ページ追加 +', articleAddShort: '　追加記事 +',
@@ -90,7 +93,9 @@ const S = {
     s1h: 'Choose your plan and options', s1p: 'Pick a plan and add any options you need.',
     psWebBadge: 'WEB', psWebName: 'Landing Page / Website', psWebDesc: 'Mobile-ready, form included',
     psSeoBadge: 'SEO', psSeoName: 'SEO Plan', psSeoDesc: '60 articles + internal SEO',
-    bothNote: 'You can select both plans and combine them',
+    psMaintBadge: 'Maint.', psMaintName: 'Monthly Maintenance', psMaintDesc: 'Post-launch updates & support', psMaintUnit: '/mo',
+    maintPlanFull: 'Monthly Maintenance (¥5,000/mo)', maintPlanBasic: 'Monthly Maintenance', maintMonthlyNote: '* Maintenance is billed separately at ¥5,000/mo',
+    bothNote: 'Combine any of the three plans. Maintenance-only requests are welcome too.',
     consultName: 'Just consult for now', consultDesc: "Haven't decided on a plan? Feel free to just ask",
     consultAlert: 'Please uncheck "Landing Page / Website" or "SEO Plan" before selecting this.',
     webBadge: 'Basic plan', webPlanName: 'Landing Page / Website Plan', webPlanSub: 'Mobile-ready, form included, original design',
@@ -141,6 +146,7 @@ const S = {
       tagWeb: '[WEB] ', tagSeo: '[SEO] ',
       consultPlan: 'Consultation only', optNone: 'None', totalTbd: 'TBD (to discuss)',
       webPlanFull: 'Landing Page / Website Plan (base ¥30,000~)', seoPlanFull: 'SEO Plan (base ¥15,000~)',
+      maintPlanFull: 'Monthly Maintenance (¥5,000/mo)', maintPlanBasic: 'Monthly Maintenance', psMaintUnit: '/mo',
       pageAddWord: 'Add pages +', pUnit: 'P', articleAddWord: 'Add articles +', articleUnit: ' articles',
       webPlanBasic: 'Landing Page / Website Plan (base)', seoPlanBasic: 'SEO Plan (base)',
       pageAddShort: '  Add pages +', articleAddShort: '  Add articles +',
@@ -209,6 +215,13 @@ const L = t.js;
                 <span class="ps-name">{t.psSeoName}</span>
                 <span class="ps-price">¥15,000<small>〜</small></span>
                 <span class="ps-desc">{t.psSeoDesc}</span>
+              </div>
+              <div class="plan-sel-card" data-plan="maint" id="planCardMaint">
+                <span class="ps-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                <span class="ps-badge">{t.psMaintBadge}</span>
+                <span class="ps-name">{t.psMaintName}</span>
+                <span class="ps-price">¥5,000<small>{t.psMaintUnit}</small></span>
+                <span class="ps-desc">{t.psMaintDesc}</span>
               </div>
             </div>
             <p style="font-size:12px;color:var(--text-muted);margin-bottom:20px;margin-top:-16px;text-align:center">{t.bothNote}</p>
@@ -314,8 +327,12 @@ const L = t.js;
 
             <div class="total-bar" id="totalBar">
               <div class="total-label">{t.totalLabel}<small>{t.totalSub}</small></div>
-              <div class="total-price"><span class="yen">¥</span><span id="totalAmount">30,000</span><small>{t.totalTax}</small></div>
+              <div class="total-price-group">
+                <div class="total-price" id="oneTimeWrap"><span class="yen">¥</span><span id="totalAmount">30,000</span><small>{t.totalTax}</small></div>
+                <div class="total-price total-maint" id="maintWrap" style="display:none;"><span class="yen">¥</span><span>5,000</span><small>{t.psMaintUnit}</small></div>
+              </div>
             </div>
+            <p id="maintNote" style="display:none;font-size:12px;color:#9b59b6;margin-top:8px;text-align:center;font-weight:700">{t.maintMonthlyNote}</p>
 
             <p style="font-size:12px;color:var(--text-muted);margin-top:12px;line-height:1.7;text-align:center">{t.priceNote}</p>
 
@@ -451,6 +468,11 @@ const L = t.js;
 .plan-sel-card:hover{border-color:var(--primary);background:#f8fcff}
 .plan-sel-card.active{border-color:var(--primary);background:var(--sky-bg);box-shadow:0 0 0 3px rgba(79,180,232,.15)}
 .plan-sel-card[data-plan="seo"].active{border-color:#34a853;background:#eaf7ee;box-shadow:0 0 0 3px rgba(52,168,83,.15)}
+.plan-sel-card[data-plan="maint"].active{border-color:#9b59b6;background:#f3e8fa;box-shadow:0 0 0 3px rgba(155,89,182,.15)}
+.plan-sel-card[data-plan="maint"].active .ps-check{background:#9b59b6;border-color:#9b59b6}
+.plan-sel-card[data-plan="maint"] .ps-badge{background:#9b59b6;color:#fff}
+.plan-sel-card[data-plan="maint"] .ps-price{color:#9b59b6}
+@media(max-width:560px){.plan-selector{flex-wrap:wrap}.plan-sel-card{flex:1 1 100%}}
 .plan-sel-card .ps-check{position:absolute;top:10px;right:10px;width:22px;height:22px;border-radius:6px;border:2px solid #ccd2db;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
 .plan-sel-card .ps-check svg{width:14px;height:14px;stroke:#fff;stroke-width:3;opacity:0;transition:opacity .2s}
 .plan-sel-card.active .ps-check{background:var(--primary);border-color:var(--primary)}
@@ -530,6 +552,9 @@ const L = t.js;
 .total-price{font-family:"Inter",sans-serif;font-weight:800;font-size:26px}
 .total-price .yen{font-size:18px;margin-right:2px}
 .total-price small{font-size:12px;font-weight:700;opacity:.7;margin-left:4px}
+.total-price-group{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;justify-content:flex-end}
+.total-price.total-maint{font-size:20px;color:#e0c3f0}
+.total-price.total-maint .yen{font-size:14px}
 
 .step-nav{display:flex;justify-content:center;margin-top:32px;gap:12px}
 .step-nav .btn{justify-content:center;white-space:nowrap;padding:16px 40px}
@@ -575,28 +600,29 @@ textarea.form-input{resize:vertical;line-height:1.8}
 
 <script define:vars={{ L }}>
 (function(){
-  var webOn=true,seoOn=false,consultOn=false;
-  var planCardWeb=document.getElementById('planCardWeb'),planCardSeo=document.getElementById('planCardSeo');
+  var webOn=true,seoOn=false,maintOn=false,consultOn=false;
+  var planCardWeb=document.getElementById('planCardWeb'),planCardSeo=document.getElementById('planCardSeo'),planCardMaint=document.getElementById('planCardMaint');
   var consultCard=document.getElementById('consultCard'),consultAlert=document.getElementById('consultAlert');
   var panelWeb=document.getElementById('panelWeb'),panelSeo=document.getElementById('panelSeo');
   var totalBar=document.getElementById('totalBar'),toStep2Btn=document.getElementById('toStep2');
 
   function syncPlanUI(){
-    planCardWeb.classList.toggle('active',webOn);planCardSeo.classList.toggle('active',seoOn);consultCard.classList.toggle('active',consultOn);
+    planCardWeb.classList.toggle('active',webOn);planCardSeo.classList.toggle('active',seoOn);planCardMaint.classList.toggle('active',maintOn);consultCard.classList.toggle('active',consultOn);
     panelWeb.classList.toggle('active',webOn);panelSeo.classList.toggle('active',seoOn);
-    totalBar.style.display=consultOn?'none':'';toStep2Btn.disabled=!(webOn||seoOn||consultOn);calcTotal();
+    totalBar.style.display=consultOn?'none':'';toStep2Btn.disabled=!(webOn||seoOn||maintOn||consultOn);calcTotal();
   }
   function clearConsultAlert(){consultAlert.classList.remove('show');}
 
   planCardWeb.addEventListener('click',function(){clearConsultAlert();if(consultOn){consultOn=false;webOn=true;syncPlanUI();return;}webOn=!webOn;syncPlanUI();});
   planCardSeo.addEventListener('click',function(){clearConsultAlert();if(consultOn){consultOn=false;seoOn=true;syncPlanUI();return;}seoOn=!seoOn;syncPlanUI();});
+  planCardMaint.addEventListener('click',function(){clearConsultAlert();if(consultOn){consultOn=false;maintOn=true;syncPlanUI();return;}maintOn=!maintOn;syncPlanUI();});
   consultCard.addEventListener('click',function(){
     if(consultOn){consultOn=false;webOn=true;clearConsultAlert();syncPlanUI();return;}
-    if(webOn||seoOn){consultAlert.classList.add('show');setTimeout(function(){consultAlert.classList.remove('show');},5000);return;}
+    if(webOn||seoOn||maintOn){consultAlert.classList.add('show');setTimeout(function(){consultAlert.classList.remove('show');},5000);return;}
     consultOn=true;clearConsultAlert();syncPlanUI();
   });
 
-  var WEB_BASE=30000,SEO_BASE=15000,PAGE_UNIT=5000,ARTICLE_UNIT=3000;
+  var WEB_BASE=30000,SEO_BASE=15000,MAINT_BASE=5000,PAGE_UNIT=5000,ARTICLE_UNIT=3000;
   var optGrid=document.getElementById('optGrid'),optGridSeo=document.getElementById('optGridSeo');
   var totalEl=document.getElementById('totalAmount');
   var pageSelect=document.getElementById('pageAddSelect'),pageAddItem=document.getElementById('optPageAdd');
@@ -626,6 +652,14 @@ textarea.form-input{resize:vertical;line-height:1.8}
       var articles=parseInt(articleSelect.value,10)||0;total+=articles*ARTICLE_UNIT;articleAddItem.classList.toggle('is-on',articles>0);
     }
     totalEl.textContent=fmt(total);
+    // 保守（月額）の表示切替
+    var maintWrap=document.getElementById('maintWrap'),oneTimeWrap=document.getElementById('oneTimeWrap'),maintNote=document.getElementById('maintNote');
+    if(maintWrap){
+      maintWrap.style.display=maintOn?'flex':'none';
+      maintNote.style.display=maintOn?'block':'none';
+      // 一括が0（保守のみ）の場合は一括表示を隠す
+      oneTimeWrap.style.display=(total===0&&maintOn)?'none':'flex';
+    }
     totalBar.style.transform='scale(1.02)';totalBar.style.transition='transform .18s cubic-bezier(.34,1.4,.64,1)';
     setTimeout(function(){totalBar.style.transform='';},200);
     updateHiddenFields(total);
@@ -660,9 +694,12 @@ textarea.form-input{resize:vertical;line-height:1.8}
       if(articles>0)opts.push(L.tagSeo+L.articleAddWord+(articles*10)+L.articleUnit+' ('+fmt(articles*ARTICLE_UNIT)+L.yen+')');
       optGridSeo.querySelectorAll('.opt-item:not(.opt-page-add)').forEach(function(item){var cb=item.querySelector('input[type=checkbox]');if(cb&&cb.checked){var name=item.getAttribute('data-name')||item.querySelector('.opt-name').textContent;var price=item.getAttribute('data-price');opts.push(L.tagSeo+name+' (+'+fmt(parseInt(price,10))+L.yen+')');}});
     }
+    if(maintOn)plans.push(L.maintPlanFull);
     document.getElementById('hiddenPlan').value=plans.join(' + ');
     document.getElementById('hiddenOptions').value=opts.length?opts.join(' / '):L.optNone;
-    document.getElementById('hiddenTotal').value='¥'+fmt(total)+L.tilde;
+    var maintStr=maintOn?('¥'+fmt(MAINT_BASE)+L.psMaintUnit):'';
+    if(total>0)document.getElementById('hiddenTotal').value='¥'+fmt(total)+L.tilde+(maintOn?(' + '+maintStr):'');
+    else document.getElementById('hiddenTotal').value=maintOn?maintStr:('¥'+fmt(total)+L.tilde);
   }
 
   var currentStep=1,step1=document.getElementById('step1'),step2=document.getElementById('step2'),step3=document.getElementById('step3');
@@ -675,7 +712,7 @@ textarea.form-input{resize:vertical;line-height:1.8}
     var panel=document.getElementById('step'+n);panel.querySelectorAll('.reveal:not(.visible)').forEach(function(c){setTimeout(function(){c.classList.add('visible');},100);});
   }
 
-  toStep2Btn.addEventListener('click',function(){if(!webOn&&!seoOn&&!consultOn)return;buildSelectedSummary();goToStep(2);});
+  toStep2Btn.addEventListener('click',function(){if(!webOn&&!seoOn&&!maintOn&&!consultOn)return;buildSelectedSummary();goToStep(2);});
   document.getElementById('backToStep1').addEventListener('click',function(){goToStep(1);});
 
   function buildSelectedSummary(){
@@ -699,7 +736,14 @@ textarea.form-input{resize:vertical;line-height:1.8}
       if(articles>0){var a=articles*ARTICLE_UNIT;total+=a;var ra=document.createElement('div');ra.className='sel-row';ra.innerHTML='<span class="sel-name">'+L.articleAddShort+(articles*10)+L.articleUnit+'</span><span class="sel-price">+ ¥'+fmt(a)+'</span>';list.appendChild(ra);}
       optGridSeo.querySelectorAll('.opt-item:not(.opt-page-add)').forEach(function(item){var cb=item.querySelector('input[type=checkbox]');if(cb&&cb.checked){var name=item.getAttribute('data-name')||item.querySelector('.opt-name').textContent;var price=parseInt(item.getAttribute('data-price'),10)||0;total+=price;var r2=document.createElement('div');r2.className='sel-row';r2.innerHTML='<span class="sel-name">  '+name+'</span><span class="sel-price">+ ¥'+fmt(price)+'</span>';list.appendChild(r2);}});
     }
-    var tr=document.createElement('div');tr.className='sel-total';tr.innerHTML='<span>'+L.summaryTotal+'</span><span style="color:var(--primary)">¥'+fmt(total)+L.tilde+'</span>';list.appendChild(tr);
+    if(maintOn){
+      if(webOn||seoOn){var sep2=document.createElement('div');sep2.style.cssText='height:1px;background:#e2e6ed;margin:10px 0;';list.appendChild(sep2);}
+      var hm=document.createElement('div');hm.className='sel-row';hm.innerHTML='<span class="sel-name" style="font-weight:700;color:#9b59b6">'+L.maintPlanBasic+'</span><span class="sel-price" style="color:#9b59b6">¥'+fmt(MAINT_BASE)+L.psMaintUnit+'</span>';list.appendChild(hm);
+    }
+    var totalHtml='<span style="color:var(--primary)">¥'+fmt(total)+L.tilde+'</span>';
+    if(maintOn&&total>0)totalHtml+='<span style="color:#9b59b6;margin-left:8px">+ ¥'+fmt(MAINT_BASE)+L.psMaintUnit+'</span>';
+    else if(maintOn&&total===0)totalHtml='<span style="color:#9b59b6">¥'+fmt(MAINT_BASE)+L.psMaintUnit+'</span>';
+    var tr=document.createElement('div');tr.className='sel-total';tr.innerHTML='<span>'+L.summaryTotal+'</span><span>'+totalHtml+'</span>';list.appendChild(tr);
   }
 
   var form=document.getElementById('contact-form'),submitBtn=document.getElementById('submitBtn'),errorEl=document.getElementById('formError');

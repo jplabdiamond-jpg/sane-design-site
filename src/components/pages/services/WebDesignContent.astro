@@ -57,6 +57,9 @@ const S = {
     optH: 'オプション',
     opt: ['¥3,000 — サーバーへの直接アップロード・公開対応', '¥10,000 — デザイン提出後の大幅変更', '¥40,000 — ECサイト構築（Stripe / Square 決済連携含）', '¥1,000 — 軽微な修正（画像入替・役員追加など）', '¥5,000 — 大規模修正（文字1,000字以上・画像20枚以上）'],
     detailNote: 'ご不明点はお気軽にご相談ください。サーバー・ドメインの選び方、ページ追加、ECサイト構築なども対応しております。',
+    plansBannerTitle: 'SEO対策・月額保守もご用意しています',
+    plansBannerText: 'Sane Designは「LP・WEBサイト制作（¥30,000〜）」「SEO対策（¥15,000〜）」「月額保守・更新代行（¥5,000/月）」の3プランをご用意。組み合わせても、単体でもご依頼いただけます。',
+    plansBannerCta: '3つのプランと料金を見る',
     perfTitlePre: '安心の', perfTitleMk: '修正対応',
     perf1big: '無制限', perf1l: '完成までの修正', perf2u: '日', perf2l: '平均納期（実績）', perf3u: '+', perf3l: '制作実績',
     worksTitle: '制作実績', worksSub: '最新の制作例をご紹介します',
@@ -118,6 +121,9 @@ const S = {
     optH: 'Options',
     opt: ['¥3,000 — Direct upload to your server & go-live', '¥10,000 — Major changes after design submission', '¥40,000 — E-commerce build (incl. Stripe / Square payments)', '¥1,000 — Minor edits (image swaps, adding a staff member, etc.)', '¥5,000 — Large edits (1,000+ characters, 20+ images)'],
     detailNote: 'Feel free to ask any questions. We also help with choosing servers and domains, adding pages, and building e-commerce.',
+    plansBannerTitle: 'We also offer SEO and monthly maintenance',
+    plansBannerText: 'Sane Design offers three plans: LP / Website Design (¥30,000~), SEO (¥15,000~), and Monthly Maintenance (¥5,000/mo). Combine them, or order any one on its own.',
+    plansBannerCta: 'See all three plans & pricing',
     perfTitlePre: 'Reassuring ', perfTitleMk: 'revision support',
     perf1big: 'Unlimited', perf1l: 'Revisions until done', perf2u: ' days', perf2l: 'Avg. delivery (actual)', perf3u: '+', perf3l: 'Projects delivered',
     worksTitle: 'Our work', worksSub: 'A look at our latest projects',
@@ -363,8 +369,29 @@ const t = S[lang];
       </div>
     </div>
     <p style="text-align:center;font-size:13px;color:var(--sub);margin-top:28px;font-weight:500;line-height:1.8">{t.detailNote}</p>
+
+    <!-- 3プランへの導線バナー -->
+    <div class="plans-banner reveal">
+      <div class="pb-body">
+        <h3>{t.plansBannerTitle}</h3>
+        <p>{t.plansBannerText}</p>
+      </div>
+      <a href={lp('/#pricing')} class="btn btn-primary pb-cta">{t.plansBannerCta}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
   </div>
 </section>
+
+<style>
+  .plans-banner{margin-top:40px;background:linear-gradient(135deg,#EAF6FC,#fff);border:2px solid var(--primary);border-radius:20px;padding:32px 36px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;justify-content:space-between;box-shadow:0 10px 30px rgba(79,180,232,.14)}
+  .plans-banner .pb-body{flex:1;min-width:260px}
+  .plans-banner h3{font-size:19px;font-weight:900;margin-bottom:8px}
+  .plans-banner p{font-size:14px;color:var(--sub);line-height:1.8;font-weight:500}
+  .plans-banner .pb-cta{white-space:nowrap;flex-shrink:0}
+  @media(max-width:720px){
+    .plans-banner{padding:24px 22px;gap:18px}
+    .plans-banner .pb-cta{width:100%;justify-content:center}
+  }
+</style>
 
 <!-- ═══ 05 パフォーマンス ═══ -->
 <section class="sky">
