@@ -87,6 +87,7 @@ const {
           <a href={localizePath('/works/', lang)}>{t('rn.works')}</a>
           <a href={localizePath('/blog/', lang)}>{t('rn.blog')}</a>
           <a href={localizePath('/#faq', lang)}>{t('rn.faq')}</a>
+          <a href={localizePath('/payment/', lang)} class="rn-nav-order">{t('rn.order')}</a>
           <a href={localizePath('/contact/', lang)} class="rn-btn rn-btn-primary rn-btn-nav">{t('rn.consult')}</a>
           <LangSwitcher />
         </nav>
@@ -104,6 +105,7 @@ const {
           <a href={localizePath('/works/', lang)}>{t('rn.works')}</a>
           <a href={localizePath('/blog/', lang)}>{t('rn.blog')}</a>
           <a href={localizePath('/#faq', lang)}>{t('rn.faq')}</a>
+          <a href={localizePath('/payment/', lang)}>{t('rn.order')}</a>
           <a href={localizePath('/contact/', lang)} class="rn-btn rn-btn-primary" style="margin-top:16px;width:100%;justify-content:center;">{t('rn.consult')}</a>
           <div class="rn-lang-row">
             <span class="rn-lang-label">Language / 言語</span>
@@ -127,6 +129,7 @@ const {
             <a href={localizePath('/#pricing', lang)}>{t('rn.pricing')}</a>
             <a href={localizePath('/works/', lang)}>{t('rn.works')}</a>
             <a href={localizePath('/#faq', lang)}>{t('rn.faq')}</a>
+            <a href={localizePath('/payment/', lang)}>{t('rn.order')}</a>
             <a href={localizePath('/contact/', lang)}>{t('rn.footContact')}</a>
           </div>
         </div>
@@ -245,6 +248,18 @@ const {
   }
   .rn-nav-links a:hover {
     color: #4FB4E8;
+  }
+  .rn-nav-order {
+    padding: 8px 16px;
+    border: 2px solid #4FB4E8;
+    border-radius: 999px;
+    color: #2E90C4 !important;
+    font-weight: 700;
+    transition: background 0.2s, color 0.2s;
+  }
+  .rn-nav-order:hover {
+    background: #4FB4E8;
+    color: #fff !important;
   }
   .rn-btn-nav {
     padding: 10px 22px;
