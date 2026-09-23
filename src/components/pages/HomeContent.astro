@@ -72,6 +72,7 @@ const S = {
     planSeoBadge: 'SEO', planSeoName: 'SEO対策プラン', planSeoPrice: '¥15,000', planSeoUnit: '〜', planSeoDesc: '指定キーワード記事＋内部SEO対策',
     planMaintBadge: '保守', planMaintName: '月額保守・更新代行', planMaintPrice: '¥5,000', planMaintUnit: '/月', planMaintDesc: '公開後の更新代行・運用サポート',
     planCardCta: 'このプランを相談する', plansNote: '※ WEB制作は基本1ページ¥30,000〜。ページ数やご要望に応じてお見積りします。',
+    planMaintToggle: '見積りに追加', planMaintToggleOn: '追加済み', optMaintLocked: '保守プランで選択中',
     optTitle: '有料オプション', optSub: '必要なものだけ選んで、自分だけのプランに。',
     optPageAdd: 'ページ追加', optPageAddPrice: '1Pあたり + 5,000円', optPageAddNone: '追加なし',
     optServer: 'サーバーへの直接アップロード（公開まで実施）', optCalendar: '予約機能付きカレンダー導入',
@@ -156,6 +157,7 @@ const S = {
     planSeoBadge: 'SEO', planSeoName: 'SEO Plan', planSeoPrice: '¥15,000', planSeoUnit: '~', planSeoDesc: 'Targeted-keyword articles + on-page SEO',
     planMaintBadge: 'Maint.', planMaintName: 'Monthly Maintenance', planMaintPrice: '¥5,000', planMaintUnit: '/mo', planMaintDesc: 'Post-launch updates & ongoing support',
     planCardCta: 'Ask about this plan', plansNote: '* Web design starts at ¥30,000 for 1 page. We quote based on page count and requirements.',
+    planMaintToggle: 'Add to estimate', planMaintToggleOn: 'Added', optMaintLocked: 'Selected in maintenance plan',
     optTitle: 'Paid options', optSub: 'Pick only what you need to build your own plan.',
     optPageAdd: 'Add a page', optPageAddPrice: '+ 5,000 yen per page', optPageAddNone: 'None',
     optServer: 'Direct upload to your server (through go-live)', optCalendar: 'Booking calendar with reservations',
@@ -423,12 +425,14 @@ const t = S[lang];
         <a href={lp('/contact/')} class="pc-cta seo">{t.planCardCta}</a>
       </div>
       <!-- 保守 -->
-      <div class="plan-card-3" data-plan="maint">
+      <div class="plan-card-3 selectable" data-plan="maint" id="maintPlanCard">
+        <span class="pc-check" id="maintPlanCheck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
         <span class="pc-badge maint">{t.planMaintBadge}</span>
         <span class="pc-name">{t.planMaintName}</span>
         <span class="pc-price">{t.planMaintPrice}<small>{t.planMaintUnit}</small></span>
         <span class="pc-desc">{t.planMaintDesc}</span>
-        <a href={lp('/contact/')} class="pc-cta maint">{t.planCardCta}</a>
+        <button type="button" class="pc-cta maint" id="maintPlanToggle" data-label-off={t.planMaintToggle} data-label-on={t.planMaintToggleOn}>{t.planMaintToggle}</button>
+        <a href={lp('/contact/')} class="pc-link-sub maint">{t.planCardCta} →</a>
       </div>
     </div>
     <p class="plans-note-2">{t.plansNote}</p>
@@ -507,9 +511,10 @@ const t = S[lang];
             <span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
             <span class="opt-info"><span class="opt-name">{t.optMember}</span><span class="opt-price">{lang === 'en' ? '+ 10,000 yen' : '+ 10,000円'}</span></span>
           </label>
-          <label class="opt-item" data-price="5000">
+          <label class="opt-item" data-price="5000" id="optMaintItem">
             <span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
             <span class="opt-info"><span class="opt-name">{t.optMaint}</span><span class="opt-price">{lang === 'en' ? '+ 5,000 yen/mo' : '+ 5,000円/月'}</span></span>
+            <span class="opt-locked-note" id="optMaintLockNote">{t.optMaintLocked}</span>
           </label>
           <label class="opt-item" data-price="5000">
             <span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
@@ -586,7 +591,10 @@ const t = S[lang];
     <!-- 合計金額バー -->
     <div class="total-bar" id="totalBar">
       <div class="total-label">{t.totalLabel}<small>{t.totalSub}</small></div>
-      <div class="total-price"><span class="yen">¥</span><span id="totalAmount">30,000</span><small>{t.totalTax}</small></div>
+      <div class="total-price-wrap-h">
+        <div class="total-price"><span class="yen">¥</span><span id="totalAmount">30,000</span><small>{t.totalTax}</small></div>
+        <div class="total-price total-maint-h" id="maintTotalWrap" style="display:none;"><span class="yen">¥</span><span>5,000</span><small>{lang === 'en' ? '/mo' : '/月'}</small></div>
+      </div>
     </div>
     <p class="price-note">💡 <b>{t.priceNoteB}</b><br>{t.priceNoteRest}</p>
   </div>
@@ -961,13 +969,29 @@ const t = S[lang];
   .pc-price{font-family:"Inter",sans-serif;font-weight:800;font-size:30px;color:var(--text);line-height:1.1}
   .pc-price small{font-size:15px;font-weight:700;color:var(--sub);margin-left:2px}
   .pc-desc{font-size:12px;color:var(--sub);line-height:1.6;font-weight:500;min-height:2.6em}
-  .pc-cta{margin-top:8px;display:inline-flex;align-items:center;justify-content:center;width:100%;padding:11px 16px;border-radius:999px;font-family:"Noto Sans JP",sans-serif;font-size:13px;font-weight:700;color:#fff!important;text-decoration:none;transition:transform .12s,box-shadow .12s}
+  .pc-cta{margin-top:8px;display:inline-flex;align-items:center;justify-content:center;width:100%;padding:11px 16px;border:none;cursor:pointer;border-radius:999px;font-family:"Noto Sans JP",sans-serif;font-size:13px;font-weight:700;color:#fff!important;text-decoration:none;transition:transform .12s,box-shadow .12s}
   .pc-cta.web{background:var(--primary);box-shadow:0 4px 0 var(--primary-deep)}
   .pc-cta.seo{background:var(--green);box-shadow:0 4px 0 #04913e}
   .pc-cta.maint{background:#9b59b6;box-shadow:0 4px 0 #6f3d8a}
   .pc-cta:hover{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.2)}
   .plans-note-2{text-align:center;font-size:12px;color:var(--sub);margin-bottom:34px;font-weight:500;line-height:1.7}
   .pricing-layout.single-col .plan{margin:0 auto}
+  /* 保守プランカード：選択トグル */
+  .plan-card-3.selectable{position:relative;cursor:pointer}
+  .pc-check{position:absolute;top:12px;right:12px;width:24px;height:24px;border-radius:7px;border:2px solid #ccd2db;background:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
+  .pc-check svg{width:14px;height:14px;stroke:#fff;stroke-width:3;opacity:0;transition:opacity .2s}
+  .plan-card-3[data-plan="maint"].is-on{background:#f3e8fa;box-shadow:0 0 0 3px rgba(155,89,182,.18),0 16px 38px rgba(58,66,86,.14)}
+  .plan-card-3[data-plan="maint"].is-on .pc-check{background:#9b59b6;border-color:#9b59b6}
+  .plan-card-3[data-plan="maint"].is-on .pc-check svg{opacity:1}
+  .plan-card-3[data-plan="maint"].is-on .pc-cta.maint{background:#7a4a96}
+  .pc-link-sub{font-size:12px;font-weight:700;text-decoration:none;margin-top:2px}
+  .pc-link-sub.maint{color:#9b59b6}
+  .pc-link-sub.maint:hover{text-decoration:underline}
+  /* オプション保守：保守プラン選択時にロック */
+  .opt-locked-note{display:none;font-size:11px;font-weight:700;color:#9b59b6;white-space:nowrap;margin-left:8px}
+  .opt-item.opt-locked{opacity:.5;pointer-events:none;background:#f0f0f4}
+  .opt-item.opt-locked .opt-locked-note{display:inline}
+  .opt-item.opt-locked .opt-price{display:none}
 
   .pricing-layout{display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:start}
   .plan{background:#fff;border-radius:var(--radius);padding:34px 26px;box-shadow:0 12px 34px rgba(79,180,232,.28);border:3px solid var(--primary);text-align:center;position:relative;overflow:visible}
@@ -1003,6 +1027,10 @@ const t = S[lang];
   .total-bar .total-price{font-family:"Inter";font-size:40px;font-weight:800;color:#fff;line-height:1.1}
   .total-bar .total-price small{font-size:16px;font-family:"Noto Sans JP";font-weight:700}
   .total-bar .total-price .yen{font-size:22px}
+  .total-price-wrap-h{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;justify-content:flex-end}
+  .total-bar .total-price.total-maint-h{font-size:30px;color:#f3e8fa}
+  .total-bar .total-price.total-maint-h .yen{font-size:18px}
+  .total-bar .total-price.total-maint-h small{opacity:.9}
   .price-note{max-width:740px;margin:32px auto 0;background:#fff;border-radius:20px;padding:20px 26px;box-shadow:var(--shadow);font-size:14px;text-align:center;font-weight:500}
   .price-note b{color:var(--primary-dark);font-family:"Noto Sans JP"}
   .opt-select{display:block;width:100%;margin-top:8px;padding:8px 12px;border:2px solid #c0d0de;border-radius:10px;font-family:"Noto Sans JP";font-size:13px;font-weight:700;color:var(--text);background:#fff;cursor:pointer;appearance:auto;-webkit-appearance:auto;transition:border-color .2s}
@@ -1423,6 +1451,12 @@ const t = S[lang];
 
   function fmt(n){ return n.toLocaleString('ja-JP'); }
 
+  // 保守プランカード（3プラン内）と、オプションの保守項目
+  var maintPlanCard = document.getElementById('maintPlanCard');
+  var optMaintItem = document.getElementById('optMaintItem');
+  var maintTotalWrap = document.getElementById('maintTotalWrap');
+  function maintPlanOn(){ return maintPlanCard && maintPlanCard.classList.contains('is-on'); }
+
   function recalc(){
     var sum = BASE;
     var items = grid.querySelectorAll('.opt-item.is-on:not(.opt-page-add)');
@@ -1434,6 +1468,9 @@ const t = S[lang];
       sum += pages * PAGE_UNIT;
     }
     totalEl.textContent = fmt(sum);
+    // 保守（月額）の表示：3プラン保守 or オプション保守 のどちらかがONなら月額枠を出す
+    var maintSelected = maintPlanOn() || (optMaintItem && optMaintItem.classList.contains('is-on'));
+    if(maintTotalWrap) maintTotalWrap.style.display = maintSelected ? 'flex' : 'none';
     var bar = document.getElementById('totalBar');
     if(bar){
       bar.style.transform = 'scale(1.02)';
@@ -1442,13 +1479,48 @@ const t = S[lang];
     }
   }
 
+  // オプション保守のロック（保守プラン選択中は選べない）
+  function syncMaintLock(){
+    if(!optMaintItem) return;
+    if(maintPlanOn()){
+      optMaintItem.classList.remove('is-on');   // 重複選択を解除
+      optMaintItem.classList.add('opt-locked'); // 無効化表示
+    } else {
+      optMaintItem.classList.remove('opt-locked');
+    }
+  }
+
   grid.addEventListener('click', function(e){
     if(e.target.closest('select')) return;
     var item = e.target.closest('.opt-item');
     if(!item || item.classList.contains('opt-page-add')) return;
+    if(item.classList.contains('opt-locked')) return; // ロック中は無視
     item.classList.toggle('is-on');
     recalc();
   });
+
+  // 保守プランカードのトグル（見積りに追加／解除）
+  if(maintPlanCard){
+    var maintToggle = document.getElementById('maintPlanToggle');
+    var maintToggleLabel = maintToggle ? { on: maintToggle.getAttribute('data-label-on'), off: maintToggle.getAttribute('data-label-off') } : { on:'', off:'' };
+    function updateToggleUI(){
+      if(maintToggle){ maintToggle.textContent = maintPlanOn() ? maintToggleLabel.on : maintToggleLabel.off; }
+    }
+    function toggleMaintPlan(e){
+      if(e){ e.preventDefault(); e.stopPropagation(); }
+      maintPlanCard.classList.toggle('is-on');
+      syncMaintLock();
+      updateToggleUI();
+      recalc();
+    }
+    if(maintToggle) maintToggle.addEventListener('click', toggleMaintPlan);
+    // カード本体クリックでもトグル（ただしサブリンクは除外）
+    maintPlanCard.addEventListener('click', function(e){
+      if(e.target.closest('.pc-link-sub') || e.target.closest('#maintPlanToggle')) return;
+      toggleMaintPlan(e);
+    });
+    updateToggleUI();
+  }
 
   if(pageSelect && pageItem){
     pageSelect.addEventListener('change', function(){
