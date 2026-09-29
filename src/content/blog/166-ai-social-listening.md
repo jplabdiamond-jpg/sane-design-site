@@ -2,7 +2,7 @@
 title: 'AIでSNS上の評判を分析する方法｜ソーシャルリスニング入門'
 description: 'AIを活用したSNS上のブランド評判分析の方法と、活用できるツールを紹介します。'
 pubDate: '2026-09-27'
-heroImage: ''
+heroImage: '/assets/blog/165_ai_social_listening.webp'
 tags:
   - AI
   - ソーシャルリスニング
