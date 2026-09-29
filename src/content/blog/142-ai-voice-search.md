@@ -2,7 +2,7 @@
 title: '音声検索時代のSEO対策｜「OK Google」に対応するサイトの作り方'
 description: '音声検索の増加に対応したSEO対策と、サイト最適化の方法を解説します。'
 pubDate: '2026-09-19'
-heroImage: ''
+heroImage: '/assets/blog/141_ai_voice_search.webp'
 tags:
   - AI
   - 音声検索
