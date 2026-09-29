@@ -2,7 +2,7 @@
 title: 'ドローン撮影で差がつくプロモーション動画｜建設・不動産・観光業向け'
 description: 'ドローン映像がもたらすインパクトと活用シーンを業種別に紹介します。'
 pubDate: '2026-09-27'
-heroImage: ''
+heroImage: '/assets/blog/166_drone_video_marketing.webp'
 tags:
   - ドローン
   - 動画
