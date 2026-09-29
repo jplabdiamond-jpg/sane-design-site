@@ -2,7 +2,7 @@
 title: 'HPの「保守・管理費」は必要？その内訳と相場'
 description: 'HPの保守・管理費は本当に必要？内訳と相場を理解して、適正な費用で運用するためのガイド。'
 pubDate: '2026-09-01'
-heroImage: ''
+heroImage: '/assets/blog/89_maintenance_cost.webp'
 tags:
   - 保守
   - 管理費
