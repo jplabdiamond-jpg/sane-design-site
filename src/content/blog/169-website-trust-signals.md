@@ -2,7 +2,7 @@
 title: 'ホームページに信頼感を持たせる10の要素｜初訪問で「ここに頼もう」と思わせる'
 description: 'Webサイトの信頼性を高めるデザイン要素とコンテンツのポイントを解説します。'
 pubDate: '2026-09-28'
-heroImage: ''
+heroImage: '/assets/blog/168_website_trust_signals.webp'
 tags:
   - 信頼感
   - Webデザイン
