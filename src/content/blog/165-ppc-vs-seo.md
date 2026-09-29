@@ -2,7 +2,7 @@
 title: 'PPC広告 vs SEO対策｜どちらを先にやるべき？使い分け戦略'
 description: '有料広告とSEOの違いを比較し、ビジネスステージに合わせた使い分けを解説します。'
 pubDate: '2026-09-27'
-heroImage: ''
+heroImage: '/assets/blog/164_ppc_vs_seo.webp'
 tags:
   - PPC
   - SEO
