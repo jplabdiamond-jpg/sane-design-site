@@ -2,7 +2,7 @@
 title: 'Googleビジネスプロフィールのカテゴリ選択ガイド｜正しい設定で検索表示を最大化'
 description: 'GBPのカテゴリ設定が検索結果に与える影響と最適な選び方を解説します。'
 pubDate: '2026-09-28'
-heroImage: ''
+heroImage: '/assets/blog/167_meo_category_selection.webp'
 tags:
   - Googleビジネスプロフィール
   - カテゴリ
