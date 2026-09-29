@@ -2,7 +2,7 @@
 title: 'SNSキャンペーンの企画アイデア10選｜フォロワーが増えるプレゼント施策'
 description: 'SNSで実施できるキャンペーンの種類とフォロワー獲得事例を紹介します。'
 pubDate: '2026-09-28'
-heroImage: ''
+heroImage: '/assets/blog/169_sns_campaign_ideas.webp'
 tags:
   - SNS
   - キャンペーン
