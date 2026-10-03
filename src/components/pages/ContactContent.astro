@@ -752,7 +752,7 @@ textarea.form-input{resize:vertical;line-height:1.8}
     submitBtn.querySelector('svg').style.display='none';submitBtn.childNodes[0].textContent=L.sending;
     fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
     .then(function(res){return res.json().then(function(json){return{ok:res.ok,json:json};});})
-    .then(function(data){if(data.ok&&data.json.success){goToStep(3);}else{throw new Error('fail');}})
+    .then(function(data){if(data.ok&&data.json.success){if(typeof gtag==='function'){gtag('event','conversion',{'send_to':'AW-18382509217/pjVgCM6si48dEKGpu71E'});}goToStep(3);}else{throw new Error('fail');}})
     .catch(function(){errorEl.textContent=L.error;errorEl.style.display='block';})
     .finally(function(){submitBtn.disabled=false;submitBtn.childNodes[0].textContent=L.submitLabel;if(submitBtn.querySelector('svg'))submitBtn.querySelector('svg').style.display='';});
   });

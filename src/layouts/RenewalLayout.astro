@@ -46,6 +46,12 @@ const {
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-17VLB3PB4C');
+      gtag('config', 'AW-18382509217');
+      // Google Ads: LINE友だち追加 コンバージョン（委任クリック計測）
+      document.addEventListener('click', function(e){
+        var a = e.target && e.target.closest && e.target.closest('a[href*="line.me/R/ti/p/@000eyrej"], a[href*="lin.ee"]');
+        if (a) { gtag('event', 'conversion', {'send_to': 'AW-18382509217/ts3zCNGsi48dEKGpu71E'}); }
+      });
     </script>
     <meta name="google-site-verification" content="IUjBMyfnWEqOl6Dw1QZFX96Bgka_bV1HBMttPd3UoOc" />
     <meta name="generator" content={Astro.generator} />
