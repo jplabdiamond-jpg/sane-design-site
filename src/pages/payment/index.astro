@@ -12,7 +12,7 @@ const PRICE_IDS = {
   web_opt_major:       { id: 'price_1UMPXFE3wzB3B1HbhWiSLQ8T', label: 'オプション：大規模修正（文字1,000字以上・画像20枚以上）', price: 6000, mode: 'payment', category: 'web_opt', requiresBase: true },
   web_opt_bilingual:   { id: 'price_1TYShQE3wzB3B1HbgfMPdFyD', label: 'オプション：英語・日本語 言語切り替え', price: 10000, mode: 'payment', category: 'web_opt', requiresBase: true },
   // ── Web Design オプション（トップ料金表と統一・2026-10追加）──
-  web_opt_page:        { id: 'price_1UMPWbE3wzB3B1HbAXw6MF55', label: 'オプション：ページ追加（1ページにつき）', price: 5000, mode: 'payment', category: 'web_opt', requiresBase: true },
+  web_opt_page:        { id: 'price_1UMPWbE3wzB3B1HbAXw6MF55', label: 'オプション：ページ追加（1ページにつき）', price: 5000, mode: 'payment', category: 'web_opt', requiresBase: true, qty: true, maxQty: 20 },
   web_opt_calendar:    { id: 'price_1UMPWcE3wzB3B1Hbs5GxYUSk', label: 'オプション：予約機能付きカレンダー導入', price: 5000, mode: 'payment', category: 'web_opt', requiresBase: true },
   web_opt_ga4:         { id: 'price_1UMPW0E3wzB3B1HbHo5kwg8w', label: 'オプション：Googleアナリティクス（GA4）設置', price: 2000, mode: 'payment', category: 'web_opt', requiresBase: true },
   web_opt_gsc:         { id: 'price_1UMPW1E3wzB3B1HbSCQ96ixW', label: 'オプション：GSC（Googleサーチコンソール）登録', price: 2000, mode: 'payment', category: 'web_opt', requiresBase: true },
@@ -121,14 +121,27 @@ const PRICE_IDS = {
               </div>
               <div class="opt-list unlocked" id="opts-list">
                 {Object.entries(PRICE_IDS).filter(([,v]) => v.category === 'web_opt').map(([key, item]) => (
-                  <label class="price-item opt-item" data-key={key}>
-                    <input type="checkbox" data-key={key} class="opt-cb" />
-                    <span class="pi-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
-                    <span class="pi-info">
-                      <span class="pi-name">{item.label.replace('オプション：', '')}</span>
-                    </span>
-                    <span class="pi-price">+ ¥{item.price.toLocaleString()}</span>
-                  </label>
+                  <div class="opt-item-wrap" data-wrap={key}>
+                    <label class="price-item opt-item" data-key={key}>
+                      <input type="checkbox" data-key={key} class="opt-cb" />
+                      <span class="pi-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+                      <span class="pi-info">
+                        <span class="pi-name">{item.label.replace('オプション：', '')}</span>
+                      </span>
+                      <span class="pi-price">+ ¥{item.price.toLocaleString()}{item.qty && <small>/ページ</small>}</span>
+                    </label>
+                    {item.qty && (
+                      <div class="qty-row" data-qty-for={key} style="display:none;">
+                        <span class="qty-label">ページ数</span>
+                        <div class="qty-stepper">
+                          <button type="button" class="qty-btn" data-qty-act="dec" data-key={key} aria-label="減らす">−</button>
+                          <span class="qty-val" data-qty-val={key}>1</span>
+                          <button type="button" class="qty-btn" data-qty-act="inc" data-key={key} aria-label="増やす">＋</button>
+                        </div>
+                        <span class="qty-sub">小計 ¥<span data-qty-sub={key}>{item.price.toLocaleString()}</span></span>
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
@@ -307,6 +320,20 @@ const PRICE_IDS = {
 .opt-item{padding:12px 18px}
 .opt-item .pi-name{font-size:13px}
 .opt-item .pi-price{font-size:14px}
+.opt-item .pi-price small{font-size:11px;font-weight:700;color:var(--text-muted);margin-left:1px}
+
+/* ── Quantity stepper ── */
+.opt-item-wrap{margin-bottom:8px}
+.opt-item-wrap .opt-item{margin-bottom:0}
+.qty-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:6px 0 2px 38px;padding:10px 14px;background:var(--sky-bg);border:1px solid var(--border);border-radius:12px}
+.qty-label{font-size:12px;font-weight:700;color:var(--text)}
+.qty-stepper{display:inline-flex;align-items:center;gap:0;border:2px solid var(--border);border-radius:10px;background:#fff;overflow:hidden}
+.qty-btn{width:34px;height:34px;border:none;background:#fff;font-size:18px;font-weight:800;color:var(--primary);cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.qty-btn:hover{background:var(--sky-bg)}
+.qty-btn:disabled{color:#ccd2db;cursor:not-allowed;background:#fff}
+.qty-val{min-width:40px;text-align:center;font-family:"Inter",sans-serif;font-weight:800;font-size:15px;color:var(--text)}
+.qty-sub{font-size:12px;font-weight:700;color:var(--primary);margin-left:auto}
+@media(max-width:860px){.qty-row{margin-left:0}.qty-sub{margin-left:0;width:100%}}
 
 /* ── Notes ── */
 .pay-notes{border-top:1px solid var(--border);padding-top:16px;margin-bottom:20px}
@@ -409,6 +436,9 @@ const PRICE_IDS = {
 </style>
 <script define:vars={{ PRICE_IDS }}>
   let selected = {};
+  let qtys = {};
+
+  const qtyOf = (key) => (PRICE_IDS[key] && PRICE_IDS[key].qty) ? (qtys[key] || 1) : 1;
 
   // ── Item toggle（基本プランカード＋オプション行）──
   document.querySelectorAll('.plan-card, .price-item').forEach(row => {
@@ -421,9 +451,44 @@ const PRICE_IDS = {
     });
   });
 
+  // ── 数量ステッパー ──
+  document.querySelectorAll('.qty-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.key;
+      const item = PRICE_IDS[key];
+      const max = item.maxQty || 99;
+      let q = qtys[key] || 1;
+      q = btn.dataset.qtyAct === 'inc' ? Math.min(max, q + 1) : Math.max(1, q - 1);
+      qtys[key] = q;
+      updateQtyUI(key);
+      updateTotal();
+    });
+  });
+
+  function updateQtyUI(key) {
+    const q = qtys[key] || 1;
+    const item = PRICE_IDS[key];
+    const valEl = document.querySelector('[data-qty-val="' + key + '"]');
+    const subEl = document.querySelector('[data-qty-sub="' + key + '"]');
+    if (valEl) valEl.textContent = q;
+    if (subEl) subEl.textContent = (item.price * q).toLocaleString();
+    const qrow = document.querySelector('[data-qty-for="' + key + '"]');
+    if (qrow) {
+      const dec = qrow.querySelector('[data-qty-act="dec"]');
+      const inc = qrow.querySelector('[data-qty-act="inc"]');
+      if (dec) dec.disabled = q <= 1;
+      if (inc) inc.disabled = q >= (item.maxQty || 99);
+    }
+  }
+
   function toggleItem(key, checked, row) {
     if (checked) { selected[key] = PRICE_IDS[key]; row.classList.add('selected'); }
     else         { delete selected[key]; row.classList.remove('selected'); }
+    if (PRICE_IDS[key] && PRICE_IDS[key].qty) {
+      const qrow = document.querySelector('[data-qty-for="' + key + '"]');
+      if (checked) { if (!qtys[key]) qtys[key] = 1; if (qrow) qrow.style.display = 'flex'; updateQtyUI(key); }
+      else { delete qtys[key]; if (qrow) qrow.style.display = 'none'; }
+    }
     if (key === 'web_standard') updateWebOpts();
     if (key === 'seo_standard') updateSeoOpts();
     updateTotal();
@@ -437,8 +502,14 @@ const PRICE_IDS = {
       document.querySelectorAll('.opt-cb').forEach(cb => {
         if (cb.checked) {
           cb.checked = false;
-          delete selected[cb.dataset.key];
+          const k = cb.dataset.key;
+          delete selected[k];
           cb.closest('.price-item').classList.remove('selected');
+          if (PRICE_IDS[k] && PRICE_IDS[k].qty) {
+            delete qtys[k];
+            const qr = document.querySelector('[data-qty-for="' + k + '"]');
+            if (qr) qr.style.display = 'none';
+          }
         }
       });
     }
@@ -461,8 +532,8 @@ const PRICE_IDS = {
 
   // ── Total ──
   function updateTotal() {
-    const oneTime = Object.values(selected).filter(i => i.mode === 'payment').reduce((s, i) => s + i.price, 0);
-    const subTotal = Object.values(selected).filter(i => i.mode === 'subscription').reduce((s, i) => s + i.price, 0);
+    const oneTime = Object.entries(selected).filter(([,i]) => i.mode === 'payment').reduce((s, [k,i]) => s + i.price * qtyOf(k), 0);
+    const subTotal = Object.entries(selected).filter(([,i]) => i.mode === 'subscription').reduce((s, [k,i]) => s + i.price * qtyOf(k), 0);
     const hasSub = subTotal > 0;
     document.getElementById('total-display').textContent = oneTime.toLocaleString();
     document.getElementById('sub-display').textContent = subTotal.toLocaleString();
@@ -503,22 +574,26 @@ const PRICE_IDS = {
   });
   // ── Summary ──
   function renderSummary() {
-    const oneTimeItems = Object.values(selected).filter(i => i.mode === 'payment');
-    const subItems = Object.values(selected).filter(i => i.mode === 'subscription');
-    const oneTimeTotal = oneTimeItems.reduce((s, i) => s + i.price, 0);
-    const subTotal = subItems.reduce((s, i) => s + i.price, 0);
+    const oneTimeItems = Object.entries(selected).filter(([,i]) => i.mode === 'payment');
+    const subItems = Object.entries(selected).filter(([,i]) => i.mode === 'subscription');
+    const oneTimeTotal = oneTimeItems.reduce((s, [k,i]) => s + i.price * qtyOf(k), 0);
+    const subTotal = subItems.reduce((s, [k,i]) => s + i.price * qtyOf(k), 0);
     let html = '';
     if (oneTimeItems.length) {
       html += '<div class="sum-section"><p class="sum-label">一括払い</p>';
-      oneTimeItems.forEach(i => {
-        html += '<div class="sum-row"><span class="sum-name">' + i.label + '</span><span class="sum-price">¥' + i.price.toLocaleString() + '</span></div>';
+      oneTimeItems.forEach(([k,i]) => {
+        const q = qtyOf(k);
+        const nm = i.label + (q > 1 ? ' ×' + q : '');
+        html += '<div class="sum-row"><span class="sum-name">' + nm + '</span><span class="sum-price">¥' + (i.price * q).toLocaleString() + '</span></div>';
       });
       html += '<div class="sum-total"><span>小計</span><span class="sum-price">¥' + oneTimeTotal.toLocaleString() + '</span></div></div>';
     }
     if (subItems.length) {
       html += '<div class="sum-section"><p class="sum-label">月額（サブスクリプション）</p>';
-      subItems.forEach(i => {
-        html += '<div class="sum-row"><span class="sum-name">' + i.label + '</span><span class="sum-price">¥' + i.price.toLocaleString() + '/月</span></div>';
+      subItems.forEach(([k,i]) => {
+        const q = qtyOf(k);
+        const nm = i.label + (q > 1 ? ' ×' + q : '');
+        html += '<div class="sum-row"><span class="sum-name">' + nm + '</span><span class="sum-price">¥' + (i.price * q).toLocaleString() + '/月</span></div>';
       });
       html += '<div class="sum-total"><span>月額合計</span><span class="sum-price">¥' + subTotal.toLocaleString() + '/月</span></div></div>';
     }
@@ -545,7 +620,7 @@ const PRICE_IDS = {
     const origText = btn.childNodes[0].textContent;
     btn.childNodes[0].textContent = '処理中...';
     btn.disabled = true;
-    const items = Object.values(selected).filter(i => i.mode === mode).map(i => ({ priceId: i.id, quantity: 1, mode: i.mode }));
+    const items = Object.entries(selected).filter(([,i]) => i.mode === mode).map(([k,i]) => ({ priceId: i.id, quantity: qtyOf(k), mode: i.mode }));
     const email = document.getElementById('customer-email').value.trim();
     try {
       const res = await fetch('https://sane-design.net/api/create-checkout-session', {
