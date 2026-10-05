@@ -2,6 +2,9 @@
 title: 'ベトナム料理の居酒屋さんの5周年セールチラシデザイン'
 client: 'ベトナム料理居酒屋'
 industry: '飲食・グルメ'
+title_en: 'Vietnamese Izakaya 5th Anniversary Flyer'
+client_en: 'Vietnamese Izakaya'
+industry_en: 'Food & Drink'
 year: 2025
 thumbnail: '/works/dtp-42.webp'
 tags:

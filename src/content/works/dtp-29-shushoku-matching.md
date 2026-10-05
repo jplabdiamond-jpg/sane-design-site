@@ -2,6 +2,9 @@
 title: '就職マッチングアプリ告知チラシ'
 client: '就職マッチングアプリ'
 industry: 'IT・求人'
+title_en: 'Job-hunting Matching App Flyer'
+client_en: 'Job-hunting Matching App'
+industry_en: 'IT / Recruiting'
 year: 2025
 thumbnail: '/works/dtp-29.webp'
 tags:

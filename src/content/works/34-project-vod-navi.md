@@ -2,6 +2,9 @@
 title: 'VODナビ'
 client: 'VODナビ'
 industry: 'メディア・ガジェットレビュー'
+title_en: 'VOD Navi'
+client_en: 'VOD Navi'
+industry_en: 'Media / Gadget Reviews'
 year: 2026
 thumbnail: '/works/work-34.webp'
 tags:

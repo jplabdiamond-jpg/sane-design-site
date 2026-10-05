@@ -2,6 +2,9 @@
 title: '歯科医院の経営コンサルセミナーチラシ'
 client: 'M&M PARTNERS'
 industry: 'コンサル・医療'
+title_en: 'Dental Clinic Management Seminar Flyer'
+client_en: 'M&M PARTNERS'
+industry_en: 'Consulting / Medical'
 year: 2025
 thumbnail: '/works/dtp-34.webp'
 tags:

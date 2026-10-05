@@ -2,6 +2,9 @@
 title: 'FX自動売買システム'
 client: 'FX自動売買システム'
 industry: 'ファイナンス・FX'
+title_en: 'FX Automated Trading System'
+client_en: 'FX Automated Trading System'
+industry_en: 'Finance / FX'
 year: 2025
 thumbnail: '/works/work-28.webp'
 tags:

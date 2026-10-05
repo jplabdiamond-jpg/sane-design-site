@@ -2,6 +2,9 @@
 title: '和装侍系音楽バンドのLIVE告知チラシデザイン制作'
 client: '和装侍系音楽バンド'
 industry: 'エンタメ・音楽'
+title_en: 'Samurai-style Band Live Flyer'
+client_en: 'Samurai-style Music Band'
+industry_en: 'Entertainment / Music'
 year: 2025
 thumbnail: '/works/dtp-18.webp'
 tags:

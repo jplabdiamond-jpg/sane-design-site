@@ -2,6 +2,9 @@
 title: '星の光の宿BIEI'
 client: '星の光の宿BIEI'
 industry: '宿泊・観光'
+title_en: 'Hoshi-no-Hikari Inn BIEI'
+client_en: 'Hoshi-no-Hikari Inn BIEI'
+industry_en: 'Accommodation / Tourism'
 year: 2025
 thumbnail: '/works/work-26.webp'
 tags:

@@ -2,6 +2,9 @@
 title: 'リユースショップのOPENフライヤー'
 client: 'リユースショップ そこね屋'
 industry: '小売・買取'
+title_en: 'Reuse Shop Opening Flyer'
+client_en: 'Reuse Shop Sokoneya'
+industry_en: 'Retail / Buyback'
 year: 2025
 thumbnail: '/works/dtp-50.webp'
 tags:

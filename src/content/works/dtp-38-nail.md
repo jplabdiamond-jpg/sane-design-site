@@ -2,6 +2,9 @@
 title: 'ネイルサロン様の店舗オープンチラシデザイン'
 client: 'ネイルサロン heartnail'
 industry: '美容・サロン'
+title_en: 'Nail Salon Opening Flyer'
+client_en: 'Nail Salon heartnail'
+industry_en: 'Beauty / Salon'
 year: 2025
 thumbnail: '/works/dtp-38.webp'
 tags:

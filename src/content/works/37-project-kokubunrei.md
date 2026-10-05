@@ -2,6 +2,9 @@
 title: '映画『國分玲』公式サイト'
 client: '映画『國分玲』製作委員会'
 industry: '映画・エンターテインメント'
+title_en: 'Film “Kokubun Rei” Official Site'
+client_en: '“Kokubun Rei” Film Committee'
+industry_en: 'Film / Entertainment'
 year: 2026
 thumbnail: '/works/work-37.webp'
 tags:

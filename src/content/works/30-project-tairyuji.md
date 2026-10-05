@@ -2,6 +2,9 @@
 title: '太龍寺ホームページ'
 client: '太龍寺ホームページ'
 industry: '寺院・観光'
+title_en: 'Tairyuji Temple Website'
+client_en: 'Tairyuji Temple'
+industry_en: 'Temple / Tourism'
 year: 2025
 thumbnail: '/works/work-30.webp'
 tags:

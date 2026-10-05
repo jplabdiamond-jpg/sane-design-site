@@ -2,6 +2,9 @@
 title: '高級会員制BARのフライヤー'
 client: 'Bar Laetus'
 industry: 'ナイト・飲食'
+title_en: 'Luxury Members-only Bar Flyer'
+client_en: 'Bar Laetus'
+industry_en: 'Nightlife / Food & Drink'
 year: 2025
 thumbnail: '/works/dtp-51.webp'
 tags:

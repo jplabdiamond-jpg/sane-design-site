@@ -2,6 +2,9 @@
 title: '介護職求人チラシデザイン'
 client: '介護施設'
 industry: '求人・福祉'
+title_en: 'Caregiver Recruiting Flyer'
+client_en: 'Care Facility'
+industry_en: 'Recruiting / Welfare'
 year: 2025
 thumbnail: '/works/dtp-06.webp'
 tags:

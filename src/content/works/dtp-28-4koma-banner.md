@@ -2,6 +2,9 @@
 title: '求人用4コマバナーデザイン'
 client: '求人サービス'
 industry: '求人・広告'
+title_en: '4-Panel Recruiting Banner'
+client_en: 'Recruiting Service'
+industry_en: 'Recruiting / Advertising'
 year: 2025
 thumbnail: '/works/dtp-28.webp'
 tags:

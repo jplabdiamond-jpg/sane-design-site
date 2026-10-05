@@ -2,6 +2,9 @@
 title: '歯科技工所（セラミック制作）様オープニングチラシ'
 client: 'Dental Studio Zebra'
 industry: '医療・歯科'
+title_en: 'Dental Lab (Ceramics) Opening Flyer'
+client_en: 'Dental Studio Zebra'
+industry_en: 'Medical / Dental'
 year: 2025
 thumbnail: '/works/dtp-32.webp'
 tags:

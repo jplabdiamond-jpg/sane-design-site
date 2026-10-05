@@ -2,6 +2,9 @@
 title: '接骨院オープニングチラシ'
 client: 'たき接骨院'
 industry: '治療院・整体'
+title_en: 'Osteopathic Clinic Opening Flyer'
+client_en: 'Taki Osteopathic Clinic'
+industry_en: 'Clinic / Bodywork'
 year: 2025
 thumbnail: '/works/dtp-05.webp'
 tags:

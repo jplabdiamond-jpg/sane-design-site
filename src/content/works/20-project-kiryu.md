@@ -2,6 +2,9 @@
 title: 'お遍路宿 亀龍'
 client: 'お遍路宿 亀龍'
 industry: '宿泊・観光'
+title_en: 'Ohenro Inn Kiryu'
+client_en: 'Ohenro Inn Kiryu'
+industry_en: 'Accommodation / Tourism'
 year: 2025
 thumbnail: '/works/work-20.webp'
 tags:

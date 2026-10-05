@@ -2,6 +2,9 @@
 title: 'リハビリ型フィットネス様のチラシデザイン'
 client: 'リハビリ型フィットネスジム'
 industry: 'フィットネス・健康'
+title_en: 'Rehab Fitness Flyer'
+client_en: 'Rehab Fitness Gym'
+industry_en: 'Fitness / Health'
 year: 2025
 thumbnail: '/works/dtp-13.webp'
 tags:

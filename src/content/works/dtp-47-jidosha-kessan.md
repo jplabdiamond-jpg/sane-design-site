@@ -2,6 +2,9 @@
 title: '自動車販売会社様の決算大セールチラシデザイン'
 client: '自動車販売会社'
 industry: '自動車・販売'
+title_en: 'Car Dealer Fiscal-End Sale Flyer'
+client_en: 'Car Dealership'
+industry_en: 'Automotive / Sales'
 year: 2025
 thumbnail: '/works/dtp-47.webp'
 tags:

@@ -2,6 +2,9 @@
 title: 'ゴールキーパー専門スクール生徒募集フライヤー'
 client: 'ゴールキーパー専門スクール YGKS'
 industry: 'スポーツ・教育'
+title_en: 'Goalkeeper School Recruiting Flyer'
+client_en: 'Goalkeeper School YGKS'
+industry_en: 'Sports / Education'
 year: 2025
 thumbnail: '/works/dtp-48.webp'
 tags:

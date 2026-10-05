@@ -2,6 +2,9 @@
 title: '住宅クリーニング業者様の営業チラシ'
 client: 'ハウスクリーニング業者'
 industry: 'ハウスクリーニング'
+title_en: 'House Cleaning Sales Flyer'
+client_en: 'House Cleaning Provider'
+industry_en: 'House Cleaning'
 year: 2025
 thumbnail: '/works/dtp-44.webp'
 tags:

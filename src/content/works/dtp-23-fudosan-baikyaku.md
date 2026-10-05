@@ -2,6 +2,9 @@
 title: '不動産売却専門店様の集客チラシ'
 client: '不動産売却専門店 LUMIERE HOME'
 industry: '不動産'
+title_en: 'Real Estate Sales Specialist Flyer'
+client_en: 'Real Estate Sales Specialist LUMIERE HOME'
+industry_en: 'Real Estate'
 year: 2025
 thumbnail: '/works/dtp-23.webp'
 tags:

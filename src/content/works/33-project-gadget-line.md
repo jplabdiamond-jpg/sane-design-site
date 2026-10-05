@@ -2,6 +2,9 @@
 title: 'GADGET LINE'
 client: 'GADGET LINE'
 industry: 'メディア・ガジェットレビュー'
+title_en: 'GADGET LINE'
+client_en: 'GADGET LINE'
+industry_en: 'Media / Gadget Reviews'
 year: 2026
 thumbnail: '/works/work-33.webp'
 tags:

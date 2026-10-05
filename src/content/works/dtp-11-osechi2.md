@@ -2,6 +2,9 @@
 title: 'おせち製造会社様チラシ2'
 client: 'おせち製造会社'
 industry: '飲食・通販'
+title_en: 'Osechi Maker Flyer 2'
+client_en: 'Osechi Maker'
+industry_en: 'Food / Mail-order'
 year: 2025
 thumbnail: '/works/dtp-11.webp'
 tags:

@@ -2,6 +2,9 @@
 title: '補助金導入アピールチラシデザイン'
 client: '飲食店向け補助金サービス'
 industry: 'コンサル・IT'
+title_en: 'Subsidy Promotion Flyer'
+client_en: 'Subsidy Service for Restaurants'
+industry_en: 'Consulting / IT'
 year: 2025
 thumbnail: '/works/dtp-15.webp'
 tags:

@@ -2,6 +2,9 @@
 title: 'ハウスクリーニング業者様の新規顧客獲得チラシ'
 client: 'ハウスセーバー SEISHO'
 industry: 'ハウスクリーニング'
+title_en: 'House Cleaning New-Customer Flyer'
+client_en: 'House Saver SEISHO'
+industry_en: 'House Cleaning'
 year: 2025
 thumbnail: '/works/dtp-33.webp'
 tags:

@@ -2,6 +2,9 @@
 title: '夜ナビ Shine'
 client: '夜ナビ Shine'
 industry: 'エンターテインメント'
+title_en: 'Yoru Navi Shine'
+client_en: 'Yoru Navi Shine'
+industry_en: 'Entertainment'
 year: 2025
 thumbnail: '/works/work-22.webp'
 tags:

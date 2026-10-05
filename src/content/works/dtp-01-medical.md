@@ -2,6 +2,9 @@
 title: '医療機器メーカー様のチラシデザイン'
 client: '医療機器メーカー'
 industry: '医療・歯科'
+title_en: 'Medical Device Maker Flyer'
+client_en: 'Medical Device Maker'
+industry_en: 'Medical / Dental'
 year: 2025
 thumbnail: '/works/dtp-01.webp'
 tags:

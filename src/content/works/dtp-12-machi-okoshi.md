@@ -2,6 +2,9 @@
 title: '町興しチラシ'
 client: '岡山県奈義町'
 industry: '自治体・地域'
+title_en: 'Town Revitalization Flyer'
+client_en: 'Nagi Town, Okayama'
+industry_en: 'Government / Community'
 year: 2025
 thumbnail: '/works/dtp-12.webp'
 tags:

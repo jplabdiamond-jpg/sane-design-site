@@ -2,6 +2,9 @@
 title: '除雪に関する注意喚起のポスターデザイン'
 client: '自治体・地域'
 industry: '自治体・地域'
+title_en: 'Snow Removal Safety Poster'
+client_en: 'Local Government'
+industry_en: 'Government / Community'
 year: 2025
 thumbnail: '/works/dtp-43.webp'
 tags:

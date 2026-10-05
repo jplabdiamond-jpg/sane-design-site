@@ -2,6 +2,9 @@
 title: 'XPost Pro'
 client: 'XPost Pro'
 industry: 'SaaS・SNSツール'
+title_en: 'XPost Pro'
+client_en: 'XPost Pro'
+industry_en: 'SaaS / Social Tool'
 year: 2025
 thumbnail: '/works/work-21.webp'
 tags:

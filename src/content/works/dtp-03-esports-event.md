@@ -2,6 +2,9 @@
 title: 'eスポーツイベント開催サポートサービスチラシ'
 client: 'CHALLENGER''S PARK'
 industry: 'エンタメ・IT'
+title_en: 'Esports Event Support Service Flyer'
+client_en: 'CHALLENGER''S PARK'
+industry_en: 'Entertainment / IT'
 year: 2025
 thumbnail: '/works/dtp-03.webp'
 tags:

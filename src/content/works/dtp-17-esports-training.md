@@ -2,6 +2,9 @@
 title: 'eスポーツのチーム研修開催チラシデザイン制作'
 client: 'CHALLENGER''S PARK'
 industry: 'エンタメ・IT'
+title_en: 'Esports Team Training Flyer'
+client_en: 'CHALLENGER''S PARK'
+industry_en: 'Entertainment / IT'
 year: 2025
 thumbnail: '/works/dtp-17.webp'
 tags:

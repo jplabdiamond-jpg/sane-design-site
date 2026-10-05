@@ -2,6 +2,9 @@
 title: '仕事マッチングアプリの利用者募集チラシデザイン'
 client: '仕事マッチングアプリ'
 industry: 'IT・求人'
+title_en: 'Job Matching App User Flyer'
+client_en: 'Job Matching App'
+industry_en: 'IT / Recruiting'
 year: 2025
 thumbnail: '/works/dtp-25.webp'
 tags:

@@ -2,6 +2,9 @@
 title: 'News Now'
 client: 'News Now'
 industry: 'メディア・ニュース'
+title_en: 'News Now'
+client_en: 'News Now'
+industry_en: 'Media / News'
 year: 2026
 thumbnail: '/works/work-31.webp'
 tags:

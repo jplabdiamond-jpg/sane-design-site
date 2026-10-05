@@ -2,6 +2,9 @@
 title: 'FPサービスのココナラ出品画像制作'
 client: 'FPサービス'
 industry: '金融・コンサル'
+title_en: 'Financial Planner Coconala Listing Image'
+client_en: 'Financial Planning Service'
+industry_en: 'Finance / Consulting'
 year: 2025
 thumbnail: '/works/dtp-20.webp'
 tags:

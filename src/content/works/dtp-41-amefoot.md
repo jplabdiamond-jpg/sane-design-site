@@ -2,6 +2,9 @@
 title: 'アメリカンフットボール部の部員募集ポスターデザイン'
 client: 'アメリカンフットボール部 BONITO'
 industry: 'スポーツ・教育'
+title_en: 'American Football Club Recruiting Poster'
+client_en: 'American Football Club BONITO'
+industry_en: 'Sports / Education'
 year: 2025
 thumbnail: '/works/dtp-41.webp'
 tags:

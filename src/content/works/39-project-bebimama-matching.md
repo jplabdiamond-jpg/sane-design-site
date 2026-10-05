@@ -2,6 +2,9 @@
 title: 'ベビ♡ママ ベビーシッターマッチングサイト'
 client: 'bebi-mama（ベビママ）'
 industry: '保育・マッチング'
+title_en: 'bebi-mama Babysitter Matching Site'
+client_en: 'bebi-mama'
+industry_en: 'Childcare / Matching'
 year: 2026
 thumbnail: '/works/work-39.webp'
 tags:

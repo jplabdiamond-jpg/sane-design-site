@@ -2,6 +2,9 @@
 title: 'エステ・脱毛のフライヤー'
 client: 'エステ・脱毛サロン'
 industry: '美容・サロン'
+title_en: 'Beauty & Hair Removal Flyer'
+client_en: 'Beauty & Hair Removal Salon'
+industry_en: 'Beauty / Salon'
 year: 2025
 thumbnail: '/works/dtp-53.webp'
 tags:

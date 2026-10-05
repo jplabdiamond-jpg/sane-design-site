@@ -2,6 +2,9 @@
 title: 'ドローンによる農薬散布サービス事業様チラシ'
 client: 'ドローン農薬散布事業者'
 industry: '農業・テクノロジー'
+title_en: 'Drone Crop-Spraying Service Flyer'
+client_en: 'Drone Crop-Spraying Provider'
+industry_en: 'Agriculture / Technology'
 year: 2025
 thumbnail: '/works/dtp-37.webp'
 tags:

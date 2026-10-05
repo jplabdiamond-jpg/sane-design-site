@@ -1,7 +1,7 @@
 // ────────────────────────────────────────────────
 //  i18n — helper functions
 // ────────────────────────────────────────────────
-import { ui, DEFAULT_LOCALE, EN_AVAILABLE, type Locale, type UIKey } from './ui';
+import { ui, DEFAULT_LOCALE, EN_AVAILABLE, EN_AVAILABLE_PREFIXES, type Locale, type UIKey } from './ui';
 
 /** URL のパスから現在の言語を判定（/en... は en、それ以外は ja） */
 export function getLangFromUrl(url: URL): Locale {
@@ -24,6 +24,12 @@ function basePath(path: string): string {
   return p.endsWith('/') ? p : p + '/';
 }
 
+/** 英語版が存在するルートか（完全一致 or プレフィックス一致） */
+export function enAvailable(base: string): boolean {
+  if (EN_AVAILABLE.includes(base)) return true;
+  return EN_AVAILABLE_PREFIXES.some((p) => base.startsWith(p));
+}
+
 /**
  * リンク先を言語に合わせて解決する。
  * - ja: /en プレフィックスを除去した日本語ルート
@@ -39,7 +45,7 @@ export function localizePath(path: string, lang: Locale): string {
 
   // en
   const base = basePath(p);
-  if (EN_AVAILABLE.includes(base)) {
+  if (enAvailable(base)) {
     // '/#faq' → '/en/#faq' 、 '/works/' → '/en/works/'
     return ('/en' + p).replace(/^\/en$/, '/en/');
   }
@@ -55,7 +61,7 @@ export function alternatePath(url: URL, target: Locale): string {
   }
   // → en
   const base = basePath(url.pathname);
-  if (EN_AVAILABLE.includes(base)) {
+  if (enAvailable(base)) {
     return ('/en' + url.pathname).replace(/^\/en$/, '/en/');
   }
   // 英語版が無いページ: トップの英語版へ
@@ -67,7 +73,7 @@ export function hreflangUrls(url: URL, site: URL | undefined) {
   const origin = site ? site.origin : url.origin;
   const jaPath = url.pathname.replace(/^\/en(?=\/|$)/, '') || '/';
   const base = basePath(jaPath);
-  const hasEn = EN_AVAILABLE.includes(base);
+  const hasEn = enAvailable(base);
   const enPath = ('/en' + jaPath).replace(/^\/en$/, '/en/');
   return {
     ja: origin + jaPath,

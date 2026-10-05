@@ -2,6 +2,9 @@
 title: 'Tas Money お小遣い稼ぎサイト'
 client: 'Tas Money お小遣い稼ぎサイト'
 industry: 'ファイナンス・副業'
+title_en: 'Tas Money Side-Income Site'
+client_en: 'Tas Money'
+industry_en: 'Finance / Side Business'
 year: 2025
 thumbnail: '/works/work-27.webp'
 tags:

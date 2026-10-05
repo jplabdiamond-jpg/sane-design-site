@@ -2,6 +2,9 @@
 title: 'ランクル300買取jp'
 client: 'ランクル300買取jp'
 industry: '自動車・買取'
+title_en: 'Land Cruiser 300 Buyback JP'
+client_en: 'Land Cruiser 300 Buyback JP'
+industry_en: 'Automotive / Buyback'
 year: 2025
 thumbnail: '/works/work-29.webp'
 tags:

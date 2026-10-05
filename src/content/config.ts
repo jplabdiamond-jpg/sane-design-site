@@ -6,6 +6,10 @@ const works = defineCollection({
     title: z.string(),
     client: z.string(),
     industry: z.string(),
+    // 英語版メタ（任意）。一覧・詳細ヘッダーの英語表示に使用。
+    title_en: z.string().optional(),
+    client_en: z.string().optional(),
+    industry_en: z.string().optional(),
     year: z.coerce.number(),
     thumbnail: z.string(),
     heroImage: z.string().optional(),

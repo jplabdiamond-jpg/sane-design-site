@@ -2,6 +2,9 @@
 title: 'AeroTech Co.'
 client: 'AeroTech Co.'
 industry: 'テクノロジー・航空'
+title_en: 'AeroTech Co.'
+client_en: 'AeroTech Co.'
+industry_en: 'Technology / Aviation'
 year: 2025
 thumbnail: '/works/work-19.webp'
 tags:

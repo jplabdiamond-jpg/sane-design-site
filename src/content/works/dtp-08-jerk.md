@@ -2,6 +2,9 @@
 title: 'ジャークチキン屋さんチラシデザイン'
 client: 'ジャークチキン店'
 industry: '飲食・グルメ'
+title_en: 'Jerk Chicken Shop Flyer'
+client_en: 'Jerk Chicken Shop'
+industry_en: 'Food & Drink'
 year: 2025
 thumbnail: '/works/dtp-08.webp'
 tags:

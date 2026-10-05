@@ -2,6 +2,9 @@
 title: '分譲住宅の販売チラシ'
 client: '分譲住宅会社'
 industry: '不動産・住宅'
+title_en: 'New Home Sales Flyer'
+client_en: 'Home Builder'
+industry_en: 'Real Estate / Housing'
 year: 2025
 thumbnail: '/works/dtp-31.webp'
 tags:

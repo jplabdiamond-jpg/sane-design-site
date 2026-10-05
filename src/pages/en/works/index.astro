@@ -1,0 +1,31 @@
+---
+import RenewalLayout from '../../../layouts/RenewalLayout.astro';
+import WorksListContent from '../../../components/pages/WorksListContent.astro';
+import { getCollection } from 'astro:content';
+import { SITE_URL } from '../../../consts';
+
+const works = (await getCollection('works', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const itemListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Sane Design — Our Work',
+  itemListElement: works
+    .filter((w) => !w.data.noLink)
+    .map((w, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `${w.data.client_en || w.data.client} ${w.data.title_en || w.data.title}`,
+      url: w.data.url || new URL(`/en/works/${w.slug}/`, SITE_URL).href,
+    })),
+};
+---
+
+<RenewalLayout
+  title="Our Work | 300+ websites, landing pages & flyers | Sane Design"
+  description="Sane Design's portfolio of website, landing page, and print (DTP) work — corporate sites, landing pages, booking sites, and restaurant flyers. Representative pieces from 300+ projects."
+  jsonLd={itemListJsonLd}
+>
+  <WorksListContent lang="en" />
+</RenewalLayout>

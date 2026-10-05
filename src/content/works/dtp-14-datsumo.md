@@ -2,6 +2,9 @@
 title: '脱毛サロンチラシデザイン'
 client: '脱毛サロン Re:A'
 industry: '美容・サロン'
+title_en: 'Hair Removal Salon Flyer'
+client_en: 'Hair Removal Salon Re:A'
+industry_en: 'Beauty / Salon'
 year: 2025
 thumbnail: '/works/dtp-14.webp'
 tags:

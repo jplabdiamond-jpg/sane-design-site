@@ -2,6 +2,9 @@
 title: 'No.134_焼き肉屋さんオープニングチラシデザイン'
 client: '焼肉 牛司'
 industry: '飲食・グルメ'
+title_en: 'Yakiniku Restaurant Opening Flyer'
+client_en: 'Yakiniku Gyuji'
+industry_en: 'Food & Drink'
 year: 2025
 thumbnail: '/works/dtp-46.webp'
 tags:

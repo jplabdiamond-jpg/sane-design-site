@@ -2,6 +2,9 @@
 title: '整体院様のオープニングキャンペーンチラシ'
 client: '鈴木トリートメント整体院'
 industry: '治療院・整体'
+title_en: 'Bodywork Clinic Opening Campaign Flyer'
+client_en: 'Suzuki Treatment Bodywork Clinic'
+industry_en: 'Clinic / Bodywork'
 year: 2025
 thumbnail: '/works/dtp-35.webp'
 tags:

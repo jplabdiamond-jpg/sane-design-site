@@ -2,6 +2,9 @@
 title: 'レクサスLX買取専門店'
 client: 'レクサスLX買取専門店'
 industry: '自動車・買取'
+title_en: 'Lexus LX Buyback Specialist'
+client_en: 'Lexus LX Buyback Specialist'
+industry_en: 'Automotive / Buyback'
 year: 2026
 thumbnail: '/works/work-35.webp'
 tags:

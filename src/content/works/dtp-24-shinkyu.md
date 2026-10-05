@@ -2,6 +2,9 @@
 title: '訪問鍼灸マッサージ院の三つ折りリーフレット'
 client: '訪問鍼灸マッサージ院'
 industry: '治療院・福祉'
+title_en: 'Home-visit Acupuncture & Massage Tri-fold Leaflet'
+client_en: 'Home-visit Acupuncture & Massage Clinic'
+industry_en: 'Clinic / Welfare'
 year: 2025
 thumbnail: '/works/dtp-24.webp'
 tags:

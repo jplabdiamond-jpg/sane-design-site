@@ -2,6 +2,9 @@
 title: 'ライバー募集チラシデザイン'
 client: 'DOZAN - Colors Project'
 industry: 'エンタメ・IT'
+title_en: 'Live Streamer Recruiting Flyer'
+client_en: 'DOZAN - Colors Project'
+industry_en: 'Entertainment / IT'
 year: 2025
 thumbnail: '/works/dtp-26.webp'
 tags:

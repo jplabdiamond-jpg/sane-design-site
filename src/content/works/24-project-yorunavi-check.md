@@ -2,6 +2,9 @@
 title: '夜ナビ Shine Check'
 client: '夜ナビ Shine Check'
 industry: 'エンターテインメント'
+title_en: 'Yoru Navi Shine Check'
+client_en: 'Yoru Navi Shine Check'
+industry_en: 'Entertainment'
 year: 2025
 thumbnail: '/works/work-24.webp'
 tags:

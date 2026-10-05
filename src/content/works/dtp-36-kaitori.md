@@ -2,6 +2,9 @@
 title: '買取屋様チラシ'
 client: '買取専門店'
 industry: '小売・買取'
+title_en: 'Buyback Shop Flyer'
+client_en: 'Buyback Specialist'
+industry_en: 'Retail / Buyback'
 year: 2025
 thumbnail: '/works/dtp-36.webp'
 tags:

@@ -2,6 +2,9 @@
 title: '地域の町おこし求人チラシデザイン制作'
 client: '岡山県奈義町'
 industry: '自治体・求人'
+title_en: 'Regional Revitalization Recruiting Flyer'
+client_en: 'Nagi Town, Okayama'
+industry_en: 'Government / Recruiting'
 year: 2025
 thumbnail: '/works/dtp-16.webp'
 tags:

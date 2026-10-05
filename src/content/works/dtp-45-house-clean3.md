@@ -2,6 +2,9 @@
 title: '住宅クリーニング業者様の営業チラシ（ECO Cheap）'
 client: 'ECO Cheap ハウスクリーニング'
 industry: 'ハウスクリーニング'
+title_en: 'House Cleaning Sales Flyer (ECO Cheap)'
+client_en: 'ECO Cheap House Cleaning'
+industry_en: 'House Cleaning'
 year: 2025
 thumbnail: '/works/dtp-45.webp'
 tags:

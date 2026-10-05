@@ -2,6 +2,9 @@
 title: 'リフォーム会社様チラシ'
 client: '建築廃材回収・リフォーム会社'
 industry: '建設・リフォーム'
+title_en: 'Renovation Company Flyer'
+client_en: 'Construction Waste & Renovation Company'
+industry_en: 'Construction / Renovation'
 year: 2025
 thumbnail: '/works/dtp-09.webp'
 tags:

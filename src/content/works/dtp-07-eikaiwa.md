@@ -2,6 +2,9 @@
 title: '英会話教室集客チラシ'
 client: '英会話教室'
 industry: '教育・スクール'
+title_en: 'English School Flyer'
+client_en: 'English School'
+industry_en: 'Education / School'
 year: 2025
 thumbnail: '/works/dtp-07.webp'
 tags:

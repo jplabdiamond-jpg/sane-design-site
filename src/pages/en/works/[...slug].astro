@@ -1,9 +1,10 @@
 ---
-import RenewalLayout from '../../layouts/RenewalLayout.astro';
-import WorkDetailContent from '../../components/pages/WorkDetailContent.astro';
+import RenewalLayout from '../../../layouts/RenewalLayout.astro';
+import WorkDetailContent from '../../../components/pages/WorkDetailContent.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
-import { SITE_URL, SITE_NAME } from '../../consts';
+import { SITE_URL, SITE_NAME } from '../../../consts';
+import { tagLabel } from '../../../i18n/works';
 
 export async function getStaticPaths() {
   const works = await getCollection('works', ({ data }) => !data.draft);
@@ -22,18 +23,23 @@ const { work, index } = Astro.props;
 const d = work.data;
 const hasUrl = !!d.url;
 
-const pageTitle = `${d.client} ${d.title}｜${d.industry}の制作実績 | Sane Design`;
-const pageDesc = `${d.industry}「${d.client}」様の${d.title}制作事例。${d.tags.join('・')}。実績300件以上のSane Designによるホームページ・デザイン制作実績をご紹介します。`;
+const title = d.title_en || d.title;
+const client = d.client_en || d.client;
+const industry = d.industry_en || d.industry;
+const tagsEn = d.tags.map((tg) => tagLabel(tg, 'en'));
+
+const pageTitle = `${client} ${title} | ${industry} project | Sane Design`;
+const pageDesc = `${title} for ${client} (${industry}). ${tagsEn.join(', ')}. A website & design project by Sane Design, a studio with 300+ projects.`;
 
 const workJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CreativeWork',
-  name: `${d.client} ${d.title}`,
+  name: `${client} ${title}`,
   description: pageDesc,
-  about: d.industry,
-  keywords: d.tags.join(', '),
+  about: industry,
+  keywords: tagsEn.join(', '),
   dateCreated: String(d.year),
-  inLanguage: 'ja',
+  inLanguage: 'en',
   ...(d.heroImage ? { image: { '@type': 'ImageObject', url: new URL(d.heroImage, SITE_URL).href, width: 1200, height: 630 } } : {}),
   ...(hasUrl ? { url: d.url } : {}),
   creator: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
@@ -48,5 +54,5 @@ const workJsonLd = {
   ogType="article"
   jsonLd={workJsonLd}
 >
-  <WorkDetailContent work={work} index={index} lang="ja" />
+  <WorkDetailContent work={work} index={index} lang="en" />
 </RenewalLayout>

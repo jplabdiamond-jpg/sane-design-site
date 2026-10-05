@@ -2,6 +2,9 @@
 title: '建築基準法12条 定期報告'
 client: '横浜建設防火検査'
 industry: '建築・法定点検／定期報告'
+title_en: 'Building Standards Act Art. 12 Periodic Reports'
+client_en: 'Yokohama Construction Fire Inspection'
+industry_en: 'Construction / Statutory Inspection'
 year: 2026
 thumbnail: '/works/work-41.webp'
 tags:

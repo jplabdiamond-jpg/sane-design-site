@@ -2,6 +2,9 @@
 title: 'ビジネススクールチラシ'
 client: 'ハイスペ PCビジネススクール'
 industry: '教育・IT'
+title_en: 'Business School Flyer'
+client_en: 'HiSpec PC Business School'
+industry_en: 'Education / IT'
 year: 2025
 thumbnail: '/works/dtp-52.webp'
 tags:

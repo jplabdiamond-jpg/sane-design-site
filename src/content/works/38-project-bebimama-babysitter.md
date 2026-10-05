@@ -2,6 +2,9 @@
 title: 'bebi-mama ベビーシッターLP'
 client: 'bebi-mama（ベビママ）'
 industry: '保育・マッチング'
+title_en: 'bebi-mama Babysitter LP'
+client_en: 'bebi-mama'
+industry_en: 'Childcare / Matching'
 year: 2026
 thumbnail: '/works/work-38.webp'
 tags:

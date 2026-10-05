@@ -2,6 +2,9 @@
 title: 'リユースショップ様のチラシデザインver2'
 client: 'リユースショップ'
 industry: '小売・買取'
+title_en: 'Reuse Shop Flyer v2'
+client_en: 'Reuse Shop'
+industry_en: 'Retail / Buyback'
 year: 2025
 thumbnail: '/works/dtp-39.webp'
 tags:

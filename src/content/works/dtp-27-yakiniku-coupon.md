@@ -2,6 +2,9 @@
 title: '焼肉屋さんのクーポン付きチラシデザイン'
 client: '焼肉 牛司'
 industry: '飲食・グルメ'
+title_en: 'Yakiniku Restaurant Coupon Flyer'
+client_en: 'Yakiniku Gyuji'
+industry_en: 'Food & Drink'
 year: 2025
 thumbnail: '/works/dtp-27.webp'
 tags:

@@ -18,6 +18,13 @@ export const EN_AVAILABLE: string[] = [
   '/services/web-design/',
   '/services/seo/',
   '/contact/',
+  '/works/',
+];
+
+// 英語版が存在するルートの「プレフィックス」（配下すべてが英語版あり）。
+// 実績詳細 /works/<slug>/ をまとめて英語版対象にする。
+export const EN_AVAILABLE_PREFIXES: string[] = [
+  '/works/',
 ];
 
 // 共通 UI（ヘッダー・フッター・CTA など）の翻訳

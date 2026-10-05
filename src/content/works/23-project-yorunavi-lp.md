@@ -2,6 +2,9 @@
 title: '夜ナビ Shine LP'
 client: '夜ナビ Shine LP'
 industry: 'エンターテインメント'
+title_en: 'Yoru Navi Shine LP'
+client_en: 'Yoru Navi Shine LP'
+industry_en: 'Entertainment'
 year: 2025
 thumbnail: '/works/work-23.webp'
 tags:

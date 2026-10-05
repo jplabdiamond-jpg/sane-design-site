@@ -2,6 +2,9 @@
 title: '外壁塗装・屋根防水工事業者様チラシ'
 client: '外壁塗装・防水工事業者'
 industry: '建設・リフォーム'
+title_en: 'Exterior Painting & Roof Waterproofing Flyer'
+client_en: 'Exterior Painting & Waterproofing Contractor'
+industry_en: 'Construction / Renovation'
 year: 2025
 thumbnail: '/works/dtp-19.webp'
 tags:

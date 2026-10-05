@@ -2,6 +2,9 @@
 title: '夏休み催事イベントチラシ'
 client: '商業施設'
 industry: '小売・イベント'
+title_en: 'Summer Event Flyer'
+client_en: 'Shopping Mall'
+industry_en: 'Retail / Event'
 year: 2025
 thumbnail: '/works/dtp-30.webp'
 tags:

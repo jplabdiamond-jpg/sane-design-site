@@ -2,6 +2,9 @@
 title: 'SCF スマートコンサルファーム'
 client: 'SCF スマートコンサルファーム'
 industry: 'コンサルティング・マーケティング支援'
+title_en: 'SCF Smart Consulting Firm'
+client_en: 'SCF Smart Consulting Firm'
+industry_en: 'Consulting / Marketing Support'
 year: 2026
 thumbnail: '/works/work-40.webp'
 tags:

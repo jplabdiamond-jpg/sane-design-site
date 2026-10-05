@@ -2,6 +2,9 @@
 title: '空き家更生サービスのチラシデザイン'
 client: '日本の空家研究所'
 industry: '不動産・住宅'
+title_en: 'Vacant House Renovation Service Flyer'
+client_en: 'Japan Vacant House Institute'
+industry_en: 'Real Estate / Housing'
 year: 2025
 thumbnail: '/works/dtp-02.webp'
 tags:

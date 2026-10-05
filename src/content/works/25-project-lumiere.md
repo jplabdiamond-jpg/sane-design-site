@@ -2,6 +2,9 @@
 title: 'Lumière Gems'
 client: 'Lumière Gems'
 industry: 'ジュエリー・EC'
+title_en: 'Lumière Gems'
+client_en: 'Lumière Gems'
+industry_en: 'Jewelry / E-commerce'
 year: 2025
 thumbnail: '/works/work-25.webp'
 tags:

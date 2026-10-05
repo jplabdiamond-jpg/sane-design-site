@@ -2,6 +2,9 @@
 title: 'ブラジリアン柔術ジムフライヤー'
 client: 'BLAST BJJ STUDIO'
 industry: 'スポーツ・フィットネス'
+title_en: 'Brazilian Jiu-Jitsu Gym Flyer'
+client_en: 'BLAST BJJ STUDIO'
+industry_en: 'Sports / Fitness'
 year: 2025
 thumbnail: '/works/dtp-54.webp'
 tags:

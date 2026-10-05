@@ -2,6 +2,9 @@
 title: '書店のイベントチラシデザイン'
 client: '書店'
 industry: '小売・イベント'
+title_en: 'Bookstore Event Flyer'
+client_en: 'Bookstore'
+industry_en: 'Retail / Event'
 year: 2025
 thumbnail: '/works/dtp-22.webp'
 tags:
