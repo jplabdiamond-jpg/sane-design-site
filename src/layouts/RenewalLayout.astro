@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SEO from '../components/SEO.astro';
 import LangRedirect from '../components/LangRedirect.astro';
+import LangChooser from '../components/LangChooser.astro';
 import LangSwitcher from '../components/LangSwitcher.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getLangFromUrl, localizePath, useTranslations } from '../i18n/utils';
@@ -148,6 +149,8 @@ const {
       <a href={localizePath('/works/', lang)} class="rn-btn rn-btn-ghost">{t('rn.footWorks')}</a>
       <a href={localizePath('/contact/', lang)} class="rn-btn rn-btn-primary">{t('rn.stickyConsult')}</a>
     </div>
+
+    <LangChooser />
 
   </body>
 </html>

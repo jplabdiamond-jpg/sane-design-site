@@ -1,0 +1,158 @@
+---
+// 初回アクセス時、Cloudflare の /cdn-cgi/trace で訪問者の国を判定し、
+// 日本（JP）以外なら「English / 日本語」を選ぶ中央モーダルを表示する。
+// 日本・判定不能・明示選択済み・英語ページ上では表示しない。選択は保存して次回以降優先。
+import { getLangFromUrl, alternatePath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const enHref = alternatePath(Astro.url, 'en');
+---
+
+<div class="lang-chooser-overlay" id="langChooser" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Choose your language / 言語を選択">
+  <div class="lang-chooser-box">
+    <span class="lc-globe" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+    </span>
+    <p class="lc-title">Choose your language</p>
+    <p class="lc-sub">言語を選択してください</p>
+    <div class="lc-btns">
+      <button type="button" class="lc-btn lc-btn-en" data-choose="en">English</button>
+      <button type="button" class="lc-btn lc-btn-ja" data-choose="ja">日本語</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .lang-chooser-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(28, 36, 54, 0.55);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+  .lang-chooser-overlay.is-open {
+    display: flex;
+    animation: lcFade 0.25s ease both;
+  }
+  @keyframes lcFade { from { opacity: 0; } to { opacity: 1; } }
+  .lang-chooser-box {
+    width: 100%;
+    max-width: 380px;
+    background: #fff;
+    border-radius: 22px;
+    padding: 36px 28px 30px;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(28, 36, 54, 0.3);
+    animation: lcPop 0.3s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  }
+  @keyframes lcPop { from { opacity: 0; transform: translateY(12px) scale(0.96); } to { opacity: 1; transform: none; } }
+  .lc-globe {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #EAF6FC;
+    color: #4FB4E8;
+    margin-bottom: 16px;
+  }
+  .lc-globe svg { width: 30px; height: 30px; display: block; }
+  .lc-title {
+    font-family: "Inter", "Noto Sans JP", sans-serif;
+    font-size: 19px;
+    font-weight: 800;
+    color: #3A4256;
+    margin: 0 0 4px;
+  }
+  .lc-sub {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 13px;
+    color: #7A8494;
+    margin: 0 0 24px;
+  }
+  .lc-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .lc-btn {
+    display: block;
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 999px;
+    font-family: "Inter", "Noto Sans JP", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.2s ease;
+    border: 2px solid transparent;
+  }
+  .lc-btn-en {
+    background: #4FB4E8;
+    color: #fff;
+    box-shadow: 0 5px 0 #2E90C4;
+  }
+  .lc-btn-en:hover { transform: translateY(2px); box-shadow: 0 3px 0 #2E90C4; }
+  .lc-btn-ja {
+    background: #fff;
+    color: #3A4256;
+    border-color: #d8dee6;
+    box-shadow: 0 5px 0 #e2e6ed;
+  }
+  .lc-btn-ja:hover { transform: translateY(2px); box-shadow: 0 3px 0 #e2e6ed; }
+</style>
+
+<script define:vars={{ enHref, curLang: lang }}>
+  (function () {
+    try {
+      // 英語ページ上や、既に明示選択済みなら出さない
+      if (curLang !== 'ja') return;
+      var saved = null;
+      try { saved = localStorage.getItem('preferred-lang'); } catch (e) {}
+      if (saved) return;
+      var shown = false;
+      try { shown = sessionStorage.getItem('lang-chooser-shown') === '1'; } catch (e) {}
+      if (shown) return;
+
+      var overlay = document.getElementById('langChooser');
+      if (!overlay) return;
+
+      function open() {
+        try { sessionStorage.setItem('lang-chooser-shown', '1'); } catch (e) {}
+        overlay.classList.add('is-open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        overlay.classList.remove('is-open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      overlay.addEventListener('click', function (e) {
+        var btn = e.target.closest ? e.target.closest('[data-choose]') : null;
+        if (!btn) return;
+        var c = btn.getAttribute('data-choose');
+        try { localStorage.setItem('preferred-lang', c); } catch (e) {}
+        if (c === 'en') { window.location.href = enHref; }
+        else { close(); }
+      });
+
+      // 国判定（Cloudflare /cdn-cgi/trace → loc=XX）。JP または判定不能なら表示しない。
+      fetch('/cdn-cgi/trace', { cache: 'no-store' })
+        .then(function (r) { return r.text(); })
+        .then(function (t) {
+          var m = t.match(/loc=([A-Z]{2})/);
+          var loc = m ? m[1] : '';
+          if (loc && loc !== 'JP') open();
+        })
+        .catch(function () {});
+    } catch (e) {}
+  })();
+</script>
