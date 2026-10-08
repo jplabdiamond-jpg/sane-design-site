@@ -4,7 +4,7 @@ description: "コンテンツマーケティングの仕組みと、個人事業
 pubDate: "2026-10-08"
 category: "コンテンツマーケティング・ブログ運用"
 tags: ["コンテンツマーケティング", "集客", "ブログ", "初心者向け"]
-heroImage: ''
+heroImage: '/assets/blog/181_content_marketing_basics.webp'
 ---
 
 ## コンテンツマーケティングとは何か？
