@@ -4,7 +4,7 @@ description: "関連記事をまとめるピラーページ戦略で、サイト
 pubDate: "2026-10-08"
 category: "コンテンツマーケティング・ブログ運用"
 tags: ["ピラーページ", "SEO", "コンテンツ戦略", "ブログ"]
-heroImage: ''
+heroImage: '/assets/blog/183_pillar_cluster_seo.webp'
 ---
 
 ## ピラーページ戦略とは？
