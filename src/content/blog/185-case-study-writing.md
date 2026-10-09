@@ -4,7 +4,7 @@ description: "導入事例・成功事例記事がなぜ最強の営業ツール
 pubDate: "2026-10-08"
 category: "コンテンツマーケティング・ブログ運用"
 tags: ["導入事例", "コンテンツマーケティング", "信頼", "集客"]
-heroImage: ''
+heroImage: '/assets/blog/184_case_study_writing.webp'
 ---
 
 ## 導入事例記事とは？なぜ最強の営業ツールと言われるのか
