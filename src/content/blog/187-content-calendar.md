@@ -4,7 +4,7 @@ description: "行き当たりばったりの更新を卒業。コンテンツカ
 pubDate: "2026-10-08"
 category: "コンテンツマーケティング・ブログ運用"
 tags: ["コンテンツカレンダー", "ブログ運用", "計画", "スケジュール"]
-heroImage: ''
+heroImage: '/assets/blog/186_content_calendar.webp'
 ---
 
 ## コンテンツカレンダーとは？なぜ必要なのか
