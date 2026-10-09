@@ -4,7 +4,7 @@ description: "公開後ずっと読まれ続ける「エバーグリーン記事
 pubDate: "2026-10-08"
 category: "コンテンツマーケティング・ブログ運用"
 tags: ["エバーグリーン", "コンテンツ", "SEO", "長期集客"]
-heroImage: ''
+heroImage: '/assets/blog/185_evergreen_content.webp'
 ---
 
 ## エバーグリーンコンテンツとは？
