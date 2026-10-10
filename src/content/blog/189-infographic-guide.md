@@ -4,7 +4,7 @@ description: "複雑な情報を視覚的に伝えるインフォグラフィッ
 pubDate: "2026-10-09"
 category: "コンテンツマーケティング・ブログ運用"
 tags: ["インフォグラフィック", "デザイン", "コンテンツ", "無料ツール"]
-heroImage: ''
+heroImage: '/assets/blog/188_infographic_guide.webp'
 ---
 
 ## インフォグラフィックとは？なぜビジネスに効果的なのか
