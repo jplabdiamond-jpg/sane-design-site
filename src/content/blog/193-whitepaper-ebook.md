@@ -4,7 +4,7 @@ description: "無料ダウンロード資料（ホワイトペーパー）でリ
 pubDate: "2026-10-10"
 category: "コンテンツマーケティング・ブログ運用"
 tags: ["ホワイトペーパー", "リード獲得", "コンテンツマーケティング", "見込み客"]
-heroImage: ''
+heroImage: '/assets/blog/192_whitepaper_ebook.webp'
 ---
 
 ## ホワイトペーパー・eBookとは？なぜリード獲得に効果的なのか
