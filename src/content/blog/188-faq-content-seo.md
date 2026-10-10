@@ -4,7 +4,7 @@ description: "FAQページは検索流入の宝庫。SEO効果を最大化する
 pubDate: "2026-10-09"
 category: "コンテンツマーケティング・ブログ運用"
 tags: ["FAQ", "SEO", "コンテンツ", "検索流入"]
-heroImage: ''
+heroImage: '/assets/blog/187_faq_content_seo.webp'
 ---
 
 ## FAQページとは？なぜSEOに強いのか
