@@ -4,7 +4,7 @@ description: "ビジネスブログを収益源にするための3つのマネ�
 pubDate: "2026-10-10"
 category: "コンテンツマーケティング・ブログ運用"
 tags: ["ブログ収益", "マネタイズ", "アフィリエイト", "集客"]
-heroImage: ''
+heroImage: '/assets/blog/190_blog_monetize.webp'
 ---
 
 ## ブログで収益を上げるとは？ビジネスブログのマネタイズの考え方
