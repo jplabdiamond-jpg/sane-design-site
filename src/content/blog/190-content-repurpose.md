@@ -4,7 +4,7 @@ description: "ブログ記事をSNS投稿・動画・メルマガに展開する
 pubDate: "2026-10-09"
 category: "コンテンツマーケティング・ブログ運用"
 tags: ["リパーパス", "コンテンツ活用", "SNS", "効率化"]
-heroImage: ''
+heroImage: '/assets/blog/189_content_repurpose.webp'
 ---
 
 ## コンテンツリパーパスとは？なぜ今すぐ始めるべきなのか
