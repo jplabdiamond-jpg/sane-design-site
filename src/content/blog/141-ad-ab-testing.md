@@ -2,7 +2,7 @@
 title: 'Web広告のA/Bテストのやり方｜少ない予算で最大効果を出す方法'
 description: '広告のA/Bテスト手法と、限られた予算で成果を最大化するテクニックを解説します。'
 pubDate: '2026-09-19'
-heroImage: ''
+heroImage: '/assets/blog/140_web_ads_ab_testing_max_effect.webp'
 tags:
   - A/Bテスト
   - Web広告
