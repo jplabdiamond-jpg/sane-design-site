@@ -4,7 +4,7 @@ description: "商品やサービスの背景にある「物語」を伝えるこ
 pubDate: "2026-10-10"
 category: "コンテンツマーケティング・ブログ運用"
 tags: ["ストーリーテリング", "共感", "マーケティング", "ブランディング"]
-heroImage: ''
+heroImage: '/assets/blog/191_storytelling_marketing.webp'
 ---
 
 ## ストーリーテリングマーケティングとは？なぜ物語が人の心を動かすのか
