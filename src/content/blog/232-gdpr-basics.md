@@ -4,7 +4,7 @@ description: "海外顧客がいる場合に気をつけたいGDPR（EU個人情
 pubDate: "2026-10-23"
 category: "Web法務・セキュリティ・コンプライアンス"
 tags: ["GDPR", "個人情報保護", "法務", "海外対応"]
-heroImage: ''
+heroImage: '/assets/blog/231_gdpr_japanese_smb.webp'
 ---
 
 ## GDPRは日本企業にも関係がある？意外と知らない適用範囲
