@@ -4,7 +4,7 @@ description: "他人の画像を使ったら違法？自社サイトの著作権
 pubDate: "2026-10-23"
 category: "Web法務・セキュリティ・コンプライアンス"
 tags: ["著作権", "法務", "画像", "Web制作"]
-heroImage: ''
+heroImage: '/assets/blog/230_website_copyright_basics.webp'
 ---
 
 ## Webサイトと著作権、なぜ今知っておくべきなのか
