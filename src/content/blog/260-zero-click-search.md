@@ -4,7 +4,7 @@ description: "Googleの検索結果だけで答えが完結する「ゼロクリ
 pubDate: "2026-11-01"
 category: "最新Webトレンド・テクノロジー"
 tags: ["ゼロクリック", "SEO", "Google", "検索トレンド"]
-heroImage: '/assets/blog/260_first_party_data_post_cookie.webp'
+heroImage: '/assets/blog/259_zero_click_search_seo_strategy.webp'
 ---
 
 Googleで何かを検索したとき、検索結果ページを見ただけで疑問が解決し、どのサイトもクリックしなかった——そんな経験はありませんか？これが**ゼロクリック検索**と呼ばれる現象です。
