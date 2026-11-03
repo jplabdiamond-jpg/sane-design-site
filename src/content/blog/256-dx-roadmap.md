@@ -4,7 +4,7 @@ description: "中小企業がDXを始めるための優先順位と、段階的�
 pubDate: "2026-10-31"
 category: "業務効率化・DX・マーケティングオートメーション"
 tags: ["DX", "ロードマップ", "中小企業", "デジタル化"]
-heroImage: '/assets/blog/256_web_trends_2027_prediction.webp'
+heroImage: '/assets/blog/255_sme_dx_roadmap_three_steps.webp'
 ---
 
 ## DX（デジタルトランスフォーメーション）とは何か？
