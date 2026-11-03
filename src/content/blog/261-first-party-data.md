@@ -4,7 +4,7 @@ description: "Cookie規制時代に必要なファーストパーティデータ
 pubDate: "2026-11-01"
 category: "最新Webトレンド・テクノロジー"
 tags: ["Cookie", "ファーストパーティデータ", "プライバシー", "集客"]
-heroImage: '/assets/blog/261_headless_cms_nextgen_web.webp'
+heroImage: '/assets/blog/260_first_party_data_post_cookie.webp'
 ---
 
 Web広告やアクセス解析を支えてきた**サードパーティCookie**が、いよいよ終わりを迎えようとしています。Google Chromeでのサードパーティ Cookie のサポート縮小が進み、Safari やFirefoxではすでにブロックが標準化されています。
