@@ -4,7 +4,7 @@ description: "音声アシスタントでの購入が増加。ボイスコマー
 pubDate: "2026-11-01"
 category: "最新Webトレンド・テクノロジー"
 tags: ["ボイスコマース", "音声", "AI", "EC"]
-heroImage: '/assets/blog/259_zero_click_search_seo_strategy.webp'
+heroImage: '/assets/blog/258_voice_commerce_future_shopping.webp'
 ---
 
 「アレクサ、いつもの洗剤を注文して」——こんな買い物の仕方が、もはや特別なことではなくなりつつあります。スマートスピーカーや音声アシスタントの普及により、**ボイスコマース（Vコマース）** と呼ばれる音声を使った購買行動が急速に広がっています。
