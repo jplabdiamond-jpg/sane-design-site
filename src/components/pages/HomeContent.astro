@@ -607,13 +607,13 @@ const t = S[lang];
     <div class="sec-head"><span class="sec-sub">Works</span><h2 class="sec-title">{t.worksExTitle}</h2></div>
     <div class="work-grid" id="worksGrid">
       {(lang === 'en' ? [
-        { href:'/works/42-project-tenkennavi/', img:'/assets/works/42-project-tenkennavi.webp', alt:'Statutory Building Inspection Navi LP', tags:['Legal Inspection','LP','2026'], h:'Statutory Building Inspection Navi LP', p:'A one-stop service LP covering statutory building inspections end to end — inspection, remediation and reporting.' },
-        { href:'/works/41-project-teiki-houkoku/', img:'/assets/works/41-project-teiki-houkoku.webp', alt:'Building Standards Act Art.12 Periodic Report LP', tags:['Legal Inspection','LP','2026'], h:'Building Standards Act Art.12 Periodic Report LP', p:'A lead-gen LP that turns the hard-to-grasp legal "periodic report" notice into a clear next step for building owners.' },
-        { href:'/works/40-project-scf/', img:'/assets/works/40-project-scf.webp', alt:'SCF Smart Consul Firm', tags:['Consulting','LP','2026'], h:'SCF Smart Consul Firm', p:'A one-stop consulting LP that supports SMEs from planning to SNS, with an empathetic tone.' },
+        { href:'/works/43-project-star-reviews/', img:'/assets/works/43-project-star-reviews.webp', alt:'star-reviews Review Collection Tool', tags:['SaaS','Reviews','2026'], h:'star-reviews — Review Collection Tool', p:'A SaaS LP for collecting customer reviews and embedding them anywhere — collect, pick, and paste in one flow.' },
+        { href:'/works/44-project-sibylla-vision/', img:'/assets/works/44-project-sibylla-vision.webp', alt:'Sibylla Vision Fortune-telling AI', tags:['Web','AI','2026'], h:'Sibylla Vision', p:'A conversational AI fortune-telling agent blending astrology, statistics and feng shui in a mystical starlit UI.' },
+        { href:'/works/45-project-free-bizdocs/', img:'/assets/works/45-project-free-bizdocs.webp', alt:'Free BizDoc Business Document Maker', tags:['SaaS','Business','2026'], h:'Free BizDoc — Business Document Maker', p:'A no-sign-up tool that turns business documents into instant, invoice-ready PDFs — nothing stored on the server.' },
       ] : [
-        { href:'/works/42-project-tenkennavi/', img:'/assets/works/42-project-tenkennavi.webp', alt:'建物法定点検ナビ LP', tags:['法定点検','LP','2026'], h:'建物法定点検ナビ LP', p:'建物の法定点検を調査から是正・報告までまるごと一括で担う、ワンストップ型サービスLP。' },
-        { href:'/works/41-project-teiki-houkoku/', img:'/assets/works/41-project-teiki-houkoku.webp', alt:'建築基準法12条 定期報告 LP', tags:['法定点検','LP','2026'], h:'建築基準法12条 定期報告 LP', p:'分かりにくい「定期報告」の通知を、建物オーナーの次の一歩へつなぐ課題喚起型LP。' },
-        { href:'/works/40-project-scf/', img:'/assets/works/40-project-scf.webp', alt:'SCF スマートコンサルファーム', tags:['コンサルティング','LP','2026'], h:'SCF スマートコンサルファーム', p:'企画からSNS運用まで一貫支援する、中小企業向けワンストップ型コンサルLP。' },
+        { href:'/works/43-project-star-reviews/', img:'/assets/works/43-project-star-reviews.webp', alt:'star-reviews 口コミ収集ツール', tags:['SaaS','レビュー','2026'], h:'star-reviews 口コミ収集ツール', p:'お客様の声を集めてサイトに貼るだけ。収集から掲載までを一気通貫で担う口コミSaaS。' },
+        { href:'/works/44-project-sibylla-vision/', img:'/assets/works/44-project-sibylla-vision.webp', alt:'Sibylla Vision（星詠）', tags:['Web','AI','2026'], h:'Sibylla Vision（星詠）', p:'占い・統計・風水を重ね、対話で転機を読み解くAI占いエージェント。' },
+        { href:'/works/45-project-free-bizdocs/', img:'/assets/works/45-project-free-bizdocs.webp', alt:'Free BizDoc ビジネス書類メーカー', tags:['SaaS','業務ツール','2026'], h:'Free BizDoc ビジネス書類メーカー', p:'請求書・見積書などを登録不要でその場でPDF化できる、無料のビジネス書類メーカー。' },
       ]).map((w) => (
         <a class="work" href={lp(w.href)}>
           <div class="thumb"><img src={w.img} alt={w.alt} loading="lazy"></div>
@@ -1354,6 +1354,9 @@ const t = S[lang];
 /* ===== hero works coverflow ===== */
 (function(){
   var WORKS = [
+    {img:"/assets/works/43-project-star-reviews.webp",title:"star-reviews 口コミ収集ツール",url:"/works/43-project-star-reviews/"},
+    {img:"/assets/works/44-project-sibylla-vision.webp",title:"Sibylla Vision（星詠）",url:"/works/44-project-sibylla-vision/"},
+    {img:"/assets/works/45-project-free-bizdocs.webp",title:"Free BizDoc ビジネス書類メーカー",url:"/works/45-project-free-bizdocs/"},
     {img:"/assets/works/42-project-tenkennavi.webp",title:"建物法定点検ナビ",url:"/works/42-project-tenkennavi/"},
     {img:"/assets/works/41-project-teiki-houkoku.webp",title:"建築基準法12条 定期報告",url:"/works/41-project-teiki-houkoku/"},
     {img:"/assets/works/38-project-bebimama-babysitter.webp",title:"bebi-mama ベビーシッターLP",url:"/works/38-project-bebimama-babysitter/"},
