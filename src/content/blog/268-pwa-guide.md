@@ -5,6 +5,13 @@ pubDate: "2026-11-04"
 category: "最新Webトレンド・テクノロジー"
 tags: ["PWA", "Webアプリ", "最新技術", "UX"]
 heroImage: '/assets/blog/267_pwa_progressive_web_app.webp'
+faq:
+  - q: "PWAとネイティブアプリは何が違うのですか？"
+    a: "PWAは通常のWebサイトでありながらアプリのような操作感を実現する技術です。App StoreやGoogle Playへの申請・審査が不要で、ユーザーはブラウザから「ホーム画面に追加」するだけ。iOS版とAndroid版を別々に作る必要がなく、1つのコードベースで両対応できるため開発・運用コストを大きく抑えられます。"
+  - q: "PWAにはどんなメリットがありますか？"
+    a: "アプリストア不要でインストールでき、Service Workerによるキャッシュでオフラインでも動作し、2回目以降の表示が高速になります。さらにWebプッシュ通知でリピーターへタイムリーに情報を届けられる点も強みで、新商品やセール、予約リマインダーの通知に活用できます。"
+  - q: "中小企業でもPWAは導入できますか？"
+    a: "はい。WordPressならSuperPWAなどのプラグインを入れるだけで基本機能を追加でき、静的サイトならGoogleのWorkboxライブラリでService Workerの実装を簡略化できます。ProgressierやPWABuilderを使えばコーディングなしで後付けも可能です。なおPWAの動作にはHTTPS（SSL化）が必須です。"
 ---
 
 ## PWA（プログレッシブWebアプリ）とは何か？
