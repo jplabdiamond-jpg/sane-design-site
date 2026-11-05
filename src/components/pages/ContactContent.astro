@@ -2,6 +2,7 @@
 // お問い合わせページ本文（日英単一ソース）。多段フォーム + 見積り計算 JS を含む。
 import { localizePath } from '../../i18n/utils';
 import type { Locale } from '../../i18n/ui';
+import Breadcrumbs from '../Breadcrumbs.astro';
 
 interface Props { lang: Locale }
 const { lang } = Astro.props;
@@ -162,6 +163,7 @@ const L = t.js;
 <!-- ── Hero ── -->
 <section class="ct-hero reveal">
   <div class="wrap">
+    <Breadcrumbs items={[{ label: lang === 'en' ? 'Contact' : 'お問い合わせ' }]} />
     <span class="sec-sub">Contact</span>
     <div class="ct-hero-illust">
       <img src="/assets/creator_thumbsup_tablet.webp" alt={t.heroAlt}>

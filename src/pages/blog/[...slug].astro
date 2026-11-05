@@ -114,7 +114,7 @@ const blogJsonLd = faqJsonLd ? [articleJsonLd, faqJsonLd] : articleJsonLd;
 <RenewalLayout
   title={`${post.data.title} | Sane Design Journal`}
   description={post.data.description}
-  image={post.data.heroImage}
+  image={post.data.heroImage || '/og-image.png'}
   ogType="article"
   jsonLd={blogJsonLd}
   publishedTime={pubISO}
@@ -227,6 +227,9 @@ const blogJsonLd = faqJsonLd ? [articleJsonLd, faqJsonLd] : articleJsonLd;
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
+      <p class="blog-cta-illust-services">
+        サービス詳細：<a href="/services/web-design/">ホームページ制作</a><span aria-hidden="true"> ／ </span><a href="/services/seo/">SEO対策</a>
+      </p>
       <p class="blog-cta-illust-note">しつこい営業は一切しません。お気軽にどうぞ。</p>
     </div>
   </section>
@@ -860,6 +863,20 @@ const blogJsonLd = faqJsonLd ? [articleJsonLd, faqJsonLd] : articleJsonLd;
     font-size: 13px;
     opacity: 0.7;
     font-weight: 500;
+  }
+  .blog-cta-illust-services {
+    margin-top: 18px;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.85;
+  }
+  .blog-cta-illust-services a {
+    color: var(--rn-primary, #4FB4E8);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .blog-cta-illust-services a:hover {
+    opacity: 0.75;
   }
 
   @media (max-width: 640px) {

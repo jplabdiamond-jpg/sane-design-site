@@ -2,6 +2,7 @@
 // SEOサービスページ本文（日英単一ソース）。CSS/JS は元ファイルから移植。
 import { localizePath } from '../../../i18n/utils';
 import type { Locale } from '../../../i18n/ui';
+import Breadcrumbs from '../../Breadcrumbs.astro';
 
 interface Props { lang: Locale }
 const { lang } = Astro.props;
@@ -87,6 +88,7 @@ const t = S[lang];
 <!-- ═══ 01 HERO ═══ -->
 <section class="seo-hero reveal">
   <div class="wrap">
+    <Breadcrumbs items={[{ label: lang === 'en' ? 'SEO' : 'SEO対策' }]} />
     <span class="sec-sub">SEO</span>
     <h1 set:html={t.h1}></h1>
     <p class="lead" set:html={t.lead}></p>

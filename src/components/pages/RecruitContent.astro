@@ -1,5 +1,6 @@
 ---
 import type { Locale } from '../../i18n/ui';
+import Breadcrumbs from '../Breadcrumbs.astro';
 
 interface Props { lang: Locale }
 const { lang } = Astro.props;
@@ -50,7 +51,8 @@ const t = S[lang];
 <!-- Hero -->
 <section style="padding:80px 0 60px;">
   <div class="container-editorial">
-    <p class="section-label reveal">Work Request</p>
+    <Breadcrumbs items={[{ label: lang === 'en' ? 'Work Request' : 'お仕事のご依頼' }]} />
+    <p class="section-label reveal" style="margin-top:18px;">Work Request</p>
     <h1 class="reveal" style="font-family:var(--font-serif); font-size:clamp(40px,7vw,100px); font-weight:300; line-height:1.05; letter-spacing:-0.02em; transition-delay:80ms;">
       Let's work<br />
       <span style="font-style:italic;">together.</span>

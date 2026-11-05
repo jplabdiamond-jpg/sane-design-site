@@ -2,6 +2,7 @@
 // ホームページ制作ページ本文（日英単一ソース）。CSS/JS は元ファイルから移植。
 import { localizePath } from '../../../i18n/utils';
 import type { Locale } from '../../../i18n/ui';
+import Breadcrumbs from '../../Breadcrumbs.astro';
 
 interface Props { lang: Locale }
 const { lang } = Astro.props;
@@ -143,6 +144,7 @@ const t = S[lang];
 <!-- ═══ 01 HERO ═══ -->
 <section class="wd-hero reveal">
   <div class="wrap">
+    <Breadcrumbs items={[{ label: lang === 'en' ? 'Web Design' : 'ホームページ制作' }]} />
     <span class="sec-sub">Web Design</span>
     <h1 set:html={t.h1}></h1>
     <img class="hero-top-img" src="/assets/webdesign_page_top.webp" alt={t.heroImgAlt}>
