@@ -44,3 +44,73 @@
 3. 高品質: DTP・WEBデザイン実績300件以上
 4. 集客重視: SEO内部対策を標準搭載
 5. やさしい対応: 専門用語なし、Web初心者でも安心
+
+## よくある質問（一問一答）
+
+Q. ホームページ制作の料金はいくらですか？
+A. Sane Designのホームページ制作は30,000円〜です。TOPページ＋4ページの構成を最速3〜4営業日で納品します。ページ数や機能の追加に応じてお見積もりします。
+
+Q. 最短でどのくらいの納期で作れますか？
+A. 最速3営業日での納品が可能です。画像とイメージをお渡しいただければ、完全オーダーメイドで制作します。お急ぎの場合は事前にご相談いただければ可能な限り調整します。
+
+Q. ホームページ制作を依頼するときに必要なものは？
+A. 掲載したい画像・テキスト・参考にしたいサイトのイメージをお渡しいただくだけで制作を進められます。素材がそろっていない場合も、ヒアリングしながら一緒に内容を固めていきます。
+
+Q. 個人事業主や小さなお店でも依頼できますか？
+A. はい。Sane Designは個人事業主・中小企業・店舗のホームページ制作を専門としています。大手制作会社より低価格・短納期で、集客につながるサイトを制作します。
+
+Q. SEO対策もお願いできますか？
+A. はい。内部SEO対策と、指定キーワードに基づくブログ記事の追加に対応しています。料金は15,000円〜です。なお検索順位の変動には通常数週間〜数ヶ月かかります。
+
+Q. スマートフォン表示（レスポンシブ）に対応していますか？
+A. すべての制作物はスマートフォン・タブレット・PCに対応したレスポンシブデザインで制作します。モバイル表示を最優先に設計しています。
+
+Q. 制作後の修正や運用サポートはありますか？
+A. 納品後の軽微な修正に対応しています。継続的な更新・運用サポートをご希望の場合は内容に応じてご相談ください。
+
+Q. チラシやロゴなどのデザインも依頼できますか？
+A. はい。DTPデザイン（チラシ・フライヤー・ロゴ・名刺など）もWeb制作と合わせて承っています。DTP・WEB合わせて300件以上の制作実績があります。
+
+Q. 対応エリアはどこですか？
+A. オンラインで全国対応しています。打ち合わせ・素材のやり取り・納品まですべてオンラインで完結しますので、地域を問わずご依頼いただけます。
+
+Q. 支払い方法は何が使えますか？
+A. オンライン決済に対応しています。詳細はお問い合わせ・ご注文時にご案内します。
+
+## 主要記事
+
+### 料金・制作の基礎
+- 個人事業主のホームページ制作費用、2026年の相場: https://sane-design.net/blog/01-kojin-jigyonushi-hp-cost/
+- ホームページ制作の費用相場【2026年最新版】: https://sane-design.net/blog/03-hp-cost-market-price/
+- HP制作後に月額費用はいくらかかる？: https://sane-design.net/blog/85-monthly-cost/
+- ホームページって本当に必要？SNSだけじゃダメな理由: https://sane-design.net/blog/02-hp-hitsuyou-sns-dame/
+- LP（ランディングページ）とHPの違いとは？: https://sane-design.net/blog/05-lp-vs-hp-difference/
+- ホームページ制作の流れを初心者向けに解説: https://sane-design.net/blog/04-hp-production-flow/
+- HP制作を依頼する前に準備すべきこと5選: https://sane-design.net/blog/15-preparation-checklist/
+
+### SEO・集客
+- SEO対策とは？初心者にもわかる基本のキ: https://sane-design.net/blog/32-seo-basics/
+- ローカルSEOとは？地域密着ビジネスが検索上位を取る方法: https://sane-design.net/blog/114-local-seo-strategy/
+- 「地域名＋サービス名」で検索1位を取るSEO戦略: https://sane-design.net/blog/34-local-seo-strategy/
+- Googleビジネスプロフィール活用術: https://sane-design.net/blog/37-google-business-profile/
+- Googleクチコミを増やす方法: https://sane-design.net/blog/107-google-reviews-guide/
+- キーワード選定の基本: https://sane-design.net/blog/40-keyword-selection/
+- 「SEOに強いHP」とは？制作時にチェックすべき5項目: https://sane-design.net/blog/45-seo-strong-hp/
+- ホームページの表示速度を改善する方法: https://sane-design.net/blog/109-hp-speed-optimization/
+- 個人事業主がホームページで集客する3つの鉄則: https://sane-design.net/blog/17-customer-attraction-rules/
+
+### 業種別の集客
+- 飲食店のホームページに必要な情報とデザイン: https://sane-design.net/blog/47-restaurant-hp/
+- 美容サロンの集客はホームページが9割: https://sane-design.net/blog/48-beauty-salon-hp/
+- 整体院・整骨院のHPで新患を増やすコツ: https://sane-design.net/blog/49-seitai-hp/
+- 士業のホームページ集客（税理士・行政書士・弁護士）: https://sane-design.net/blog/50-professional-service-hp/
+- 不動産会社のHPで物件問い合わせを増やす5つのポイント: https://sane-design.net/blog/54-real-estate-hp/
+- ネットショップの始め方（初心者向け）: https://sane-design.net/blog/55-ec-shop-guide/
+
+### 運用・その他
+- 補助金・助成金でHP制作費を抑える方法: https://sane-design.net/blog/26-subsidy-hp-cost/
+- 中小企業のHP、作っただけで放置していませんか？: https://sane-design.net/blog/18-website-maintenance-neglect/
+- HPの「お客様の声」が集客力を3倍にする理由: https://sane-design.net/blog/25-customer-voice-power/
+- 求人にもHPが効く！採用ページの作り方: https://sane-design.net/blog/29-recruitment-page/
+
+※ ブログ記事は全記事に「よくある質問（FAQ）」を掲載しています。最新の全記事一覧は https://sane-design.net/blog/ を参照してください。
