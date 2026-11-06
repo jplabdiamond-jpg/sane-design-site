@@ -607,13 +607,13 @@ const t = S[lang];
     <div class="sec-head"><span class="sec-sub">Works</span><h2 class="sec-title">{t.worksExTitle}</h2></div>
     <div class="work-grid" id="worksGrid">
       {(lang === 'en' ? [
+        { href:'/works/46-project-akiya-jouto/', img:'/assets/works/46-project-akiya-jouto.webp', alt:'Japan Akiya Lab Vacant House Comic LP', tags:['Real Estate','LP','2026'], h:'Japan Akiya Lab — Vacant House Comic LP', p:'A full-comic lead-gen LP guiding inherited-vacant-house owners to a free consultation, warmly and clearly.' },
+        { href:'/works/47-project-supercar-glory/', img:'/assets/works/47-project-supercar-glory.webp', alt:'Car Shop Glory Supercar Buying LP', tags:['Automotive','LP','2026'], h:'Car Shop Glory — Supercar Buying', p:'A bold, black-and-red supercar buying LP driving owners to a fully online, nationwide quick appraisal.' },
         { href:'/works/43-project-star-reviews/', img:'/assets/works/43-project-star-reviews.webp', alt:'star-reviews Review Collection Tool', tags:['SaaS','Reviews','2026'], h:'star-reviews — Review Collection Tool', p:'A SaaS LP for collecting customer reviews and embedding them anywhere — collect, pick, and paste in one flow.' },
-        { href:'/works/44-project-sibylla-vision/', img:'/assets/works/44-project-sibylla-vision.webp', alt:'Sibylla Vision Fortune-telling AI', tags:['Web','AI','2026'], h:'Sibylla Vision', p:'A conversational AI fortune-telling agent blending astrology, statistics and feng shui in a mystical starlit UI.' },
-        { href:'/works/45-project-free-bizdocs/', img:'/assets/works/45-project-free-bizdocs.webp', alt:'Free BizDoc Business Document Maker', tags:['SaaS','Business','2026'], h:'Free BizDoc — Business Document Maker', p:'A no-sign-up tool that turns business documents into instant, invoice-ready PDFs — nothing stored on the server.' },
       ] : [
+        { href:'/works/46-project-akiya-jouto/', img:'/assets/works/46-project-akiya-jouto.webp', alt:'日本の空き家研究所 空き家活用LP', tags:['不動産','LP','2026'], h:'日本の空き家研究所 空き家活用LP', p:'相続空き家の悩みを全編漫画でやさしく解き、無料相談へつなぐ課題喚起型LP。' },
+        { href:'/works/47-project-supercar-glory/', img:'/assets/works/47-project-supercar-glory.webp', alt:'CAR SHOP GLORY スーパーカー買取', tags:['自動車','LP','2026'], h:'CAR SHOP GLORY スーパーカー買取', p:'全国オンライン完結の簡単査定へ導く、高級感とスピード感を両立したスーパーカー買取LP。' },
         { href:'/works/43-project-star-reviews/', img:'/assets/works/43-project-star-reviews.webp', alt:'star-reviews 口コミ収集ツール', tags:['SaaS','レビュー','2026'], h:'star-reviews 口コミ収集ツール', p:'お客様の声を集めてサイトに貼るだけ。収集から掲載までを一気通貫で担う口コミSaaS。' },
-        { href:'/works/44-project-sibylla-vision/', img:'/assets/works/44-project-sibylla-vision.webp', alt:'Sibylla Vision（星詠）', tags:['Web','AI','2026'], h:'Sibylla Vision（星詠）', p:'占い・統計・風水を重ね、対話で転機を読み解くAI占いエージェント。' },
-        { href:'/works/45-project-free-bizdocs/', img:'/assets/works/45-project-free-bizdocs.webp', alt:'Free BizDoc ビジネス書類メーカー', tags:['SaaS','業務ツール','2026'], h:'Free BizDoc ビジネス書類メーカー', p:'請求書・見積書などを登録不要でその場でPDF化できる、無料のビジネス書類メーカー。' },
       ]).map((w) => (
         <a class="work" href={lp(w.href)}>
           <div class="thumb"><img src={w.img} alt={w.alt} loading="lazy"></div>
@@ -1354,6 +1354,8 @@ const t = S[lang];
 /* ===== hero works coverflow ===== */
 (function(){
   var WORKS = [
+    {img:"/assets/works/46-project-akiya-jouto.webp",title:"日本の空き家研究所 空き家活用LP",url:"/works/46-project-akiya-jouto/"},
+    {img:"/assets/works/47-project-supercar-glory.webp",title:"CAR SHOP GLORY スーパーカー買取",url:"/works/47-project-supercar-glory/"},
     {img:"/assets/works/43-project-star-reviews.webp",title:"star-reviews 口コミ収集ツール",url:"/works/43-project-star-reviews/"},
     {img:"/assets/works/44-project-sibylla-vision.webp",title:"Sibylla Vision（星詠）",url:"/works/44-project-sibylla-vision/"},
     {img:"/assets/works/45-project-free-bizdocs.webp",title:"Free BizDoc ビジネス書類メーカー",url:"/works/45-project-free-bizdocs/"},
