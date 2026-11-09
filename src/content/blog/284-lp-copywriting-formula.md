@@ -4,7 +4,7 @@ description: "売れるLPのキャッチコピーの作り方を、PASONAの法�
 pubDate: "2026-11-09"
 category: "LP・セールスファネル・コンバージョン最適化"
 tags: ["キャッチコピー", "LP", "PASONA", "コピーライティング"]
-heroImage: '/assets/blog/283_lp_catch_copy_pasona_beaf.webp'
+heroImage: '/assets/blog/284_conversion_rate_benchmarks.webp'
 ---
 
 ## LPの成否を左右する「キャッチコピー」の力
