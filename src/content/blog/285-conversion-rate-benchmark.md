@@ -4,7 +4,7 @@ description: "コンバージョン率の業種別平均値と、改善のため
 pubDate: "2026-11-09"
 category: "LP・セールスファネル・コンバージョン最適化"
 tags: ["コンバージョン率", "業種別", "目安", "改善"]
-heroImage: '/assets/blog/284_conversion_rate_benchmarks.webp'
+heroImage: '/assets/blog/285_step_form_completion.webp'
 ---
 
 ## コンバージョン率（CVR）を正しく理解していますか？
