@@ -4,7 +4,7 @@ description: "コホート分析の基本と、顧客のリピート率を時系
 pubDate: "2026-11-21"
 category: "Webアクセス解析・データ活用マーケティング"
 tags: ["コホート分析", "リピート率", "顧客分析", "データ"]
-heroImage: ''
+heroImage: '/assets/blog/323_cohort_analysis_repeat_rate.webp'
 ---
 
 ## コホート分析とは何か？
