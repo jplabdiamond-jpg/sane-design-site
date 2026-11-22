@@ -4,7 +4,7 @@ description: "GA4でコンバージョンを設定する方法を解説。問い
 pubDate: "2026-11-21"
 category: "Webアクセス解析・データ活用マーケティング"
 tags: ["GA4", "コンバージョン", "設定", "計測"]
-heroImage: ''
+heroImage: '/assets/blog/322_exit_rate_bounce_rate_improvement.webp'
 ---
 
 ## GA4のコンバージョン設定とは？
